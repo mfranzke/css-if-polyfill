@@ -1,344 +1,371 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CSS if() Polyfill - Examples</title>
-    <style>
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        margin: 0;
-        padding: 20px;
-        background-color: #f5f5f5;
-      }
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>CSS if() Polyfill - Examples</title>
+		<style>
+			body {
+				font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+				margin: 0;
+				padding: 20px;
+				background-color: #f5f5f5;
+			}
 
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        background: white;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      }
+			.container {
+				max-width: 1200px;
+				margin: 0 auto;
+				background: white;
+				padding: 30px;
+				border-radius: 10px;
+				box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+			}
 
-      h1 {
-        color: #333;
-        text-align: center;
-        margin-bottom: 30px;
-      }
+			h1 {
+				color: #333;
+				text-align: center;
+				margin-bottom: 30px;
+			}
 
-      .example {
-        margin-bottom: 40px;
-        padding: 20px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        background-color: #fafafa;
-      }
+			.example {
+				margin-bottom: 40px;
+				padding: 20px;
+				border: 1px solid #ddd;
+				border-radius: 8px;
+				background-color: #fafafa;
+			}
 
-      .example h3 {
-        color: #555;
-        margin-top: 0;
-      }
+			.example h3 {
+				color: #555;
+				margin-top: 0;
+			}
 
-      .example-code {
-        background-color: #f8f8f8;
-        padding: 15px;
-        border-radius: 5px;
-        font-family: "Courier New", monospace;
-        margin: 10px 0;
-        overflow-x: auto;
-      }
+			.example-code {
+				background-color: #f8f8f8;
+				padding: 15px;
+				border-radius: 5px;
+				font-family: "Courier New", monospace;
+				margin: 10px 0;
+				overflow-x: auto;
+			}
 
-      .example-result {
-        padding: 15px;
-        border: 2px solid #007acc;
-        border-radius: 5px;
-        background-color: white;
-      }
+			.example-result {
+				padding: 15px;
+				border: 2px solid #007acc;
+				border-radius: 5px;
+				background-color: white;
+			}
 
-      /* CSS if() examples - these will be processed by the polyfill */
-      .responsive-text {
-        font-size: if(media(width >= 768px): 24px; else: 16px);
-        color: if(media(width >= 768px): #333; else: #666);
-      }
+			/* CSS if() examples - these will be processed by the polyfill */
+			.responsive-text {
+				font-size: if(media(width >=768px): 24px; else: 16px);
+				color: if(media(width >=768px): #333; else: #666);
+			}
 
-      .grid-fallback {
-        display: if(supports(display: grid): grid; else: flex);
-        gap: if(supports(gap): 20px; else: 0);
-        grid-template-columns: if(supports(display: grid): repeat(3, 1fr));
-      }
+			.grid-fallback {
+				display: if(supports(display: grid): grid; else: flex);
+				gap: if(supports(gap): 20px; else: 0);
+				grid-template-columns: if(
+					supports(display: grid): repeat(3, 1fr)
+				);
+			}
 
-      .grid-fallback > div {
-        padding: 20px;
-        background-color: #e3f2fd;
-        border-radius: 5px;
-        margin: if(supports(gap): 0; else: 10px);
-      }
+			.grid-fallback > div {
+				padding: 20px;
+				background-color: #e3f2fd;
+				border-radius: 5px;
+				margin: if(supports(gap): 0; else: 10px);
+			}
 
-      .custom-property-check {
-        --has-custom-props: if(supports(--custom: value): true; else: false);
-        background-color: if(supports(--custom: value): #4caf50; else: #f44336);
-        color: white;
-        padding: 15px;
-        border-radius: 5px;
-        text-align: center;
-      }
+			.custom-property-check {
+				--has-custom-props: if(
+					supports(--custom: value): true; else: false
+				);
+				background-color: if(
+					supports(--custom: value): #4caf50; else: #f44336
+				);
+				color: white;
+				padding: 15px;
+				border-radius: 5px;
+				text-align: center;
+			}
 
-      .theme-aware {
-        background-color: if(
-          media(prefers-color-scheme: dark): #333; else: #fff
-        );
-        color: if(media(prefers-color-scheme: dark): #fff; else: #333);
-        padding: 20px;
-        border-radius: 5px;
-        border: 1px solid
-          if(media(prefers-color-scheme: dark): #555; else: #ddd);
-      }
+			.theme-aware {
+				background-color: if(
+					media(prefers-color-scheme: dark): #333; else: #fff
+				);
+				color: if(media(prefers-color-scheme: dark): #fff; else: #333);
+				padding: 20px;
+				border-radius: 5px;
+				border: 1px solid
+					if(media(prefers-color-scheme: dark): #555; else: #ddd);
+			}
 
-      .hover-effect {
-        transition: all 0.3s ease;
-        padding: 15px;
-        border-radius: 5px;
-        background-color: if(supports(: hover): #2196f3; else: #90caf9);
-        color: white;
-        cursor: pointer;
-      }
+			.hover-effect {
+				transition: all 0.3s ease;
+				padding: 15px;
+				border-radius: 5px;
+				background-color: if(supports(: hover): #2196f3; else: #90caf9);
+				color: white;
+				cursor: pointer;
+			}
 
-      .hover-effect:hover {
-        background-color: if(supports(: hover): #1976d2; else: #2196f3);
-        transform: if(supports(transform): translateY(-2px));
-      }
+			.hover-effect:hover {
+				background-color: if(supports(: hover): #1976d2; else: #2196f3);
+				transform: if(supports(transform): translateY(-2px));
+			}
 
-      .status-indicator {
-        padding: 10px;
-        border-radius: 5px;
-        margin: 10px 0;
-        font-weight: bold;
-      }
+			.status-indicator {
+				padding: 10px;
+				border-radius: 5px;
+				margin: 10px 0;
+				font-weight: bold;
+			}
 
-      .native-support {
-        background-color: #4caf50;
-        color: white;
-      }
+			.native-support {
+				background-color: #4caf50;
+				color: white;
+			}
 
-      .polyfill-active {
-        background-color: #ff9800;
-        color: white;
-      }
+			.polyfill-active {
+				background-color: #ff9800;
+				color: white;
+			}
 
-      .controls {
-        margin: 20px 0;
-        text-align: center;
-      }
+			.controls {
+				margin: 20px 0;
+				text-align: center;
+			}
 
-      button {
-        padding: 10px 20px;
-        margin: 0 10px;
-        border: none;
-        border-radius: 5px;
-        background-color: #007acc;
-        color: white;
-        cursor: pointer;
-        font-size: 16px;
-      }
+			button {
+				padding: 10px 20px;
+				margin: 0 10px;
+				border: none;
+				border-radius: 5px;
+				background-color: #007acc;
+				color: white;
+				cursor: pointer;
+				font-size: 16px;
+			}
 
-      button:hover {
-        background-color: #005a9e;
-      }
-    </style>
-  </head>
+			button:hover {
+				background-color: #005a9e;
+			}
+		</style>
+	</head>
 
-  <body>
-    <div class="container">
-      <h1>CSS if() Function Polyfill Examples</h1>
+	<body>
+		<div class="container">
+			<h1>CSS if() Function Polyfill Examples</h1>
 
-      <div id="status" class="status-indicator"></div>
+			<div id="status" class="status-indicator"></div>
 
-      <div class="controls">
-        <button type="button" class="refreshPolyfill">Refresh Polyfill</button>
-        <button type="button" class="toggleDebug">Toggle Debug</button>
-        <button type="button" class="testProcessing">
-          Test CSS Processing
-        </button>
-      </div>
+			<div class="controls">
+				<button type="button" class="refreshPolyfill">
+					Refresh Polyfill
+				</button>
+				<button type="button" class="toggleDebug">Toggle Debug</button>
+				<button type="button" class="testProcessing">
+					Test CSS Processing
+				</button>
+			</div>
 
-      <div class="example">
-        <h3>1. Responsive Typography</h3>
-        <div class="example-code">
-          .responsive-text {<br />
-          &nbsp;&nbsp;font-size: if(media(width >= 768px): 24px; else:
-          16px);<br />
-          &nbsp;&nbsp;color: if(media(width >= 768px): #333; else: #666);<br />
-          }
-        </div>
-        <div class="example-result responsive-text">
-          This text changes size and color based on screen width!
-        </div>
-      </div>
+			<div class="example">
+				<h3>1. Responsive Typography</h3>
+				<div class="example-code">
+					.responsive-text {<br />
+					&nbsp;&nbsp;font-size: if(media(width >= 768px): 24px; else:
+					16px);<br />
+					&nbsp;&nbsp;color: if(media(width >= 768px): #333; else:
+					#666);<br />
+					}
+				</div>
+				<div class="example-result responsive-text">
+					This text changes size and color based on screen width!
+				</div>
+			</div>
 
-      <div class="example">
-        <h3>2. Grid with Flexbox Fallback</h3>
-        <div class="example-code">
-          .grid-fallback {<br />
-          &nbsp;&nbsp;display: if(supports(display: grid): grid; else: flex);<br />
-          &nbsp;&nbsp;gap: if(supports(gap): 20px; else: 0);<br />
-          &nbsp;&nbsp;grid-template-columns: if(supports(display: grid):
-          repeat(3, 1fr));<br />
-          }
-        </div>
-        <div class="example-result">
-          <div class="grid-fallback">
-            <div>Item 1</div>
-            <div>Item 2</div>
-            <div>Item 3</div>
-          </div>
-        </div>
-      </div>
+			<div class="example">
+				<h3>2. Grid with Flexbox Fallback</h3>
+				<div class="example-code">
+					.grid-fallback {<br />
+					&nbsp;&nbsp;display: if(supports(display: grid): grid; else:
+					flex);<br />
+					&nbsp;&nbsp;gap: if(supports(gap): 20px; else: 0);<br />
+					&nbsp;&nbsp;grid-template-columns: if(supports(display:
+					grid): repeat(3, 1fr));<br />
+					}
+				</div>
+				<div class="example-result">
+					<div class="grid-fallback">
+						<div>Item 1</div>
+						<div>Item 2</div>
+						<div>Item 3</div>
+					</div>
+				</div>
+			</div>
 
-      <div class="example">
-        <h3>3. Custom Properties Support Detection</h3>
-        <div class="example-code">
-          .custom-property-check {<br />
-          &nbsp;&nbsp;background-color: if(supports(--custom: value): #4caf50;
-          else: #f44336);<br />
-          &nbsp;&nbsp;color: white;<br />
-          }
-        </div>
-        <div class="example-result custom-property-check">
-          CSS Custom Properties:
-          <span id="custom-props-status">Checking...</span>
-        </div>
-      </div>
+			<div class="example">
+				<h3>3. Custom Properties Support Detection</h3>
+				<div class="example-code">
+					.custom-property-check {<br />
+					&nbsp;&nbsp;background-color: if(supports(--custom: value):
+					#4caf50; else: #f44336);<br />
+					&nbsp;&nbsp;color: white;<br />
+					}
+				</div>
+				<div class="example-result custom-property-check">
+					CSS Custom Properties:
+					<span id="custom-props-status">Checking...</span>
+				</div>
+			</div>
 
-      <div class="example">
-        <h3>4. Dark Mode Support</h3>
-        <div class="example-code">
-          .theme-aware {<br />
-          &nbsp;&nbsp;background-color: if(media(prefers-color-scheme: dark):
-          #333; else: #fff);<br />
-          &nbsp;&nbsp;color: if(media(prefers-color-scheme: dark): #fff; else:
-          #333);<br />
-          }
-        </div>
-        <div class="example-result theme-aware">
-          This element adapts to your system's dark mode preference!
-        </div>
-      </div>
+			<div class="example">
+				<h3>4. Dark Mode Support</h3>
+				<p>
+					Whereas technically possible, it might be much easier and
+					stable to use the standarized and well supported
+					<a
+						href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark"
+						><code>light-dark</code> CSS function</a
+					>
+					for this.
+				</p>
+				<div class="example-code">
+					.theme-aware {<br />
+					&nbsp;&nbsp;background-color: if(media(prefers-color-scheme:
+					dark): #333; else: #fff);<br />
+					&nbsp;&nbsp;color: if(media(prefers-color-scheme: dark):
+					#fff; else: #333);<br />
+					}
+				</div>
+				<div class="example-result theme-aware">
+					This element adapts to your system's dark mode preference!
+				</div>
+			</div>
 
-      <div class="example">
-        <h3>5. Hover Effects with Fallback</h3>
-        <div class="example-code">
-          .hover-effect {<br />
-          &nbsp;&nbsp;background-color: if(supports(:hover): #2196f3; else:
-          #90caf9);<br />
-          &nbsp;&nbsp;transform: if(supports(transform): translateY(-2px));<br />
-          }
-        </div>
-        <div class="example-result hover-effect">
-          Hover over me! (Fallback styling for touch devices)
-        </div>
-      </div>
+			<div class="example">
+				<h3>5. Hover Effects with Fallback</h3>
+				<div class="example-code">
+					.hover-effect {<br />
+					&nbsp;&nbsp;background-color: if(supports(:hover): #2196f3;
+					else: #90caf9);<br />
+					&nbsp;&nbsp;transform: if(supports(transform):
+					translateY(-2px));<br />
+					}
+				</div>
+				<div class="example-result hover-effect">
+					Hover over me! (Fallback styling for touch devices)
+				</div>
+			</div>
 
-      <div class="example">
-        <h3>6. Manual CSS Processing</h3>
-        <div class="example-code">
-          <div id="manual-css-input">
-            .test { color: if(style(--true): red; else: blue); background: if(false:
-            white; else: yellow); }
-          </div>
-        </div>
-        <div class="example-result">
-          <div id="manual-css-output">
-            Click "Test CSS Processing" to see the result
-          </div>
-        </div>
-      </div>
-    </div>
+			<div class="example">
+				<h3>6. Manual CSS Processing</h3>
+				<div class="example-code">
+					<div id="manual-css-input">
+						.test { color: if(style(--true): red; else: blue);
+						background: if(false: white; else: yellow); }
+					</div>
+				</div>
+				<div class="example-result">
+					<div id="manual-css-output">
+						Click "Test CSS Processing" button to see the result
+					</div>
+				</div>
+			</div>
+		</div>
 
-    <!-- Load the polyfill -->
-    <script type="module">
-      import CSSIfPolyfill from "../dist/index.modern.js";
+		<!-- Load the polyfill -->
+		<script type="module">
+			import CSSIfPolyfill from "../dist/index.modern.js";
 
-      // Initialize the polyfill with debug enabled
-      const polyfill = CSSIfPolyfill.init({ debug: true });
+			// Initialize the polyfill with debug enabled
+			const polyfill = CSSIfPolyfill.init({ debug: true });
 
-      // Update status indicator
-      function updateStatus() {
-        const statusEl = document.getElementById("status");
-        const hasNative = CSSIfPolyfill.hasNativeSupport();
+			// Update status indicator
+			function updateStatus() {
+				const statusEl = document.getElementById("status");
+				const hasNative = CSSIfPolyfill.hasNativeSupport();
 
-        if (hasNative) {
-          statusEl.textContent = "Native CSS if() support detected";
-          statusEl.className = "status-indicator native-support";
-        } else {
-          statusEl.textContent = "CSS if() polyfill is active";
-          statusEl.className = "status-indicator polyfill-active";
-        }
-      }
+				if (hasNative) {
+					statusEl.textContent = "Native CSS if() support detected";
+					statusEl.className = "status-indicator native-support";
+				} else {
+					statusEl.textContent = "CSS if() polyfill is active";
+					statusEl.className = "status-indicator polyfill-active";
+				}
+			}
 
-      // Update custom properties status
-      function updateCustomPropsStatus() {
-        const statusEl = document.getElementById("custom-props-status");
-        const hasSupport = CSS.supports("--custom", "value");
-        statusEl.textContent = hasSupport ? "Supported" : "Not Supported";
-      }
+			// Update custom properties status
+			function updateCustomPropsStatus() {
+				const statusEl = document.getElementById("custom-props-status");
+				const hasSupport = CSS.supports("--custom", "value");
+				statusEl.textContent = hasSupport
+					? "Supported"
+					: "Not Supported";
+			}
 
-      // Control functions
-      document.querySelector(".refreshPolyfill").onclick = function () {
-        CSSIfPolyfill.refresh();
-        console.log("Polyfill refreshed");
-      };
+			// Control functions
+			document.querySelector(".refreshPolyfill").onclick = function () {
+				CSSIfPolyfill.refresh();
+				console.log("Polyfill refreshed");
+			};
 
-      let debugEnabled = true;
-      document.querySelector(".toggleDebug").onclick = function () {
-        // Toggle debug mode
-        debugEnabled = !debugEnabled;
-        CSSIfPolyfill.options.debug = debugEnabled;
-        console.log("Debug mode:", debugEnabled ? "enabled" : "disabled");
-      };
+			let debugEnabled = true;
+			document.querySelector(".toggleDebug").onclick = function () {
+				// Toggle debug mode
+				debugEnabled = !debugEnabled;
+				CSSIfPolyfill.options.debug = debugEnabled;
+				console.log(
+					"Debug mode:",
+					debugEnabled ? "enabled" : "disabled"
+				);
+			};
 
-      document.querySelector(".testProcessing").onclick = function () {
-        // Test manual CSS processing
-        const inputEl = document.getElementById("manual-css-input");
-        const outputEl = document.getElementById("manual-css-output");
+			document.querySelector(".testProcessing").onclick = function () {
+				// Test manual CSS processing
+				const inputEl = document.getElementById("manual-css-input");
+				const outputEl = document.getElementById("manual-css-output");
 
-        const inputCSS = inputEl.textContent.trim();
-        const outputCSS = CSSIfPolyfill.processCSSText(inputCSS);
+				const inputCSS = inputEl.textContent.trim();
+				const outputCSS = CSSIfPolyfill.processCSSText(inputCSS);
 
-        outputEl.innerHTML = `
+				outputEl.innerHTML = `
               <strong>Input:</strong> ${inputCSS}<br>
               <strong>Output:</strong> ${outputCSS}
           `;
-      };
+			};
 
-      // Initialize on page load
-      document.addEventListener("DOMContentLoaded", function () {
-        updateStatus();
-        updateCustomPropsStatus();
+			// Initialize on page load
+			document.addEventListener("DOMContentLoaded", function () {
+				updateStatus();
+				updateCustomPropsStatus();
 
-        // Add some dynamic content after a delay to test mutation observer
-        setTimeout(() => {
-          const dynamicStyle = document.createElement("style");
-          dynamicStyle.textContent = `
+				// Add some dynamic content after a delay to test mutation observer
+				setTimeout(() => {
+					const dynamicStyle = document.createElement("style");
+					dynamicStyle.textContent = `
                   .dynamic-content {
                       color: if(media(width >= 1024px): purple; else: orange);
                       font-weight: if(supports(font-variation-settings: "wght" 400): 600; else: bold);
                   }
               `;
-          document.head.appendChild(dynamicStyle);
+					document.head.appendChild(dynamicStyle);
 
-          const dynamicDiv = document.createElement("div");
-          dynamicDiv.className = "dynamic-content";
-          dynamicDiv.textContent =
-            "This content was added dynamically and should be processed by the polyfill!";
-          dynamicDiv.style.padding = "15px";
-          dynamicDiv.style.marginTop = "20px";
-          dynamicDiv.style.borderRadius = "5px";
-          dynamicDiv.style.backgroundColor = "#f0f0f0";
+					const dynamicDiv = document.createElement("div");
+					dynamicDiv.className = "dynamic-content";
+					dynamicDiv.textContent =
+						"This content was added dynamically and should be processed by the polyfill!";
+					dynamicDiv.style.padding = "15px";
+					dynamicDiv.style.marginTop = "20px";
+					dynamicDiv.style.borderRadius = "5px";
+					dynamicDiv.style.backgroundColor = "#f0f0f0";
 
-          document.querySelector(".container").appendChild(dynamicDiv);
-        }, 2000);
-      });
-    </script>
-  </body>
+					document
+						.querySelector(".container")
+						.appendChild(dynamicDiv);
+				}, 2000);
+			});
+		</script>
+	</body>
 </html>
