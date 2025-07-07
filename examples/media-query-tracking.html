@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>CSS if() Polyfill - Media Query Tracking Demo</title>
+		<style>
+			/* This CSS will automatically adapt when the window is resized */
+			.responsive-box {
+				padding: 20px;
+				margin: 20px;
+				border: 2px solid;
+
+				/* Responsive background color */
+				background-color: if(
+					media(min-width: 768px): lightblue; else: lightcoral
+				);
+
+				/* Responsive border color */
+				border-color: if(
+					media(min-width: 768px): darkblue; else: darkred
+				);
+
+				/* Responsive text color */
+				color: if(media(min-width: 768px): darkblue; else: darkred);
+
+				/* Responsive font size */
+				font-size: if(media(min-width: 768px): 18px; else: 14px);
+			}
+
+			.demo-container {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 20px;
+			}
+
+			.info {
+				background: #f0f0f0;
+				padding: 15px;
+				border-radius: 5px;
+				margin-bottom: 20px;
+			}
+
+			.resize-instruction {
+				background: #fff3cd;
+				padding: 10px;
+				border-radius: 5px;
+				border: 1px solid #ffeaa7;
+				margin-bottom: 20px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="demo-container">
+			<h1>CSS if() Polyfill - Media Query Tracking Demo</h1>
+
+			<div class="info">
+				<h2>What's happening here?</h2>
+				<p>
+					This page demonstrates the enhanced CSS if() polyfill with
+					media query tracking. The polyfill now automatically listens
+					for media query changes and updates styles in real-time.
+				</p>
+			</div>
+
+			<div class="resize-instruction">
+				<strong>Try this:</strong> Resize your browser window to be
+				wider or narrower than 768px. Notice how the box below changes
+				color, border, and font size automatically!
+			</div>
+
+			<div class="responsive-box">
+				<h3>Responsive Box</h3>
+				<p>
+					This box changes its appearance based on the viewport width:
+				</p>
+				<ul>
+					<li>
+						<strong>Wide screens (≥768px):</strong> Light blue
+						background, dark blue text and border, larger font
+					</li>
+					<li>
+						<strong>Narrow screens (&lt;768px):</strong> Light coral
+						background, dark red text and border, smaller font
+					</li>
+				</ul>
+				<p>
+					The polyfill automatically detects media query changes and
+					updates the styles without any JavaScript intervention!
+				</p>
+			</div>
+
+			<div class="info">
+				<h2>How it works</h2>
+				<p>The polyfill:</p>
+				<ol>
+					<li>
+						Processes CSS with
+						<code>if(media(...))</code> conditions
+					</li>
+					<li>
+						Registers MediaQueryList listeners for each media query
+					</li>
+					<li>
+						Automatically re-evaluates and updates styles when media
+						queries change
+					</li>
+					<li>
+						Cleans up listeners when needed to prevent memory leaks
+					</li>
+				</ol>
+			</div>
+		</div>
+
+		<!-- Include the polyfill -->
+		<script type="module">
+			import CSSIfPolyfill from "../src/index.js";
+
+			// Enable debug logging to see what's happening
+			CSSIfPolyfill.init({ debug: true });
+
+			// Log when the polyfill is ready
+			console.log(
+				"CSS if() polyfill with media query tracking is active!"
+			);
+			console.log("Try resizing the window to see the magic happen.");
+		</script>
+	</body>
+</html>

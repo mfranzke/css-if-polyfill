@@ -134,11 +134,17 @@ function evaluateMediaCondition(
 	const mediaQuery = match[1].trim();
 
 	try {
-		const result = globalThis.matchMedia(`(${mediaQuery})`).matches;
+		const mediaQueryList = globalThis.matchMedia(`(${mediaQuery})`);
+		const result = mediaQueryList.matches;
 
 		// Register this media query for change tracking if requested
 		if (registerForTracking && element && originalContent) {
-			registerMediaQuery(mediaQuery, element, originalContent);
+			registerMediaQuery(
+				mediaQuery,
+				element,
+				originalContent,
+				mediaQueryList
+			);
 		}
 
 		return result;
@@ -589,7 +595,12 @@ async function processLinkStylesheet(linkElement) {
 /**
  * Register a media query for change tracking
  */
-function registerMediaQuery(mediaQuery, element, originalContent) {
+function registerMediaQuery(
+	mediaQuery,
+	element,
+	originalContent,
+	mediaQueryList = null
+) {
 	if (!mediaQueryRegistry.has(mediaQuery)) {
 		mediaQueryRegistry.set(mediaQuery, new Set());
 	}
@@ -599,14 +610,19 @@ function registerMediaQuery(mediaQuery, element, originalContent) {
 	// Set up listener if not already done
 	if (!mediaQueryListeners.has(mediaQuery)) {
 		try {
-			const mediaQueryList = globalThis.matchMedia(`(${mediaQuery})`);
+			// Use provided MediaQueryList or create a new one
+			const mql =
+				mediaQueryList || globalThis.matchMedia(`(${mediaQuery})`);
 			const listener = () => {
 				log(`Media query changed: ${mediaQuery}`);
 				reprocessElementsForMediaQuery(mediaQuery);
 			};
 
-			mediaQueryList.addEventListener('change', listener);
-			mediaQueryListeners.set(mediaQuery, { mediaQueryList, listener });
+			mql.addEventListener('change', listener);
+			mediaQueryListeners.set(mediaQuery, {
+				mediaQueryList: mql,
+				listener
+			});
 
 			log(`Registered media query listener: ${mediaQuery}`);
 		} catch (error) {
