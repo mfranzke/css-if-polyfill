@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced CSS if() Examples</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+        }
+        
+        .demo-section {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #007acc;
+        }
+        
+        .demo-section h2 {
+            color: #007acc;
+            margin-top: 0;
+        }
+        
+        /* Advanced CSS if() examples with correct single-function syntax */
+        
+        /* 1. Complex responsive grid */
+        .responsive-grid {
+            display: if(supports(display: grid): grid; else: flex);
+            gap: if(supports(gap): 30px; else: 0);
+            grid-template-columns: if(
+                media(width >= 1200px): repeat(4, 1fr);
+                media(width >= 768px): repeat(2, 1fr);
+                else: 1fr
+            );
+            flex-wrap: if(supports(display: grid): initial; else: wrap);
+        }
+        
+        .grid-item {
+            padding: 25px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: bold;
+            margin: if(supports(gap): 0; else: 15px);
+            flex: if(supports(display: grid): none; else: 1);
+            min-width: if(supports(display: grid): none; else: 200px);
+        }
+        
+        /* 2. Progressive enhancement for animations */
+        .animated-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: if(supports(transform): translateY(0));
+            transition: if(supports(transition): all 0.3s cubic-bezier(0.4, 0, 0.2, 1));
+        }
+        
+        .animated-card:hover {
+            transform: if(supports(transform): translateY(-10px) scale(1.02));
+            box-shadow: if(
+                supports(box-shadow): 0 20px 40px rgba(0, 0, 0, 0.2);
+                else: 0 10px 30px rgba(0, 0, 0, 0.1)
+            );
+        }
+        
+        /* 3. Feature detection for modern CSS */
+        .modern-layout {
+            display: if(
+                supports(display: subgrid): subgrid;
+                supports(display: grid): grid;
+                else: flex
+            );
+            gap: if(
+                supports(gap): clamp(1rem, 5vw, 3rem);
+                else: 20px
+            );
+            container-type: if(supports(container-type: inline-size): inline-size);
+        }
+        
+        .modern-text {
+            font-size: if(
+                supports(font-size: clamp(1rem, 5vw, 2rem)): clamp(1rem, 5vw, 2rem);
+                else: 1.5rem
+            );
+            background: if(
+                supports(background-clip: text): linear-gradient(45deg, #667eea, #764ba2);
+                else: #333
+            );
+            background-clip: if(supports(background-clip: text): text);
+            -webkit-background-clip: if(supports(-webkit-background-clip: text): text);
+            color: if(
+                supports(background-clip: text): transparent;
+                else: #333
+            );
+            font-weight: bold;
+        }
+        
+        /* 4. Accessibility-first design */
+        .accessible-button {
+            background: if(
+                media(prefers-reduced-motion: reduce): #007acc;
+                else: linear-gradient(45deg, #007acc, #0056b3)
+            );
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: if(
+                media(prefers-reduced-motion: reduce): none;
+                else: all 0.2s ease
+            );
+            transform: if(
+                media(prefers-reduced-motion: reduce): none;
+                else: scale(1)
+            );
+            outline: if(
+                media(prefers-reduced-motion: reduce): 2px solid transparent
+            );
+        }
+        
+        .accessible-button:hover {
+            background: if(
+                media(prefers-reduced-motion: reduce): #0056b3;
+                else: linear-gradient(45deg, #0056b3, #004085)
+            );
+            transform: if(
+                media(prefers-reduced-motion: reduce): none;
+                else: scale(1.05)
+            );
+        }
+        
+        .accessible-button:focus {
+            outline: if(
+                supports(outline-offset): 2px solid #007acc;
+                else: 3px solid #007acc
+            );
+            outline-offset: if(supports(outline-offset): 2px; else: 0);
+        }
+        
+        /* 5. Dark mode with system preference */
+        .theme-card {
+            background: if(
+                media(prefers-color-scheme: dark): #2d3748;
+                else: #ffffff
+            );
+            color: if(
+                media(prefers-color-scheme: dark): #e2e8f0;
+                else: #2d3748
+            );
+            border: 1px solid if(
+                media(prefers-color-scheme: dark): #4a5568;
+                else: #e2e8f0
+            );
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: if(
+                media(prefers-color-scheme: dark): 0 10px 30px rgba(0, 0, 0, 0.3);
+                else: 0 10px 30px rgba(0, 0, 0, 0.1)
+            );
+        }
+        
+        /* 6. Performance-aware styles */
+        .performance-optimized {
+            will-change: if(supports(will-change: transform): transform; else: auto);
+            backface-visibility: if(supports(backface-visibility: hidden): hidden; else: visible);
+            perspective: if(supports(perspective: 1000px): 1000px);
+        }
+        
+        /* 7. Advanced typography */
+        .advanced-typography {
+            font-variation-settings: if(supports(font-variation-settings: "wght" 400): "wght" 400);
+            font-feature-settings: if(supports(font-feature-settings: "liga" 1): "liga" 1);
+            text-rendering: if(
+                supports(text-rendering: optimizeLegibility): optimizeLegibility;
+                else: auto
+            );
+            font-smooth: if(supports(font-smooth: antialiased): antialiased; else: auto);
+            -webkit-font-smoothing: if(supports(-webkit-font-smoothing: antialiased): antialiased; else: auto);
+        }
+        
+        /* 8. Container queries fallback */
+        .container-aware {
+            background: if(
+                supports(@container (min-width: 400px)): #4caf50;
+                else: #ff9800
+            );
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        /* 9. Logical properties with fallback */
+        .logical-properties {
+            margin-inline-start: if(supports(margin-inline-start: 20px): 20px; else: 20px);
+            margin-inline-end: if(supports(margin-inline-end: 20px): 20px; else: 20px);
+            padding-block: if(supports(padding-block: 15px): 15px; else: 15px 15px);
+            border-inline: if(
+                supports(border-inline: 2px solid #007acc): 2px solid #007acc;
+                else: 2px solid #007acc
+            );
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Advanced CSS if() Examples</h1>
+        
+        <div class="demo-section">
+            <h2>1. Complex Responsive Grid</h2>
+            <p>This grid adapts based on screen size and browser support for CSS Grid:</p>
+            <div class="responsive-grid">
+                <div class="grid-item">Item 1</div>
+                <div class="grid-item">Item 2</div>
+                <div class="grid-item">Item 3</div>
+                <div class="grid-item">Item 4</div>
+                <div class="grid-item">Item 5</div>
+                <div class="grid-item">Item 6</div>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>2. Progressive Enhancement for Animations</h2>
+            <p>Cards with hover effects that degrade gracefully:</p>
+            <div class="animated-card">
+                <h3>Hover over me!</h3>
+                <p>This card uses CSS transforms and transitions with fallbacks for older browsers.</p>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>3. Modern CSS Features</h2>
+            <div class="modern-layout">
+                <div class="modern-text">Modern Typography</div>
+                <p>This text uses clamp(), background-clip, and other modern CSS features with fallbacks.</p>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>4. Accessibility-First Button</h2>
+            <p>Button that respects user preferences for reduced motion:</p>
+            <button class="accessible-button">Click me!</button>
+        </div>
+        
+        <div class="demo-section">
+            <h2>5. Dark Mode Support</h2>
+            <div class="theme-card">
+                <h3>Theme-Aware Card</h3>
+                <p>This card automatically adapts to your system's dark mode preference.</p>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>6. Performance Optimizations</h2>
+            <div class="performance-optimized">
+                <p>This element uses performance-optimized CSS properties when supported.</p>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>7. Advanced Typography</h2>
+            <div class="advanced-typography">
+                <p>This text uses variable fonts, font features, and rendering optimizations when available.</p>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>8. Container Queries Fallback</h2>
+            <div class="container-aware">
+                Container queries support: <span id="container-support">Checking...</span>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>9. Logical Properties</h2>
+            <div class="logical-properties">
+                <p>This element uses logical properties that work with different writing modes.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../dist/index.umd.js"></script>
+    <script>
+        // Initialize polyfill
+        const polyfill = CSSIfPolyfill.init({ debug: true });
+        
+        // Update container support status
+        document.addEventListener('DOMContentLoaded', function() {
+            const containerSupportEl = document.getElementById('container-support');
+            const hasSupport = CSS.supports('@container (min-width: 400px)');
+            containerSupportEl.textContent = hasSupport ? 'Supported' : 'Not Supported';
+        });
+    </script>
+</body>
+</html>

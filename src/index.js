@@ -1,0 +1,619 @@
+/**
+ * CSS if() Function Polyfill
+ * Provides support for CSS if() function with style(), media(), and supports() conditions
+ * Syntax: if(condition: value; else: fallback-value)
+ * Supports multiple conditions within a single if() and usage within CSS shorthand properties
+ */
+
+/* global window, document, CSS, Node, MutationObserver */
+
+// Global state
+let polyfillOptions = {
+  debug: false,
+  autoInit: true,
+};
+
+/**
+ * Log debug messages
+ */
+function log(...arguments_) {
+  if (polyfillOptions.debug) {
+    console.log('[CSS if() Polyfill]', ...arguments_);
+  }
+}
+
+/**
+ * Check if browser has native CSS if() support
+ */
+function hasNativeSupport() {
+  if (typeof window === 'undefined' || !window.CSS) {
+    return false;
+  }
+
+  try {
+    // Test if CSS if() function is supported by testing a specific CSS if() syntax
+    return window.CSS.supports('color', 'if(style(--true): red; else: blue)');
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Evaluate a condition (style(), media(), supports())
+ */
+function evaluateCondition(condition) {
+  condition = condition.trim();
+
+  // Handle style() function
+  if (condition.startsWith('style(')) {
+    return evaluateStyleCondition(condition);
+  }
+
+  // Handle media() function
+  if (condition.startsWith('media(')) {
+    return evaluateMediaCondition(condition);
+  }
+
+  // Handle supports() function
+  if (condition.startsWith('supports(')) {
+    return evaluateSupportsCondition(condition);
+  }
+
+  // Direct boolean evaluation
+  return evaluateBooleanCondition(condition);
+}
+
+/**
+ * Evaluate style() condition
+ */
+function evaluateStyleCondition(condition) {
+  const match = condition.match(/style\s*\(\s*([^)]+)\s*\)/);
+  if (!match) {
+    return false;
+  }
+
+  const query = match[1].trim();
+
+  // Parse property and optional value
+  const parts = query.split(':').map(part => part.trim());
+  const property = parts[0];
+  const expectedValue = parts[1];
+
+  // Get computed style from document element or a test element
+  const testElement = document.createElement('div');
+  document.body.append(testElement);
+
+  try {
+    const computedStyle = window.getComputedStyle(testElement);
+    const actualValue = computedStyle.getPropertyValue(property);
+
+    if (expectedValue) {
+      return actualValue === expectedValue;
+    }
+
+    // If no expected value, check if property has any value
+    return actualValue !== '' && actualValue !== 'initial';
+  } catch {
+    return false;
+  } finally {
+    testElement.remove();
+  }
+}
+
+/**
+ * Evaluate media() condition
+ */
+function evaluateMediaCondition(condition) {
+  const match = condition.match(/media\s*\(\s*([^)]+)\s*\)/);
+  if (!match) {
+    return false;
+  }
+
+  const mediaQuery = match[1].trim();
+
+  try {
+    return window.matchMedia(`(${mediaQuery})`).matches;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Evaluate supports() condition
+ */
+function evaluateSupportsCondition(condition) {
+  const match = condition.match(/supports\s*\(\s*([^)]+)\s*\)/);
+  if (!match) {
+    return false;
+  }
+
+  const feature = match[1].trim();
+
+  try {
+    return CSS.supports(feature);
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Evaluate boolean condition
+ */
+function evaluateBooleanCondition(condition) {
+  // Simple boolean evaluation
+  const lowerCondition = condition.toLowerCase();
+
+  if (lowerCondition === 'true' || lowerCondition === '1') {
+    return true;
+  }
+
+  if (lowerCondition === 'false' || lowerCondition === '0') {
+    return false;
+  }
+
+  return false;
+}
+
+/**
+ * Parse multiple conditions within a single if() function
+ */
+function parseMultipleConditions(ifContent) {
+  const conditions = [];
+  let currentCondition = '';
+  let depth = 0;
+  let inQuotes = false;
+  let quoteChar = '';
+
+  for (let i = 0; i < ifContent.length; i++) {
+    const char = ifContent[i];
+    const previousChar = i > 0 ? ifContent[i - 1] : '';
+
+    // Handle quotes
+    if ((char === '"' || char === '\'') && previousChar !== '\\') {
+      if (!inQuotes) {
+        inQuotes = true;
+        quoteChar = char;
+      } else if (char === quoteChar) {
+        inQuotes = false;
+        quoteChar = '';
+      }
+    }
+
+    // Handle parentheses depth
+    if (!inQuotes) {
+      if (char === '(') {
+        depth++;
+      } else if (char === ')') {
+        depth--;
+      }
+    }
+
+    // Check for semicolon separator at depth 0
+    if (!inQuotes && depth === 0 && char === ';') {
+      // This is a separator between conditions
+      if (currentCondition.trim()) {
+        conditions.push(currentCondition.trim());
+      }
+
+      currentCondition = '';
+      continue;
+    }
+
+    currentCondition += char;
+  }
+
+  // Add the last condition
+  if (currentCondition.trim()) {
+    conditions.push(currentCondition.trim());
+  }
+
+  return conditions;
+}
+
+/**
+ * Process a single condition within an if() function
+ */
+function processSingleCondition(condition) {
+  // Check if this is an else clause
+  if (condition.trim().startsWith('else:')) {
+    return {
+      isElse: true,
+      value: condition.replace(/^\s*else\s*:\s*/, '').trim(),
+    };
+  }
+
+  // Find the main separator colon (outside of parentheses)
+  let depth = 0;
+  let inQuotes = false;
+  let quoteChar = '';
+  let separatorIndex = -1;
+
+  for (let i = 0; i < condition.length; i++) {
+    const char = condition[i];
+    const previousChar = i > 0 ? condition[i - 1] : '';
+
+    // Handle quotes
+    if ((char === '"' || char === '\'') && previousChar !== '\\') {
+      if (!inQuotes) {
+        inQuotes = true;
+        quoteChar = char;
+      } else if (char === quoteChar) {
+        inQuotes = false;
+        quoteChar = '';
+      }
+    }
+
+    // Handle parentheses depth
+    if (!inQuotes) {
+      if (char === '(') {
+        depth++;
+      } else if (char === ')') {
+        depth--;
+      } else if (char === ':' && depth === 0) {
+        // This is the main separator colon
+        separatorIndex = i;
+        break;
+      }
+    }
+  }
+
+  if (separatorIndex === -1) {
+    log('Invalid condition format:', condition);
+    return null;
+  }
+
+  const conditionPart = condition.slice(0, separatorIndex).trim();
+  const valuePart = condition.slice(separatorIndex + 1).trim();
+
+  return {
+    isElse: false,
+    condition: conditionPart,
+    value: valuePart,
+  };
+}
+
+/**
+ * Process multiple conditions within a single if() function
+ */
+function processMultipleConditions(ifContent) {
+  // Handle malformed if() functions that don't contain proper syntax
+  if (!ifContent || !ifContent.includes(':')) {
+    log('Malformed if() function - missing colon separator');
+    throw new Error('Malformed if() syntax');
+  }
+
+  const conditions = parseMultipleConditions(ifContent);
+  let elseValue = '';
+
+  // Process each condition in order
+  for (const condition of conditions) {
+    const parsed = processSingleCondition(condition);
+
+    if (!parsed) {
+      continue;
+    }
+
+    if (parsed.isElse) {
+      elseValue = parsed.value;
+      continue;
+    }
+
+    // Evaluate the condition
+    const isTrue = evaluateCondition(parsed.condition);
+
+    if (isTrue) {
+      log(`Condition matched: ${parsed.condition} -> ${parsed.value}`);
+      return parsed.value;
+    }
+  }
+
+  // No condition matched, return else value
+  log(`No condition matched, using else value: ${elseValue}`);
+  return elseValue;
+}
+
+/**
+ * Find and extract if() functions with proper nested parentheses handling
+ */
+function findIfFunctions(text) {
+  const functions = [];
+  let index = 0;
+
+  while (index < text.length) {
+    const match = text.indexOf('if(', index);
+    if (match === -1) {
+      break;
+    }
+
+    // Make sure it's actually an if() function (not part of another word)
+    if (match > 0 && /[\w-]/.test(text[match - 1])) {
+      index = match + 1;
+      continue;
+    }
+
+    // Find the matching closing parenthesis
+    let depth = 0;
+    let inQuotes = false;
+    let quoteChar = '';
+    const start = match + 3; // Start after 'if('
+    let end = -1;
+
+    for (let i = start; i < text.length; i++) {
+      const char = text[i];
+      const previousChar = i > 0 ? text[i - 1] : '';
+
+      // Handle quotes
+      if ((char === '"' || char === '\'') && previousChar !== '\\') {
+        if (!inQuotes) {
+          inQuotes = true;
+          quoteChar = char;
+        } else if (char === quoteChar) {
+          inQuotes = false;
+          quoteChar = '';
+        }
+      }
+
+      if (!inQuotes) {
+        if (char === '(') {
+          depth++;
+        } else if (char === ')') {
+          if (depth === 0) {
+            end = i;
+            break;
+          }
+
+          depth--;
+        }
+      }
+    }
+
+    if (end === -1) {
+      // Malformed if() function
+      index = match + 3;
+    } else {
+      const fullMatch = text.slice(match, end + 1);
+      const content = text.slice(start, end);
+      functions.push({
+        match: fullMatch,
+        content,
+        start: match,
+        end: end + 1,
+      });
+      index = end + 1;
+    }
+  }
+
+  return functions;
+}
+
+/**
+ * Process CSS text manually
+ */
+function processCSSText(cssText, options = {}) {
+  // Set options for this processing session
+  const originalOptions = {...polyfillOptions};
+  polyfillOptions = {...polyfillOptions, ...options};
+
+  try {
+    let result = cssText;
+    let hasChanges = true;
+
+    // Keep processing until no more if() functions are found
+    // This handles nested if() functions and multiple if() in the same property
+    while (hasChanges) {
+      hasChanges = false;
+      const ifFunctions = findIfFunctions(result);
+
+      // Process if() functions from right to left to maintain indices
+      for (let i = ifFunctions.length - 1; i >= 0; i--) {
+        const {match, content, start, end} = ifFunctions[i];
+
+        log('Processing if() function:', match);
+
+        try {
+          const processedResult = processMultipleConditions(content);
+          log(`Result: ${processedResult}`);
+
+          // Replace the if() function with the result
+          result = result.slice(0, start) + processedResult + result.slice(end);
+          hasChanges = true;
+        } catch (error) {
+          log('Error processing if() function:', error);
+          // For malformed if() functions, leave them unchanged
+          // Don't remove them, as they might be valid in future CSS specs
+        }
+      }
+    }
+
+    return result;
+  } finally {
+    // Restore original options
+    polyfillOptions = originalOptions;
+  }
+}
+
+/**
+ * Process a style element by rewriting its content
+ */
+function processStyleElement(styleElement) {
+  if (styleElement.dataset.cssIfProcessed) {
+    return; // Already processed
+  }
+
+  const originalContent = styleElement.textContent;
+  const processedContent = processCSSText(originalContent);
+
+  if (processedContent !== originalContent) {
+    log('Processing style element, original length:', originalContent.length);
+    styleElement.textContent = processedContent;
+    styleElement.dataset.cssIfProcessed = 'true';
+    log('Style element processed, new length:', processedContent.length);
+  }
+}
+
+/**
+ * Process all existing style elements
+ */
+function processExistingStylesheets() {
+  // Process inline style elements
+  const styleElements = document.querySelectorAll('style:not([data-css-if-processed])');
+  log(`Found ${styleElements.length} unprocessed style elements`);
+
+  for (const styleElement of styleElements) {
+    processStyleElement(styleElement);
+  }
+
+  // Process link stylesheets that we can access
+  const linkElements = document.querySelectorAll('link[rel="stylesheet"]');
+  for (const linkElement of linkElements) {
+    // We can't directly modify external stylesheets due to CORS,
+    // but we can try to fetch and reprocess them if they're same-origin
+    processLinkStylesheet(linkElement);
+  }
+}
+
+/**
+ * Process external stylesheet (if accessible)
+ */
+function processLinkStylesheet(linkElement) {
+  if (linkElement.dataset.cssIfProcessed) {
+    return;
+  }
+
+  // Only process same-origin stylesheets
+  try {
+    const url = new URL(linkElement.href);
+    if (url.origin !== window.location.origin) {
+      log('Skipping cross-origin stylesheet:', linkElement.href);
+      return;
+    }
+
+    // Fetch the stylesheet content
+    fetch(linkElement.href)
+      .then(response => response.text())
+      .then(cssText => {
+        const processedCssText = processCSSText(cssText);
+        if (processedCssText !== cssText) {
+          // Create a new style element with processed content
+          const styleElement = document.createElement('style');
+          styleElement.textContent = processedCssText;
+          styleElement.dataset.cssIfProcessed = 'true';
+          styleElement.dataset.originalHref = linkElement.href;
+
+          // Insert the style element after the link element
+          linkElement.parentNode.insertBefore(styleElement, linkElement.nextSibling);
+
+          // Disable the original link (but don't remove it for compatibility)
+          linkElement.disabled = true;
+          linkElement.dataset.cssIfProcessed = 'true';
+
+          log('External stylesheet processed and replaced:', linkElement.href);
+        }
+      })
+      .catch(error => {
+        log('Could not fetch external stylesheet:', linkElement.href, error);
+      });
+  } catch (error) {
+    log('Error processing external stylesheet:', error);
+  }
+}
+
+/**
+ * Observe stylesheet changes
+ */
+function observeStylesheetChanges() {
+  // Create a MutationObserver to watch for new stylesheets
+  const observer = new MutationObserver(mutations => {
+    for (const mutation of mutations) {
+      for (const node of mutation.addedNodes) {
+        if (
+          node.nodeType === Node.ELEMENT_NODE
+          && (node.tagName === 'STYLE' || node.tagName === 'LINK')
+        ) {
+          log('New style element detected:', node.tagName);
+
+          if (node.tagName === 'STYLE') {
+            // Process inline style elements immediately
+            setTimeout(() => {
+              processStyleElement(node);
+            }, 0);
+          } else if (node.tagName === 'LINK' && node.rel === 'stylesheet') {
+            // Process link stylesheets after they load
+            node.addEventListener('load', () => {
+              processLinkStylesheet(node);
+            });
+
+            // Also try to process immediately in case it's already loaded
+            setTimeout(() => {
+              processLinkStylesheet(node);
+            }, 100);
+          }
+        }
+      }
+    }
+  });
+
+  observer.observe(document.head, {
+    childList: true,
+    subtree: true,
+  });
+
+  // Also observe the body for style elements that might be added there
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
+}
+
+/**
+ * Initialize the polyfill
+ */
+function init(options = {}) {
+  if (typeof window === 'undefined') {
+    throw new TypeError('CSS if() polyfill requires a browser environment');
+  }
+
+  // Update global options
+  polyfillOptions = {...polyfillOptions, ...options};
+
+  if (hasNativeSupport()) {
+    log('Native CSS if() support detected, polyfill not needed');
+    return;
+  }
+
+  log('Initializing CSS if() polyfill');
+  processExistingStylesheets();
+  observeStylesheetChanges();
+}
+
+/**
+ * Public API to manually trigger processing
+ */
+function refresh() {
+  processExistingStylesheets();
+}
+
+// Auto-initialize if in browser and DOMContentLoaded
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      init();
+    });
+  } else {
+    init();
+  }
+}
+
+// Named exports for modern usage
+export {init, processCSSText, hasNativeSupport, refresh};
+
+// Create the CSSIfPolyfill object with all the methods
+const CSSIfPolyfill = {
+  init,
+  processCSSText,
+  hasNativeSupport,
+  refresh,
+};
+
+// Default export for backward compatibility
+export default CSSIfPolyfill;
