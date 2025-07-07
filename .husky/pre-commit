@@ -1,0 +1,3 @@
+lint-staged --config .config/.lintstagedrc.json
+lint-staged --config .config/.lintstagedrc-prettier.json
+git update-index --again

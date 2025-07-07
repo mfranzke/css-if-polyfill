@@ -1,0 +1,14 @@
+{
+	"trailingComma": "none",
+	"bracketSpacing": true,
+	"overrides": [
+		{
+			"files": ["*.js", "*.jsx", "*.cjs", "*.ts", "*.tsx"],
+			"options": {
+				"bracketSameLine": true
+			}
+		}
+	],
+	"endOfLine": "auto",
+	"plugins": ["prettier-plugin-pkg", "prettier-plugin-organize-imports"]
+}

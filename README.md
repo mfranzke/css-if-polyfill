@@ -6,7 +6,7 @@ A comprehensive JavaScript polyfill for the CSS `if()` function that provides su
 
 - ✅ **Complete CSS if() support** with condition evaluation
 - ✅ **Media queries** via `media()` function
-- ✅ **Feature detection** via `supports()` function  
+- ✅ **Feature detection** via `supports()` function
 - ✅ **Style queries** via `style()` function
 - ✅ **Multiple conditions** within a single if() function
 - ✅ **Shorthand property support** for complex CSS values
@@ -30,7 +30,7 @@ npm install css-if-polyfill
 Simply import the polyfill and it will automatically initialize:
 
 ```javascript
-import 'css-if-polyfill';
+import "css-if-polyfill";
 ```
 
 Or include it via script tag:
@@ -42,21 +42,21 @@ Or include it via script tag:
 ### Manual Initialization
 
 ```javascript
-import { init } from 'css-if-polyfill';
+import { init } from "css-if-polyfill";
 
 // Initialize with options
 const polyfill = init({
-  debug: true,
-  autoInit: true
+	debug: true,
+	autoInit: true
 });
 ```
 
 ### Processing CSS Text
 
 ```javascript
-import { processCSSText } from 'css-if-polyfill';
+import { processCSSText } from "css-if-polyfill";
 
-const css = '.button { color: if(media(width >= 768px): blue; else: red); }';
+const css = ".button { color: if(media(width >= 768px): blue; else: red); }";
 const processed = processCSSText(css);
 console.log(processed); // .button { color: blue; } (if screen >= 768px)
 ```
@@ -79,13 +79,13 @@ You can now use multiple conditions within a single `if()` function, where each 
 
 ```css
 .element {
-  /* Multiple conditions tested in order */
-  background: if(
-    style(--scheme: ice): linear-gradient(#caf0f8, white, #caf0f8);
-    style(--scheme: fire): linear-gradient(#ffc971, white, #ffc971);
-    style(--scheme: earth): linear-gradient(#8fbc8f, white, #8fbc8f);
-    else: linear-gradient(#e0e0e0, white, #e0e0e0);
-  );
+	/* Multiple conditions tested in order */
+	background: if(
+		style(--scheme: ice): linear-gradient(#caf0f8, white, #caf0f8) ;
+			style(--scheme: fire): linear-gradient(#ffc971, white, #ffc971) ;
+			style(--scheme: earth): linear-gradient(#8fbc8f, white, #8fbc8f) ;
+			else: linear-gradient(#e0e0e0, white, #e0e0e0) ;
+	);
 }
 ```
 
@@ -95,29 +95,24 @@ Use if() functions within CSS shorthand properties:
 
 ```css
 .element {
-  /* Border shorthand with conditional values */
-  border: if(
-    style(--scheme: ice): 3px;
-    style(--scheme: fire): 5px;
-    else: 1px;
-  ) if(
-    supports(border-style: dashed): dashed;
-    else: solid;
-  ) if(
-    style(--scheme: ice): #0ea5e9;
-    style(--scheme: fire): #f97316;
-    else: #6b7280;
-  );
-  
-  /* Font shorthand with multiple conditions */
-  font: if(
-    media(width >= 1200px): bold;
-    media(width >= 768px): 600;
-    else: normal;
-  ) if(
-    media(width >= 768px): 18px;
-    else: 14px;
-  )/1.5 system-ui, sans-serif;
+	/* Border shorthand with conditional values */
+	border: if(
+			style(--scheme: ice): 3px; style(--scheme: fire): 5px; else: 1px;
+		)
+		if(supports(border-style: dashed): dashed; else: solid;)
+		if(
+			style(--scheme: ice): #0ea5e9; style(--scheme: fire): #f97316;
+				else: #6b7280;
+		);
+
+	/* Font shorthand with multiple conditions */
+	font:
+		if(
+				media(width >= 1200px): bold; media(width >= 768px): 600;
+					else: normal;
+			)
+			if(media(width >= 768px): 18px; else: 14px;) / 1.5 system-ui,
+		sans-serif;
 }
 ```
 
@@ -127,11 +122,9 @@ Use if() functions within CSS shorthand properties:
 
 ```css
 .responsive-text {
-  font-size: if(
-    media(width >= 1200px): 24px;
-    media(width >= 768px): 18px;
-    else: 16px;
-  );
+	font-size: if(
+		media(width >= 1200px): 24px; media(width >= 768px): 18px; else: 16px;
+	);
 }
 ```
 
@@ -139,12 +132,10 @@ Use if() functions within CSS shorthand properties:
 
 ```css
 .modern-layout {
-  display: if(
-    supports(display: subgrid): subgrid;
-    supports(display: grid): grid;
-    supports(display: flex): flex;
-    else: block;
-  );
+	display: if(
+		supports(display: subgrid): subgrid; supports(display: grid): grid;
+			supports(display: flex): flex; else: block;
+	);
 }
 ```
 
@@ -152,12 +143,10 @@ Use if() functions within CSS shorthand properties:
 
 ```css
 .theme-aware {
-  color: if(
-    style(--theme: dark): white;
-    style(--theme: light): black;
-    style(--theme: blue): #1e40af;
-    else: #374151;
-  );
+	color: if(
+		style(--theme: dark): white; style(--theme: light): black;
+			style(--theme: blue): #1e40af; else: #374151;
+	);
 }
 ```
 
@@ -165,8 +154,8 @@ Use if() functions within CSS shorthand properties:
 
 ```css
 .debug-mode {
-  border: if(style(--true): 2px solid red; else: none);
-  opacity: if(style(--false): 0.5; else: 1);
+	border: if(style(--true): 2px solid red; else: none);
+	opacity: if(style(--false): 0.5; else: 1);
 }
 ```
 
@@ -176,19 +165,28 @@ Use if() functions within CSS shorthand properties:
 
 ```css
 .card {
-  background: if(
-    style(--scheme: ice): linear-gradient(135deg, #caf0f8, white, #caf0f8);
-    style(--scheme: fire): linear-gradient(135deg, #ffc971, white, #ffc971);
-    style(--scheme: earth): linear-gradient(135deg, #8fbc8f, white, #8fbc8f);
-    else: linear-gradient(135deg, #e0e0e0, white, #e0e0e0);
-  );
-  
-  color: if(
-    style(--theme: dark): #e2e8f0;
-    style(--theme: light): #2d3748;
-    style(--theme: blue): #1e40af;
-    else: #374151;
-  );
+	background: if(
+		style(--scheme: ice): linear-gradient(135deg, #caf0f8, white, #caf0f8) ;
+			style(--scheme: fire): linear-gradient(
+				135deg,
+				#ffc971,
+				white,
+				#ffc971
+			)
+			;
+			style(--scheme: earth): linear-gradient(
+				135deg,
+				#8fbc8f,
+				white,
+				#8fbc8f
+			)
+			; else: linear-gradient(135deg, #e0e0e0, white, #e0e0e0) ;
+	);
+
+	color: if(
+		style(--theme: dark): #e2e8f0; style(--theme: light): #2d3748;
+			style(--theme: blue): #1e40af; else: #374151;
+	);
 }
 ```
 
@@ -196,17 +194,12 @@ Use if() functions within CSS shorthand properties:
 
 ```css
 .feature-demo {
-  display: if(
-    supports(display: subgrid): subgrid;
-    supports(display: grid): grid;
-    supports(display: flex): flex;
-    else: block;
-  );
-  
-  gap: if(
-    supports(gap): 20px;
-    else: 0;
-  );
+	display: if(
+		supports(display: subgrid): subgrid; supports(display: grid): grid;
+			supports(display: flex): flex; else: block;
+	);
+
+	gap: if(supports(gap): 20px; else: 0;);
 }
 ```
 
@@ -214,18 +207,14 @@ Use if() functions within CSS shorthand properties:
 
 ```css
 .responsive-element {
-  padding: if(
-    media(width >= 1200px): 40px;
-    media(width >= 768px): 30px;
-    media(width >= 480px): 20px;
-    else: 15px;
-  );
-  
-  font-size: if(
-    media(width >= 1200px): 20px;
-    media(width >= 768px): 18px;
-    else: 16px;
-  );
+	padding: if(
+		media(width >= 1200px): 40px; media(width >= 768px): 30px;
+			media(width >= 480px): 20px; else: 15px;
+	);
+
+	font-size: if(
+		media(width >= 1200px): 20px; media(width >= 768px): 18px; else: 16px;
+	);
 }
 ```
 
@@ -233,17 +222,15 @@ Use if() functions within CSS shorthand properties:
 
 ```css
 .animated-element {
-  transition: if(
-    media(prefers-reduced-motion: reduce): none;
-    supports(transition): all 0.3s ease;
-    else: none;
-  );
-  
-  transform: if(
-    media(prefers-reduced-motion: reduce): none;
-    supports(transform): scale(1);
-    else: none;
-  );
+	transition: if(
+		media(prefers-reduced-motion: reduce): none; supports(transition): all
+			0.3s ease; else: none;
+	);
+
+	transform: if(
+		media(prefers-reduced-motion: reduce): none;
+			supports(transform): scale(1) ; else: none;
+	);
 }
 ```
 
@@ -255,8 +242,8 @@ Initialize the polyfill with optional configuration.
 
 ```javascript
 const polyfill = init({
-  debug: false,        // Enable debug logging
-  autoInit: true       // Automatically process existing stylesheets
+	debug: false, // Enable debug logging
+	autoInit: true // Automatically process existing stylesheets
 });
 ```
 
@@ -266,12 +253,12 @@ Process CSS text containing if() functions.
 
 ```javascript
 const processed = processCSSText(`
-  .test { 
+  .test {
     color: if(
       style(--theme: dark): white;
       style(--theme: light): black;
       else: gray;
-    ); 
+    );
   }
 `);
 ```
@@ -282,7 +269,7 @@ Check if the browser has native CSS if() support.
 
 ```javascript
 if (hasNativeSupport()) {
-  console.log('Native support available!');
+	console.log("Native support available!");
 }
 ```
 
@@ -311,8 +298,9 @@ The polyfill works in all modern browsers that support:
 - matchMedia API
 
 **Tested browsers:**
+
 - Chrome 60+
-- Firefox 55+  
+- Firefox 55+
 - Safari 12+
 - Edge 79+
 
@@ -323,25 +311,6 @@ The polyfill works in all modern browsers that support:
 - Caches evaluation results for better performance
 - Processes stylesheets incrementally to avoid blocking
 - Optimized parsing for multiple conditions and complex shorthand properties
-
-## Development
-
-```bash
-# Install dependencies
-npm install
-
-# Run tests
-npm test
-
-# Build distribution files
-npm run build
-
-# Run examples
-npm run serve
-
-# Lint code
-npm run lint
-```
 
 ## Examples
 
@@ -354,11 +323,7 @@ The package includes comprehensive examples:
 
 ## Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Add tests for new functionality
-4. Ensure all tests pass and linting passes
-5. Submit a pull request
+Please have a look at our [CONTRIBUTION guidelines](CONTRIBUTING.md).
 
 ## License
 
@@ -372,7 +337,8 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Changelog
 
-### v1.2.0
+### v0.0.0
+
 - ✨ Added support for multiple conditions within a single if() function
 - ✨ Enhanced switch-case like behavior for condition evaluation
 - ✨ Improved parsing for complex nested conditions
@@ -380,8 +346,6 @@ MIT License - see [LICENSE](LICENSE) file for details.
 - 🐛 Fixed edge cases with quoted values and nested parentheses
 - 📚 Added comprehensive examples for multiple conditions
 - 🧪 Expanded test suite to cover new functionality
-
-### v1.1.0
 - ✨ Added support for multiple if-tests separated by semicolons
 - ✨ Added support for if() functions in CSS shorthand properties
 - ✨ Enhanced parsing to handle complex nested conditions
@@ -389,8 +353,6 @@ MIT License - see [LICENSE](LICENSE) file for details.
 - 🐛 Fixed edge cases with quoted values and nested parentheses
 - 📚 Added comprehensive examples and documentation
 - 🧪 Expanded test suite to cover new features
-
-### v1.0.0
 - Initial release with full CSS if() support
 - Support for media(), supports(), and style() functions
 - Comprehensive test suite

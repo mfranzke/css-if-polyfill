@@ -1,0 +1,10 @@
+{
+	"recommendations": [
+		"editorconfig.editorconfig",
+		"henrynguyen5-vsc.vsc-nvm",
+		"streetsidesoftware.code-spell-checker",
+		"samverschueren.linter-xo",
+		"esbenp.prettier-vscode",
+		"gruntfuggly.todo-tree"
+	]
+}

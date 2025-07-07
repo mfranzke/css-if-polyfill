@@ -1,0 +1,38 @@
+---
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "23:00"
+      timezone: "Europe/Berlin"
+    pull-request-branch-name:
+      separator: "-"
+
+  # Daily: Check minor and patch updates
+  - package-ecosystem: "npm"
+    directory: "/"
+    open-pull-requests-limit: 10
+    schedule:
+      interval: "daily"
+      time: "23:00"
+      timezone: "Europe/Berlin"
+    pull-request-branch-name:
+      separator: "-"
+    # https://github.com/dependabot/dependabot-core/issues/5226#issuecomment-1179434437
+    versioning-strategy: increase
+    groups:
+      patch-dependencies:
+        update-types:
+          - "patch"
+      commitlint:
+        patterns:
+          - "@commitlint*"
+      babel:
+        patterns:
+          - "@babel*"
+      jest:
+        patterns:
+          - "jest"
+          - "jest-environment-jsdom"
