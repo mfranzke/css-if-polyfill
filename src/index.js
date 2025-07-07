@@ -486,7 +486,7 @@ function processExistingStylesheets() {
 /**
  * Process external stylesheet (if accessible)
  */
-function processLinkStylesheet(linkElement) {
+async function processLinkStylesheet(linkElement) {
 	if (linkElement.dataset.cssIfPolyfillProcessed) {
 		return;
 	}
@@ -500,43 +500,39 @@ function processLinkStylesheet(linkElement) {
 		}
 
 		// Fetch the stylesheet content
-		fetch(linkElement.href)
-			// eslint-disable-next-line promise/prefer-await-to-then
-			.then((response) => response.text())
-			// eslint-disable-next-line promise/prefer-await-to-then
-			.then((cssText) => {
-				const processedCssText = processCSSText(cssText);
-				if (processedCssText !== cssText) {
-					// Create a new style element with processed content
-					const styleElement = document.createElement('style');
-					styleElement.textContent = processedCssText;
-					styleElement.dataset.cssIfPolyfillProcessed = 'true';
-					styleElement.dataset.originalHref = linkElement.href;
+		try {
+			const response = await fetch(linkElement.href);
+			const cssText = await response.text();
+			const processedCssText = processCSSText(cssText);
+			if (processedCssText !== cssText) {
+				// Create a new style element with processed content
+				const styleElement = document.createElement('style');
+				styleElement.textContent = processedCssText;
+				styleElement.dataset.cssIfPolyfillProcessed = 'true';
+				styleElement.dataset.originalHref = linkElement.href;
 
-					// Insert the style element after the link element
-					linkElement.parentNode.insertBefore(
-						styleElement,
-						linkElement.nextSibling
-					);
-
-					// Disable the original link (but don't remove it for compatibility)
-					linkElement.disabled = true;
-					linkElement.dataset.cssIfPolyfillProcessed = 'true';
-
-					log(
-						'External stylesheet processed and replaced:',
-						linkElement.href
-					);
-				}
-			})
-			// eslint-disable-next-line promise/prefer-await-to-then
-			.catch((error) => {
-				log(
-					'Could not fetch external stylesheet:',
-					linkElement.href,
-					error
+				// Insert the style element after the link element
+				linkElement.parentNode.insertBefore(
+					styleElement,
+					linkElement.nextSibling
 				);
-			});
+
+				// Disable the original link (but don't remove it for compatibility)
+				linkElement.disabled = true;
+				linkElement.dataset.cssIfPolyfillProcessed = 'true';
+
+				log(
+					'External stylesheet processed and replaced:',
+					linkElement.href
+				);
+			}
+		} catch (error) {
+			log(
+				'Could not fetch external stylesheet:',
+				linkElement.href,
+				error
+			);
+		}
 	} catch (error) {
 		log('Error processing external stylesheet:', error);
 	}
