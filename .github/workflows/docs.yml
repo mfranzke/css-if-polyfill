@@ -79,8 +79,8 @@ jobs:
 
           **Parameters:**
           - `options` (optional): Configuration object
-            - `debug` (boolean): Enable debug logging (default: false)
-            - `autoInit` (boolean): Auto-initialize on DOMContentLoaded (default: true)
+              - `debug` (boolean): Enable debug logging (default: false)
+              - `autoInit` (boolean): Auto-initialize on DOMContentLoaded (default: true)
 
           ### `processCSSText(cssText, options?, element?)`
 
