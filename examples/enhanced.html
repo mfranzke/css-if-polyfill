@@ -450,8 +450,10 @@
 			</div>
 		</div>
 
-		<script src="../dist/index.umd.js"></script>
-		<script>
+		<script type="module">
+			// Load the polyfill
+			import CSSIfPolyfill from "../dist/index.modern.js";
+
 			// Initialize polyfill with debug enabled
 			const polyfill = CSSIfPolyfill.init({ debug: true });
 

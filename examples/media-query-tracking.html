@@ -113,9 +113,9 @@
 			</div>
 		</div>
 
-		<!-- Include the polyfill -->
 		<script type="module">
-			import CSSIfPolyfill from "../src/index.js";
+			// Load the polyfill
+			import CSSIfPolyfill from "../dist/index.modern.js";
 
 			// Enable debug logging to see what's happening
 			CSSIfPolyfill.init({ debug: true });

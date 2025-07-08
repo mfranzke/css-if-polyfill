@@ -1,421 +1,415 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS if() Multiple Conditions Examples</title>
-    <style>
-        :root {
-            --scheme: ice;
-            --theme: dark;
-            --size: large;
-        }
-        
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-        
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 40px;
-            font-size: 2.5em;
-        }
-        
-        .demo-section {
-            margin-bottom: 50px;
-            padding: 30px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            border-left: 5px solid #007acc;
-        }
-        
-        .demo-section h2 {
-            color: #007acc;
-            margin-top: 0;
-        }
-        
-        .code-block {
-            background: #2d3748;
-            color: #e2e8f0;
-            padding: 20px;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            margin: 15px 0;
-            overflow-x: auto;
-            white-space: pre-wrap;
-        }
-        
-        .example-result {
-            padding: 20px;
-            border: 2px solid #007acc;
-            border-radius: 10px;
-            background: white;
-            margin: 15px 0;
-        }
-        
-        .controls {
-            margin: 20px 0;
-            text-align: center;
-        }
-        
-        .controls button {
-            padding: 10px 20px;
-            margin: 0 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #007acc;
-            color: white;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        
-        .controls button:hover {
-            background-color: #005a9e;
-        }
-        
-        /* CSS if() examples with multiple conditions */
-        
-        /* 1. Theme-based background gradients */
-        .theme-card {
-            background: if(
-                style(--scheme: ice): linear-gradient(135deg, #caf0f8, white, #caf0f8);
-                style(--scheme: fire): linear-gradient(135deg, #ffc971, white, #ffc971);
-                style(--scheme: earth): linear-gradient(135deg, #8fbc8f, white, #8fbc8f);
-                else: linear-gradient(135deg, #e0e0e0, white, #e0e0e0);
-            );
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            font-weight: bold;
-            color: #333;
-            margin: 20px 0;
-        }
-        
-        /* 2. Size-based typography */
-        .size-text {
-            font-size: if(
-                style(--size: small): 14px;
-                style(--size: medium): 18px;
-                style(--size: large): 24px;
-                style(--size: xlarge): 32px;
-                else: 16px;
-            );
-            font-weight: if(
-                style(--size: small): normal;
-                style(--size: medium): 500;
-                style(--size: large): 600;
-                style(--size: xlarge): bold;
-                else: normal;
-            );
-            padding: 20px;
-            background: #f0f8ff;
-            border-radius: 10px;
-            text-align: center;
-        }
-        
-        /* 3. Theme-based colors with fallbacks */
-        .theme-text {
-            color: if(
-                style(--theme: dark): #e2e8f0;
-                style(--theme: light): #2d3748;
-                style(--theme: blue): #1e40af;
-                style(--theme: green): #059669;
-                else: #374151;
-            );
-            background: if(
-                style(--theme: dark): #2d3748;
-                style(--theme: light): #f7fafc;
-                style(--theme: blue): #dbeafe;
-                style(--theme: green): #d1fae5;
-                else: #f9fafb;
-            );
-            padding: 25px;
-            border-radius: 12px;
-            text-align: center;
-            font-weight: 600;
-        }
-        
-        /* 4. Complex border styles */
-        .border-demo {
-            border: if(
-                style(--scheme: ice): 3px;
-                style(--scheme: fire): 5px;
-                style(--scheme: earth): 2px;
-                else: 1px;
-            ) if(
-                style(--scheme: ice): solid;
-                style(--scheme: fire): dashed;
-                style(--scheme: earth): dotted;
-                else: solid;
-            ) if(
-                style(--scheme: ice): #0ea5e9;
-                style(--scheme: fire): #f97316;
-                style(--scheme: earth): #65a30d;
-                else: #6b7280;
-            );
-            padding: 20px;
-            margin: 20px 0;
-            background: white;
-            border-radius: 8px;
-            text-align: center;
-        }
-        
-        /* 5. Media query combinations */
-        .responsive-demo {
-            padding: if(
-                media(width >= 1200px): 40px;
-                media(width >= 768px): 30px;
-                media(width >= 480px): 20px;
-                else: 15px;
-            );
-            font-size: if(
-                media(width >= 1200px): 20px;
-                media(width >= 768px): 18px;
-                media(width >= 480px): 16px;
-                else: 14px;
-            );
-            background: if(
-                media(width >= 1200px): #e0f2fe;
-                media(width >= 768px): #f0f9ff;
-                media(width >= 480px): #f8fafc;
-                else: #f1f5f9;
-            );
-            border-radius: 10px;
-            text-align: center;
-            margin: 20px 0;
-        }
-        
-        /* 6. Feature detection with multiple fallbacks */
-        .feature-demo {
-            display: if(
-                supports(display: subgrid): subgrid;
-                supports(display: grid): grid;
-                supports(display: flex): flex;
-                else: block;
-            );
-            gap: if(
-                supports(gap): 20px;
-                supports(margin): 0;
-                else: 0;
-            );
-            background: if(
-                supports(display: subgrid): #dcfce7;
-                supports(display: grid): #dbeafe;
-                supports(display: flex): #fef3c7;
-                else: #f3f4f6;
-            );
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-        }
-        
-        /* 7. Animation preferences */
-        .animation-demo {
-            transition: if(
-                media(prefers-reduced-motion: reduce): none;
-                supports(transition): all 0.3s ease;
-                else: none;
-            );
-            transform: if(
-                media(prefers-reduced-motion: reduce): none;
-                supports(transform): scale(1);
-                else: none;
-            );
-            background: if(
-                media(prefers-reduced-motion: reduce): #fbbf24;
-                else: #3b82f6;
-            );
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            cursor: pointer;
-        }
-        
-        .animation-demo:hover {
-            transform: if(
-                media(prefers-reduced-motion: reduce): none;
-                supports(transform): scale(1.05);
-                else: none;
-            );
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>CSS if() Multiple Conditions Examples</h1>
-        <p style="text-align: center; font-size: 18px; color: #666;">
-            Demonstrating multiple conditions within a single if() function
-        </p>
-        
-        <div class="controls">
-            <button onclick="setScheme('ice')">Ice Theme</button>
-            <button onclick="setScheme('fire')">Fire Theme</button>
-            <button onclick="setScheme('earth')">Earth Theme</button>
-            <button onclick="setScheme('default')">Default</button>
-        </div>
-        
-        <div class="controls">
-            <button onclick="setTheme('dark')">Dark Theme</button>
-            <button onclick="setTheme('light')">Light Theme</button>
-            <button onclick="setTheme('blue')">Blue Theme</button>
-            <button onclick="setTheme('green')">Green Theme</button>
-        </div>
-        
-        <div class="controls">
-            <button onclick="setSize('small')">Small Text</button>
-            <button onclick="setSize('medium')">Medium Text</button>
-            <button onclick="setSize('large')">Large Text</button>
-            <button onclick="setSize('xlarge')">XLarge Text</button>
-        </div>
-        
-        <div class="demo-section">
-            <h2>1. Theme-Based Background Gradients</h2>
-            <div class="code-block">background: if(
-    style(--scheme: ice): linear-gradient(135deg, #caf0f8, white, #caf0f8);
-    style(--scheme: fire): linear-gradient(135deg, #ffc971, white, #ffc971);
-    style(--scheme: earth): linear-gradient(135deg, #8fbc8f, white, #8fbc8f);
-    else: linear-gradient(135deg, #e0e0e0, white, #e0e0e0);
-);</div>
-            <div class="example-result theme-card">
-                This card's background changes based on the --scheme custom property!
-            </div>
-        </div>
-        
-        <div class="demo-section">
-            <h2>2. Size-Based Typography</h2>
-            <div class="code-block">font-size: if(
-    style(--size: small): 14px;
-    style(--size: medium): 18px;
-    style(--size: large): 24px;
-    style(--size: xlarge): 32px;
-    else: 16px;
-);</div>
-            <div class="example-result size-text">
-                This text size changes based on the --size custom property!
-            </div>
-        </div>
-        
-        <div class="demo-section">
-            <h2>3. Theme-Based Colors</h2>
-            <div class="code-block">color: if(
-    style(--theme: dark): #e2e8f0;
-    style(--theme: light): #2d3748;
-    style(--theme: blue): #1e40af;
-    style(--theme: green): #059669;
-    else: #374151;
-);</div>
-            <div class="example-result theme-text">
-                This text adapts its color and background based on the --theme property!
-            </div>
-        </div>
-        
-        <div class="demo-section">
-            <h2>4. Complex Border Styles</h2>
-            <div class="code-block">border: if(
-    style(--scheme: ice): 3px;
-    style(--scheme: fire): 5px;
-    style(--scheme: earth): 2px;
-    else: 1px;
-) if(
-    style(--scheme: ice): solid;
-    style(--scheme: fire): dashed;
-    style(--scheme: earth): dotted;
-    else: solid;
-) if(
-    style(--scheme: ice): #0ea5e9;
-    style(--scheme: fire): #f97316;
-    style(--scheme: earth): #65a30d;
-    else: #6b7280;
-);</div>
-            <div class="example-result border-demo">
-                This border style changes completely based on the scheme!
-            </div>
-        </div>
-        
-        <div class="demo-section">
-            <h2>5. Responsive Design with Multiple Breakpoints</h2>
-            <div class="code-block">padding: if(
-    media(width >= 1200px): 40px;
-    media(width >= 768px): 30px;
-    media(width >= 480px): 20px;
-    else: 15px;
-);</div>
-            <div class="example-result responsive-demo">
-                This element's padding and styling adapt to different screen sizes!
-            </div>
-        </div>
-        
-        <div class="demo-section">
-            <h2>6. Progressive Enhancement with Feature Detection</h2>
-            <div class="code-block">display: if(
-    supports(display: subgrid): subgrid;
-    supports(display: grid): grid;
-    supports(display: flex): flex;
-    else: block;
-);</div>
-            <div class="example-result feature-demo">
-                This element uses the most advanced layout method available!
-            </div>
-        </div>
-        
-        <div class="demo-section">
-            <h2>7. Accessibility-Aware Animations</h2>
-            <div class="code-block">transition: if(
-    media(prefers-reduced-motion: reduce): none;
-    supports(transition): all 0.3s ease;
-    else: none;
-);</div>
-            <div class="example-result animation-demo">
-                Hover me! This respects your motion preferences.
-            </div>
-        </div>
-    </div>
-    
-    <script src="../dist/index.umd.js"></script>
-    <script>
-        // Initialize polyfill
-        const polyfill = CSSIfPolyfill.init({ debug: true });
-        
-        // Control functions
-        function setScheme(scheme) {
-            document.documentElement.style.setProperty('--scheme', scheme === 'default' ? '' : scheme);
-            console.log('Scheme set to:', scheme);
-        }
-        
-        function setTheme(theme) {
-            document.documentElement.style.setProperty('--theme', theme);
-            console.log('Theme set to:', theme);
-        }
-        
-        function setSize(size) {
-            document.documentElement.style.setProperty('--size', size);
-            console.log('Size set to:', size);
-        }
-        
-        // Test manual processing
-        const testCSS = `
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>CSS if() Multiple Conditions Examples</title>
+		<style>
+			:root {
+				--scheme: ice;
+				--theme: dark;
+				--size: large;
+			}
+
+			body {
+				font-family:
+					system-ui,
+					-apple-system,
+					sans-serif;
+				margin: 0;
+				padding: 20px;
+				background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+				min-height: 100vh;
+			}
+
+			.container {
+				max-width: 1200px;
+				margin: 0 auto;
+				background: rgba(255, 255, 255, 0.95);
+				padding: 40px;
+				border-radius: 20px;
+				box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+			}
+
+			h1 {
+				text-align: center;
+				color: #333;
+				margin-bottom: 40px;
+				font-size: 2.5em;
+			}
+
+			.demo-section {
+				margin-bottom: 50px;
+				padding: 30px;
+				background: #f8f9fa;
+				border-radius: 15px;
+				border-left: 5px solid #007acc;
+			}
+
+			.demo-section h2 {
+				color: #007acc;
+				margin-top: 0;
+			}
+
+			.code-block {
+				background: #2d3748;
+				color: #e2e8f0;
+				padding: 20px;
+				border-radius: 10px;
+				font-family: "Courier New", monospace;
+				margin: 15px 0;
+				overflow-x: auto;
+				white-space: pre-wrap;
+			}
+
+			.example-result {
+				padding: 20px;
+				border: 2px solid #007acc;
+				border-radius: 10px;
+				background: white;
+				margin: 15px 0;
+			}
+
+			.controls {
+				margin: 20px 0;
+				text-align: center;
+			}
+
+			.controls button {
+				padding: 10px 20px;
+				margin: 0 10px;
+				border: none;
+				border-radius: 5px;
+				background-color: #007acc;
+				color: white;
+				cursor: pointer;
+				font-size: 16px;
+			}
+
+			.controls button:hover {
+				background-color: #005a9e;
+			}
+
+			/* CSS if() examples with multiple conditions */
+
+			/* 1. Theme-based background gradients */
+			.theme-card {
+				background: if(
+					style(--scheme: ice): linear-gradient(
+							135deg,
+							#caf0f8,
+							white,
+							#caf0f8
+						)
+						;
+						style(--scheme: fire): linear-gradient(
+							135deg,
+							#ffc971,
+							white,
+							#ffc971
+						)
+						;
+						style(--scheme: earth): linear-gradient(
+							135deg,
+							#8fbc8f,
+							white,
+							#8fbc8f
+						)
+						; else: linear-gradient(135deg, #e0e0e0, white, #e0e0e0)
+						;
+				);
+				padding: 30px;
+				border-radius: 15px;
+				text-align: center;
+				font-weight: bold;
+				color: #333;
+				margin: 20px 0;
+			}
+
+			/* 2. Size-based typography */
+			.size-text {
+				font-size: if(
+					style(--size: small): 14px; style(--size: medium): 18px;
+						style(--size: large): 24px; style(--size: xlarge): 32px;
+						else: 16px;
+				);
+				font-weight: if(
+					style(--size: small): normal; style(--size: medium): 500;
+						style(--size: large): 600; style(--size: xlarge): bold;
+						else: normal;
+				);
+				padding: 20px;
+				background: #f0f8ff;
+				border-radius: 10px;
+				text-align: center;
+			}
+
+			/* 3. Theme-based colors with fallbacks */
+			.theme-text {
+				color: if(
+					style(--theme: dark): #e2e8f0;
+						style(--theme: light): #2d3748;
+						style(--theme: blue): #1e40af;
+						style(--theme: green): #059669; else: #374151;
+				);
+				background: if(
+					style(--theme: dark): #2d3748;
+						style(--theme: light): #f7fafc;
+						style(--theme: blue): #dbeafe;
+						style(--theme: green): #d1fae5; else: #f9fafb;
+				);
+				padding: 25px;
+				border-radius: 12px;
+				text-align: center;
+				font-weight: 600;
+			}
+
+			/* 4. Complex border styles */
+			.border-demo {
+				border: if(
+						style(--scheme: ice): 3px; style(--scheme: fire): 5px;
+							style(--scheme: earth): 2px; else: 1px;
+					)
+					if(
+						style(--scheme: ice): solid;
+							style(--scheme: fire): dashed;
+							style(--scheme: earth): dotted; else: solid;
+					)
+					if(
+						style(--scheme: ice): #0ea5e9;
+							style(--scheme: fire): #f97316;
+							style(--scheme: earth): #65a30d; else: #6b7280;
+					);
+				padding: 20px;
+				margin: 20px 0;
+				background: white;
+				border-radius: 8px;
+				text-align: center;
+			}
+
+			/* 5. Media query combinations */
+			.responsive-demo {
+				padding: if(
+					media(width >=1200px): 40px; media(width >=768px): 30px;
+						media(width >=480px): 20px; else: 15px;
+				);
+				font-size: if(
+					media(width >=1200px): 20px; media(width >=768px): 18px;
+						media(width >=480px): 16px; else: 14px;
+				);
+				background: if(
+					media(width >=1200px): #e0f2fe;
+						media(width >=768px): #f0f9ff;
+						media(width >=480px): #f8fafc; else: #f1f5f9;
+				);
+				border-radius: 10px;
+				text-align: center;
+				margin: 20px 0;
+			}
+
+			/* 6. Feature detection with multiple fallbacks */
+			.feature-demo {
+				display: if(
+					supports(display: subgrid): subgrid;
+						supports(display: grid): grid;
+						supports(display: flex): flex; else: block;
+				);
+				gap: if(supports(gap): 20px; supports(margin): 0; else: 0;);
+				background: if(
+					supports(display: subgrid): #dcfce7;
+						supports(display: grid): #dbeafe;
+						supports(display: flex): #fef3c7; else: #f3f4f6;
+				);
+				padding: 20px;
+				border-radius: 10px;
+				text-align: center;
+			}
+
+			/* 7. Animation preferences */
+			.animation-demo {
+				transition: if(
+					media(prefers-reduced-motion: reduce): none;
+						supports(transition): all 0.3s ease; else: none;
+				);
+				transform: if(
+					media(prefers-reduced-motion: reduce): none;
+						supports(transform): scale(1) ; else: none;
+				);
+				background: if(
+					media(prefers-reduced-motion: reduce): #fbbf24;
+						else: #3b82f6;
+				);
+				color: white;
+				padding: 20px;
+				border-radius: 10px;
+				text-align: center;
+				cursor: pointer;
+			}
+
+			.animation-demo:hover {
+				transform: if(
+					media(prefers-reduced-motion: reduce): none;
+						supports(transform): scale(1.05) ; else: none;
+				);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<h1>CSS if() Multiple Conditions Examples</h1>
+			<p style="text-align: center; font-size: 18px; color: #666">
+				Demonstrating multiple conditions within a single if() function
+			</p>
+
+			<div class="controls">
+				<button onclick="setScheme('ice')">Ice Theme</button>
+				<button onclick="setScheme('fire')">Fire Theme</button>
+				<button onclick="setScheme('earth')">Earth Theme</button>
+				<button onclick="setScheme('default')">Default</button>
+			</div>
+
+			<div class="controls">
+				<button onclick="setTheme('dark')">Dark Theme</button>
+				<button onclick="setTheme('light')">Light Theme</button>
+				<button onclick="setTheme('blue')">Blue Theme</button>
+				<button onclick="setTheme('green')">Green Theme</button>
+			</div>
+
+			<div class="controls">
+				<button onclick="setSize('small')">Small Text</button>
+				<button onclick="setSize('medium')">Medium Text</button>
+				<button onclick="setSize('large')">Large Text</button>
+				<button onclick="setSize('xlarge')">XLarge Text</button>
+			</div>
+
+			<div class="demo-section">
+				<h2>1. Theme-Based Background Gradients</h2>
+				<div class="code-block">
+					background: if( style(--scheme: ice):
+					linear-gradient(135deg, #caf0f8, white, #caf0f8);
+					style(--scheme: fire): linear-gradient(135deg, #ffc971,
+					white, #ffc971); style(--scheme: earth):
+					linear-gradient(135deg, #8fbc8f, white, #8fbc8f); else:
+					linear-gradient(135deg, #e0e0e0, white, #e0e0e0); );
+				</div>
+				<div class="example-result theme-card">
+					This card's background changes based on the --scheme custom
+					property!
+				</div>
+			</div>
+
+			<div class="demo-section">
+				<h2>2. Size-Based Typography</h2>
+				<div class="code-block">
+					font-size: if( style(--size: small): 14px; style(--size:
+					medium): 18px; style(--size: large): 24px; style(--size:
+					xlarge): 32px; else: 16px; );
+				</div>
+				<div class="example-result size-text">
+					This text size changes based on the --size custom property!
+				</div>
+			</div>
+
+			<div class="demo-section">
+				<h2>3. Theme-Based Colors</h2>
+				<div class="code-block">
+					color: if( style(--theme: dark): #e2e8f0; style(--theme:
+					light): #2d3748; style(--theme: blue): #1e40af;
+					style(--theme: green): #059669; else: #374151; );
+				</div>
+				<div class="example-result theme-text">
+					This text adapts its color and background based on the
+					--theme property!
+				</div>
+			</div>
+
+			<div class="demo-section">
+				<h2>4. Complex Border Styles</h2>
+				<div class="code-block">
+					border: if( style(--scheme: ice): 3px; style(--scheme:
+					fire): 5px; style(--scheme: earth): 2px; else: 1px; ) if(
+					style(--scheme: ice): solid; style(--scheme: fire): dashed;
+					style(--scheme: earth): dotted; else: solid; ) if(
+					style(--scheme: ice): #0ea5e9; style(--scheme: fire):
+					#f97316; style(--scheme: earth): #65a30d; else: #6b7280; );
+				</div>
+				<div class="example-result border-demo">
+					This border style changes completely based on the scheme!
+				</div>
+			</div>
+
+			<div class="demo-section">
+				<h2>5. Responsive Design with Multiple Breakpoints</h2>
+				<div class="code-block">
+					padding: if( media(width >= 1200px): 40px; media(width >=
+					768px): 30px; media(width >= 480px): 20px; else: 15px; );
+				</div>
+				<div class="example-result responsive-demo">
+					This element's padding and styling adapt to different screen
+					sizes!
+				</div>
+			</div>
+
+			<div class="demo-section">
+				<h2>6. Progressive Enhancement with Feature Detection</h2>
+				<div class="code-block">
+					display: if( supports(display: subgrid): subgrid;
+					supports(display: grid): grid; supports(display: flex):
+					flex; else: block; );
+				</div>
+				<div class="example-result feature-demo">
+					This element uses the most advanced layout method available!
+				</div>
+			</div>
+
+			<div class="demo-section">
+				<h2>7. Accessibility-Aware Animations</h2>
+				<div class="code-block">
+					transition: if( media(prefers-reduced-motion: reduce): none;
+					supports(transition): all 0.3s ease; else: none; );
+				</div>
+				<div class="example-result animation-demo">
+					Hover me! This respects your motion preferences.
+				</div>
+			</div>
+		</div>
+
+		<script type="module">
+			// Load the polyfill
+			import CSSIfPolyfill from "../dist/index.modern.js";
+
+			// Initialize polyfill
+			const polyfill = CSSIfPolyfill.init({ debug: true });
+
+			// Control functions
+			function setScheme(scheme) {
+				document.documentElement.style.setProperty(
+					"--scheme",
+					scheme === "default" ? "" : scheme
+				);
+				console.log("Scheme set to:", scheme);
+			}
+
+			function setTheme(theme) {
+				document.documentElement.style.setProperty("--theme", theme);
+				console.log("Theme set to:", theme);
+			}
+
+			function setSize(size) {
+				document.documentElement.style.setProperty("--size", size);
+				console.log("Size set to:", size);
+			}
+
+			// Test manual processing
+			const testCSS = `
             .test {
                 background: if(
                     style(--scheme: ice): linear-gradient(#caf0f8, white);
                     style(--scheme: fire): linear-gradient(#ffc971, white);
                     else: gray;
                 );
-                
+
                 color: if(
                     style(--theme: dark): white;
                     style(--theme: light): black;
@@ -423,12 +417,12 @@
                 );
             }
         `;
-        
-        console.log('Test CSS processing:');
-        console.log('Input:', testCSS);
-        console.log('Output:', CSSIfPolyfill.processCSSText(testCSS));
-        
-        console.log('Multiple conditions CSS if() polyfill loaded!');
-    </script>
-</body>
+
+			console.log("Test CSS processing:");
+			console.log("Input:", testCSS);
+			console.log("Output:", CSSIfPolyfill.processCSSText(testCSS));
+
+			console.log("Multiple conditions CSS if() polyfill loaded!");
+		</script>
+	</body>
 </html>
