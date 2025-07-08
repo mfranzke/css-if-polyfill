@@ -118,7 +118,7 @@ jobs:
               <h2>Available Examples</h2>
               <ul class="example-list">
                   <li>
-                      <a href="index.html">Basic Examples</a>
+                      <a href="basic-examples.html">Basic Examples</a>
                       <br><small>Demonstrates basic if() syntax with style(), media(), and supports() conditions</small>
                   </li>
                   <li>

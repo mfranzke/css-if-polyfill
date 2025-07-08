@@ -54,7 +54,7 @@
     "prepare": "husky",
     "prepublishOnly": "npm run build",
     "pretest:packing": "npm run build",
-    "serve": "http-server -p 3000 -o examples",
+    "serve": "http-server -p 3000 -o examples/basic-examples.html",
     "test": "npm-run-all --sequential test:*",
     "test:jest": "jest --testEnvironment=jsdom",
     "test:jest:watch": "jest --testEnvironment=jsdom --watch",
