@@ -1,0 +1,173 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build for GitHub Pages
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Run linting
+        run: npm run lint
+
+      - name: Build package
+        run: npm run build
+
+      - name: Prepare GitHub Pages content
+        run: |
+          # Create pages directory
+          mkdir -p _site
+
+          # Copy examples folder
+          cp -r examples/* _site/
+
+          # Copy dist folder for example pages to access the scripts
+          mkdir -p _site/dist
+          cp -r dist/* _site/dist/
+
+          # Create index.html that lists all examples
+          cat > _site/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>CSS if() Polyfill - Examples</title>
+              <style>
+                  body {
+                      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                      max-width: 800px;
+                      margin: 0 auto;
+                      padding: 20px;
+                      line-height: 1.6;
+                  }
+                  .example-list {
+                      list-style: none;
+                      padding: 0;
+                  }
+                  .example-list li {
+                      margin: 10px 0;
+                      padding: 15px;
+                      border: 1px solid #ddd;
+                      border-radius: 5px;
+                      background: #f9f9f9;
+                  }
+                  .example-list a {
+                      text-decoration: none;
+                      color: #0066cc;
+                      font-weight: bold;
+                  }
+                  .example-list a:hover {
+                      text-decoration: underline;
+                  }
+                  .cdn-info {
+                      background: #e7f3ff;
+                      padding: 15px;
+                      border-radius: 5px;
+                      margin: 20px 0;
+                  }
+                  .cdn-info code {
+                      background: #f0f0f0;
+                      padding: 2px 4px;
+                      border-radius: 3px;
+                  }
+              </style>
+          </head>
+          <body>
+              <h1>CSS if() Polyfill - Live Examples</h1>
+
+              <p>This page showcases live examples of the CSS if() polyfill in action. Each example demonstrates different aspects of the polyfill's functionality.</p>
+
+              <div class="cdn-info">
+                  <h3>CDN Usage</h3>
+                  <p>You can include the polyfill directly from jsDelivr:</p>
+                  <code>https://cdn.jsdelivr.net/npm/css-if-polyfill/dist/index.modern.js</code>
+              </div>
+
+              <h2>Available Examples</h2>
+              <ul class="example-list">
+                  <li>
+                      <a href="index.html">Basic Examples</a>
+                      <br><small>Demonstrates basic if() syntax with style(), media(), and supports() conditions</small>
+                  </li>
+                  <li>
+                      <a href="enhanced.html">Enhanced Features</a>
+                      <br><small>Shows advanced usage patterns and edge cases</small>
+                  </li>
+                  <li>
+                      <a href="multiple-conditions.html">Multiple Conditions</a>
+                      <br><small>Examples with multiple conditions within a single if() function</small>
+                  </li>
+                  <li>
+                      <a href="advanced.html">Advanced Usage</a>
+                      <br><small>Complex scenarios and real-world use cases</small>
+                  </li>
+                  <li>
+                      <a href="media-query-tracking.html">Media Query Tracking</a>
+                      <br><small>Demonstrates automatic media query change detection and responsive updates</small>
+                  </li>
+              </ul>
+
+              <h2>Project Information</h2>
+              <p>
+                  <a href="https://github.com/mfranzke/css-if-polyfill">View on GitHub</a> |
+                  <a href="https://www.npmjs.com/package/css-if-polyfill">View on npm</a>
+              </p>
+          </body>
+          </html>
+          EOF
+
+          # Update example files to use the built polyfill from dist
+          find _site -name "*.html" -not -name "index.html" -exec sed -i 's|../src/index.js|./dist/index.modern.js|g' {} \;
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "_site"
+
+  deploy:
+    name: Deploy to GitHub Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-24.04
+    needs: build
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

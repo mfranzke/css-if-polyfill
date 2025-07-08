@@ -36,7 +36,7 @@ import "css-if-polyfill";
 Or include it via script tag:
 
 ```html
-<script src="https://unpkg.com/css-if-polyfill/dist/index.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/css-if-polyfill/dist/index.umd.min.js"></script>
 ```
 
 ### Manual Initialization

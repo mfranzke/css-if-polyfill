@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Discussions
+    url: https://github.com/mfranzke/css-if-polyfill/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: 📖 Documentation
+    url: https://mfranzke.github.io/css-if-polyfill/
+    about: Read the documentation and see live examples
+  - name: 🐛 Security Issues
+    url: https://github.com/mfranzke/css-if-polyfill/security/advisories/new
+    about: Report security vulnerabilities privately
