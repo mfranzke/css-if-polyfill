@@ -39,9 +39,10 @@
   ],
   "scripts": {
     "build": "microbundle",
+    "codestyle": "prettier . --write",
     "dev": "microbundle watch",
-    "lint": "xo",
-    "lint:fix": "xo --fix",
+    "lint:markdownlint": "markdownlint -c .config/.markdown-lint.yml **/*.md",
+    "lint:xo": "xo",
     "prepare": "husky",
     "prepublishOnly": "npm run build",
     "serve": "http-server -p 3000 -o examples",
