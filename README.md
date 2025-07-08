@@ -1,6 +1,6 @@
 # CSS if() Function Polyfill
 
-A comprehensive JavaScript polyfill for the CSS `if()` function that provides support for conditional CSS with `style()`, `media()`, and `supports()` functions. Now with enhanced support for **multiple conditions within a single if()** and **shorthand property usage**.
+A comprehensive JavaScript polyfill for the [CSS `if()` function](https://developer.mozilla.org/en-US/docs/Web/CSS/if) that provides support for conditional CSS with `style()`, `media()`, and `supports()` functions. Now with enhanced support for **multiple conditions within a single if()** and **shorthand property usage**.
 
 ## Features
 
