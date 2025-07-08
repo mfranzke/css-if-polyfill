@@ -53,10 +53,10 @@
     "prepare": "husky",
     "prepublishOnly": "npm run build",
     "serve": "http-server -p 3000 -o examples",
-    "test": "npm-run-all -p test:jest test:packing",
+    "test": "npm-run-all -p test:*",
     "test:jest": "jest --testEnvironment=jsdom",
-    "test:packing": "publint",
-    "test:watch": "jest --testEnvironment=jsdom --watch"
+    "test:jest:watch": "jest --testEnvironment=jsdom --watch",
+    "test:packing": "publint"
   },
   "devDependencies": {
     "@babel/core": "^7.28.0",
