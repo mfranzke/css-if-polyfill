@@ -20,16 +20,16 @@ const mediaQueryListeners = new Map(); // MediaQuery -> MediaQueryList
 /**
  * Log debug messages
  */
-function log(...arguments_) {
+const log = (...arguments_) => {
 	if (polyfillOptions.debug) {
 		console.log('[CSS if() Polyfill]', ...arguments_);
 	}
-}
+};
 
 /**
  * Check if browser has native CSS if() support
  */
-function hasNativeSupport() {
+const hasNativeSupport = () => {
 	if (globalThis.window === undefined || !globalThis.CSS) {
 		return false;
 	}
@@ -43,17 +43,17 @@ function hasNativeSupport() {
 	} catch {
 		return false;
 	}
-}
+};
 
 /**
  * Evaluate a condition (style(), media(), supports())
  */
-function evaluateCondition(
+const evaluateCondition = (
 	condition,
 	registerForTracking = false,
 	element = null,
 	originalContent = null
-) {
+) => {
 	condition = condition.trim();
 
 	// Handle style() function
@@ -78,12 +78,12 @@ function evaluateCondition(
 
 	// Direct boolean evaluation
 	return evaluateBooleanCondition(condition);
-}
+};
 
 /**
  * Evaluate style() condition
  */
-function evaluateStyleCondition(condition) {
+const evaluateStyleCondition = (condition) => {
 	const match = condition.match(/style\s*\(\s*([^)]+)\s*\)/);
 	if (!match) {
 		return false;
@@ -115,17 +115,17 @@ function evaluateStyleCondition(condition) {
 	} finally {
 		testElement.remove();
 	}
-}
+};
 
 /**
  * Evaluate media() condition
  */
-function evaluateMediaCondition(
+const evaluateMediaCondition = (
 	condition,
 	registerForTracking = false,
 	element = null,
 	originalContent = null
-) {
+) => {
 	const match = condition.match(/media\s*\(\s*([^)]+)\s*\)/);
 	if (!match) {
 		return false;
@@ -151,12 +151,12 @@ function evaluateMediaCondition(
 	} catch {
 		return false;
 	}
-}
+};
 
 /**
  * Evaluate supports() condition
  */
-function evaluateSupportsCondition(condition) {
+const evaluateSupportsCondition = (condition) => {
 	const match = condition.match(/supports\s*\(\s*([^)]+)\s*\)/);
 	if (!match) {
 		return false;
@@ -169,12 +169,12 @@ function evaluateSupportsCondition(condition) {
 	} catch {
 		return false;
 	}
-}
+};
 
 /**
  * Evaluate boolean condition
  */
-function evaluateBooleanCondition(condition) {
+const evaluateBooleanCondition = (condition) => {
 	// Simple boolean evaluation
 	const lowerCondition = condition.toLowerCase();
 
@@ -187,12 +187,12 @@ function evaluateBooleanCondition(condition) {
 	}
 
 	return false;
-}
+};
 
 /**
  * Parse multiple conditions within a single if() function
  */
-function parseMultipleConditions(ifContent) {
+const parseMultipleConditions = (ifContent) => {
 	const conditions = [];
 	let currentCondition = '';
 	let depth = 0;
@@ -243,12 +243,12 @@ function parseMultipleConditions(ifContent) {
 	}
 
 	return conditions;
-}
+};
 
 /**
  * Process a single condition within an if() function
  */
-function processSingleCondition(condition) {
+const processSingleCondition = (condition) => {
 	// Check if this is an else clause
 	if (condition.trim().startsWith('else:')) {
 		return {
@@ -305,17 +305,17 @@ function processSingleCondition(condition) {
 		condition: conditionPart,
 		value: valuePart
 	};
-}
+};
 
 /**
  * Process multiple conditions within a single if() function
  */
-function processMultipleConditions(
+const processMultipleConditions = (
 	ifContent,
 	registerForTracking = false,
 	element = null,
 	originalContent = null
-) {
+) => {
 	// Handle malformed if() functions that don't contain proper syntax
 	if (!ifContent || !ifContent.includes(':')) {
 		log('Malformed if() function - missing colon separator');
@@ -355,12 +355,12 @@ function processMultipleConditions(
 	// No condition matched, return else value
 	log(`No condition matched, using else value: ${elseValue}`);
 	return elseValue;
-}
+};
 
 /**
  * Find and extract if() functions with proper nested parentheses handling
  */
-function findIfFunctions(text) {
+const findIfFunctions = (text) => {
 	const functions = [];
 	let index = 0;
 
@@ -429,12 +429,12 @@ function findIfFunctions(text) {
 	}
 
 	return functions;
-}
+};
 
 /**
  * Process CSS text manually
  */
-function processCSSText(cssText, options = {}, element = null) {
+const processCSSText = (cssText, options = {}, element = null) => {
 	// Set options for this processing session
 	const originalOptions = { ...polyfillOptions };
 	polyfillOptions = { ...polyfillOptions, ...options };
@@ -488,12 +488,12 @@ function processCSSText(cssText, options = {}, element = null) {
 		// Restore original options
 		polyfillOptions = originalOptions;
 	}
-}
+};
 
 /**
  * Process a style element by rewriting its content
  */
-function processStyleElement(styleElement) {
+const processStyleElement = (styleElement) => {
 	if (styleElement.dataset.cssIfPolyfillProcessed) {
 		return; // Already processed
 	}
@@ -510,12 +510,12 @@ function processStyleElement(styleElement) {
 		styleElement.dataset.cssIfPolyfillProcessed = 'true';
 		log('Style element processed, new length:', processedContent.length);
 	}
-}
+};
 
 /**
  * Process all existing style elements
  */
-function processExistingStylesheets() {
+const processExistingStylesheets = () => {
 	// Process inline style elements
 	const styleElements = document.querySelectorAll(
 		'style:not([data-css-if-polyfill-processed])'
@@ -533,7 +533,7 @@ function processExistingStylesheets() {
 		// but we can try to fetch and reprocess them if they're same-origin
 		processLinkStylesheet(linkElement);
 	}
-}
+};
 
 /**
  * Process external stylesheet (if accessible)
@@ -595,12 +595,12 @@ async function processLinkStylesheet(linkElement) {
 /**
  * Register a media query for change tracking
  */
-function registerMediaQuery(
+const registerMediaQuery = (
 	mediaQuery,
 	element,
 	originalContent,
 	mediaQueryList = null
-) {
+) => {
 	if (!mediaQueryRegistry.has(mediaQuery)) {
 		mediaQueryRegistry.set(mediaQuery, new Set());
 	}
@@ -632,12 +632,12 @@ function registerMediaQuery(
 			);
 		}
 	}
-}
+};
 
 /**
  * Reprocess elements when a media query changes
  */
-function reprocessElementsForMediaQuery(mediaQuery) {
+const reprocessElementsForMediaQuery = (mediaQuery) => {
 	const elements = mediaQueryRegistry.get(mediaQuery);
 	if (!elements) {
 		return;
@@ -659,12 +659,12 @@ function reprocessElementsForMediaQuery(mediaQuery) {
 			);
 		}
 	}
-}
+};
 
 /**
  * Clean up media query listeners
  */
-function cleanupMediaQueryListeners() {
+const cleanupMediaQueryListeners = () => {
 	for (const [
 		mediaQuery,
 		{ mediaQueryList, listener }
@@ -679,12 +679,12 @@ function cleanupMediaQueryListeners() {
 
 	mediaQueryListeners.clear();
 	mediaQueryRegistry.clear();
-}
+};
 
 /**
  * Observe stylesheet changes
  */
-function observeStylesheetChanges() {
+const observeStylesheetChanges = () => {
 	// Create a MutationObserver to watch for new stylesheets
 	const observer = new MutationObserver((mutations) => {
 		for (const mutation of mutations) {
@@ -729,12 +729,12 @@ function observeStylesheetChanges() {
 		childList: true,
 		subtree: true
 	});
-}
+};
 
 /**
  * Initialize the polyfill
  */
-function init(options = {}) {
+const init = (options = {}) => {
 	if (globalThis.window === undefined) {
 		throw new TypeError('CSS if() polyfill requires a browser environment');
 	}
@@ -750,14 +750,14 @@ function init(options = {}) {
 	log('Initializing CSS if() polyfill');
 	processExistingStylesheets();
 	observeStylesheetChanges();
-}
+};
 
 /**
  * Public API to manually trigger processing
  */
-function refresh() {
+const refresh = () => {
 	processExistingStylesheets();
-}
+};
 
 // Auto-initialize if in browser and DOMContentLoaded
 if (globalThis.window !== undefined && typeof document !== 'undefined') {
