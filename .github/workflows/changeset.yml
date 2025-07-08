@@ -8,6 +8,16 @@ on:
       - ".changeset/**"
       - "src/**"
       - "package.json"
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Choose an action"
+        required: true
+        default: "version"
+        type: choice
+        options:
+          - version
+          - release
 
 jobs:
   version-or-release:
