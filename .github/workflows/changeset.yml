@@ -19,21 +19,15 @@ on:
           - version
           - release
 
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
 jobs:
   version-or-release:
     name: Create Version PR or Release
-    if: github.repository == 'mfranzke/css-if-polyfill'
     runs-on: ubuntu-24.04
-    permissions:
-      contents: write # to create release (changesets/action)
-      issues: write # to post issue comments (changesets/action)
-      pull-requests: write # to create pull request (changesets/action)
-      id-token: write # to use OpenID Connect token for provenance (changesets/action)
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -45,6 +39,7 @@ jobs:
         run: npm ci
 
       - name: Create Release Pull Request or Publish to npm
+        id: changesets
         # https://github.com/changesets/action
         uses: changesets/action@v1
         with:
