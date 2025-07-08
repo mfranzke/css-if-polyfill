@@ -59,13 +59,13 @@ npx @changesets/cli status
 ### Manually version packages (done automatically in CI)
 
 ```bash
-npx @changesets/cli version
+npm run changeset:version
 ```
 
 ### Manually publish (done automatically in CI)
 
 ```bash
-npx @changesets/cli release
+npm run changeset:release
 ```
 
 ## Example Workflow
