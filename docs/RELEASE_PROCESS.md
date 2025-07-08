@@ -15,7 +15,7 @@ This project uses [Changesets](https://github.com/changesets/changesets) for ver
 After making changes, run:
 
 ```bash
-npx changeset
+npx @changesets/cli
 ```
 
 This will:
