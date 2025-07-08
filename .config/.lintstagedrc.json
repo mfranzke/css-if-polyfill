@@ -1,4 +1,4 @@
 {
 	"*.md": "markdownlint -c .config/.markdown-lint.yml",
-	"*.{js,ts,tsx,jsx,mjs,cjs}": "npm run lint:fix"
+	"*.{js,ts,tsx,jsx,mjs,cjs}": "npm run lint:xo -- --fix"
 }
