@@ -39,6 +39,8 @@
   ],
   "scripts": {
     "build": "microbundle",
+    "changeset:release": "npm run build && changeset publish",
+    "changeset:version": "changeset version",
     "codestyle": "prettier . --write",
     "dev": "microbundle watch",
     "lint": "npm-run-all -p lint:*",
@@ -46,11 +48,12 @@
     "lint:xo": "xo",
     "prepare": "husky",
     "prepublishOnly": "npm run build",
+    "pretest:packing": "npm run build",
     "serve": "http-server -p 3000 -o examples",
     "test": "npm-run-all -p test:jest test:packing",
     "test:jest": "jest --testEnvironment=jsdom",
-    "test:packing": "publint",
-    "test:watch": "jest --testEnvironment=jsdom --watch"
+    "test:jest:watch": "jest --testEnvironment=jsdom --watch",
+    "test:packing": "publint"
   },
   "devDependencies": {
     "@babel/core": "^7.28.0",
