@@ -1,7 +1,7 @@
 /** @type {import('xo').FlatXoConfig} */
 const xoConfig = [
 	{
-		prettier: true,
+		prettier: 'compat',
 		rules: {
 			'import-x/order': 0 // We use a prettier plugin to organize imports
 		}
