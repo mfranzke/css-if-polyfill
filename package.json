@@ -48,13 +48,14 @@
     "dev": "microbundle watch",
     "lint": "npm-run-all -p lint:*",
     "lint:markdownlint": "markdownlint -c .config/.markdown-lint.yml **/*.md",
-    "lint:packing": "publint",
     "lint:xo": "xo",
     "prebuild": "cp dist/index.d.ts dist/index.d.cts",
     "prepare": "husky",
     "prepublishOnly": "npm run build",
     "serve": "http-server -p 3000 -o examples",
-    "test": "jest --testEnvironment=jsdom",
+    "test": "npm-run-all -p test:jest test:packing",
+    "test:jest": "jest --testEnvironment=jsdom",
+    "test:packing": "publint",
     "test:watch": "jest --testEnvironment=jsdom --watch"
   },
   "devDependencies": {
