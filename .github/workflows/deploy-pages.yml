@@ -50,7 +50,7 @@ jobs:
           mkdir -p _site
 
           # Copy examples folder
-          cp -r examples/* _site/
+          cp -r examples/* _site/examples/
 
           # Copy dist folder for example pages to access the scripts
           mkdir -p _site/dist
@@ -118,23 +118,23 @@ jobs:
               <h2>Available Examples</h2>
               <ul class="example-list">
                   <li>
-                      <a href="basic-examples.html">Basic Examples</a>
+                      <a href="examples/basic-examples.html">Basic Examples</a>
                       <br><small>Demonstrates basic if() syntax with style(), media(), and supports() conditions</small>
                   </li>
                   <li>
-                      <a href="enhanced.html">Enhanced Features</a>
+                      <a href="examples/enhanced.html">Enhanced Features</a>
                       <br><small>Shows advanced usage patterns and edge cases</small>
                   </li>
                   <li>
-                      <a href="multiple-conditions.html">Multiple Conditions</a>
+                      <a href="examples/multiple-conditions.html">Multiple Conditions</a>
                       <br><small>Examples with multiple conditions within a single if() function</small>
                   </li>
                   <li>
-                      <a href="advanced.html">Advanced Usage</a>
+                      <a href="examples/advanced.html">Advanced Usage</a>
                       <br><small>Complex scenarios and real-world use cases</small>
                   </li>
                   <li>
-                      <a href="media-query-tracking.html">Media Query Tracking</a>
+                      <a href="examples/media-query-tracking.html">Media Query Tracking</a>
                       <br><small>Demonstrates automatic media query change detection and responsive updates</small>
                   </li>
               </ul>
