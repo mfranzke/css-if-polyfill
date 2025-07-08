@@ -47,13 +47,13 @@ When you merge the "Version Packages" PR, the **Release workflow** (`.github/wor
 ### Create a changeset
 
 ```bash
-npx changeset
+npx @changesets/cli
 ```
 
 ### Preview what version would be released
 
 ```bash
-npx changeset status
+npx @changesets/cli status
 ```
 
 ### Manually version packages (done automatically in CI)
@@ -75,7 +75,7 @@ npm run changeset:release
 3. **Create changeset**:
 
     ```bash
-    npx changeset
+    npx @changesets/cli
     ```
 
     - Select package to bump
