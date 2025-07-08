@@ -50,6 +50,7 @@ jobs:
           mkdir -p _site
 
           # Copy examples folder
+          mkdir -p _site/examples
           cp -r examples/* _site/examples/
 
           # Copy dist folder for example pages to access the scripts
