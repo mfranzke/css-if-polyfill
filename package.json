@@ -44,7 +44,6 @@
   ],
   "scripts": {
     "build": "microbundle",
-    "changeset:release": "npm run build && npx @changesets/cli publish",
     "codestyle": "prettier . --write",
     "dev": "microbundle watch",
     "lint": "npm-run-all --parallel lint:*",
