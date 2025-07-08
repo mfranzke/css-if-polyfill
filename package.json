@@ -5,7 +5,7 @@
   "description": "A JavaScript polyfill for CSS if() functionality with style(), media(), and supports() functions",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mfranzke/css-if-polyfill.git"
+    "url": "git+https://github.com/mfranzke/css-if-polyfill.git"
   },
   "homepage": "https://github.com/mfranzke/css-if-polyfill#readme",
   "bugs": {
@@ -14,11 +14,11 @@
   "author": "Maximilian Franzke",
   "license": "MIT",
   "main": "dist/index.cjs",
-  "types": "dist/index.d.ts",
+  "types": "dist/index.d.cts",
   "module": "dist/index.modern.js",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/index.d.cts",
       "require": "./dist/index.cjs",
       "import": "./dist/index.modern.js"
     }
