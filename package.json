@@ -5,7 +5,7 @@
   "description": "A JavaScript polyfill for CSS if() functionality with style(), media(), and supports() functions",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mfranzke/css-if-polyfill.git"
+    "url": "git+https://github.com/mfranzke/css-if-polyfill.git"
   },
   "homepage": "https://github.com/mfranzke/css-if-polyfill#readme",
   "bugs": {
@@ -18,9 +18,14 @@
   "module": "dist/index.modern.js",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.modern.js"
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.modern.js"
+      }
     }
   },
   "files": [
@@ -41,16 +46,18 @@
     "build": "microbundle",
     "codestyle": "prettier . --write",
     "dev": "microbundle watch",
-    "lint": "npm-run-all -p lint:*",
+    "lint": "npm-run-all --parallel lint:*",
     "lint:markdownlint": "markdownlint -c .config/.markdown-lint.yml **/*.md",
     "lint:xo": "xo",
+    "postbuild": "cp dist/index.d.ts dist/index.d.cts",
     "prepare": "husky",
     "prepublishOnly": "npm run build",
+    "pretest:packing": "npm run build",
     "serve": "http-server -p 3000 -o examples",
-    "test": "npm-run-all -p test:jest test:packing",
+    "test": "npm-run-all --sequential test:*",
     "test:jest": "jest --testEnvironment=jsdom",
-    "test:packing": "publint",
-    "test:watch": "jest --testEnvironment=jsdom --watch"
+    "test:jest:watch": "jest --testEnvironment=jsdom --watch",
+    "test:packing": "publint"
   },
   "devDependencies": {
     "@babel/core": "^7.28.0",

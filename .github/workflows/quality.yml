@@ -33,7 +33,7 @@ jobs:
           npm run lint
 
       - name: Run tests with coverage
-        run: npm test -- --coverage --coverageReporters=lcov --coverageReporters=json
+        run: npm run test:jest -- --coverage --coverageReporters=lcov --coverageReporters=json
 
       - name: Check build
         run: npm run build
