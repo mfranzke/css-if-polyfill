@@ -77,7 +77,7 @@
     "npm-run-all2": "^8.0.4",
     "prettier": "3.6.2",
     "prettier-plugin-organize-imports": "^4.1.0",
-    "prettier-plugin-pkg": "^0.21.1",
+    "prettier-plugin-pkg": "^0.21.2",
     "publint": "^0.3.12",
     "xo": "^1.1.1"
   },
