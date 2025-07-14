@@ -297,6 +297,15 @@
 			}
 
 			// Update custom properties status
+			function escapeHtml(unsafe) {
+				return unsafe
+					.replace(/&/g, "&amp;")
+					.replace(/</g, "&lt;")
+					.replace(/>/g, "&gt;")
+					.replace(/"/g, "&quot;")
+					.replace(/'/g, "&#039;");
+			}
+
 			function updateCustomPropsStatus() {
 				const statusEl = document.getElementById("custom-props-status");
 				const hasSupport = CSS.supports("--custom", "value");
@@ -331,8 +340,8 @@
 				const outputCSS = CSSIfPolyfill.processCSSText(inputCSS);
 
 				outputEl.innerHTML = `
-              <strong>Input:</strong> ${inputCSS}<br>
-              <strong>Output:</strong> ${outputCSS}
+              <strong>Input:</strong> ${escapeHtml(inputCSS)}<br>
+              <strong>Output:</strong> ${escapeHtml(outputCSS)}
           `;
 			};
 
