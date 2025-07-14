@@ -45,6 +45,8 @@ jobs:
     name: Build
     runs-on: ubuntu-24.04
     needs: test
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout repository
