@@ -10,6 +10,8 @@ jobs:
   quality:
     name: Code Quality Checks
     runs-on: ubuntu-24.04
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout repository
@@ -62,6 +64,8 @@ jobs:
   security:
     name: Security Scan
     runs-on: ubuntu-24.04
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout repository
