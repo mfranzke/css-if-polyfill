@@ -9,14 +9,14 @@ on:
       - "README.md"
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
   update-docs:
     name: Update Documentation
     runs-on: ubuntu-24.04
     if: github.repository == 'mfranzke/css-if-polyfill'
+
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout repository
