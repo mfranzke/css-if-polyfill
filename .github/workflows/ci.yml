@@ -79,6 +79,8 @@ jobs:
   lint-markdown:
     name: Lint Markdown
     runs-on: ubuntu-24.04
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout repository
