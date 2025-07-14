@@ -8,10 +8,11 @@ on:
 
 jobs:
   test:
-    permissions:
-      contents: read
     name: Test
     runs-on: ubuntu-24.04
+
+    permissions:
+      contents: read
 
     strategy:
       matrix:
