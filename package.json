@@ -79,7 +79,7 @@
     "prettier-plugin-organize-imports": "^4.1.0",
     "prettier-plugin-pkg": "^0.21.2",
     "publint": "^0.3.12",
-    "xo": "^1.1.1"
+    "xo": "^1.2.0"
   },
   "source": "src/index.js",
   "umd:main": "dist/index.umd.js"
