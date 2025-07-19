@@ -41,14 +41,13 @@ jobs:
         run: npm run build
 
       - name: Validate package.json
-        run: npm run lint -- package.json || true
+        run: npm run lint:xo -- package.json || true
 
       - name: Check for security vulnerabilities
         run: npm audit --audit-level=moderate
 
       - name: Check bundle size
         run: |
-          npm run build
           echo "## Bundle Size Report" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           ls -lh dist/ >> $GITHUB_STEP_SUMMARY
