@@ -1,6 +1,6 @@
 {
   "name": "css-if-polyfill",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "type": "module",
   "description": "A JavaScript polyfill for CSS if() functionality with style(), media(), and supports() functions",
   "license": "MIT",
