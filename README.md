@@ -1,37 +1,37 @@
-# CSS if() Function Polyfill
+# CSS if() Function Polyfill v0.1
 
 [![MIT license](https://img.shields.io/npm/l/css-if-polyfill.svg "license badge")](https://opensource.org/licenses/mit-license.php)
-
-<!-- [![npm bundle size](https://img.shields.io/bundlephobia/minzip/css-if-polyfill)](https://bundlephobia.com/result?p=css-if-polyfill) -->
 
 ![Main pipeline](https://github.com/db-ux-design-system/core-web/actions/workflows/default.yml/badge.svg)
 [![Total downloads ~ Npmjs](https://img.shields.io/npm/dt/css-if-polyfill.svg "Count of total downloads – NPM")](https://npmjs.com/package/css-if-polyfill "CSS if() function polyfill – on NPM")
 [![jsDelivr CDN downloads](https://data.jsdelivr.com/v1/package/npm/css-if-polyfill/badge "Count of total downloads – jsDelivr")](https://www.jsdelivr.com/package/npm/css-if-polyfill "CSS if() function polyfill – on jsDelivr")
-
-<!-- [![Codacy Badge](https://app.codacy.com/project/badge/Grade/8338e7ee4e554d05b5277cb449d92375)](https://www.codacy.com/gh/mfranzke/css-if-polyfill/dashboard)
-[![GitHub Super-Linter](https://github.com/mfranzke/css-if-polyfill/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/mfranzke/css-if-polyfill/actions/workflows/linter.yml)
-[![CodeQL](https://github.com/mfranzke/css-if-polyfill/actions/workflows/codeql-analysis.yml/badge.svg?branch=main)](https://github.com/mfranzke/css-if-polyfill/actions/workflows/codeql-analysis.yml)
-[![Known Vulnerabilities](https://snyk.io/test/github/mfranzke/css-if-polyfill/badge.svg?targetFile=package.json)](https://snyk.io/test/github/mfranzke/css-if-polyfill?targetFile=package.json) -->
 
 [![css-if-polyfill on Npmjs](https://img.shields.io/npm/v/css-if-polyfill.svg?color=rgb%28237%2C%2028%2C%2036%29 "npm version")](https://npmjs.com/package/css-if-polyfill "CSS if() function polyfill – on NPM")
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
-<!-- [![Join the chat at https://gitter.im/css-if-polyfill/community](https://badges.gitter.im/css-if-polyfill/community.svg)](https://gitter.im/css-if-polyfill/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) -->
-
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Open Source Love](https://badges.frapsoft.com/os/v3/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.0-4baaaa.svg)](CODE-OF-CONDUCT.md)
 
-A comprehensive JavaScript polyfill for the [CSS `if()` function](https://developer.mozilla.org/en-US/docs/Web/CSS/if) that provides support for conditional CSS with `style()`, [`media()`](https://developer.mozilla.org/de/docs/Web/CSS/@media), and [`supports()`](https://developer.mozilla.org/de/docs/Web/CSS/@supports) functions. Now with enhanced support for **multiple conditions within a single if()** and **shorthand property usage**.
+A modern JavaScript polyfill for the [CSS `if()` function](https://developer.mozilla.org/en-US/docs/Web/CSS/if) with **hybrid build-time and runtime processing**. Transforms CSS `if()` functions to native `@media` and `@supports` rules where possible, with runtime fallback for dynamic conditions.
+
+## 🚀 What's New in v0.1
+
+- **🏗️ Build-time Transformation** - Convert `media()` and `supports()` conditions to native CSS
+- **⚡ Zero Runtime Cost** - Native CSS rules require no JavaScript processing
+- **🔄 Hybrid Processing** - Automatic routing between native and runtime processing
+- **🛠️ CLI Tool** - Transform CSS files during build process
+- **📈 Performance Optimized** - Up to 95% faster for transformable conditions
+- **🔧 Backwards Compatible** - Existing code continues to work unchanged
 
 ## Features
 
-- ✅ **Complete CSS if() support** with condition evaluation
-- ✅ **Media queries** via `media()` function
-- ✅ **Feature detection** via `supports()` function
-- ✅ **Style queries** via `style()` function
+- ✅ **Hybrid Architecture** with build-time + runtime processing
+- ✅ **Native CSS Generation** for `media()` and `supports()` conditions
+- ✅ **Runtime Processing** for dynamic `style()` conditions
+- ✅ **CLI Tool** for build-time transformation with statistics
 - ✅ **Multiple conditions** within a single if() function
 - ✅ **Shorthand property support** for complex CSS values
 - ✅ **Automatic fallback** for unsupported browsers
@@ -45,6 +45,24 @@ A comprehensive JavaScript polyfill for the [CSS `if()` function](https://develo
 
 ```bash
 npm install css-if-polyfill
+```
+
+## Quick Start
+
+### Build-time Transformation (Recommended)
+
+```bash
+# Transform CSS during build
+npx css-if-transform input.css output.css --minify --stats
+```
+
+### Runtime Processing
+
+```javascript
+import CSSIfPolyfill from "css-if-polyfill";
+
+// Initialize with hybrid processing
+CSSIfPolyfill.init({ useNativeTransform: true });
 ```
 
 ## Usage

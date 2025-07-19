@@ -13,6 +13,9 @@
   },
   "author": "Maximilian Franzke",
   "license": "MIT",
+  "bin": {
+    "css-if-transform": "./src/cli.js"
+  },
   "main": "dist/index.cjs",
   "types": "dist/index.d.ts",
   "module": "dist/index.modern.js",
@@ -30,6 +33,7 @@
   },
   "files": [
     "dist/",
+    "src/cli.js",
     "README.md",
     "LICENSE"
   ],
@@ -56,9 +60,9 @@
     "pretest:packing": "npm run build",
     "serve": "http-server -p 3000 -o examples/basic-examples.html",
     "test": "npm-run-all --sequential test:*",
+    "test:packing": "publint",
     "test:vitest": "vitest run",
-    "test:vitest:watch": "vitest",
-    "test:packing": "publint"
+    "test:vitest:watch": "vitest"
   },
   "devDependencies": {
     "@babel/core": "^7.28.0",

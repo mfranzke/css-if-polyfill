@@ -7,10 +7,13 @@
 
 /* global document, CSS, Node, MutationObserver */
 
+import { buildTimeTransform, runtimeTransform } from './transform.js';
+
 // Global state
 let polyfillOptions = {
 	debug: false,
-	autoInit: true
+	autoInit: true,
+	useNativeTransform: true // New option to enable native CSS transformation
 };
 
 // Registry for tracking media queries and their associated elements
@@ -443,6 +446,34 @@ const processCSSText = (cssText, options = {}, element = null) => {
 	const originalContent = cssText;
 
 	try {
+		// Try native transformation first if enabled
+		if (polyfillOptions.useNativeTransform) {
+			try {
+				const transformResult = runtimeTransform(cssText, element);
+
+				if (transformResult.nativeCSS) {
+					log('Native CSS transformation applied');
+				}
+
+				// If we have runtime rules that need processing, continue with polyfill
+				if (
+					transformResult.hasRuntimeRules &&
+					transformResult.processedCSS
+				) {
+					cssText = transformResult.processedCSS;
+				} else if (!transformResult.hasRuntimeRules) {
+					// All transformations were native, return original CSS
+					// The native CSS was already injected by runtimeTransform
+					return cssText;
+				}
+			} catch (error) {
+				log(
+					'Native transformation failed, falling back to polyfill:',
+					error
+				);
+			}
+		}
+
 		let result = cssText;
 		let hasChanges = true;
 
@@ -771,6 +802,8 @@ if (globalThis.window !== undefined && typeof document !== 'undefined') {
 }
 
 // Named exports for modern usage
+// Re-export build-time transformation
+export { buildTimeTransform } from './transform.js';
 export {
 	init,
 	processCSSText,
@@ -785,7 +818,8 @@ const CSSIfPolyfill = {
 	processCSSText,
 	hasNativeSupport,
 	refresh,
-	cleanup: cleanupMediaQueryListeners
+	cleanup: cleanupMediaQueryListeners,
+	buildTimeTransform
 };
 
 // Default export for backward compatibility
