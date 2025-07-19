@@ -5,7 +5,7 @@
 
 A [PostCSS](https://postcss.org/) plugin for transforming CSS `if()` functions into native CSS `@media` and `@supports` rules at build time.
 
-This plugin is part of the [css-if-polyfill](../css-if-polyfill) project and provides build-time transformation of conditional CSS, eliminating the need for runtime JavaScript processing when using only `media()` and `supports()` functions.
+This plugin is part of the [css-if-polyfill](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/css-if-polyfill/) project and provides build-time transformation of conditional CSS, eliminating the need for runtime JavaScript processing when using only `media()` and `supports()` functions.
 
 ## Installation
 
@@ -225,7 +225,7 @@ module.exports = {
 
 ## Limitations
 
-- **Style Functions Not Supported**: This plugin only transforms `media()` and `supports()` functions. For `style()` functions (which depend on runtime DOM state), use the [css-if-polyfill](../css-if-polyfill) runtime library
+- **Style Functions Not Supported**: This plugin only transforms `media()` and `supports()` functions. For `style()` functions (which depend on runtime DOM state), use the [css-if-polyfill](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/css-if-polyfill/) runtime library
 - **Static Analysis Only**: The plugin performs static analysis and cannot handle dynamically generated CSS
 - **PostCSS Compatibility**: Requires PostCSS 8.0.0 or higher
 
@@ -234,7 +234,7 @@ module.exports = {
 For complete CSS `if()` support including `style()` functions, combine this plugin with the runtime polyfill:
 
 1. Use this PostCSS plugin for build-time transformation of `media()` and `supports()`
-2. Use [css-if-polyfill](../css-if-polyfill) runtime for `style()` functions
+2. Use [css-if-polyfill](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/css-if-polyfill/) runtime for `style()` functions
 
 ```html
 <!-- For style() functions only -->
@@ -270,6 +270,6 @@ MIT © [Maximilian Franzke](https://github.com/mfranzke)
 
 ## Related
 
-- [css-if-polyfill](../css-if-polyfill) - Runtime polyfill for CSS if() functions
+- [css-if-polyfill](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/css-if-polyfill/) - Runtime polyfill for CSS if() functions
 - [PostCSS](https://postcss.org/) - Tool for transforming CSS with JavaScript
-- [CSS Conditional Rules](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Conditional_Rules) - MDN documentation for @media and @supports
+- [CSS Conditional Rules](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_conditional_rules) - MDN documentation for @media and @supports
