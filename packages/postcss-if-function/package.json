@@ -37,6 +37,7 @@
     "build": "microbundle",
     "dev": "microbundle watch",
     "prepublishOnly": "npm run build",
+    "pretest:vitest": "npm run build",
     "test": "npm-run-all --sequential test:*",
     "test:vitest": "vitest run",
     "test:vitest:watch": "vitest"

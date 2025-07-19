@@ -34,7 +34,7 @@
     "postbuild": "cp dist/index.d.ts dist/index.d.cts",
     "prelint:packages": "npm run build",
     "prepare": "husky",
-    "pretest:vitest": "npm run build",
+    "preserve": "npm run build --workspace=packages/css-if-polyfill",
     "serve": "http-server -p 3000 -o examples/basic-examples.html",
     "test": "npm test --workspaces"
   },
