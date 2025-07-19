@@ -167,7 +167,7 @@ jobs:
 
           if [[ -n $(git status --porcelain) ]]; then
             git add docs/ examples/
-            git commit -m "docs: Update API documentation and examples [skip ci]"
+            git commit -m "docs: update API documentation and examples [skip ci]"
             git push
           else
             echo "No documentation changes to commit"
