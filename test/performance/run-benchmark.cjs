@@ -44,7 +44,7 @@ const process = require('node:process');
 
 	// Save results to file
 	fs.writeFileSync(
-		'performance-results.json',
+		'test/performance/performance-results.json',
 		JSON.stringify(results, null, 2)
 	);
 
