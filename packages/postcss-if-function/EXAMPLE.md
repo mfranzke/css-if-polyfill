@@ -5,14 +5,14 @@ This example demonstrates how to use the PostCSS CSS if plugin to transform CSS 
 ## Setup
 
 ```bash
-npm install postcss-css-if postcss
+npm install postcss-if-function postcss
 ```
 
 ## Usage
 
 ```js
 import postcss from "postcss";
-import postcssCssIf from "postcss-css-if";
+import postcssCssIf from "postcss-if-function";
 
 const css = `
 .card {
@@ -65,7 +65,7 @@ The plugin will transform the CSS if() functions into native @media and @support
 ```js
 // vite.config.js
 import { defineConfig } from "vite";
-import postcssCssIf from "postcss-css-if";
+import postcssCssIf from "postcss-if-function";
 
 export default defineConfig({
 	css: {
@@ -92,7 +92,7 @@ module.exports = {
 						loader: "postcss-loader",
 						options: {
 							postcssOptions: {
-								plugins: [["postcss-css-if", {}]]
+								plugins: [["postcss-if-function", {}]]
 							}
 						}
 					}

@@ -1,6 +1,6 @@
-# postcss-css-if
+# postcss-if-function
 
-[![npm version](https://badge.fury.io/js/postcss-css-if.svg)](https://badge.fury.io/js/postcss-css-if)
+[![npm version](https://badge.fury.io/js/postcss-if-function.svg)](https://badge.fury.io/js/postcss-if-function)
 [![Build Status](https://github.com/mfranzke/css-if-polyfill/workflows/CI/badge.svg)](https://github.com/mfranzke/css-if-polyfill/actions)
 
 A [PostCSS](https://postcss.org/) plugin for transforming CSS `if()` functions into native CSS `@media` and `@supports` rules at build time.
@@ -10,7 +10,7 @@ This plugin is part of the [css-if-polyfill](../css-if-polyfill) project and pro
 ## Installation
 
 ```bash
-npm install postcss-css-if
+npm install postcss-if-function
 ```
 
 ## Usage
@@ -19,7 +19,7 @@ npm install postcss-css-if
 
 ```js
 import postcss from "postcss";
-import postcssCssIf from "postcss-css-if";
+import postcssCssIf from "postcss-if-function";
 
 const css = `
 .example {
@@ -75,7 +75,7 @@ const result = await postcss([
 ```js
 // vite.config.js
 import { defineConfig } from "vite";
-import postcssCssIf from "postcss-css-if";
+import postcssCssIf from "postcss-if-function";
 
 export default defineConfig({
 	css: {
@@ -108,7 +108,7 @@ module.exports = {
 							postcssOptions: {
 								plugins: [
 									[
-										"postcss-css-if",
+										"postcss-if-function",
 										{
 											logTransformations: true
 										}
@@ -132,7 +132,7 @@ module.exports = {
 	experimental: {
 		postcss: {
 			plugins: {
-				"postcss-css-if": {
+				"postcss-if-function": {
 					logTransformations: process.env.NODE_ENV === "development"
 				}
 			}

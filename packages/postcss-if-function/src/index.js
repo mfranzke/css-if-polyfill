@@ -35,7 +35,7 @@
 
 import { buildTimeTransform } from '../../css-if-polyfill/src/index.js';
 
-const PLUGIN_NAME = 'postcss-css-if';
+const PLUGIN_NAME = 'postcss-if-function';
 
 /**
  * PostCSS plugin options

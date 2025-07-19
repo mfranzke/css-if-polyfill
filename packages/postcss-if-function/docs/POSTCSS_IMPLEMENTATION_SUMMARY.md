@@ -7,11 +7,11 @@
 - Converted from single package to npm workspaces monorepo
 - Created two distinct packages:
     - `packages/css-if-polyfill/` - Core polyfill with runtime + build-time processing
-    - `packages/postcss-css-if/` - PostCSS plugin for build-time transformation
+    - `packages/postcss-if-function/` - PostCSS plugin for build-time transformation
 
 ### 2. **PostCSS Plugin Development**
 
-- **File**: `packages/postcss-css-if/src/index.js`
+- **File**: `packages/postcss-if-function/src/index.js`
 - **Features**:
     - Integrates with PostCSS ecosystem
     - Uses the css-if-polyfill transformation engine
@@ -45,7 +45,7 @@
 ### **Core Functionality**
 
 ```js
-import postcssCssIf from "postcss-css-if";
+import postcssCssIf from "postcss-if-function";
 
 const result = await postcss([
 	postcssCssIf({
@@ -111,7 +111,7 @@ css-if-polyfill/
 │   │   ├── package.json
 │   │   └── README.md
 │   │
-│   └── postcss-css-if/           # PostCSS plugin package
+│   └── postcss-if-function/           # PostCSS plugin package
 │       ├── src/
 │       │   ├── index.js          # PostCSS plugin implementation
 │       │   └── index.d.ts        # TypeScript definitions
@@ -199,7 +199,7 @@ Use PostCSS for static conditions + runtime polyfill for dynamic ones:
 ### **Building Both Packages**
 
 ```bash
-npm run build  # Builds both css-if-polyfill and postcss-css-if
+npm run build  # Builds both css-if-polyfill and postcss-if-function
 ```
 
 ### **Testing**
@@ -211,7 +211,7 @@ npm test  # Runs tests for both packages
 ### **Working with Individual Packages**
 
 ```bash
-npm run build --workspace=postcss-css-if
+npm run build --workspace=postcss-if-function
 npm run test --workspace=css-if-polyfill
 ```
 
@@ -226,4 +226,4 @@ We have successfully:
 5. **✅ Provided flexible integration options** for different build tools
 6. **✅ Optimized performance** with build-time transformation capabilities
 
-The PostCSS plugin (`postcss-css-if`) now provides a complete build-time solution for transforming CSS if() functions, while the core polyfill (`css-if-polyfill`) continues to provide runtime processing for dynamic conditions. This hybrid approach offers the best of both worlds: optimal performance for static conditions and full functionality for dynamic styling needs.
+The PostCSS plugin (`postcss-if-function`) now provides a complete build-time solution for transforming CSS if() functions, while the core polyfill (`css-if-polyfill`) continues to provide runtime processing for dynamic conditions. This hybrid approach offers the best of both worlds: optimal performance for static conditions and full functionality for dynamic styling needs.

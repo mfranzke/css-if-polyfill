@@ -2,7 +2,7 @@ import postcss from 'postcss';
 import { describe, expect, it } from 'vitest';
 import postcssCssIf from '../src/index.js';
 
-describe('postcss-css-if plugin', () => {
+describe('postcss-if-function plugin', () => {
 	async function run(input, output, options = {}) {
 		const result = await postcss([postcssCssIf(options)]).process(input, {
 			from: undefined
@@ -212,7 +212,7 @@ describe('postcss-css-if plugin', () => {
 		console.log = originalLog;
 
 		expect(consoleLogs).toContain(
-			'[postcss-css-if] Transformation statistics:'
+			'[postcss-if-function] Transformation statistics:'
 		);
 		expect(
 			consoleLogs.some((log) => log.includes('Total transformations: 1'))
