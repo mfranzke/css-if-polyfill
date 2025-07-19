@@ -1,5 +1,5 @@
 {
-  "name": "css-if-polyfill",
+  "name": "css-if-polyfill-monorepo",
   "type": "module",
   "description": "A JavaScript polyfill and PostCSS plugin for CSS if() functionality with style(), media(), and supports() functions",
   "repository": {
@@ -13,6 +13,9 @@
   "author": "Maximilian Franzke",
   "license": "MIT",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "keywords": [
     "css",
     "polyfill",
@@ -34,7 +37,7 @@
     "postbuild": "cp dist/index.d.ts dist/index.d.cts",
     "prelint:packages": "npm run build",
     "prepare": "husky",
-    "preserve": "npm run build --workspace=packages/css-if-polyfill",
+    "preserve": "npm run build --workspace=css-if-polyfill",
     "serve": "http-server -p 3000 -o examples/basic-examples.html",
     "test": "npm test --workspaces"
   },
