@@ -83,7 +83,7 @@
     "prettier-plugin-organize-imports": "^4.1.0",
     "prettier-plugin-pkg": "^0.21.2",
     "publint": "^0.3.12",
-    "vite": "^6.0.1",
+    "vite": "^7.0.5",
     "vitest": "^3.2.4",
     "xo": "^1.1.1"
   },
