@@ -53,7 +53,7 @@
     "dev": "microbundle watch",
     "lint": "npm-run-all --parallel lint:*",
     "lint:markdownlint": "markdownlint -c .config/.markdown-lint.yml **/*.md",
-    "lint:package": "publint",
+    "lint:package": "npx --no publint",
     "lint:xo": "xo",
     "postbuild": "cp dist/index.d.ts dist/index.d.cts",
     "prelint:package": "npm run build",
