@@ -59,6 +59,7 @@
     "prelint:package": "npm run build",
     "prepare": "husky",
     "prepublishOnly": "npm run build",
+    "pretest:vitest": "npm run build",
     "serve": "http-server -p 3000 -o examples/basic-examples.html",
     "test": "npm-run-all --sequential test:*",
     "test:vitest": "vitest run",
