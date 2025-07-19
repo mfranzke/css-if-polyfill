@@ -59,10 +59,10 @@ npx css-if-transform input.css output.css --minify --stats
 ### Runtime Processing
 
 ```javascript
-import CSSIfPolyfill from "css-if-polyfill";
+import { init } from "css-if-polyfill";
 
 // Initialize with hybrid processing
-CSSIfPolyfill.init({ useNativeTransform: true });
+init({ useNativeTransform: true });
 ```
 
 ## Usage

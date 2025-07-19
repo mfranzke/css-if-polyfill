@@ -114,10 +114,10 @@ console.log("Needs runtime?", result.hasRuntimeRules);
 #### Enhanced Polyfill
 
 ```javascript
-import CSSIfPolyfill from "css-if-polyfill";
+import { init } from "css-if-polyfill";
 
 // Initialize with native transformation
-CSSIfPolyfill.init({
+init({
 	useNativeTransform: true,
 	debug: true
 });
@@ -189,8 +189,8 @@ Existing code continues to work without modifications:
 
 ```javascript
 // v0.0 code - still works
-import CSSIfPolyfill from "css-if-polyfill";
-CSSIfPolyfill.init();
+import { init } from "css-if-polyfill";
+init();
 ```
 
 #### Opt-in Enhancements
@@ -199,7 +199,7 @@ Enable new features gradually:
 
 ```javascript
 // Enable native transformation
-CSSIfPolyfill.init({ useNativeTransform: true });
+init({ useNativeTransform: true });
 
 // Use build-time transformation
 import { buildTimeTransform } from "css-if-polyfill";

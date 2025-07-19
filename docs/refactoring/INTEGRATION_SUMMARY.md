@@ -125,14 +125,14 @@ const buildResult = buildTimeTransform(css);
 // → Generates optimized CSS + runtime CSS
 
 // Runtime (only for style() conditions)
-CSSIfPolyfill.init({ useNativeTransform: true });
+init({ useNativeTransform: true });
 ```
 
 ### 3. Pure Runtime (Backwards Compatible)
 
 ```javascript
 // Existing v0.0 code - no changes needed
-CSSIfPolyfill.init();
+init();
 ```
 
 ## 📈 Performance Impact

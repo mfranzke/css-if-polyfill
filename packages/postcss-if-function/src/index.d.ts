@@ -1,4 +1,3 @@
-export default postcsscssif;
 /**
  * PostCSS plugin options
  */

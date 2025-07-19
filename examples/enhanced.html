@@ -452,10 +452,10 @@
 
 		<script type="module">
 			// Load the polyfill
-			import CSSIfPolyfill from "../packages/css-if-polyfill/dist/index.modern.js";
+			import { init } from "../packages/css-if-polyfill/dist/index.modern.js";
 
 			// Initialize polyfill with debug enabled
-			const polyfill = CSSIfPolyfill.init({ debug: true });
+			const polyfill = init({ debug: true });
 
 			console.log("Enhanced CSS if() polyfill loaded!");
 			console.log("Shorthand property support enabled");

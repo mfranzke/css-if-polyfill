@@ -59,19 +59,19 @@ jobs:
           ## ESM Import
 
           ```javascript
-          import CSSIfPolyfill from 'css-if-polyfill';
+          import { init } from 'css-if-polyfill';
 
           // Initialize the polyfill
-          CSSIfPolyfill.init();
+          init();
           ```
 
           ## CommonJS Require
 
           ```javascript
-          const CSSIfPolyfill = require('css-if-polyfill');
+          const { init } = require('css-if-polyfill');
 
           // Initialize the polyfill
-          CSSIfPolyfill.init();
+          init();
           ```
 
           ## API Reference
