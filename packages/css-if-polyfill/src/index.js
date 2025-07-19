@@ -7,7 +7,7 @@
 
 /* global document, CSS, Node, MutationObserver */
 
-import { buildTimeTransform, runtimeTransform } from './transform.js';
+import { runtimeTransform } from './transform.js';
 
 // Global state
 let polyfillOptions = {
@@ -818,16 +818,3 @@ export {
 	processCSSText,
 	refresh
 };
-
-// Create the CSSIfPolyfill object with all the methods
-const CSSIfPolyfill = {
-	init,
-	processCSSText,
-	hasNativeSupport,
-	refresh,
-	cleanup: cleanupMediaQueryListeners,
-	buildTimeTransform
-};
-
-// Default export for backward compatibility
-export default CSSIfPolyfill;

@@ -23,8 +23,8 @@
     }
   },
   "files": [
+    "bin/",
     "dist/",
-    "src/cli.js",
     "README.md",
     "LICENSE"
   ],

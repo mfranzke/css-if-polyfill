@@ -5,10 +5,10 @@
  * Transforms CSS if() functions to native @media/@supports rules
  */
 
-import { buildTimeTransform } from 'css-if-polyfill';
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
+import { buildTimeTransform } from '../dist/index.modern.js';
 
 const help = `
 CSS if() Build-time Transformation CLI

@@ -1,11 +1,7 @@
 /* global document, describe, test, expect, beforeEach, afterEach */
 
 import { vi } from 'vitest';
-import CSSIfPolyfill, {
-	hasNativeSupport,
-	init,
-	processCSSText
-} from '../src/index.js';
+import { hasNativeSupport, init, processCSSText } from '../src/index.js';
 
 describe('CSS if() Polyfill', () => {
 	beforeEach(() => {
@@ -22,11 +18,10 @@ describe('CSS if() Polyfill', () => {
 	});
 
 	describe('Initialization', () => {
-		test('should have CSSIfPolyfill object with functional API', () => {
-			expect(typeof CSSIfPolyfill.init).toBe('function');
-			expect(typeof CSSIfPolyfill.processCSSText).toBe('function');
-			expect(typeof CSSIfPolyfill.hasNativeSupport).toBe('function');
-			expect(typeof CSSIfPolyfill.refresh).toBe('function');
+		test('should have named function exports', () => {
+			expect(typeof init).toBe('function');
+			expect(typeof processCSSText).toBe('function');
+			expect(typeof hasNativeSupport).toBe('function');
 		});
 
 		test('should have named function exports', () => {
