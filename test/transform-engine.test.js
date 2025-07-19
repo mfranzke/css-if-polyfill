@@ -105,7 +105,7 @@ describe('CSS Transform Engine - Detailed Testing', () => {
 				parseIfFunction('invalid-condition: blue; else: red')
 			).toThrow('unknown condition type');
 			expect(() => parseIfFunction('blue; else: red')).toThrow(
-				'missing colon'
+				'missing else clause'
 			);
 		});
 	});
