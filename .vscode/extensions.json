@@ -5,6 +5,7 @@
 		"streetsidesoftware.code-spell-checker",
 		"samverschueren.linter-xo",
 		"esbenp.prettier-vscode",
-		"gruntfuggly.todo-tree"
+		"gruntfuggly.todo-tree",
+		"kravets.vscode-publint"
 	]
 }

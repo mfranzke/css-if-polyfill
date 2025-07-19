@@ -6,28 +6,6 @@
 /* global document */
 
 /**
- * Handle comment parsing in CSS
- */
-const handleComments = (char, nextChar, parseState) => {
-	if (
-		!parseState.inString &&
-		!parseState.inComment &&
-		char === '/' &&
-		nextChar === '*'
-	) {
-		parseState.inComment = true;
-		return true;
-	}
-
-	if (parseState.inComment && char === '*' && nextChar === '/') {
-		parseState.inComment = false;
-		return true;
-	}
-
-	return false;
-};
-
-/**
  * Handle string parsing in CSS
  */
 const handleStrings = (char, previousChar, parseState) => {
@@ -64,13 +42,38 @@ const parseCSSRules = (cssText) => {
 		const nextChar = cssText[i + 1];
 		const previousChar = cssText[i - 1];
 
-		// Handle comments
-		if (handleComments(char, nextChar, parseState)) {
-			i++; // Skip next character
+		// Handle comment start
+		if (
+			!parseState.inString &&
+			!parseState.inComment &&
+			char === '/' &&
+			nextChar === '*'
+		) {
+			// If we have accumulated content before the comment, save it
+			if (currentRule.trim() && !inRule) {
+				rules.push(currentRule.trim());
+				currentRule = '';
+			}
+
+			parseState.inComment = true;
+			currentRule += char;
+			continue;
+		}
+
+		// Handle comment end
+		if (parseState.inComment && char === '*' && nextChar === '/') {
+			currentRule += char + nextChar;
+			parseState.inComment = false;
+
+			// Save the complete comment as a rule
+			rules.push(currentRule.trim());
+			currentRule = '';
+			i++; // Skip the next character
 			continue;
 		}
 
 		if (parseState.inComment) {
+			currentRule += char;
 			continue;
 		}
 
@@ -355,6 +358,25 @@ const transformPropertyToNative = (selector, property, value) => {
 };
 
 /**
+ * Parse a CSS declaration string into property-value pairs
+ */
+const parseDeclaration = (declaration) => {
+	const colonIndex = declaration.indexOf(':');
+	if (colonIndex === -1) {
+		return null;
+	}
+
+	const property = declaration.slice(0, colonIndex).trim();
+	const value = declaration.slice(colonIndex + 1).trim();
+
+	if (property && value) {
+		return { property, value };
+	}
+
+	return null;
+};
+
+/**
  * Parse a CSS rule and extract selector and properties
  */
 const parseRule = (ruleText) => {
@@ -369,17 +391,56 @@ const parseRule = (ruleText) => {
 	const declarations = ruleText.slice(openBrace + 1, closeBrace).trim();
 
 	const properties = [];
-	const declarationParts = declarations.split(';');
 
-	for (const declaration of declarationParts) {
-		const colonIndex = declaration.indexOf(':');
-		if (colonIndex === -1) continue;
+	// Parse declarations with proper handling of semicolons in parentheses
+	let currentDeclaration = '';
+	let depth = 0;
+	let inQuotes = false;
+	let quoteChar = '';
 
-		const property = declaration.slice(0, colonIndex).trim();
-		const value = declaration.slice(colonIndex + 1).trim();
+	for (let i = 0; i < declarations.length; i++) {
+		const char = declarations[i];
+		const previousChar = i > 0 ? declarations[i - 1] : '';
 
-		if (property && value) {
-			properties.push({ property, value });
+		// Handle quotes
+		if ((char === '"' || char === "'") && previousChar !== '\\') {
+			if (!inQuotes) {
+				inQuotes = true;
+				quoteChar = char;
+			} else if (char === quoteChar) {
+				inQuotes = false;
+				quoteChar = '';
+			}
+		}
+
+		if (!inQuotes) {
+			if (char === '(') {
+				depth++;
+			} else if (char === ')') {
+				depth--;
+			}
+		}
+
+		if (char === ';' && depth === 0 && !inQuotes) {
+			// This is a real property separator
+			if (currentDeclaration.trim()) {
+				const parsed = parseDeclaration(currentDeclaration);
+				if (parsed) {
+					properties.push(parsed);
+				}
+			}
+
+			currentDeclaration = '';
+		} else {
+			currentDeclaration += char;
+		}
+	}
+
+	// Handle the last declaration
+	if (currentDeclaration.trim()) {
+		const parsed = parseDeclaration(currentDeclaration);
+		if (parsed) {
+			properties.push(parsed);
 		}
 	}
 
@@ -408,6 +469,7 @@ const transformToNativeCSS = (cssText) => {
 		}
 
 		let hasIfConditions = false;
+		const nonIfProperties = [];
 
 		for (const { property, value } of rule.properties) {
 			if (value.includes('if(')) {
@@ -426,10 +488,17 @@ const transformToNativeCSS = (cssText) => {
 					runtimeCSS += transformed.runtimeCSS + '\n';
 					hasRuntimeRules = true;
 				}
+			} else {
+				// Collect non-if() properties to preserve them
+				nonIfProperties.push(`${property}: ${value}`);
 			}
 		}
 
-		if (!hasIfConditions) {
+		// If we have non-if() properties in a rule that also has if() properties,
+		// we need to create a base rule with those properties
+		if (hasIfConditions && nonIfProperties.length > 0) {
+			nativeCSS += `${rule.selector} { ${nonIfProperties.join('; ')}; }\n`;
+		} else if (!hasIfConditions) {
 			// Keep rules without if() conditions as-is
 			nativeCSS += ruleText + '\n';
 		}

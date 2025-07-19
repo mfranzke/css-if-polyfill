@@ -21,7 +21,7 @@ describe('Integrated CSS if() Polyfill', () => {
 
 			const result = buildTimeTransform(css);
 
-			expect(result.nativeCSS).toContain('@media min-width: 768px');
+			expect(result.nativeCSS).toContain('@media (min-width: 768px)');
 			expect(result.nativeCSS).toContain('color: blue');
 			expect(result.nativeCSS).toContain('color: red');
 			expect(result.hasRuntimeRules).toBe(false);
@@ -36,7 +36,7 @@ describe('Integrated CSS if() Polyfill', () => {
 
 			const result = buildTimeTransform(css);
 
-			expect(result.nativeCSS).toContain('@supports display: grid');
+			expect(result.nativeCSS).toContain('@supports (display: grid)');
 			expect(result.nativeCSS).toContain('display: grid');
 			expect(result.nativeCSS).toContain('display: block');
 			expect(result.hasRuntimeRules).toBe(false);
@@ -65,7 +65,7 @@ describe('Integrated CSS if() Polyfill', () => {
 
 			const result = buildTimeTransform(css);
 
-			expect(result.nativeCSS).toContain('@media min-width: 768px');
+			expect(result.nativeCSS).toContain('@media (min-width: 768px)');
 			expect(result.hasRuntimeRules).toBe(true);
 			expect(result.runtimeCSS).toContain('style(--dark-mode)');
 		});
@@ -157,8 +157,8 @@ describe('Integrated CSS if() Polyfill', () => {
 
 			const result = buildTimeTransform(css);
 
-			expect(result.nativeCSS).toContain('@media min-width: 768px');
-			expect(result.nativeCSS).toContain('@supports margin-inline: 0');
+			expect(result.nativeCSS).toContain('@media (min-width: 768px)');
+			expect(result.nativeCSS).toContain('@supports (margin-inline: 0)');
 		});
 
 		test('preserves non-if() CSS rules', () => {

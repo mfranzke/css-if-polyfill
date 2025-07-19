@@ -5,17 +5,17 @@
  * Transforms CSS if() functions to native @media/@supports rules
  */
 
+import { buildTimeTransform } from 'css-if-polyfill';
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
-import { buildTimeTransform } from './index.js';
 
 const help = `
 CSS if() Build-time Transformation CLI
 
 Usage:
   npx css-if-transform <input.css> [output.css] [options]
-  node src/cli.js <input.css> [output.css] [options]
+  node bin/cli.js <input.css> [output.css] [options]
 
 Options:
   --minify         Minify the output CSS

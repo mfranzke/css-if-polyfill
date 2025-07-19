@@ -33,7 +33,7 @@ describe('CLI Tool', () => {
 
 	test('transforms CSS file with output to file', async () => {
 		const { stdout } = await execAsync(
-			`node src/cli.js ${testInputFile} ${testOutputFile} --stats`
+			`node bin/cli.js ${testInputFile} ${testOutputFile} --stats`
 		);
 
 		expect(stdout).toContain('Reading CSS from');
@@ -49,7 +49,7 @@ describe('CLI Tool', () => {
 
 	test('outputs to stdout when no output file specified', async () => {
 		const { stdout } = await execAsync(
-			`node src/cli.js ${testInputFile} --stats`
+			`node bin/cli.js ${testInputFile} --stats`
 		);
 
 		expect(stdout).toContain('Transformation Statistics');
@@ -58,7 +58,7 @@ describe('CLI Tool', () => {
 	});
 
 	test('shows help when no arguments provided', async () => {
-		const { stdout } = await execAsync('node src/cli.js --help');
+		const { stdout } = await execAsync('node bin/cli.js --help');
 
 		expect(stdout).toContain('CSS if() Build-time Transformation CLI');
 		expect(stdout).toContain('Usage:');
@@ -67,7 +67,7 @@ describe('CLI Tool', () => {
 
 	test('handles minification option', async () => {
 		const { stdout } = await execAsync(
-			`node src/cli.js ${testInputFile} ${testOutputFile} --minify --stats`
+			`node bin/cli.js ${testInputFile} ${testOutputFile} --minify --stats`
 		);
 
 		expect(stdout).toContain('CSS was minified');
@@ -79,7 +79,7 @@ describe('CLI Tool', () => {
 
 	test('handles non-existent input file gracefully', async () => {
 		try {
-			await execAsync('node src/cli.js non-existent.css');
+			await execAsync('node bin/cli.js non-existent.css');
 			expect.fail('Should have thrown an error');
 		} catch (error) {
 			expect(error.stdout || error.stderr).toContain('Error');
