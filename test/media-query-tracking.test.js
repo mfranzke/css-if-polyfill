@@ -1,5 +1,6 @@
-/* global document, describe, test, expect, beforeEach, afterEach, jest */
+/* global document, describe, test, expect, beforeEach, afterEach */
 
+import { vi } from 'vitest';
 import { cleanupMediaQueryListeners, processCSSText } from '../src/index.js';
 
 describe('Media Query Tracking', () => {
@@ -12,15 +13,15 @@ describe('Media Query Tracking', () => {
 		cleanupMediaQueryListeners();
 
 		// Mock matchMedia to return a controllable MediaQueryList
-		mockAddEventListener = jest.fn();
-		mockRemoveEventListener = jest.fn();
+		mockAddEventListener = vi.fn();
+		mockRemoveEventListener = vi.fn();
 		mockMediaQueryList = {
 			matches: true,
 			addEventListener: mockAddEventListener,
 			removeEventListener: mockRemoveEventListener
 		};
 
-		globalThis.matchMedia = jest.fn().mockReturnValue(mockMediaQueryList);
+		globalThis.matchMedia = vi.fn().mockReturnValue(mockMediaQueryList);
 	});
 
 	afterEach(() => {
@@ -156,7 +157,7 @@ describe('Media Query Tracking', () => {
 		const styleElement = document.createElement('style');
 
 		// Mock matchMedia to throw an error for malformed queries
-		globalThis.matchMedia = jest.fn().mockImplementation(() => {
+		globalThis.matchMedia = vi.fn().mockImplementation(() => {
 			throw new Error('Invalid media query');
 		});
 

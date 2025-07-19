@@ -1,10 +1,12 @@
 // Test setup
 
-/* global document, jest */
+/* global document */
+
+import { vi } from 'vitest';
 
 // Mock CSS.supports for testing
 globalThis.CSS = {
-	supports: jest.fn().mockImplementation((prop, value) => {
+	supports: vi.fn().mockImplementation((prop, value) => {
 		// If testing if() function syntax, return false (no native support)
 		if (value && value.includes('if(')) {
 			return false;
@@ -49,18 +51,18 @@ globalThis.CSS = {
 // Mock window.matchMedia - return true for common breakpoints
 Object.defineProperty(globalThis, 'matchMedia', {
 	writable: true,
-	value: jest.fn().mockImplementation((query) => ({
+	value: vi.fn().mockImplementation((query) => ({
 		matches:
 			query.includes('width >= 768px') ||
 			query.includes('min-width: 1200px') ||
 			query === 'prefers-color-scheme: dark',
 		media: query,
 		onchange: null,
-		addListener: jest.fn(),
-		removeListener: jest.fn(),
-		addEventListener: jest.fn(),
-		removeEventListener: jest.fn(),
-		dispatchEvent: jest.fn()
+		addListener: vi.fn(),
+		removeListener: vi.fn(),
+		addEventListener: vi.fn(),
+		removeEventListener: vi.fn(),
+		dispatchEvent: vi.fn()
 	}))
 });
 

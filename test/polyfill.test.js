@@ -1,5 +1,6 @@
-/* global document, describe, test, expect, beforeEach, afterEach, jest */
+/* global document, describe, test, expect, beforeEach, afterEach */
 
+import { vi } from 'vitest';
 import CSSIfPolyfill, {
 	hasNativeSupport,
 	init,
@@ -92,10 +93,10 @@ describe('CSS if() Polyfill', () => {
 
 			// Mock getComputedStyle
 			const mockComputedStyle = {
-				getPropertyValue: jest.fn().mockReturnValue('red')
+				getPropertyValue: vi.fn().mockReturnValue('red')
 			};
 
-			jest.spyOn(globalThis, 'getComputedStyle').mockReturnValue(
+			vi.spyOn(globalThis, 'getComputedStyle').mockReturnValue(
 				mockComputedStyle
 			);
 

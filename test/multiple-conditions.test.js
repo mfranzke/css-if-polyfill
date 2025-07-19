@@ -1,5 +1,6 @@
-/* global document, describe, test, expect, beforeEach, afterEach, jest */
+/* global document, describe, test, expect, beforeEach, afterEach */
 
+import { vi } from 'vitest';
 import { processCSSText } from '../src/index.js';
 
 describe('CSS if() Polyfill - Multiple Conditions', () => {
@@ -20,7 +21,7 @@ describe('CSS if() Polyfill - Multiple Conditions', () => {
 		test('should handle multiple style conditions with first match', () => {
 			// Mock getComputedStyle to return specific values
 			const mockComputedStyle = {
-				getPropertyValue: jest.fn().mockImplementation((prop) => {
+				getPropertyValue: vi.fn().mockImplementation((prop) => {
 					if (prop === '--scheme') {
 						return 'ice';
 					}
@@ -29,7 +30,7 @@ describe('CSS if() Polyfill - Multiple Conditions', () => {
 				})
 			};
 
-			jest.spyOn(globalThis, 'getComputedStyle').mockReturnValue(
+			vi.spyOn(globalThis, 'getComputedStyle').mockReturnValue(
 				mockComputedStyle
 			);
 
@@ -49,7 +50,7 @@ describe('CSS if() Polyfill - Multiple Conditions', () => {
 
 		test('should handle multiple style conditions with second match', () => {
 			const mockComputedStyle = {
-				getPropertyValue: jest.fn().mockImplementation((prop) => {
+				getPropertyValue: vi.fn().mockImplementation((prop) => {
 					if (prop === '--scheme') {
 						return 'fire';
 					}
@@ -58,7 +59,7 @@ describe('CSS if() Polyfill - Multiple Conditions', () => {
 				})
 			};
 
-			jest.spyOn(globalThis, 'getComputedStyle').mockReturnValue(
+			vi.spyOn(globalThis, 'getComputedStyle').mockReturnValue(
 				mockComputedStyle
 			);
 
@@ -78,10 +79,10 @@ describe('CSS if() Polyfill - Multiple Conditions', () => {
 
 		test('should fall back to else clause when no conditions match', () => {
 			const mockComputedStyle = {
-				getPropertyValue: jest.fn().mockReturnValue('')
+				getPropertyValue: vi.fn().mockReturnValue('')
 			};
 
-			jest.spyOn(globalThis, 'getComputedStyle').mockReturnValue(
+			vi.spyOn(globalThis, 'getComputedStyle').mockReturnValue(
 				mockComputedStyle
 			);
 
@@ -141,10 +142,10 @@ describe('CSS if() Polyfill - Multiple Conditions', () => {
 
 		test('should handle mixed condition types', () => {
 			const mockComputedStyle = {
-				getPropertyValue: jest.fn().mockReturnValue('')
+				getPropertyValue: vi.fn().mockReturnValue('')
 			};
 
-			jest.spyOn(globalThis, 'getComputedStyle').mockReturnValue(
+			vi.spyOn(globalThis, 'getComputedStyle').mockReturnValue(
 				mockComputedStyle
 			);
 			globalThis.matchMedia.mockReturnValue({ matches: true });
@@ -169,7 +170,7 @@ describe('CSS if() Polyfill - Multiple Conditions', () => {
 	describe('Complex Parsing Scenarios', () => {
 		test('should handle conditions with quoted values containing semicolons', () => {
 			const mockComputedStyle = {
-				getPropertyValue: jest.fn().mockImplementation((prop) => {
+				getPropertyValue: vi.fn().mockImplementation((prop) => {
 					if (prop === '--content') {
 						return 'hello; world';
 					}
@@ -178,7 +179,7 @@ describe('CSS if() Polyfill - Multiple Conditions', () => {
 				})
 			};
 
-			jest.spyOn(globalThis, 'getComputedStyle').mockReturnValue(
+			vi.spyOn(globalThis, 'getComputedStyle').mockReturnValue(
 				mockComputedStyle
 			);
 
@@ -215,10 +216,10 @@ describe('CSS if() Polyfill - Multiple Conditions', () => {
 
 		test('should handle conditions without else clause', () => {
 			const mockComputedStyle = {
-				getPropertyValue: jest.fn().mockReturnValue('')
+				getPropertyValue: vi.fn().mockReturnValue('')
 			};
 
-			jest.spyOn(globalThis, 'getComputedStyle').mockReturnValue(
+			vi.spyOn(globalThis, 'getComputedStyle').mockReturnValue(
 				mockComputedStyle
 			);
 
@@ -239,7 +240,7 @@ describe('CSS if() Polyfill - Multiple Conditions', () => {
 	describe('Shorthand Property Integration', () => {
 		test('should work with multiple if() functions in shorthand', () => {
 			const mockComputedStyle = {
-				getPropertyValue: jest.fn().mockImplementation((prop) => {
+				getPropertyValue: vi.fn().mockImplementation((prop) => {
 					if (prop === '--scheme') {
 						return 'ice';
 					}
@@ -248,7 +249,7 @@ describe('CSS if() Polyfill - Multiple Conditions', () => {
 				})
 			};
 
-			jest.spyOn(globalThis, 'getComputedStyle').mockReturnValue(
+			vi.spyOn(globalThis, 'getComputedStyle').mockReturnValue(
 				mockComputedStyle
 			);
 			globalThis.CSS.supports.mockReturnValue(true);
@@ -304,7 +305,7 @@ describe('CSS if() Polyfill - Multiple Conditions', () => {
       }`;
 
 			const mockComputedStyle = {
-				getPropertyValue: jest.fn().mockImplementation((prop) => {
+				getPropertyValue: vi.fn().mockImplementation((prop) => {
 					if (prop === '--theme') {
 						return 'dark';
 					}
@@ -313,7 +314,7 @@ describe('CSS if() Polyfill - Multiple Conditions', () => {
 				})
 			};
 
-			jest.spyOn(globalThis, 'getComputedStyle').mockReturnValue(
+			vi.spyOn(globalThis, 'getComputedStyle').mockReturnValue(
 				mockComputedStyle
 			);
 
@@ -333,10 +334,10 @@ describe('CSS if() Polyfill - Multiple Conditions', () => {
       }`;
 
 			const mockComputedStyle = {
-				getPropertyValue: jest.fn().mockReturnValue('')
+				getPropertyValue: vi.fn().mockReturnValue('')
 			};
 
-			jest.spyOn(globalThis, 'getComputedStyle').mockReturnValue(
+			vi.spyOn(globalThis, 'getComputedStyle').mockReturnValue(
 				mockComputedStyle
 			);
 

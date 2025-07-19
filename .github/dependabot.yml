@@ -32,7 +32,3 @@ updates:
       babel:
         patterns:
           - "@babel*"
-      jest:
-        patterns:
-          - "jest"
-          - "jest-environment-jsdom"

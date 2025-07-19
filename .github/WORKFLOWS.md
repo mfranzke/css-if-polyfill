@@ -14,7 +14,7 @@ This document describes all the GitHub Actions workflows and configurations set 
     - Checkout repository
     - Install dependencies (with npm cache)
     - Run linting with `xo`
-    - Run tests with Jest
+    - Run tests with Vite
     - Upload test coverage to Codecov
 - **Build**: Builds package and uploads artifacts
     - Build with `microbundle`
