@@ -33,7 +33,7 @@
  * }
  */
 
-import { buildTimeTransform } from 'css-if-polyfill/dist/index.modern.js';
+import { buildTimeTransform } from 'css-if-polyfill';
 
 const PLUGIN_NAME = 'postcss-if-function';
 
