@@ -33,7 +33,7 @@
  * }
  */
 
-import { buildTimeTransform } from '../../css-if-polyfill/src/index.js';
+import { buildTimeTransform } from 'css-if-polyfill/dist/index.modern.js';
 
 const PLUGIN_NAME = 'postcss-if-function';
 
@@ -71,7 +71,7 @@ function postcsscssif(options = {}) {
 			// Apply transformation
 			const transformed = buildTimeTransform(cssText);
 
-			if (transformed.transformedCSS === cssText) {
+			if (transformed.nativeCSS === cssText) {
 				// No transformations were made
 				return;
 			}
@@ -82,7 +82,7 @@ function postcsscssif(options = {}) {
 			// Parse the transformed CSS and add it back
 			try {
 				const transformedRoot = result.processor.process(
-					transformed.transformedCSS,
+					transformed.nativeCSS,
 					{
 						from: undefined,
 						parser: result.processor.parser
@@ -123,5 +123,4 @@ function postcsscssif(options = {}) {
 
 postcsscssif.postcss = true;
 
-export default postcsscssif;
 export { postcsscssif };

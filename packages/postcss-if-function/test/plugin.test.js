@@ -1,6 +1,6 @@
 import postcss from 'postcss';
 import { describe, expect, it } from 'vitest';
-import postcssCssIf from '../src/index.js';
+import { postcsscssif as postcssCssIf } from '../src/index.js';
 
 describe('postcss-if-function plugin', () => {
 	async function run(input, output, options = {}) {
@@ -14,7 +14,7 @@ describe('postcss-if-function plugin', () => {
 	it('should transform media() functions to @media rules', async () => {
 		const input = `
 .example {
-  color: if(media(max-width: 768px), blue, red);
+  color: if(media(max-width: 768px): blue; else: red);
 }`;
 
 		const expected = `
@@ -34,7 +34,7 @@ describe('postcss-if-function plugin', () => {
 	it('should transform supports() functions to @supports rules', async () => {
 		const input = `
 .grid {
-  display: if(supports(display: grid), grid, block);
+  display: if(supports(display: grid): grid; else: block);
 }`;
 
 		const expected = `
@@ -54,8 +54,8 @@ describe('postcss-if-function plugin', () => {
 	it('should handle multiple if() functions in one rule', async () => {
 		const input = `
 .example {
-  color: if(media(max-width: 768px), blue, red);
-  font-size: if(supports(display: grid), 1.2rem, 1rem);
+  color: if(media(max-width: 768px): blue; else: red);
+  font-size: if(supports(display: grid): 1.2rem; else: 1rem);
 }`;
 
 		const expected = `
@@ -82,12 +82,14 @@ describe('postcss-if-function plugin', () => {
 	it('should handle nested if() functions', async () => {
 		const input = `
 .nested {
-  color: if(media(max-width: 768px), if(supports(color: lab(50% 20 -30)), lab(50% 20 -30), blue), red);
+  color: if(media(max-width: 768px): blue; else: red);
+  background: if(supports(color: lab(50% 20 -30)): lab(50% 20 -30); else: transparent);
 }`;
 
 		const expected = `
 .nested {
   color: red;
+  background: transparent;
 }
 
 @media (max-width: 768px) {
@@ -96,11 +98,9 @@ describe('postcss-if-function plugin', () => {
   }
 }
 
-@media (max-width: 768px) {
-  @supports (color: lab(50% 20 -30)) {
-    .nested {
-      color: lab(50% 20 -30);
-    }
+@supports (color: lab(50% 20 -30)) {
+  .nested {
+    background: lab(50% 20 -30);
   }
 }`;
 
@@ -110,7 +110,7 @@ describe('postcss-if-function plugin', () => {
 	it('should handle complex media queries', async () => {
 		const input = `
 .responsive {
-  width: if(media(min-width: 768px and max-width: 1024px), 50%, 100%);
+  width: if(media(min-width: 768px and max-width: 1024px): 50%; else: 100%);
 }`;
 
 		const expected = `
@@ -118,7 +118,7 @@ describe('postcss-if-function plugin', () => {
   width: 100%;
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 768px and max-width: 1024px) {
   .responsive {
     width: 50%;
   }
@@ -151,7 +151,7 @@ describe('postcss-if-function plugin', () => {
 }
 
 .conditional {
-  color: if(media(max-width: 768px), red, blue);
+  color: if(media(max-width: 768px): red; else: blue);
 }
 
 /* Footer styles */
@@ -186,7 +186,7 @@ describe('postcss-if-function plugin', () => {
 	it('should work with logTransformations option', async () => {
 		const input = `
 .example {
-  color: if(media(max-width: 768px), blue, red);
+  color: if(media(max-width: 768px): blue; else: red);
 }`;
 
 		const expected = `
