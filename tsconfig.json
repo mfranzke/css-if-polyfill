@@ -11,6 +11,6 @@
 		"outDir": "./dist",
 		"rootDir": "./src"
 	},
-	"include": ["src/**/*", "bin/cli.js"],
+	"include": ["src/**/*"],
 	"exclude": ["node_modules", "dist", "test"]
 }

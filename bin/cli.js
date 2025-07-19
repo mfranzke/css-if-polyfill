@@ -8,7 +8,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
-import { buildTimeTransform } from '../src/index.js';
+import { buildTimeTransform } from '../dist/index.modern.js';
 
 const help = `
 CSS if() Build-time Transformation CLI
