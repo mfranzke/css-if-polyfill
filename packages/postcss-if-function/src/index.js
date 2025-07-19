@@ -96,21 +96,12 @@ function postcsscssif(options = {}) {
 
 				// Log transformation statistics if requested
 				if (logTransformations && transformed.stats) {
-					const {
-						totalTransformations,
-						mediaTransformations,
-						supportsTransformations,
-						styleTransformations
-					} = transformed.stats;
+					const { totalRules, transformedRules } = transformed.stats;
 					console.log(`[${PLUGIN_NAME}] Transformation statistics:`);
+					console.log(`  - Total rules: ${totalRules}`);
 					console.log(
-						`  - Total transformations: ${totalTransformations}`
+						`  - Total transformations: ${transformedRules}`
 					);
-					console.log(`  - Media queries: ${mediaTransformations}`);
-					console.log(
-						`  - Support queries: ${supportsTransformations}`
-					);
-					console.log(`  - Style functions: ${styleTransformations}`);
 				}
 			} catch (error) {
 				throw new Error(
