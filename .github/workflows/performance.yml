@@ -114,7 +114,7 @@ jobs:
           </html>
           EOF
 
-          cat > perf-tests/run-benchmark.js << 'EOF'
+          cat > perf-tests/run-benchmark.cjs << 'EOF'
           const { chromium } = require('playwright');
           const fs = require('node:fs');
 
@@ -159,7 +159,7 @@ jobs:
       - name: Run performance benchmark
         run: |
           cd perf-tests
-          node run-benchmark.js
+          node run-benchmark.cjs
 
       - name: Upload performance results
         uses: actions/upload-artifact@v4
