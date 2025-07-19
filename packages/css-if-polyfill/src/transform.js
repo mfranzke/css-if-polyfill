@@ -493,12 +493,12 @@ const runtimeTransform = (cssText, element) => {
 };
 
 export {
-	transformToNativeCSS,
 	buildTimeTransform,
-	runtimeTransform,
 	extractIfFunctions,
-	parseIfFunction,
 	parseCSSRules,
+	parseIfFunction,
 	parseRule,
-	transformPropertyToNative
+	runtimeTransform,
+	transformPropertyToNative,
+	transformToNativeCSS
 };

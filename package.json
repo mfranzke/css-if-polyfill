@@ -2,7 +2,7 @@
   "name": "css-if-polyfill",
   "version": "0.0.1",
   "type": "module",
-  "description": "A JavaScript polyfill for CSS if() functionality with style(), media(), and supports() functions",
+  "description": "A JavaScript polyfill and PostCSS Plugin for CSS if() functionality with style(), media(), and supports() functions",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mfranzke/css-if-polyfill.git"
@@ -13,79 +13,31 @@
   },
   "author": "Maximilian Franzke",
   "license": "MIT",
-  "bin": {
-    "css-if-transform": "./src/cli.js"
-  },
-  "main": "dist/index.cjs",
-  "types": "dist/index.d.ts",
-  "module": "dist/index.modern.js",
-  "exports": {
-    ".": {
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      },
-      "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.modern.js"
-      }
-    }
-  },
-  "files": [
-    "dist/",
-    "src/cli.js",
-    "README.md",
-    "LICENSE"
-  ],
-  "keywords": [
-    "css",
-    "polyfill",
-    "conditional",
-    "if",
-    "media-query",
-    "supports",
-    "style"
+  "private": true,
+  "workspaces": [
+    "packages/*"
   ],
   "scripts": {
-    "build": "microbundle",
-    "changeset:release": "npm run build && npx @changesets/cli publish",
+    "build": "npm run build --workspaces",
     "codestyle": "prettier . --write",
-    "dev": "microbundle watch",
-    "lint": "npm-run-all --parallel lint:*",
+    "dev": "npm run dev --workspaces",
+    "lint": "npm run lint:*",
     "lint:markdownlint": "markdownlint -c .config/.markdown-lint.yml **/*.md",
     "lint:xo": "xo",
-    "postbuild": "cp dist/index.d.ts dist/index.d.cts",
-    "prepare": "husky",
-    "prepublishOnly": "npm run build",
-    "pretest:packing": "npm run build",
+    "postinstall": "npm run build",
     "serve": "http-server -p 3000 -o examples/basic-examples.html",
-    "test": "npm-run-all --sequential test:*",
-    "test:packing": "publint",
-    "test:vitest": "vitest run",
-    "test:vitest:watch": "vitest"
+    "test": "npm run test --workspaces"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.0",
-    "@babel/preset-env": "^7.28.0",
     "@changesets/cli": "^2.29.5",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
-    "@vitest/coverage-v8": "^2.1.9",
     "http-server": "^14.1.1",
     "husky": "^9.1.7",
-    "jsdom": "^25.0.1",
     "lint-staged": "^16.1.2",
     "markdownlint-cli": "^0.45.0",
-    "microbundle": "^0.15.1",
-    "npm-run-all2": "^8.0.4",
     "prettier": "3.6.2",
     "prettier-plugin-organize-imports": "^4.1.0",
-    "prettier-plugin-pkg": "^0.21.2",
-    "publint": "^0.3.12",
-    "vite": "^6.0.1",
-    "vitest": "^2.1.8",
-    "xo": "^1.1.1"
-  },
-  "source": "src/index.js",
-  "umd:main": "dist/index.umd.js"
+    "prettier-plugin-pkg": "^0.21.2"
+  }
 }

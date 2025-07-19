@@ -805,11 +805,11 @@ if (globalThis.window !== undefined && typeof document !== 'undefined') {
 // Re-export build-time transformation
 export { buildTimeTransform } from './transform.js';
 export {
+	cleanupMediaQueryListeners,
+	hasNativeSupport,
 	init,
 	processCSSText,
-	hasNativeSupport,
-	refresh,
-	cleanupMediaQueryListeners
+	refresh
 };
 
 // Create the CSSIfPolyfill object with all the methods

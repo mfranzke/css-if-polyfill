@@ -15,7 +15,7 @@ jobs:
   performance:
     name: Performance Benchmarks
     runs-on: ubuntu-24.04
-    
+
     permissions:
       contents: read
       pull-requests: write
@@ -72,7 +72,7 @@ jobs:
               <div class="test-complex">Complex Test</div>
 
               <script type="module">
-                  import CSSIfPolyfill from '../dist/index.modern.js';
+                  import CSSIfPolyfill from '../packages/css-if-polyfill/dist/index.modern.js';
 
                   // Performance measurement
                   const startTime = performance.now();
