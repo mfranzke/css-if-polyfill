@@ -469,6 +469,7 @@ const transformToNativeCSS = (cssText) => {
 		}
 
 		let hasIfConditions = false;
+		const nonIfProperties = [];
 
 		for (const { property, value } of rule.properties) {
 			if (value.includes('if(')) {
@@ -487,10 +488,17 @@ const transformToNativeCSS = (cssText) => {
 					runtimeCSS += transformed.runtimeCSS + '\n';
 					hasRuntimeRules = true;
 				}
+			} else {
+				// Collect non-if() properties to preserve them
+				nonIfProperties.push(`${property}: ${value}`);
 			}
 		}
 
-		if (!hasIfConditions) {
+		// If we have non-if() properties in a rule that also has if() properties,
+		// we need to create a base rule with those properties
+		if (hasIfConditions && nonIfProperties.length > 0) {
+			nativeCSS += `${rule.selector} { ${nonIfProperties.join('; ')}; }\n`;
+		} else if (!hasIfConditions) {
 			// Keep rules without if() conditions as-is
 			nativeCSS += ruleText + '\n';
 		}
