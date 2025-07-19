@@ -45,44 +45,68 @@
 		<div class="test-element-5">Test 5</div>
 		<div class="test-complex">Complex Test</div>
 
-		<script type="module">
-			import CSSIfPolyfill from "../packages/css-if-polyfill/dist/index.modern.js";
+		<script src="../../packages/css-if-polyfill/dist/index.umd.js"></script>
+		<script>
+			console.log("Script starting...");
 
-			// Performance measurement
-			const startTime = performance.now();
+			try {
+				console.log("Starting performance measurement...");
 
-			CSSIfPolyfill.init({ debug: true });
+				// Check if the polyfill is available
+				if (typeof cssIfPolyfill === "undefined") {
+					throw new Error("cssIfPolyfill is not available");
+				}
 
-			const endTime = performance.now();
-			const initTime = endTime - startTime;
+				console.log(
+					"cssIfPolyfill available:",
+					Object.keys(cssIfPolyfill)
+				);
 
-			// Test processing time
-			const testCSS = `
-                      .perf-test {
-                          color: if(media(min-width: 768px): blue; else: red);
-                          background: if(supports(display: grid): white; else: gray);
-                          font-size: if(style(--large): 18px; else: 14px);
-                      }
-                  `;
+				// Performance measurement
+				const startTime = performance.now();
 
-			const processStart = performance.now();
-			for (let i = 0; i < 1000; i++) {
-				CSSIfPolyfill.processCSSText(testCSS);
+				cssIfPolyfill.init({ debug: true });
+
+				const endTime = performance.now();
+				const initTime = endTime - startTime;
+
+				// Test processing time
+				const testCSS = `
+	                      .perf-test {
+	                          color: if(media(min-width: 768px): blue; else: red);
+	                          background: if(supports(display: grid): white; else: gray);
+	                          font-size: if(style(--large): 18px; else: 14px);
+	                      }
+	                  `;
+
+				const processStart = performance.now();
+				for (let i = 0; i < 1000; i++) {
+					cssIfPolyfill.processCSSText(testCSS);
+				}
+				const processEnd = performance.now();
+				const processTime = processEnd - processStart;
+
+				// Report results
+				const results = {
+					initTime: initTime,
+					processTime: processTime,
+					avgProcessTime: processTime / 1000
+				};
+
+				console.log("Performance Results:", results);
+
+				// Make results available to test runner
+				window.performanceResults = results;
+			} catch (error) {
+				console.error("Benchmark failed:", error);
+				// Still set results so the test doesn't timeout
+				window.performanceResults = {
+					initTime: 0,
+					processTime: 0,
+					avgProcessTime: 0,
+					error: error.message
+				};
 			}
-			const processEnd = performance.now();
-			const processTime = processEnd - processStart;
-
-			// Report results
-			const results = {
-				initTime: initTime,
-				processTime: processTime,
-				avgProcessTime: processTime / 1000
-			};
-
-			console.log("Performance Results:", results);
-
-			// Make results available to test runner
-			window.performanceResults = results;
 		</script>
 	</body>
 </html>

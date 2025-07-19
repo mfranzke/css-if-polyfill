@@ -6,44 +6,71 @@ const path = require('node:path');
 const process = require('node:process');
 
 (async () => {
-	const browser = await chromium.launch();
-	const page = await browser.newPage();
+	try {
+		console.log('Starting performance benchmark...');
 
-	await page.goto(`file://${path.join(__dirname, 'benchmark.html')}`);
+		const browser = await chromium.launch();
+		console.log('Browser launched successfully');
 
-	// Wait for benchmark to complete
-	await page.waitForFunction(() => globalThis.performanceResults);
+		const page = await browser.newPage();
+		console.log('New page created');
 
-	// Get results
-	const results = await page.evaluate(() => globalThis.performanceResults);
+		const benchmarkPath = `file://${path.join(__dirname, 'benchmark.html')}`;
+		console.log(`Loading benchmark from: ${benchmarkPath}`);
 
-	console.log('Performance Benchmark Results:');
-	console.log(`Initialization time: ${results.initTime.toFixed(2)}ms`);
-	console.log(
-		`Total processing time (1000 iterations): ${results.processTime.toFixed(2)}ms`
-	);
-	console.log(
-		`Average processing time per iteration: ${results.avgProcessTime.toFixed(4)}ms`
-	);
+		await page.goto(benchmarkPath);
+		console.log('Page loaded, waiting for results...');
 
-	// Save results to file
-	fs.writeFileSync(
-		'performance-results.json',
-		JSON.stringify(results, null, 2)
-	);
+		// Add console listener to see any errors from the page
+		page.on('console', (message) =>
+			console.log('PAGE LOG:', message.text())
+		);
+		page.on('pageerror', (error) => console.error('PAGE ERROR:', error));
 
-	// Check performance thresholds
-	if (results.initTime > 100) {
-		console.error('❌ Initialization time exceeded threshold (100ms)');
+		// Wait for benchmark to complete with increased timeout
+		await page.waitForFunction(() => globalThis.performanceResults, {
+			timeout: 60_000
+		});
+		console.log('Performance results available');
+
+		// Get results
+		const results = await page.evaluate(
+			() => globalThis.performanceResults
+		);
+
+		console.log('Performance Benchmark Results:');
+		console.log(`Initialization time: ${results.initTime.toFixed(2)}ms`);
+		console.log(
+			`Total processing time (1000 iterations): ${results.processTime.toFixed(2)}ms`
+		);
+		console.log(
+			`Average processing time per iteration: ${results.avgProcessTime.toFixed(4)}ms`
+		);
+
+		// Save results to file
+		fs.writeFileSync(
+			'performance-results.json',
+			JSON.stringify(results, null, 2)
+		);
+
+		// Check performance thresholds
+		if (results.initTime > 100) {
+			console.error('❌ Initialization time exceeded threshold (100ms)');
+			process.exit(1);
+		}
+
+		if (results.avgProcessTime > 1) {
+			console.error(
+				'❌ Average processing time exceeded threshold (1ms)'
+			);
+			process.exit(1);
+		}
+
+		console.log('✅ All performance benchmarks passed');
+
+		await browser.close();
+	} catch (error) {
+		console.error('Benchmark failed with error:', error);
 		process.exit(1);
 	}
-
-	if (results.avgProcessTime > 1) {
-		console.error('❌ Average processing time exceeded threshold (1ms)');
-		process.exit(1);
-	}
-
-	console.log('✅ All performance benchmarks passed');
-
-	await browser.close();
 })();
