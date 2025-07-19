@@ -14,7 +14,7 @@
   "author": "Maximilian Franzke",
   "license": "MIT",
   "bin": {
-    "css-if-transform": "./src/cli.js"
+    "css-if-transform": "./bin/cli.js"
   },
   "main": "dist/index.cjs",
   "types": "dist/index.d.ts",
@@ -32,8 +32,8 @@
     }
   },
   "files": [
+    "bin/cli.js",
     "dist/",
-    "src/cli.js",
     "README.md",
     "LICENSE"
   ],
