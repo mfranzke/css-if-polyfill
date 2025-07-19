@@ -1,8 +1,7 @@
 {
   "name": "css-if-polyfill",
-  "version": "0.1.0",
   "type": "module",
-  "description": "A JavaScript polyfill for CSS if() functionality with style(), media(), and supports() functions",
+  "description": "A JavaScript polyfill and PostCSS plugin for CSS if() functionality with style(), media(), and supports() functions",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mfranzke/css-if-polyfill.git"
@@ -13,6 +12,7 @@
   },
   "author": "Maximilian Franzke",
   "license": "MIT",
+  "private": true,
   "keywords": [
     "css",
     "polyfill",
@@ -23,23 +23,20 @@
     "style"
   ],
   "scripts": {
-    "build": "microbundle",
+    "build": "npm run build --workspaces",
     "changeset:release": "npm run build && npx @changesets/cli publish",
     "codestyle": "prettier . --write",
-    "dev": "microbundle watch",
+    "dev": "npm run dev --workspaces",
     "lint": "npm-run-all --parallel lint:*",
     "lint:markdownlint": "markdownlint -c .config/.markdown-lint.yml **/*.md",
-    "lint:package": "publint",
+    "lint:packages": "publint packages/css-if-polyfill && publint packages/postcss-if-function",
     "lint:xo": "xo",
     "postbuild": "cp dist/index.d.ts dist/index.d.cts",
-    "prelint:package": "npm run build",
+    "prelint:packages": "npm run build",
     "prepare": "husky",
-    "prepublishOnly": "npm run build",
     "pretest:vitest": "npm run build",
     "serve": "http-server -p 3000 -o examples/basic-examples.html",
-    "test": "npm-run-all --sequential test:*",
-    "test:vitest": "vitest run",
-    "test:vitest:watch": "vitest"
+    "test": "npm test --workspaces"
   },
   "devDependencies": {
     "@babel/core": "^7.28.0",

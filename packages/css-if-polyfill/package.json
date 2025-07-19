@@ -39,14 +39,12 @@
   "scripts": {
     "build": "microbundle",
     "dev": "microbundle watch",
-    "lint:package": "publint",
     "postbuild": "cp dist/index.d.ts dist/index.d.cts",
-    "prelint:package": "npm run build",
     "prepublishOnly": "npm run build",
     "pretest:vitest": "npm run build",
     "test": "npm-run-all --sequential test:*",
     "test:vitest": "vitest run",
-    "test:watch": "vitest"
+    "test:vitest:watch": "vitest"
   },
   "devDependencies": {
     "@babel/core": "^7.28.0",
@@ -54,7 +52,6 @@
     "@vitest/coverage-v8": "^3.2.4",
     "jsdom": "^26.1.0",
     "microbundle": "^0.15.1",
-    "publint": "^0.3.12",
     "vite": "^7.0.5",
     "vitest": "^3.2.4",
     "xo": "^1.1.1"

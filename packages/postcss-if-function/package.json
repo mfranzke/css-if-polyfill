@@ -37,8 +37,9 @@
     "build": "microbundle",
     "dev": "microbundle watch",
     "prepublishOnly": "npm run build",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "test": "npm-run-all --sequential test:*",
+    "test:vitest": "vitest run",
+    "test:vitest:watch": "vitest"
   },
   "peerDependencies": {
     "postcss": "^8.0.0"
@@ -49,7 +50,6 @@
   "devDependencies": {
     "microbundle": "^0.15.1",
     "postcss": "^8.4.0",
-    "publint": "^0.3.12",
     "vitest": "^3.2.4",
     "xo": "^1.1.1"
   },
