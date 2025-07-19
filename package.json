@@ -34,7 +34,6 @@
     "lint:markdownlint": "markdownlint -c .config/.markdown-lint.yml **/*.md",
     "lint:packages": "publint packages/css-if-polyfill && publint packages/postcss-if-function",
     "lint:xo": "xo",
-    "postbuild": "cp dist/index.d.ts dist/index.d.cts",
     "prelint:packages": "npm run build",
     "prepare": "husky",
     "preserve": "npm run build --workspace=css-if-polyfill",
