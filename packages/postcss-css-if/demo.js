@@ -1,5 +1,5 @@
 import postcss from 'postcss';
-import postcssCssIf from '../src/index.js';
+import postcssCssIf from './src/index.js';
 
 const css = `
 .example {
