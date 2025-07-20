@@ -79,7 +79,11 @@ function postcssIfFunction(options = {}) {
 			// Clear the original root
 			root.removeAll();
 
-			// Parse the transformed CSS and add it back
+			// Note: Architectural optimization opportunity
+			// This re-parsing step could be eliminated by modifying the transformation engine
+			// to output PostCSS AST nodes directly instead of CSS strings, removing the
+			// double parsing overhead identified by static analysis tools.
+
 			try {
 				const transformedRoot = result.processor.process(
 					transformed.nativeCSS,
@@ -89,7 +93,7 @@ function postcssIfFunction(options = {}) {
 					}
 				).root;
 
-				// Copy all nodes from transformed root to original root
+				// Clone nodes to preserve original formatting and avoid reference issues
 				transformedRoot.each((node) => {
 					root.append(node.clone());
 				});

@@ -245,6 +245,22 @@ For complete CSS `if()` support including `style()` functions, combine this plug
 <script src="https://cdn.jsdelivr.net/npm/css-if-polyfill/dist/index.modern.js"></script>
 ```
 
+## Performance Considerations
+
+This plugin is designed for optimal build-time performance, transforming CSS if() functions to native CSS without runtime overhead. However, there are some architectural considerations:
+
+### Current Implementation
+
+- **Double Parsing**: The plugin currently parses CSS twice - once by PostCSS and once by the transformation engine
+- **String-based Transformation**: The transformation engine outputs CSS strings that are re-parsed into PostCSS AST nodes
+
+### Future Optimization Opportunities
+
+- **Direct AST Transformation**: The transformation engine could be modified to output PostCSS AST nodes directly, eliminating the double parsing overhead
+- **Streaming Processing**: For very large CSS files, streaming transformation could reduce memory usage
+
+For most typical usage scenarios, the current performance is excellent and the double parsing overhead is negligible compared to the benefits of build-time transformation.
+
 ## Contributing
 
 See the main [Contributing Guide](https://github.com/mfranzke/css-if-polyfill/blob/main/CONTRIBUTING.md) for details on how to contribute to this project.
