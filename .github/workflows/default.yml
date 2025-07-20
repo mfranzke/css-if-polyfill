@@ -110,7 +110,7 @@ jobs:
   performance:
     name: Performance Tests
     needs: ci
-    if: contains(github.event.head_commit.modified, 'src/') || github.event_name == 'pull_request'
+    if: (github.event.head_commit && contains(github.event.head_commit.modified, 'src/')) || github.event_name == 'pull_request'
     uses: ./.github/workflows/performance.yml
     secrets: inherit
     permissions:
