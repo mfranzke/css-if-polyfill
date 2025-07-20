@@ -245,28 +245,9 @@ For complete CSS `if()` support including `style()` functions, combine this plug
 <script src="https://cdn.jsdelivr.net/npm/css-if-polyfill/dist/index.modern.js"></script>
 ```
 
-## Development
-
-```bash
-# Install dependencies
-npm install
-
-# Run tests
-npm test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Build the package
-npm run build
-
-# Lint code
-npm run lint
-```
-
 ## Contributing
 
-See the main [Contributing Guide](../../CONTRIBUTING.md) for details on how to contribute to this project.
+See the main [Contributing Guide](https://github.com/mfranzke/css-if-polyfill/blob/main/CONTRIBUTING.md) for details on how to contribute to this project.
 
 ## License
 

@@ -21,6 +21,9 @@ npm install
 # Run tests
 npm test
 
+# Run tests in watch mode
+npm run vitest:watch
+
 # Build distribution files
 npm run build
 

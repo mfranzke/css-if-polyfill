@@ -365,7 +365,7 @@ The package includes comprehensive examples:
 
 ## Contributing
 
-Please have a look at our [CONTRIBUTION guidelines](CONTRIBUTING.md).
+Please have a look at our [CONTRIBUTION guidelines](https://github.com/mfranzke/css-if-polyfill/blob/main/CONTRIBUTING.md).
 
 ## License
 
