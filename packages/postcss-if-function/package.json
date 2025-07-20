@@ -3,6 +3,13 @@
   "version": "0.1.0",
   "type": "module",
   "description": "PostCSS plugin for transforming CSS if() functions to native CSS",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mfranzke/css-if-polyfill.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mfranzke/css-if-polyfill/issues"
+  },
   "license": "MIT",
   "main": "dist/index.cjs",
   "types": "dist/index.d.ts",

@@ -3,6 +3,14 @@
   "version": "0.1.1",
   "type": "module",
   "description": "A JavaScript polyfill for CSS if() functionality with style(), media(), and supports() functions",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mfranzke/css-if-polyfill.git"
+  },
+  "homepage": "https://mfranzke.github.io/css-if-polyfill/",
+  "bugs": {
+    "url": "https://github.com/mfranzke/css-if-polyfill/issues"
+  },
   "license": "MIT",
   "bin": {
     "css-if-transform": "bin/cli.js"
