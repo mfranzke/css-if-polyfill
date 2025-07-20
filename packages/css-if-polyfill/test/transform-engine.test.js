@@ -55,10 +55,15 @@ describe('CSS Transform Engine - Detailed Testing', () => {
 			const parsed = parseIfFunction(content);
 
 			expect(parsed).toEqual({
-				conditionType: 'media',
-				conditionExpression: 'min-width: 768px',
-				trueValue: 'blue',
-				falseValue: 'red'
+				conditions: [
+					{
+						conditionType: 'media',
+						conditionExpression: 'min-width: 768px',
+						value: 'blue'
+					}
+				],
+				elseValue: 'red',
+				isMultipleConditions: false
 			});
 		});
 
@@ -67,10 +72,15 @@ describe('CSS Transform Engine - Detailed Testing', () => {
 			const parsed = parseIfFunction(content);
 
 			expect(parsed).toEqual({
-				conditionType: 'supports',
-				conditionExpression: 'display: grid',
-				trueValue: 'transparent',
-				falseValue: 'white'
+				conditions: [
+					{
+						conditionType: 'supports',
+						conditionExpression: 'display: grid',
+						value: 'transparent'
+					}
+				],
+				elseValue: 'white',
+				isMultipleConditions: false
 			});
 		});
 
@@ -79,10 +89,15 @@ describe('CSS Transform Engine - Detailed Testing', () => {
 			const parsed = parseIfFunction(content);
 
 			expect(parsed).toEqual({
-				conditionType: 'style',
-				conditionExpression: '--large',
-				trueValue: '24px',
-				falseValue: '16px'
+				conditions: [
+					{
+						conditionType: 'style',
+						conditionExpression: '--large',
+						value: '24px'
+					}
+				],
+				elseValue: '16px',
+				isMultipleConditions: false
 			});
 		});
 
@@ -91,10 +106,10 @@ describe('CSS Transform Engine - Detailed Testing', () => {
 				'media(min-width: 768px): linear-gradient(to right, blue, navy); else: solid red';
 			const parsed = parseIfFunction(content);
 
-			expect(parsed.trueValue).toBe(
+			expect(parsed.conditions[0].value).toBe(
 				'linear-gradient(to right, blue, navy)'
 			);
-			expect(parsed.falseValue).toBe('solid red');
+			expect(parsed.elseValue).toBe('solid red');
 		});
 
 		test('throws error for malformed if() functions', () => {
@@ -105,7 +120,7 @@ describe('CSS Transform Engine - Detailed Testing', () => {
 				parseIfFunction('invalid-condition: blue; else: red')
 			).toThrow('unknown condition type');
 			expect(() => parseIfFunction('blue; else: red')).toThrow(
-				'missing else clause'
+				'missing colon'
 			);
 		});
 	});

@@ -4,7 +4,6 @@
 
 ### Debug Files (Root Directory)
 
-- `debug-transform.js` - Temporary debugging script
 - `detailed-debug.js` - Detailed transformation debugging
 - `property-debug.js` - Property transformation debugging
 - `test-debug.js` - General test debugging
