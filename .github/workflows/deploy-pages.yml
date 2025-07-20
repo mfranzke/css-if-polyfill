@@ -56,7 +56,7 @@ jobs:
 
           # Copy dist folder for example pages to access the scripts
           mkdir -p _site/dist
-          cp -r dist/* _site/dist/
+          cp -r packages/css-if-polyfill/dist/* _site/dist/
 
           # Create index.html that lists all examples
           cat > _site/index.html << 'EOF'
