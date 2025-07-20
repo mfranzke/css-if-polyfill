@@ -25,17 +25,20 @@ const process = require('node:process');
 	page.on('pageerror', (error) => console.error('PAGE ERROR:', error));
 
 	// Wait for benchmark to complete with increased timeout
-	await page.waitForFunction(() => {
-		const results = globalThis.performanceResults;
-		return (
-			results &&
-			typeof results.initTime === 'number' &&
-			typeof results.processTime === 'number' &&
-			typeof results.avgProcessTime === 'number'
-		);
-	}, {
-		timeout: 60_000
-	});
+	await page.waitForFunction(
+		() => {
+			const results = globalThis.performanceResults;
+			return (
+				results &&
+				typeof results.initTime === 'number' &&
+				typeof results.processTime === 'number' &&
+				typeof results.avgProcessTime === 'number'
+			);
+		},
+		{
+			timeout: 60_000
+		}
+	);
 	console.log('Performance results available');
 
 	// Get results
@@ -49,6 +52,7 @@ const process = require('node:process');
 		) {
 			throw new Error('Invalid performance results structure');
 		}
+
 		return results;
 	});
 
