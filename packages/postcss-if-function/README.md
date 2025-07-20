@@ -192,35 +192,37 @@ module.exports = {
 }
 ```
 
-### Complex Nested Conditions
+### Multiple Conditions
 
 ```css
 /* Input */
-.complex {
-	color: if(
-		media(max-width: 768px): if(
-				supports(color: lab(50% 20 -30)): lab(50% 20 -30) ; else: blue
-			)
-			; else: red
+.responsive {
+	padding: if(
+		media(width >= 1200px): 40px; media(width >= 768px): 30px;
+			media(width >= 480px): 20px; else: 15px
 	);
 }
 
 /* Output */
-.complex {
-	color: red;
+.responsive {
+	padding: 15px;
 }
 
-@media (max-width: 768px) {
-	.complex {
-		color: blue;
+@media (width >= 1200px) {
+	.responsive {
+		padding: 40px;
 	}
 }
 
-@media (max-width: 768px) {
-	@supports (color: lab(50% 20 -30)) {
-		.complex {
-			color: lab(50% 20 -30);
-		}
+@media (width >= 768px) {
+	.responsive {
+		padding: 30px;
+	}
+}
+
+@media (width >= 480px) {
+	.responsive {
+		padding: 20px;
 	}
 }
 ```
@@ -228,6 +230,7 @@ module.exports = {
 ## Limitations
 
 - **Style Functions Not Supported**: This plugin only transforms `media()` and `supports()` functions. For `style()` functions (which depend on runtime DOM state), use the [css-if-polyfill](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/css-if-polyfill/) runtime library
+- **Multiple Conditions Build-Time Support**: While multiple conditions work perfectly in the runtime polyfill, the PostCSS build-time transformation has limited support for complex multiple conditions syntax. For full multiple conditions support, use the runtime polyfill
 - **Static Analysis Only**: The plugin performs static analysis and cannot handle dynamically generated CSS
 - **PostCSS Compatibility**: Requires PostCSS 8.0.0 or higher
 

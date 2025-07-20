@@ -61,7 +61,7 @@ describe('postcss-if-function plugin', () => {
 		await run(input, expected);
 	});
 
-	it('should handle nested if() functions', async () => {
+	it('should handle multiple separate if() functions', async () => {
 		const input = `
 .nested {
   color: if(media(max-width: 768px): blue; else: red);

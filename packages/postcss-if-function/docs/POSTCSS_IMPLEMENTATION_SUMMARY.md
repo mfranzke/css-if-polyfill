@@ -90,8 +90,8 @@ const result = await postcss([
 
 ### **Advanced Features**
 
-- **Nested Conditions**: Handles complex nested if() structures
-- **Multiple Conditions**: Supports multiple if() functions per property
+- **Multiple Conditions**: Supports multiple conditions within a single if() function
+- **Separate if() Functions**: Handles multiple if() functions per CSS rule
 - **Error Handling**: Graceful handling of malformed CSS
 - **Statistics Logging**: Optional transformation statistics output
 - **Preservation Options**: Can preserve original CSS alongside transformations
