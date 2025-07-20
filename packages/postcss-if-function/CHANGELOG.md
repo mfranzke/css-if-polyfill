@@ -1,5 +1,13 @@
 # postcss-if-function
 
+## 0.1.2
+
+### Patch Changes
+
+- b7f8df7: fix: ensure that multiple if() conditions are handled correctly
+- Updated dependencies [b7f8df7]
+    - css-if-polyfill@0.1.3
+
 ## 0.1.1
 
 ### Patch Changes
