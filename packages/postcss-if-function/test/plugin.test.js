@@ -153,23 +153,21 @@ describe('postcss-if-function plugin', () => {
   .example { color: blue; }
 }`;
 
-		// Capture console output
-		const consoleLogs = [];
-		const originalLog = console.log;
-		console.log = (...args) => {
-			consoleLogs.push(args.join(' '));
-		};
+		// Spy on console.log
+		const logSpy = vi.spyOn(console, 'log');
 
 		await run(input, expected, { logTransformations: true });
 
-		console.log = originalLog;
-
-		expect(consoleLogs).toContain(
+		expect(logSpy).toHaveBeenCalledWith(
 			'[postcss-if-function] Transformation statistics:'
 		);
 		expect(
-			consoleLogs.some((log) => log.includes('Total transformations: 1'))
+			logSpy.mock.calls.some((call) =>
+				call[0].includes('Total transformations: 1')
+			)
 		).toBe(true);
+
+		logSpy.mockRestore();
 	});
 
 	it('should handle malformed CSS gracefully', async () => {
