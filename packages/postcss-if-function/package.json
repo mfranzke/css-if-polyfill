@@ -1,6 +1,6 @@
 {
   "name": "postcss-if-function",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "description": "PostCSS plugin for transforming CSS if() functions to native CSS",
   "license": "MIT",
@@ -48,7 +48,7 @@
     "postcss": "^8.0.0"
   },
   "dependencies": {
-    "css-if-polyfill": "0.1.0"
+    "css-if-polyfill": "0.1.1"
   },
   "devDependencies": {
     "microbundle": "^0.15.1",
