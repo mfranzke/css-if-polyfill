@@ -100,7 +100,7 @@ import { processCSSText } from "css-if-polyfill";
 
 const css = ".button { color: if(media(width >= 768px): blue; else: red); }";
 const processed = processCSSText(css);
-console.log(processed); // .button { color: blue; } (if screen >= 768px)
+console.log(processed); // .button { color: red; } @media(width >= 768px) { .button { color: blue; } }
 ```
 
 ## CSS if() Syntax
@@ -141,19 +141,19 @@ Use if() functions within CSS shorthand properties:
 	border: if(
 			style(--scheme: ice): 3px; style(--scheme: fire): 5px; else: 1px;
 		)
-		if(supports(border-style: dashed): dashed; else: solid;)
+		if(supports(border-style: dashed): dashed; else: solid)
 		if(
 			style(--scheme: ice): #0ea5e9; style(--scheme: fire): #f97316;
-				else: #6b7280;
+				else: #6b7280
 		);
 
 	/* Font shorthand with multiple conditions */
 	font:
 		if(
 				media(width >= 1200px): bold; media(width >= 768px): 600;
-					else: normal;
+					else: normal
 			)
-			if(media(width >= 768px): 18px; else: 14px;) / 1.5 system-ui,
+			if(media(width >= 768px): 18px; else: 14px) / 1.5 system-ui,
 		sans-serif;
 }
 ```
@@ -165,7 +165,7 @@ Use if() functions within CSS shorthand properties:
 ```css
 .responsive-text {
 	font-size: if(
-		media(width >= 1200px): 24px; media(width >= 768px): 18px; else: 16px;
+		media(width >= 1200px): 24px; media(width >= 768px): 18px; else: 16px
 	);
 }
 ```
@@ -176,7 +176,7 @@ Use if() functions within CSS shorthand properties:
 .modern-layout {
 	display: if(
 		supports(display: subgrid): subgrid; supports(display: grid): grid;
-			supports(display: flex): flex; else: block;
+			supports(display: flex): flex; else: block
 	);
 }
 ```
@@ -187,7 +187,7 @@ Use if() functions within CSS shorthand properties:
 .theme-aware {
 	color: if(
 		style(--theme: dark): white; style(--theme: light): black;
-			style(--theme: blue): #1e40af; else: #374151;
+			style(--theme: blue): #1e40af; else: #374151
 	);
 }
 ```
