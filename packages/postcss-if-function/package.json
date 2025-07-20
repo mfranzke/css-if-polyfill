@@ -37,6 +37,7 @@
   "scripts": {
     "build": "microbundle",
     "dev": "microbundle watch",
+    "postbuild": "cp dist/index.d.ts dist/index.d.cts",
     "prepublishOnly": "npm run build",
     "pretest:vitest": "npm run build",
     "test": "npm-run-all --sequential test:*",
