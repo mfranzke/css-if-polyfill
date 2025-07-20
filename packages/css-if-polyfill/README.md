@@ -376,3 +376,8 @@ MIT License - see [LICENSE](LICENSE) file for details.
 - Pure JavaScript implementation with custom CSS parsing
 - Inspired by the CSS Working Group's conditional CSS proposals
 - Thanks to all contributors and testers
+
+## Related
+
+- [postcss-if-function](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/postcss-if-function/) - PostCSS plugin for build-time transformation
+- [CSS Conditional Rules](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_conditional_rules) - MDN documentation for @media and @supports
