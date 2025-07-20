@@ -11,7 +11,7 @@ This plugin is part of the [css-if-polyfill](https://github.com/mfranzke/css-if-
 ## Installation
 
 ```bash
-npm install postcss-if-function
+npm install postcss-if-function postcss
 ```
 
 ## Usage
