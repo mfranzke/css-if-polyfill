@@ -16,6 +16,7 @@
   "workspaces": [
     "packages/*"
   ],
+  "packageManager": "npm@11.4.2",
   "keywords": [
     "css",
     "polyfill",
@@ -65,6 +66,5 @@
   },
   "overrides": {
     "@eslint/plugin-kit": "0.3.3"
-  },
-  "packageManager": "npm@11.4.2"
+  }
 }
