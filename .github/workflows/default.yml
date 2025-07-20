@@ -63,7 +63,7 @@ jobs:
         run: npm ci
 
       - name: Run tests with coverage
-        run: npm run test:vitest -- --coverage --coverage.reporter lcov --coverage.reporter json
+        run: npm run test:vitest --workspaces -- --coverage --coverage.reporter lcov --coverage.reporter json
 
       - name: Upload coverage reports
         uses: actions/upload-artifact@v4
