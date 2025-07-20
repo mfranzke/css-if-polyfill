@@ -32,7 +32,7 @@ This is the main orchestrator workflow that runs analysis tasks in parallel, the
 
 **Stage 5: Release** (Conditional, requires all stages, main branch only)
 
-- **Release Management** - Calls `release.yml` (only for changeset/src/package.json changes)
+- **Release Management** - Calls `release.yml` (only for changeset/, src/ or package.json changes)
 
 **Benefits:**
 
@@ -117,7 +117,7 @@ _Note: Comprehensive linting has been moved to default.yml to avoid duplication_
 
 **Features:**
 
-- Automated CodeQL security scanning for JavaScript
+- Automated CodeQL security scanning for JavaScript and actions
 - Detects potential security vulnerabilities
 - Integrates with GitHub Security Advisory database
 - Runs weekly on schedule for continuous monitoring
