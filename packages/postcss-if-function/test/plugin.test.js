@@ -103,26 +103,15 @@ describe('postcss-if-function plugin', () => {
 	);
 }`;
 
-		const expected = `.responsive {
-	padding: 15px;
-}
-
-@media (width >= 1200px) {
-	.responsive {
-		padding: 40px;
-	}
-}
-
-@media (width >= 768px) {
-	.responsive {
-		padding: 30px;
-	}
-}
-
+		const expected = `.responsive { padding: 15px; }
 @media (width >= 480px) {
-	.responsive {
-		padding: 20px;
-	}
+  .responsive { padding: 20px; }
+}
+@media (width >= 768px) {
+  .responsive { padding: 30px; }
+}
+@media (width >= 1200px) {
+  .responsive { padding: 40px; }
 }`;
 
 		await run(input, expected);

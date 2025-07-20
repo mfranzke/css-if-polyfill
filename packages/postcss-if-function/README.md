@@ -206,9 +206,9 @@ module.exports = {
 	padding: 15px;
 }
 
-@media (width >= 1200px) {
+@media (width >= 480px) {
 	.responsive {
-		padding: 40px;
+		padding: 20px;
 	}
 }
 
@@ -218,9 +218,9 @@ module.exports = {
 	}
 }
 
-@media (width >= 480px) {
+@media (width >= 1200px) {
 	.responsive {
-		padding: 20px;
+		padding: 40px;
 	}
 }
 ```

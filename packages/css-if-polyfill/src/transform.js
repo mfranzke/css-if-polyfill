@@ -184,11 +184,12 @@ const extractIfFunctions = (cssText) => {
 };
 
 /**
- * Parse if() function content
+ * Parse if() function content - supports both single conditions and multiple chained conditions
  */
 const parseIfFunction = (content) => {
-	// Find the colon that separates condition from values
-	let colonIndex = -1;
+	// Split content by semicolons, but respect parentheses and quotes
+	const segments = [];
+	let currentSegment = '';
 	let parenDepth = 0;
 	let inQuotes = false;
 	let quoteChar = '';
@@ -213,44 +214,111 @@ const parseIfFunction = (content) => {
 				parenDepth++;
 			} else if (char === ')') {
 				parenDepth--;
-			} else if (char === ':' && parenDepth === 0) {
-				colonIndex = i;
-				break;
+			} else if (char === ';' && parenDepth === 0) {
+				// End of segment
+				segments.push(currentSegment.trim());
+				currentSegment = '';
+				continue;
 			}
 		}
+
+		currentSegment += char;
 	}
 
-	if (colonIndex === -1) {
-		throw new Error('Invalid if() function: missing colon');
+	// Add the last segment
+	if (currentSegment.trim()) {
+		segments.push(currentSegment.trim());
 	}
 
-	const condition = content.slice(0, colonIndex).trim();
-	const valuesString = content.slice(colonIndex + 1).trim();
+	// Parse segments into conditions and values
+	const conditions = [];
+	let elseValue = null;
 
-	// Parse values (value; else: fallback)
-	const elseMatch = valuesString.match(/^(.*?);?\s*else:\s*(.*)$/);
+	for (const segment of segments) {
+		// Check if this is an else clause
+		const elseMatch = segment.match(/^else:\s*(.*)$/);
+		if (elseMatch) {
+			elseValue = elseMatch[1].trim();
+			continue;
+		}
 
-	if (!elseMatch) {
+		// Parse condition: value format
+		let colonIndex = -1;
+		let parenDepth = 0;
+		let inQuotes = false;
+		let quoteChar = '';
+
+		// Find the colon that's outside of parentheses and quotes
+		for (let i = 0; i < segment.length; i++) {
+			const char = segment[i];
+			const previousChar = i > 0 ? segment[i - 1] : '';
+
+			// Handle quotes
+			if ((char === '"' || char === "'") && previousChar !== '\\') {
+				if (!inQuotes) {
+					inQuotes = true;
+					quoteChar = char;
+				} else if (char === quoteChar) {
+					inQuotes = false;
+					quoteChar = '';
+				}
+			}
+
+			if (!inQuotes) {
+				if (char === '(') {
+					parenDepth++;
+				} else if (char === ')') {
+					parenDepth--;
+				} else if (char === ':' && parenDepth === 0) {
+					colonIndex = i;
+					break;
+				}
+			}
+		}
+
+		if (colonIndex === -1) {
+			throw new Error('Invalid if() function: missing colon in segment');
+		}
+
+		const conditionPart = segment.slice(0, colonIndex).trim();
+		const valuePart = segment.slice(colonIndex + 1).trim();
+
+		// Parse the condition type and expression
+		const conditionMatch = conditionPart.match(
+			/^(style|media|supports)\((.*)\)$/
+		);
+		if (!conditionMatch) {
+			throw new Error(
+				`Invalid if() function: unknown condition type in "${conditionPart}"`
+			);
+		}
+
+		conditions.push({
+			conditionType: conditionMatch[1],
+			conditionExpression: conditionMatch[2],
+			value: valuePart
+		});
+	}
+
+	if (!elseValue) {
 		throw new Error('Invalid if() function: missing else clause');
 	}
 
-	const trueValue = elseMatch[1].trim();
-	const falseValue = elseMatch[2].trim();
-
-	// Parse condition
-	const conditionMatch = condition.match(/^(style|media|supports)\((.*)\)$/);
-	if (!conditionMatch) {
-		throw new Error('Invalid if() function: unknown condition type');
+	// For backward compatibility, if there's only one condition, return the old format
+	if (conditions.length === 1) {
+		return {
+			conditionType: conditions[0].conditionType,
+			conditionExpression: conditions[0].conditionExpression,
+			trueValue: conditions[0].value,
+			falseValue: elseValue
+		};
 	}
 
-	const conditionType = conditionMatch[1];
-	const conditionExpression = conditionMatch[2];
-
+	// For multiple conditions, return the new format
 	return {
-		conditionType,
-		conditionExpression,
-		trueValue,
-		falseValue
+		conditions,
+		falseValue: elseValue,
+		isMultipleConditions: true
 	};
 };
 
@@ -276,6 +344,58 @@ const transformPropertyToNative = (selector, property, value) => {
 		try {
 			const parsed = parseIfFunction(ifFunc.content);
 
+			// Handle multiple conditions format
+			if (parsed.isMultipleConditions) {
+				// Check if any condition uses style() - if so, needs runtime processing
+				const hasStyleCondition = parsed.conditions.some(
+					(condition) => condition.conditionType === 'style'
+				);
+
+				if (hasStyleCondition) {
+					// If any condition uses style(), fall back to runtime processing
+					runtimeRules.push({
+						selector,
+						property,
+						value,
+						condition: parsed
+					});
+					continue;
+				}
+
+				// All conditions are media() or supports() - can transform to native CSS
+				// Create fallback rule first
+				const fallbackValue = value.replace(
+					ifFunc.fullFunction,
+					parsed.falseValue
+				);
+				nativeRules.push({
+					condition: null, // No condition = fallback
+					rule: `${selector} { ${property}: ${fallbackValue}; }`
+				});
+
+				// Create conditional rules for each condition (in reverse order for CSS cascade)
+				const { conditions } = parsed;
+				for (let i = conditions.length - 1; i >= 0; i--) {
+					const condition = conditions[i];
+					const nativeCondition =
+						condition.conditionType === 'media'
+							? `@media (${condition.conditionExpression})`
+							: `@supports (${condition.conditionExpression})`;
+
+					const conditionalValue = value.replace(
+						ifFunc.fullFunction,
+						condition.value
+					);
+					nativeRules.push({
+						condition: nativeCondition,
+						rule: `${selector} { ${property}: ${conditionalValue}; }`
+					});
+				}
+
+				continue;
+			}
+
+			// Handle single condition format (backward compatibility)
 			if (parsed.conditionType === 'style') {
 				// Style() conditions need runtime processing
 				runtimeRules.push({
@@ -284,33 +404,34 @@ const transformPropertyToNative = (selector, property, value) => {
 					value,
 					condition: parsed
 				});
-			} else {
-				// Media() and supports() can be transformed to native CSS
-				const nativeCondition =
-					parsed.conditionType === 'media'
-						? `@media (${parsed.conditionExpression})`
-						: `@supports (${parsed.conditionExpression})`;
-
-				// Create conditional rule with true value
-				const trueValue = value.replace(
-					ifFunc.fullFunction,
-					parsed.trueValue
-				);
-				nativeRules.push({
-					condition: nativeCondition,
-					rule: `${selector} { ${property}: ${trueValue}; }`
-				});
-
-				// Create fallback rule with false value
-				const falseValue = value.replace(
-					ifFunc.fullFunction,
-					parsed.falseValue
-				);
-				nativeRules.push({
-					condition: null, // No condition = fallback
-					rule: `${selector} { ${property}: ${falseValue}; }`
-				});
+				continue;
 			}
+
+			// Media() and supports() can be transformed to native CSS
+			const nativeCondition =
+				parsed.conditionType === 'media'
+					? `@media (${parsed.conditionExpression})`
+					: `@supports (${parsed.conditionExpression})`;
+
+			// Create conditional rule with true value
+			const trueValue = value.replace(
+				ifFunc.fullFunction,
+				parsed.trueValue
+			);
+			nativeRules.push({
+				condition: nativeCondition,
+				rule: `${selector} { ${property}: ${trueValue}; }`
+			});
+
+			// Create fallback rule with false value
+			const falseValue = value.replace(
+				ifFunc.fullFunction,
+				parsed.falseValue
+			);
+			nativeRules.push({
+				condition: null, // No condition = fallback
+				rule: `${selector} { ${property}: ${falseValue}; }`
+			});
 		} catch (error) {
 			// If parsing fails, fall back to runtime processing
 			runtimeRules.push({
