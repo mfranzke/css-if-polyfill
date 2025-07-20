@@ -69,28 +69,13 @@ jobs:
 
   security:
     name: Security Analysis
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-
+    uses: ./.github/workflows/codeql.yml
+    secrets: inherit
     permissions:
       actions: read
       contents: read
       security-events: write
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
-        with:
-          languages: javascript
-
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v3
-
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+      packages: read
 
   # Stage 2: Build and comprehensive testing (requires all analysis to pass)
   ci:
