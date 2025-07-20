@@ -2,7 +2,7 @@
 
 [![MIT license](https://img.shields.io/npm/l/css-if-polyfill.svg "license badge")](https://opensource.org/licenses/mit-license.php)
 
-![Main pipeline](https://github.com/mfranzke/css-if-polyfill/actions/workflows/default.yml/badge.svg)
+[![Default CI/CD Pipeline](https://github.com/mfranzke/css-if-polyfill/actions/workflows/default.yml/badge.svg)](https://github.com/mfranzke/css-if-polyfill/actions/workflows/default.yml)
 [![Total downloads ~ Npmjs](https://img.shields.io/npm/dt/css-if-polyfill.svg "Count of total downloads – NPM")](https://npmjs.com/package/css-if-polyfill "CSS if() function polyfill – on NPM")
 [![jsDelivr CDN downloads](https://data.jsdelivr.com/v1/package/npm/css-if-polyfill/badge "Count of total downloads – jsDelivr")](https://www.jsdelivr.com/package/npm/css-if-polyfill "CSS if() function polyfill – on jsDelivr")
 
