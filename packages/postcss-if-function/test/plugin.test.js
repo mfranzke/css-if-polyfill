@@ -94,7 +94,7 @@ describe('postcss-if-function plugin', () => {
 		await run(input, expected);
 	});
 
-	it('should handle multiple concatenated if() functions', async () => {
+	it('should handle multiple if() conditions', async () => {
 		const input = `
 .responsive {
 	padding: if(
