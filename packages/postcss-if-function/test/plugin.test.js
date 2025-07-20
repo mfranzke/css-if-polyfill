@@ -63,18 +63,18 @@ describe('postcss-if-function plugin', () => {
 
 	it('should handle multiple separate if() functions', async () => {
 		const input = `
-.nested {
+.multiple {
   color: if(media(max-width: 768px): blue; else: red);
   background: if(supports(color: lab(50% 20 -30)): lab(50% 20 -30); else: transparent);
 }`;
 
-		const expected = `.nested { color: red; }
+		const expected = `.multiple { color: red; }
 @media (max-width: 768px) {
-  .nested { color: blue; }
+  .multiple { color: blue; }
 }
-.nested { background: transparent; }
+.multiple { background: transparent; }
 @supports (color: lab(50% 20 -30)) {
-  .nested { background: lab(50% 20 -30); }
+  .multiple { background: lab(50% 20 -30); }
 }`;
 
 		await run(input, expected);
