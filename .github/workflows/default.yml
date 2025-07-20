@@ -69,7 +69,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage-reports
-          path: coverage/
+          path: |
+            packages/css-if-polyfill/coverage/
+            packages/postcss-if-function/coverage/
           retention-days: 30
 
   security:
