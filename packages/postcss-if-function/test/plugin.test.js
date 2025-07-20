@@ -1,5 +1,5 @@
 import postcss from 'postcss';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { postcssIfFunction } from '../src/index.js';
 
 describe('postcss-if-function plugin', () => {
