@@ -41,15 +41,15 @@ console.log(result.css);
 ```css
 .example {
 	color: red;
-	font-size: 1rem;
 }
-
 @media (max-width: 768px) {
 	.example {
 		color: blue;
 	}
 }
-
+.example {
+	font-size: 1rem;
+}
 @supports (display: grid) {
 	.example {
 		font-size: 1.2rem;
@@ -164,7 +164,6 @@ module.exports = {
 .responsive {
 	width: 50%;
 }
-
 @media (max-width: 768px) {
 	.responsive {
 		width: 100%;
@@ -184,7 +183,6 @@ module.exports = {
 .grid {
 	display: block;
 }
-
 @supports (display: grid) {
 	.grid {
 		display: grid;
