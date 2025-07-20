@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+	<head>
+		<title>CSS if() Polyfill Performance Test</title>
+		<style>
+			/* Test styles with various if() conditions */
+			.test-element-1 {
+				color: if(media(min-width: 768px): blue; else: red);
+			}
+
+			.test-element-2 {
+				background: if(supports(display: grid): white; else: gray);
+			}
+
+			.test-element-3 {
+				font-size: if(style(--large): 18px; else: 14px);
+			}
+
+			.test-element-4 {
+				padding: if(media(max-width: 480px): 10px; else: 20px);
+			}
+
+			.test-element-5 {
+				margin: if(media(min-width: 1024px): 30px; else: 15px);
+			}
+
+			/* Multiple conditions */
+			.test-complex {
+				color: if(
+					media(min-width: 768px): blue; supports(color: red): red;
+						else: black
+				);
+				background: if(
+					media(orientation: landscape): white; else: lightgray
+				);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="test-element-1">Test 1</div>
+		<div class="test-element-2">Test 2</div>
+		<div class="test-element-3">Test 3</div>
+		<div class="test-element-4">Test 4</div>
+		<div class="test-element-5">Test 5</div>
+		<div class="test-complex">Complex Test</div>
+
+		<script src="../../packages/css-if-polyfill/dist/index.umd.js"></script>
+		<script>
+			console.log("Script starting...");
+
+			try {
+				console.log("Starting performance measurement...");
+
+				// Check if the polyfill is available
+				if (typeof cssIfPolyfill === "undefined") {
+					throw new Error("cssIfPolyfill is not available");
+				}
+
+				console.log(
+					"cssIfPolyfill available:",
+					Object.keys(cssIfPolyfill)
+				);
+
+				// Performance measurement
+				const startTime = performance.now();
+
+				cssIfPolyfill.init({ debug: true });
+
+				const endTime = performance.now();
+				const initTime = endTime - startTime;
+
+				// Test processing time
+				const testCSS = `
+	                      .performance-test {
+	                          color: if(media(min-width: 768px): blue; else: red);
+	                          background: if(supports(display: grid): white; else: gray);
+	                          font-size: if(style(--large): 18px; else: 14px);
+	                      }
+	                  `;
+
+				const processStart = performance.now();
+				for (let i = 0; i < 1000; i++) {
+					cssIfPolyfill.processCSSText(testCSS);
+				}
+				const processEnd = performance.now();
+				const processTime = processEnd - processStart;
+
+				// Report results
+				const results = {
+					initTime: initTime,
+					processTime: processTime,
+					avgProcessTime: processTime / 1000
+				};
+
+				console.log("Performance Results:", results);
+
+				// Make results available to test runner
+				window.performanceResults = results;
+			} catch (error) {
+				console.error("Benchmark failed:", error);
+				// Still set results so the test doesn't timeout
+				window.performanceResults = {
+					initTime: 0,
+					processTime: 0,
+					avgProcessTime: 0,
+					error: error.message
+				};
+			}
+		</script>
+	</body>
+</html>

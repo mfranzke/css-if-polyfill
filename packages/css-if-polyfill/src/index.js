@@ -7,7 +7,7 @@
 
 /* global document, CSS, Node, MutationObserver */
 
-import { buildTimeTransform, runtimeTransform } from './transform.js';
+import { runtimeTransform } from './transform.js';
 
 // Global state
 let polyfillOptions = {
@@ -485,7 +485,7 @@ const processCSSText = (cssText, options = {}, element = null) => {
 		let hasChanges = true;
 
 		// Keep processing until no more if() functions are found
-		// This handles nested if() functions and multiple if() in the same property
+		// This handles multiple if() functions in the same property value
 		while (hasChanges) {
 			hasChanges = false;
 			const ifFunctions = findIfFunctions(result);
@@ -812,22 +812,9 @@ if (globalThis.window !== undefined && typeof document !== 'undefined') {
 // Re-export build-time transformation
 export { buildTimeTransform } from './transform.js';
 export {
+	cleanupMediaQueryListeners,
+	hasNativeSupport,
 	init,
 	processCSSText,
-	hasNativeSupport,
-	refresh,
-	cleanupMediaQueryListeners
+	refresh
 };
-
-// Create the CSSIfPolyfill object with all the methods
-const CSSIfPolyfill = {
-	init,
-	processCSSText,
-	hasNativeSupport,
-	refresh,
-	cleanup: cleanupMediaQueryListeners,
-	buildTimeTransform
-};
-
-// Default export for backward compatibility
-export default CSSIfPolyfill;

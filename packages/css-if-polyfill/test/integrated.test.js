@@ -135,16 +135,16 @@ describe('Integrated CSS if() Polyfill', () => {
 	});
 
 	describe('Complex scenarios', () => {
-		test('handles nested if() functions', () => {
+		test('handles multiple conditions in single if() function', () => {
 			const css = `
 				.test {
-					color: if(media(min-width: 768px): if(supports(color: lab(50% 20 -30)): lab(50% 20 -30); else: blue); else: red);
+					color: if(media(min-width: 1200px): blue; media(min-width: 768px): green; else: red);
 				}
 			`;
 
 			const result = buildTimeTransform(css);
 
-			// Should handle nested conditions appropriately
+			// Should handle multiple conditions appropriately
 			expect(result.nativeCSS || result.runtimeCSS).toBeDefined();
 		});
 

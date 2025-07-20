@@ -241,7 +241,7 @@ export default {
 	"scripts": {
 		"analyze": "rollup-plugin-analyzer",
 		"size-check": "size-limit",
-		"perf-test": "lighthouse-ci"
+		"performance-test": "lighthouse-ci"
 	}
 }
 ```

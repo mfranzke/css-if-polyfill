@@ -30,7 +30,7 @@ jobs:
         run: npm ci
 
       - name: Run tests with coverage
-        run: npm run test:vitest -- --coverage --coverage.reporter lcov --coverage.reporter json
+        run: npm run test:vitest --workspaces -- --coverage --coverage.reporter lcov --coverage.reporter json
 
       - name: Check build
         run: npm run build
@@ -40,17 +40,18 @@ jobs:
 
       - name: Check bundle size
         run: |
-          npm run build
           echo "## Bundle Size Report" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          ls -lh dist/ >> $GITHUB_STEP_SUMMARY
+          ls -lh packages/css-if-polyfill/dist >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v4
         with:
           name: code-coverage-report
-          path: coverage/
+          path: |
+            packages/css-if-polyfill/coverage/
+            packages/postcss-if-function/coverage/
           retention-days: 30
 
   security:

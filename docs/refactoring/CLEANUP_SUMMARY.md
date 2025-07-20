@@ -42,6 +42,8 @@
 
 ```text
 css-if-polyfill/
+├── bin/
+│   ├── cli.js             # Build-time transformation CLI
 ├── src/
 │   ├── index.js           # Main polyfill with hybrid processing
 │   ├── transform.js       # Unified transformation engine
@@ -57,7 +59,6 @@ css-if-polyfill/
 ├── docs/
 │   ├── API.md             # Complete API documentation
 │   └── refactoring/       # Integration documentation
-├── cli.js                 # Build-time transformation CLI
 └── README.md              # Updated with v2.0 features
 ```
 

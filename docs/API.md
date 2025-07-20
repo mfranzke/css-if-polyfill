@@ -18,19 +18,19 @@ npm install css-if-polyfill
 ## ESM Import
 
 ```javascript
-import CSSIfPolyfill from "css-if-polyfill";
+import { init } from "css-if-polyfill";
 
 // Initialize the polyfill
-CSSIfPolyfill.init();
+init();
 ```
 
 ## CommonJS Require
 
 ```javascript
-const CSSIfPolyfill = require("css-if-polyfill");
+const { init } = require("css-if-polyfill");
 
 // Initialize the polyfill
-CSSIfPolyfill.init();
+init();
 ```
 
 ## API Reference
@@ -51,7 +51,7 @@ Initializes the CSS if() polyfill with optional configuration.
 **Example:**
 
 ```javascript
-CSSIfPolyfill.init({
+init({
 	debug: true,
 	useNativeTransform: true
 });
@@ -304,7 +304,8 @@ Use if() functions within complex CSS values:
 The polyfill includes comprehensive TypeScript definitions:
 
 ```typescript
-import CSSIfPolyfill, {
+import {
+	init,
 	buildTimeTransform,
 	type CssIfPolyfillOptions,
 	type TransformResult
@@ -315,7 +316,7 @@ const options: CssIfPolyfillOptions = {
 	useNativeTransform: true
 };
 
-CSSIfPolyfill.init(options);
+init(options);
 
 const result: TransformResult = buildTimeTransform(cssText);
 ```
@@ -336,15 +337,15 @@ Existing v1.x code continues to work without modifications:
 
 ```javascript
 // v1.x code - still works
-import CSSIfPolyfill from "css-if-polyfill";
-CSSIfPolyfill.init();
+import { init } from "css-if-polyfill";
+init();
 ```
 
 ### Opt-in to v2.0 Features
 
 ```javascript
 // Enable hybrid processing
-CSSIfPolyfill.init({ useNativeTransform: true });
+init({ useNativeTransform: true });
 
 // Use build-time transformation
 import { buildTimeTransform } from "css-if-polyfill";
