@@ -1,5 +1,6 @@
 # postcss-if-function
 
+![Main pipeline](https://github.com/mfranzke/css-if-polyfill/actions/workflows/default.yml/badge.svg)
 [![npm version](https://badge.fury.io/js/postcss-if-function.svg)](https://badge.fury.io/js/postcss-if-function)
 [![Build Status](https://github.com/mfranzke/css-if-polyfill/workflows/CI/badge.svg)](https://github.com/mfranzke/css-if-polyfill/actions)
 
