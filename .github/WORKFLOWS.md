@@ -117,7 +117,7 @@ _Note: Comprehensive linting has been moved to default.yml to avoid duplication_
 
 **Features:**
 
-- Automated CodeQL security scanning for JavaScript
+- Automated CodeQL security scanning for JavaScript and actions
 - Detects potential security vulnerabilities
 - Integrates with GitHub Security Advisory database
 - Runs weekly on schedule for continuous monitoring
