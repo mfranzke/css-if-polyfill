@@ -229,7 +229,7 @@ module.exports = {
 
 ## Limitations
 
-- **Style Functions Not Supported**: This plugin only transforms `media()` and `supports()` functions. For `style()` functions (which depend on runtime DOM state), use the [css-if-polyfill](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/css-if-polyfill/) runtime library
+- **Style Functions Not Supported**: This plugin only transforms `media()` and `supports()` functions. For `style()` functions (which depend on runtime DOM state), use the [css-if-polyfill](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/css-if-polyfill/) runtime (browser) library
 - **Static Analysis Only**: The plugin performs static analysis and cannot handle dynamically generated CSS
 - **PostCSS Compatibility**: Requires PostCSS 8.0.0 or higher
 
