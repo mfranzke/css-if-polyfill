@@ -121,4 +121,7 @@ jobs:
     uses: ./.github/workflows/release.yml
     secrets: inherit
     permissions:
-      contents: write
+      contents: write # to create release (changesets/action)
+      issues: write # to post issue comments (changesets/action)
+      pull-requests: write # to create pull request (changesets/action)
+      id-token: write # to use OpenID Connect token for provenance (changesets/action)
