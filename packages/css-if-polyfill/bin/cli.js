@@ -14,7 +14,7 @@ const help = `
 CSS if() Build-time Transformation CLI
 
 Usage:
-  npx css-if-transform <input.css> [output.css] [options]
+  npx css-if-polyfill <input.css> [output.css] [options]
   node bin/cli.js <input.css> [output.css] [options]
 
 Options:
@@ -23,9 +23,9 @@ Options:
   --help           Show this help message
 
 Examples:
-  npx css-if-transform input.css output.css
-  npx css-if-transform input.css output.css --minify --stats
-  npx css-if-transform input.css --stats  (outputs to stdout)
+  npx css-if-polyfill input.css output.css
+  npx css-if-polyfill input.css output.css --minify --stats
+  npx css-if-polyfill input.css --stats  (outputs to stdout)
 `;
 
 const parseArguments = () => {

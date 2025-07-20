@@ -13,7 +13,7 @@
   },
   "license": "MIT",
   "bin": {
-    "css-if-transform": "bin/cli.js"
+    "css-if-polyfill": "bin/cli.js"
   },
   "main": "dist/index.cjs",
   "types": "dist/index.d.ts",

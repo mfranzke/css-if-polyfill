@@ -45,7 +45,7 @@ The CSS if() polyfill has been successfully modernized and integrated with a hyb
 
 ### 3. Developer Experience
 
-- **CLI Tool**: `npx css-if-transform` for build-time processing
+- **CLI Tool**: `npx css-if-polyfill` for build-time processing
 - **Build Integration Ready**: PostCSS/Webpack plugin foundation
 - **Comprehensive Statistics**: Detailed transformation reporting
 - **Progressive Enhancement**: Gradual adoption path
@@ -112,7 +112,7 @@ The CSS if() polyfill has been successfully modernized and integrated with a hyb
 ### 1. Build-time Only (Optimal Performance)
 
 ```bash
-npx css-if-transform styles.css optimized.css --minify --stats
+npx css-if-polyfill styles.css optimized.css --minify --stats
 ```
 
 - **Use Case**: Static conditions only (`media()`, `supports()`)
@@ -195,7 +195,6 @@ CSSIfPolyfill.init();
 
 ### Immediate Opportunities
 
-- **PostCSS Plugin**: Official plugin for seamless build integration
 - **Webpack Loader**: Dedicated loader for automatic transformation
 - **Vite Plugin**: Integration with modern build tools
 - **Source Maps**: Debug support for transformed CSS

@@ -114,7 +114,7 @@
 ### 1. Build-time Only (Optimal Performance)
 
 ```bash
-npx css-if-transform input.css output.css --minify
+npx css-if-polyfill input.css output.css --minify
 ```
 
 ### 2. Hybrid Mode (Best Flexibility)
@@ -147,7 +147,6 @@ init();
 
 ### Immediate Enhancements
 
-- PostCSS plugin for seamless build tool integration
 - Webpack loader for automatic transformation
 - Source map support for debugging
 

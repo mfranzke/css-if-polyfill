@@ -166,7 +166,7 @@ console.log("Needs polyfill:", result.hasRuntimeRules);
 The package includes a command-line tool for build-time transformation:
 
 ```bash
-npx css-if-transform input.css output.css [options]
+npx css-if-polyfill input.css output.css [options]
 ```
 
 ### CLI Options
@@ -179,13 +179,13 @@ npx css-if-transform input.css output.css [options]
 
 ```bash
 # Basic transformation
-npx css-if-transform styles.css optimized.css
+npx css-if-polyfill styles.css optimized.css
 
 # With minification and statistics
-npx css-if-transform styles.css optimized.css --minify --stats
+npx css-if-polyfill styles.css optimized.css --minify --stats
 
 # Output to stdout with stats
-npx css-if-transform styles.css --stats
+npx css-if-polyfill styles.css --stats
 ```
 
 ## CSS Syntax

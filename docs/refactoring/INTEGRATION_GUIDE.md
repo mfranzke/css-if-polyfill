@@ -81,13 +81,13 @@ graph TD
 
 ```bash
 # Transform CSS file
-npx css-if-transform input.css output.css
+npx css-if-polyfill input.css output.css
 
 # With minification and stats
-npx css-if-transform input.css output.css --minify --stats
+npx css-if-polyfill input.css output.css --minify --stats
 
 # Output to stdout
-npx css-if-transform input.css --stats
+npx css-if-polyfill input.css --stats
 ```
 
 #### Programmatic Usage
@@ -229,7 +229,8 @@ module.exports = {
 								plugins: [
 									function cssIfTransform() {
 										return {
-											postcssPlugin: "css-if-transform",
+											postcssPlugin:
+												"postcss-if-function",
 											Once(root) {
 												const result =
 													buildTimeTransform(
@@ -260,7 +261,7 @@ import { buildTimeTransform } from "css-if-polyfill";
 export default {
 	plugins: [
 		{
-			name: "css-if-transform",
+			name: "css-if-polyfill",
 			transform(code, id) {
 				if (id.endsWith(".css")) {
 					const result = buildTimeTransform(code);
@@ -295,7 +296,6 @@ export default {
 
 ### Planned Enhancements
 
-- **PostCSS Plugin**: Official plugin for build tools
 - **Webpack Loader**: Dedicated webpack loader
 - **Source Maps**: Support for CSS source maps
 - **CSS Nesting**: Integration with CSS nesting proposals

@@ -53,7 +53,7 @@ npm install css-if-polyfill
 
 ```bash
 # Transform CSS during build
-npx css-if-transform input.css output.css --minify --stats
+npx css-if-polyfill input.css output.css --minify --stats
 ```
 
 ### Runtime Processing
