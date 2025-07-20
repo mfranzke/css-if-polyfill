@@ -49,15 +49,17 @@ function processMarkdownFile(filePath) {
 <!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory. To regenerate this documentation, run npm run build:docs -->
 
 **Input CSS:**
+
 \`\`\`css
 ${inputCSS}
 \`\`\`
 
 **Expected Output:**
+
 \`\`\`css
 ${expectedCSS}
 \`\`\`
-`.trimEnd();
+`;
 
 				modified = true;
 				return `<!-- FIXTURE: ${fixtureName} -->${newContent}
