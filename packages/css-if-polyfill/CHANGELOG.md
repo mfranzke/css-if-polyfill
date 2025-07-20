@@ -5,7 +5,7 @@
 ### Patch Changes
 
 - 9c6d05a: fix: several package metadata related issues
-  docs: corrected the package name
+- 588be15: docs: corrected the package name
 
 ## 0.1.1
 
