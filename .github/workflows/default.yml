@@ -1,0 +1,123 @@
+name: Default CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Stage 1: Parallel analysis jobs (no build required)
+  lint:
+    name: Lint & Code Style
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint code (xo), markdown (markdownlint), and package (publint)
+        run: npm run lint
+
+      - name: Check code style
+        run: npx --no prettier . --check
+
+  quality:
+    name: Code Quality Analysis
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Needed for quality analysis
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests with coverage
+        run: npm run test:vitest -- --coverage --coverage.reporter lcov --coverage.reporter json
+
+      - name: Upload coverage reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-reports
+          path: coverage/
+          retention-days: 30
+
+  security:
+    name: Security Analysis
+    uses: ./.github/workflows/codeql.yml
+    secrets: inherit
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+      packages: read
+
+  # Stage 2: Build and comprehensive testing (requires all analysis to pass)
+  ci:
+    name: CI Tests & Build
+    needs: [lint, quality, security]
+    uses: ./.github/workflows/ci.yml
+    secrets: inherit
+    permissions:
+      contents: read
+
+  # Stage 3: Performance testing (runs for all workflows, but performance.yml has its own path filtering)
+  performance:
+    name: Performance Tests
+    needs: ci
+    uses: ./.github/workflows/performance.yml
+    secrets: inherit
+    permissions:
+      contents: read
+      pull-requests: write
+
+  # Stage 4: Deploy to GitHub Pages (main branch only, requires all previous stages)
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: [ci, performance]
+    if: always() && needs.ci.result == 'success' && (needs.performance.result == 'success' || needs.performance.result == 'skipped') && github.ref == 'refs/heads/main' && github.event_name == 'push'
+    uses: ./.github/workflows/deploy-pages.yml
+    secrets: inherit
+    permissions:
+      pages: write
+      id-token: write
+
+  # Stage 5: Release (main branch only, requires all checks to pass)
+  release:
+    name: Release Management
+    needs: [ci, performance, deploy]
+    if: always() && needs.ci.result == 'success' && (needs.performance.result == 'success' || needs.performance.result == 'skipped') && (needs.deploy.result == 'success' || needs.deploy.result == 'skipped') && github.ref == 'refs/heads/main' && github.event_name == 'push'
+    uses: ./.github/workflows/release.yml
+    secrets: inherit
+    permissions:
+      contents: write
