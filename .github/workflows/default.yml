@@ -135,3 +135,5 @@ jobs:
     if: always() && needs.ci.result == 'success' && (needs.performance.result == 'success' || needs.performance.result == 'skipped') && (needs.deploy.result == 'success' || needs.deploy.result == 'skipped') && github.ref == 'refs/heads/main' && github.event_name == 'push' && (contains(github.event.head_commit.modified, '.changeset/') || contains(github.event.head_commit.modified, 'src/') || contains(github.event.head_commit.modified, 'package.json'))
     uses: ./.github/workflows/release.yml
     secrets: inherit
+    permissions:
+      contents: write
