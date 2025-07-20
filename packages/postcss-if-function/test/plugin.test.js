@@ -94,6 +94,40 @@ describe('postcss-if-function plugin', () => {
 		await run(input, expected);
 	});
 
+	it('should handle multiple concatenated if() functions', async () => {
+		const input = `
+.responsive {
+	padding: if(
+		media(width >= 1200px): 40px; media(width >= 768px): 30px;
+			media(width >= 480px): 20px; else: 15px
+	);
+}`;
+
+		const expected = `.responsive {
+	padding: 15px;
+}
+
+@media (width >= 1200px) {
+	.responsive {
+		padding: 40px;
+	}
+}
+
+@media (width >= 768px) {
+	.responsive {
+		padding: 30px;
+	}
+}
+
+@media (width >= 480px) {
+	.responsive {
+		padding: 20px;
+	}
+}`;
+
+		await run(input, expected);
+	});
+
 	it('should handle CSS that does not contain if() functions', async () => {
 		const input = `
 .normal {
