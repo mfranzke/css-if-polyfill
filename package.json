@@ -1,5 +1,6 @@
 {
   "name": "css-if-polyfill-monorepo",
+  "version": "",
   "type": "module",
   "description": "A JavaScript polyfill and PostCSS plugin for CSS if() functionality with style(), media(), and supports() functions",
   "repository": {
