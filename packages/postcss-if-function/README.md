@@ -242,7 +242,7 @@ For complete CSS `if()` support including `style()` functions, combine this plug
 
 ```html
 <!-- For style() functions only -->
-<script src="https://unpkg.com/css-if-polyfill"></script>
+<script src="https://cdn.jsdelivr.net/npm/css-if-polyfill/dist/index.modern.js"></script>
 ```
 
 ## Development
