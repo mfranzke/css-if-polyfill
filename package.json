@@ -91,5 +91,6 @@
     "@eslint/plugin-kit": "0.3.3"
   },
   "source": "src/index.js",
-  "umd:main": "dist/index.umd.js"
+  "umd:main": "dist/index.umd.js",
+  "packageManager": "npm@11.4.2"
 }
