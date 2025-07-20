@@ -111,6 +111,7 @@ jobs:
     permissions:
       pages: write
       id-token: write
+      contents: read
 
   # Stage 5: Release (main branch only, requires all checks to pass)
   release:
