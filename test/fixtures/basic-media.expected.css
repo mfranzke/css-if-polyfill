@@ -1,8 +1,8 @@
-.responsive {
+.responsive1 {
 	width: 50%;
 }
 @media (max-width: 768px) {
-	.responsive {
+	.responsive1 {
 		width: 100%;
 	}
 }
