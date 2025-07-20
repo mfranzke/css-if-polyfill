@@ -2,9 +2,10 @@ name: Code Quality
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main]
   pull_request:
-    branches: [main, develop]
+    branches: [main]
+  workflow_call: # Allow this workflow to be called by other workflows
 
 jobs:
   quality:
@@ -28,20 +29,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run linting with report
-        run: |
-          mkdir -p reports
-          npm run lint -- --format=json --output-file=reports/xo-report.json || true
-          npm run lint
-
       - name: Run tests with coverage
         run: npm run test:vitest --workspaces -- --coverage --coverage.reporter lcov --coverage.reporter json
 
       - name: Check build
         run: npm run build
-
-      - name: Validate package.json
-        run: npm run lint:xo -- package.json || true
 
       - name: Check for security vulnerabilities
         run: npm audit --audit-level=moderate

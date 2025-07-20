@@ -31,7 +31,7 @@
     "codestyle": "prettier . --write",
     "dev": "npm run dev --workspaces",
     "lint": "npm-run-all --parallel lint:*",
-    "lint:markdownlint": "markdownlint -c .config/.markdown-lint.yml **/*.md",
+    "lint:markdownlint": "markdownlint --config .config/.markdown-lint.yml **/*.md",
     "lint:packages": "publint packages/css-if-polyfill && publint packages/postcss-if-function",
     "lint:xo": "xo",
     "prelint:packages": "npm run build",
