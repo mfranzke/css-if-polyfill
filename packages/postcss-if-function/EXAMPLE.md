@@ -1,6 +1,6 @@
-# PostCSS CSS If Plugin Example
+# PostCSS CSS `if()` Plugin Example
 
-This example demonstrates how to use the PostCSS CSS if plugin to transform CSS if() functions at build time.
+This example demonstrates how to use the PostCSS CSS `if()` plugin to transform CSS if() functions at build time.
 
 ## Setup
 
