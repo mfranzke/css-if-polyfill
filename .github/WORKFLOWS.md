@@ -4,65 +4,26 @@ This document describes all the GitHub Actions workflows and configurations set 
 
 ## Workflows Overview
 
-### 1. **Default CI/CD Pipeline** (`.github/workflows/default.yml`)
+### 1. **CI Workflow** (`.github/workflows/ci.yml`)
 
-**Triggers:** Push to main, Pull requests to main, Manual dispatch
-
-**Optimized Parallel Architecture:**
-
-This is the main orchestrator workflow that runs analysis tasks in parallel, then proceeds with build-dependent tasks sequentially:
-
-**Stage 1: Parallel Analysis** (All run simultaneously, no build required)
-
-- **Lint & Code Style** - XO linting, Markdown linting, Package checks by publint, Prettier checks
-- **Quality Analysis** - Test coverage, quality metrics (embedded quality checks)
-- **Security Analysis** - CodeQL security scanning (embedded security checks)
-
-**Stage 2: Build & Test** (Requires all Stage 1 to pass)
-
-- **CI Tests & Build** - Calls `ci.yml` for comprehensive testing and building
-
-**Stage 3: Performance Testing** (Conditional, requires build)
-
-- **Performance Tests** - Calls `performance.yml` (only when src/ files change)
-
-**Stage 4: Deploy** (Requires all previous stages, main branch only)
-
-- **GitHub Pages Deploy** - Calls `deploy-pages.yml`
-
-**Stage 5: Release** (Conditional, requires all stages, main branch only)
-
-- **Release Management** - Calls `release.yml` (only for changeset/src/package.json changes)
-
-**Benefits:**
-
-- **Parallel efficiency**: All analysis runs simultaneously (3x faster than sequential)
-- **Fast failure**: Any analysis failure stops the pipeline before expensive build operations
-- **Resource optimization**: Build-dependent tasks only run after all checks pass
-- **Conditional execution**: Performance tests only when source files change
-- **Gated releases**: Releases only happen after all quality gates pass
-
-### 2. **CI Workflow** (`.github/workflows/ci.yml`)
-
-**Triggers:** Push to main, Pull requests, Workflow calls from default.yml
+**Triggers:** Push to main/develop, Pull requests to main/develop
 
 **Jobs:**
 
 - **Test**: Runs on Node.js 22.x, 24.x
     - Checkout repository
     - Install dependencies (with npm cache)
-    - Run tests with Vitest
+    - Run linting with `xo`
+    - Run tests with Vite
     - Upload test coverage to Codecov
 - **Build**: Builds package and uploads artifacts
     - Build with `microbundle`
     - Upload `dist/` and `examples/` as artifacts
 - **Lint Markdown**: Validates all Markdown files
 
-_Note: Linting has been moved to default.yml to avoid duplication_
+### 2. **GitHub Pages Deployment** (`.github/workflows/deploy-pages.yml`)
 
-### 3. **GitHub Pages Deployment** (`.github/workflows/deploy-pages.yml`)
-
-**Triggers:** Push to main, Manual dispatch, Workflow calls from default.yml
+**Triggers:** Push to main, Manual dispatch
 
 **Features:**
 
@@ -76,7 +37,7 @@ _Note: Linting has been moved to default.yml to avoid duplication_
 
 **CDN Access:** `https://cdn.jsdelivr.net/npm/css-if-polyfill/dist/index.modern.js`
 
-### 4. **Release Workflow** (`.github/workflows/release.yml`)
+### 3. **Release Workflow** (`.github/workflows/release.yml`)
 
 **Triggers:** Git tags starting with `v*`
 
@@ -86,94 +47,33 @@ _Note: Linting has been moved to default.yml to avoid duplication_
 - **GitHub Release**: Creates GitHub release with changelog
 - **npm Publish**: Publishes to npm registry (requires `NPM_TOKEN` secret)
 
-### 5. **Code Quality** (`.github/workflows/quality.yml`)
+### 4. **Code Quality** (`.github/workflows/quality.yml`)
 
-**Triggers:** Push to main/develop, Pull requests, Workflow calls from default.yml
+**Triggers:** Push to main/develop, Pull requests
 
 **Features:**
 
-- Test coverage analysis with detailed reports
-- Bundle size analysis
+- Comprehensive linting with detailed reports
+- Test coverage analysis
+- Bundle size reporting
 - Security vulnerability scanning
+- CodeQL security analysis
 - Archives coverage reports as artifacts
 
-_Note: Comprehensive linting has been moved to default.yml to avoid duplication_
+### 5. **Documentation Updates** (`.github/workflows/docs.yml`)
+
+**Triggers:** Push to main (when src/, examples/, or README.md changes), Manual dispatch
+
+**Features:**
+
+- Auto-generates API documentation
+- Updates examples with latest syntax
+- Commits changes back to repository
+- Skips CI on documentation commits
 
 ### 6. **Performance Testing** (`.github/workflows/performance.yml`)
 
-**Triggers:** Push/PR to main (when src/ changes), Manual dispatch, Workflow calls from default.yml
-
-**Features:**
-
-- Runs performance benchmarks using Playwright
-- Tests initialization time and processing speed
-- Fails if performance thresholds are exceeded
-- Comments benchmark results on PRs
-- Uploads performance results as artifacts
-
-### 7. **Security Analysis** (`.github/workflows/codeql.yml`)
-
-**Triggers:** Push to main, Pull requests, Scheduled (weekly), Manual dispatch, Workflow calls from default.yml
-
-**Features:**
-
-- Automated CodeQL security scanning for JavaScript
-- Detects potential security vulnerabilities
-- Integrates with GitHub Security Advisory database
-- Runs weekly on schedule for continuous monitoring
-
-### 8. **Release Workflow** (`.github/workflows/release.yml`)
-
-**Triggers:** Push to main (changeset changes), Manual dispatch
-
-**Features:**
-
-- Integrated with Changesets for version management
-- Creates version PRs automatically
-- Publishes to npm with proper provenance
-- Generates GitHub releases with changelogs
-
-_Note: This workflow remains independent as it handles specialized release processes_
-
-## Workflow Architecture
-
-### Parallel + Sequential Design
-
-The new architecture optimizes for maximum efficiency with parallel analysis followed by sequential build-dependent tasks:
-
-```text
-Default.yml (Orchestrator)
-├── Stage 1: Parallel Analysis (simultaneous)
-│   ├── Lint & Code Style
-│   ├── Quality Analysis (with embedded testing)
-│   └── Security Analysis (CodeQL)
-├── Stage 2: CI Tests & Build (requires all Stage 1)
-├── Stage 3: Performance Tests (conditional, requires Stage 2)
-├── Stage 4: Deploy (main only, requires Stages 2-3)
-└── Stage 5: Release (conditional, requires all previous stages)
-```
-
-**Key Optimizations:**
-
-- **3x faster Stage 1**: Parallel execution instead of sequential
-- **Embedded quality checks**: Tests run within quality job to avoid duplication
-- **Embedded security**: CodeQL runs inline instead of calling separate workflow
-- **Smart dependencies**: Build only happens after all analysis passes
-
-### Standalone Workflows
-
-Some workflows remain independent for specific use cases:
-
-- **Release** (`release.yml`) - Handles changesets and publishing (now also integrated into default.yml)
-- **Individual workflows** - Can still be triggered independently for debugging
-
-### Removed Duplication
-
-- **Linting**: Centralized in default.yml Stage 1
-- **Setup/Dependencies**: Managed per workflow but coordinated
-- **Build**: Streamlined through CI workflow
-- **Security**: Dedicated stage in pipeline
-- **Changeset workflow**: Removed duplicate `changeset.yml` (functionality preserved in `release.yml`)
+**Triggers:** Push/PR to main (when src/ changes), Manual dispatch
 
 **Features:**
 

@@ -10,7 +10,6 @@ on:
     paths:
       - "src/**"
   workflow_dispatch:
-  workflow_call: # Allow this workflow to be called by other workflows
 
 jobs:
   performance:

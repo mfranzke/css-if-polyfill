@@ -28,7 +28,7 @@ The changeset will be saved in `.changeset/` and should be committed with your c
 
 ### 2. Version PR Creation
 
-When you push changesets to the `main` branch, the **Release workflow** (`.github/workflows/release.yml`) will:
+When you push changesets to the `main` branch, the **Changeset workflow** (`.github/workflows/changeset.yml`) will:
 
 - Create or update a "Version Packages" PR
 - This PR will contain version bumps and updated CHANGELOG.md
