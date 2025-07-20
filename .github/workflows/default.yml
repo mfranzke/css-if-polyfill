@@ -91,11 +91,10 @@ jobs:
     permissions:
       contents: read
 
-  # Stage 3: Performance testing (conditional, requires build)
+  # Stage 3: Performance testing (runs for all workflows, but performance.yml has its own path filtering)
   performance:
     name: Performance Tests
     needs: ci
-    if: (github.event.head_commit && contains(github.event.head_commit.modified, 'src/')) || github.event_name == 'pull_request'
     uses: ./.github/workflows/performance.yml
     secrets: inherit
     permissions:
@@ -113,11 +112,11 @@ jobs:
       pages: write
       id-token: write
 
-  # Stage 5: Release (main branch only, requires all checks to pass, only for changeset-related changes)
+  # Stage 5: Release (main branch only, requires all checks to pass)
   release:
     name: Release Management
     needs: [ci, performance, deploy]
-    if: always() && needs.ci.result == 'success' && (needs.performance.result == 'success' || needs.performance.result == 'skipped') && (needs.deploy.result == 'success' || needs.deploy.result == 'skipped') && github.ref == 'refs/heads/main' && github.event_name == 'push' && (contains(github.event.head_commit.modified, '.changeset/') || contains(github.event.head_commit.modified, 'src/') || contains(github.event.head_commit.modified, 'package.json'))
+    if: always() && needs.ci.result == 'success' && (needs.performance.result == 'success' || needs.performance.result == 'skipped') && (needs.deploy.result == 'success' || needs.deploy.result == 'skipped') && github.ref == 'refs/heads/main' && github.event_name == 'push'
     uses: ./.github/workflows/release.yml
     secrets: inherit
     permissions:
