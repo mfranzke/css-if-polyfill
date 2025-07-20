@@ -63,7 +63,6 @@ jobs:
           # this expects you to have a script called changeset:release which does a build for your packages and calls changeset publish
           publish: npm run changeset:release
           commit: "chore: version packages" # we need to fulfill commitlint based rules
-          title: "chore: version packages"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
