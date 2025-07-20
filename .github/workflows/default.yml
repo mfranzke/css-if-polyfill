@@ -103,6 +103,8 @@ jobs:
     needs: [lint, quality, security]
     uses: ./.github/workflows/ci.yml
     secrets: inherit
+    permissions:
+      contents: read
 
   # Stage 3: Performance testing (conditional, requires build)
   performance:
