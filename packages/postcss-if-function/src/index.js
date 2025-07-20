@@ -7,8 +7,8 @@
  * @example
  * // Input CSS:
  * .example {
- *   color: if(media(max-width: 768px), blue, red);
- *   font-size: if(supports(display: grid), 1.2rem, 1rem);
+ *   color: if(media(max-width: 768px): blue; else: red);
+ *   font-size: if(supports(display: grid): 1.2rem; else: 1rem);
  * }
  *
  * // Output CSS:

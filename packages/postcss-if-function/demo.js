@@ -1,14 +1,14 @@
 import postcss from 'postcss';
-import postcssCssIf from './src/index.js';
+import { postcsscssif } from './src/index.js';
 
 const css = `
 .example {
-  color: if(media(max-width: 768px), blue, red);
-  font-size: if(supports(display: grid), 1.2rem, 1rem);
+  color: if(media(max-width: 768px): blue; else: red);
+  font-size: if(supports(display: grid): 1.2rem; else: 1rem);
 }
 
 .card {
-  background: if(media(prefers-color-scheme: dark), #333, #fff);
+  background: if(media(prefers-color-scheme: dark): #333; else: #fff);
 }
 `;
 
@@ -17,7 +17,7 @@ async function demo() {
 	console.log(css);
 
 	const result = await postcss([
-		postcssCssIf({
+		postcsscssif({
 			logTransformations: true
 		})
 	]).process(css, { from: undefined });

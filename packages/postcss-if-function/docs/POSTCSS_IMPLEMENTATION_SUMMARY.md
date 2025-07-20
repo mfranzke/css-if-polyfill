@@ -62,8 +62,8 @@ const result = await postcss([
 
 ```css
 .example {
-	color: if(media(max-width: 768px), blue, red);
-	font-size: if(supports(display: grid), 1.2rem, 1rem);
+	color: if(media(max-width: 768px): blue; else: red);
+	font-size: if(supports(display: grid): 1.2rem; else: 1rem);
 }
 ```
 
@@ -136,8 +136,8 @@ Perfect for media() and supports() conditions that can be statically analyzed:
 ```css
 /* Build-time transformation */
 .responsive {
-	width: if(media(max-width: 768px), 100%, 50%);
-	display: if(supports(display: grid), grid, flex);
+	width: if(media(max-width: 768px): 100%; else: 50%);
+	display: if(supports(display: grid): grid; else: flex);
 }
 ```
 
@@ -148,8 +148,8 @@ For style() conditions that depend on runtime state:
 ```css
 /* Runtime processing */
 .dynamic {
-	color: if(style(--theme: dark), white, black);
-	font-size: if(style(--large), 1.5rem, 1rem);
+	color: if(style(--theme: dark): white; else: black);
+	font-size: if(style(--large): 1.5rem; else: 1rem);
 }
 ```
 
@@ -160,10 +160,10 @@ Use PostCSS for static conditions + runtime polyfill for dynamic ones:
 ```css
 .optimized {
 	/* Static - handled by PostCSS */
-	padding: if(media(max-width: 768px), 1rem, 2rem);
+	padding: if(media(max-width: 768px): 1rem; else: 2rem);
 
 	/* Dynamic - handled by runtime polyfill */
-	background: if(style(--dark-mode), #333, #fff);
+	background: if(style(--dark-mode): #333; else: #fff);
 }
 ```
 

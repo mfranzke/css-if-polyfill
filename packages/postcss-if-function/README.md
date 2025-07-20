@@ -24,8 +24,8 @@ import postcssCssIf from "postcss-if-function";
 
 const css = `
 .example {
-  color: if(media(max-width: 768px), blue, red);
-  font-size: if(supports(display: grid), 1.2rem, 1rem);
+  color: if(media(max-width: 768px): blue; else: red);
+  font-size: if(supports(display: grid): 1.2rem; else: 1rem);
 }
 `;
 
@@ -157,7 +157,7 @@ module.exports = {
 ```css
 /* Input */
 .responsive {
-	width: if(media(max-width: 768px), 100%, 50%);
+	width: if(media(max-width: 768px): 100%; else: 50%);
 }
 
 /* Output */
@@ -177,7 +177,7 @@ module.exports = {
 ```css
 /* Input */
 .grid {
-	display: if(supports(display: grid), grid, block);
+	display: if(supports(display: grid): grid; else: block);
 }
 
 /* Output */
@@ -198,9 +198,10 @@ module.exports = {
 /* Input */
 .complex {
 	color: if(
-		media(max-width: 768px),
-		if(supports(color: lab(50% 20 -30)), lab(50% 20 -30), blue),
-		red
+		media(max-width: 768px): if(
+				supports(color: lab(50% 20 -30)): lab(50% 20 -30) ; else: blue
+			)
+			; else: red
 	);
 }
 
