@@ -27,7 +27,13 @@ export type PluginOptions = {
  * @param {PluginOptions} [options={}] - Plugin configuration options
  * @returns {Object} PostCSS plugin
  */
-export function postcsscssif(options?: PluginOptions): Record<string, unknown>;
-export namespace postcsscssif {
+export function postcssIfFunction(
+	options?: PluginOptions
+): Record<string, unknown>;
+export namespace postcssIfFunction {
 	const postcss: boolean;
 }
+
+// Default export
+declare const _default: typeof postcssIfFunction;
+export default _default;

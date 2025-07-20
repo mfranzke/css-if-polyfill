@@ -1,12 +1,15 @@
 import postcss from 'postcss';
 import { describe, expect, it } from 'vitest';
-import { postcsscssif as postcssCssIf } from '../src/index.js';
+import { postcssIfFunction } from '../src/index.js';
 
 describe('postcss-if-function plugin', () => {
 	async function run(input, output, options = {}) {
-		const result = await postcss([postcssCssIf(options)]).process(input, {
-			from: undefined
-		});
+		const result = await postcss([postcssIfFunction(options)]).process(
+			input,
+			{
+				from: undefined
+			}
+		);
 		expect(result.css).toBe(output);
 		expect(result.warnings()).toHaveLength(0);
 	}
@@ -176,7 +179,7 @@ describe('postcss-if-function plugin', () => {
 }`;
 
 		// Should not throw an error, but may not transform properly
-		const result = await postcss([postcssCssIf()]).process(input, {
+		const result = await postcss([postcssIfFunction()]).process(input, {
 			from: undefined
 		});
 

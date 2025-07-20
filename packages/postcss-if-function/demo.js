@@ -1,5 +1,5 @@
 import postcss from 'postcss';
-import { postcsscssif } from './src/index.js';
+import { postcssIfFunction } from './src/index.js';
 
 const css = `
 .example {
@@ -17,7 +17,7 @@ async function demo() {
 	console.log(css);
 
 	const result = await postcss([
-		postcsscssif({
+		postcssIfFunction({
 			logTransformations: true
 		})
 	]).process(css, { from: undefined });

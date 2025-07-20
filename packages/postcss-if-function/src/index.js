@@ -50,7 +50,7 @@ const PLUGIN_NAME = 'postcss-if-function';
  * @param {PluginOptions} [options={}] - Plugin configuration options
  * @returns {Object} PostCSS plugin
  */
-function postcsscssif(options = {}) {
+function postcssIfFunction(options = {}) {
 	const {
 		preserveOriginal: _preserveOriginal = false,
 		logTransformations = false,
@@ -112,6 +112,7 @@ function postcsscssif(options = {}) {
 	};
 }
 
-postcsscssif.postcss = true;
+postcssIfFunction.postcss = true;
 
-export { postcsscssif };
+export { postcssIfFunction };
+export default postcssIfFunction;
