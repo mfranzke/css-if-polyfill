@@ -1,0 +1,16 @@
+/* Header styles */
+.header {
+	background: blue;
+}
+.conditional {
+	color: blue;
+}
+@media (max-width: 768px) {
+	.conditional {
+		color: red;
+	}
+}
+/* Footer styles */
+.footer {
+	background: gray;
+}

@@ -1,5 +1,6 @@
 import postcss from 'postcss';
 import { describe, expect, it, vi } from 'vitest';
+import { loadFixture } from '../../../test/fixture-utils.js';
 import { postcssIfFunction } from '../src/index.js';
 
 describe('postcss-if-function plugin', () => {
@@ -15,166 +16,49 @@ describe('postcss-if-function plugin', () => {
 	}
 
 	it('should transform media() functions to @media rules', async () => {
-		const input = `
-.example {
-  color: if(media(max-width: 768px): blue; else: red);
-}`;
-
-		const expected = `.example { color: red; }
-@media (max-width: 768px) {
-  .example { color: blue; }
-}`;
-
+		const { input, expected } = loadFixture('basic-media');
 		await run(input, expected);
 	});
 
 	it('should transform supports() functions to @supports rules', async () => {
-		const input = `
-.grid {
-  display: if(supports(display: grid): grid; else: block);
-}`;
-
-		const expected = `.grid { display: block; }
-@supports (display: grid) {
-  .grid { display: grid; }
-}`;
-
+		const { input, expected } = loadFixture('basic-supports');
 		await run(input, expected);
 	});
 
 	it('should handle multiple if() functions in one rule', async () => {
-		const input = `
-.example {
-  color: if(media(max-width: 768px): blue; else: red);
-  font-size: if(supports(display: grid): 1.2rem; else: 1rem);
-}`;
-
-		const expected = `.example { color: red; }
-@media (max-width: 768px) {
-  .example { color: blue; }
-}
-.example { font-size: 1rem; }
-@supports (display: grid) {
-  .example { font-size: 1.2rem; }
-}`;
-
+		const { input, expected } = loadFixture('multiple-functions-one-rule');
 		await run(input, expected);
 	});
 
 	it('should handle multiple separate if() functions', async () => {
-		const input = `
-.multiple {
-  color: if(media(max-width: 768px): blue; else: red);
-  background: if(supports(color: lab(50% 20 -30)): lab(50% 20 -30); else: transparent);
-}`;
-
-		const expected = `.multiple { color: red; }
-@media (max-width: 768px) {
-  .multiple { color: blue; }
-}
-.multiple { background: transparent; }
-@supports (color: lab(50% 20 -30)) {
-  .multiple { background: lab(50% 20 -30); }
-}`;
-
+		const { input, expected } = loadFixture('multiple-separate-functions');
 		await run(input, expected);
 	});
 
 	it('should handle complex media queries', async () => {
-		const input = `
-.responsive {
-  width: if(media(min-width: 768px and max-width: 1024px): 50%; else: 100%);
-}`;
-
-		const expected = `.responsive { width: 100%; }
-@media (min-width: 768px and max-width: 1024px) {
-  .responsive { width: 50%; }
-}`;
-
+		const { input, expected } = loadFixture('complex-media-query');
 		await run(input, expected);
 	});
 
 	it('should handle multiple concatenated if() functions', async () => {
-		const input = `
-.responsive {
-	padding: if(
-		media(width >= 1200px): 40px; media(width >= 768px): 30px;
-			media(width >= 480px): 20px; else: 15px
-	);
-}`;
-
-		const expected = `.responsive { padding: 15px; }
-@media (width >= 480px) {
-  .responsive { padding: 20px; }
-}
-@media (width >= 768px) {
-  .responsive { padding: 30px; }
-}
-@media (width >= 1200px) {
-  .responsive { padding: 40px; }
-}`;
-
+		const { input, expected } = loadFixture(
+			'multiple-concatenated-conditions'
+		);
 		await run(input, expected);
 	});
 
 	it('should handle CSS that does not contain if() functions', async () => {
-		const input = `
-.normal {
-  color: red;
-  font-size: 1rem;
-}`;
-
-		const expected = `
-.normal {
-  color: red;
-  font-size: 1rem;
-}`;
-
+		const { input, expected } = loadFixture('no-if-functions');
 		await run(input, expected);
 	});
 
 	it('should preserve other CSS rules and comments', async () => {
-		const input = `
-/* Header styles */
-.header {
-  background: blue;
-}
-
-.conditional {
-  color: if(media(max-width: 768px): red; else: blue);
-}
-
-/* Footer styles */
-.footer {
-  background: gray;
-}`;
-
-		const expected = `/* Header styles */
-.header {
-  background: blue;
-}
-.conditional { color: blue; }
-@media (max-width: 768px) {
-  .conditional { color: red; }
-}
-/* Footer styles */
-.footer {
-  background: gray;
-}`;
-
+		const { input, expected } = loadFixture('with-comments');
 		await run(input, expected);
 	});
 
 	it('should work with logTransformations option', async () => {
-		const input = `
-.example {
-  color: if(media(max-width: 768px): blue; else: red);
-}`;
-
-		const expected = `.example { color: red; }
-@media (max-width: 768px) {
-  .example { color: blue; }
-}`;
+		const { input, expected } = loadFixture('basic-media');
 
 		// Spy on console.log
 		const logSpy = vi.spyOn(console, 'log');

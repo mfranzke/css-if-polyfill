@@ -1,0 +1,11 @@
+.test {
+	color: red;
+}
+@media (min-width: 768px) {
+	.test {
+		color: blue;
+	}
+}
+.test {
+	background: white;
+}

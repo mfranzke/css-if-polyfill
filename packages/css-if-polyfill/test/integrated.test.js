@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, test } from 'vitest';
+import { loadFixture } from '../../../test/fixture-utils.js';
 import { buildTimeTransform, init, processCSSText } from '../src/index.js';
 
 describe('Integrated CSS if() Polyfill', () => {
@@ -13,28 +14,18 @@ describe('Integrated CSS if() Polyfill', () => {
 
 	describe('Build-time transformation', () => {
 		test('transforms media queries to native CSS', () => {
-			const css = `
-				.test {
-					color: if(media(min-width: 768px): blue; else: red);
-				}
-			`;
+			const { input } = loadFixture('basic-media');
+			const result = buildTimeTransform(input);
 
-			const result = buildTimeTransform(css);
-
-			expect(result.nativeCSS).toContain('@media (min-width: 768px)');
+			expect(result.nativeCSS).toContain('@media (max-width: 768px)');
 			expect(result.nativeCSS).toContain('color: blue');
 			expect(result.nativeCSS).toContain('color: red');
 			expect(result.hasRuntimeRules).toBe(false);
 		});
 
 		test('transforms supports queries to native CSS', () => {
-			const css = `
-				.test {
-					display: if(supports(display: grid): grid; else: block);
-				}
-			`;
-
-			const result = buildTimeTransform(css);
+			const { input } = loadFixture('basic-supports');
+			const result = buildTimeTransform(input);
 
 			expect(result.nativeCSS).toContain('@supports (display: grid)');
 			expect(result.nativeCSS).toContain('display: grid');

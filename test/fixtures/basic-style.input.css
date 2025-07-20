@@ -1,0 +1,3 @@
+.test {
+	color: if(style(--theme): var(--primary) ; else: blue);
+}
