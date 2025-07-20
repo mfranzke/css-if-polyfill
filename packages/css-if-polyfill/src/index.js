@@ -485,7 +485,7 @@ const processCSSText = (cssText, options = {}, element = null) => {
 		let hasChanges = true;
 
 		// Keep processing until no more if() functions are found
-		// This handles nested if() functions and multiple if() in the same property
+		// This handles multiple if() functions in the same property value
 		while (hasChanges) {
 			hasChanges = false;
 			const ifFunctions = findIfFunctions(result);

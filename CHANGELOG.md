@@ -24,14 +24,14 @@ And the commit messages from [Conventional Commits](https://conventionalcommits.
 
 - ✨ Added support for multiple conditions within a single if() function
 - ✨ Enhanced switch-case like behavior for condition evaluation
-- ✨ Improved parsing for complex nested conditions
+- ✨ Improved parsing for complex multiple conditions
 - ✨ Better error handling for malformed condition syntax
 - 🐛 Fixed edge cases with quoted values and nested parentheses
 - 📚 Added comprehensive examples for multiple conditions
 - 🧪 Expanded test suite to cover new functionality
 - ✨ Added support for multiple if-tests separated by semicolons
 - ✨ Added support for if() functions in CSS shorthand properties
-- ✨ Enhanced parsing to handle complex nested conditions
+- ✨ Enhanced parsing to handle complex multiple conditions
 - ✨ Improved error handling for malformed syntax
 - 🐛 Fixed edge cases with quoted values and nested parentheses
 - 📚 Added comprehensive examples and documentation

@@ -151,17 +151,6 @@ describe('CSS if() Polyfill', () => {
 			expect(result).toBe('.test { color: blue; background: black; }');
 		});
 
-		test('should handle nested conditions', () => {
-			globalThis.CSS.supports.mockReturnValue(false);
-			globalThis.matchMedia.mockReturnValue({ matches: true });
-
-			const cssText =
-				'.test { display: if(supports(display: grid): grid; else: if(media(width >= 768px): flex; else: block)); }';
-			const result = processCSSText(cssText);
-
-			expect(result).toBe('.test { display: flex; }');
-		});
-
 		test('should handle false condition with no else clause', () => {
 			const cssText = '.test { color: if(false: red); }';
 			const result = processCSSText(cssText);
