@@ -19,7 +19,9 @@ on:
           - release
   workflow_call: # Allow this workflow to be called by other workflows
 
-concurrency: ${{ github.workflow }}-${{ github.ref }}
+concurrency:
+  group: release-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   # Only run release process after main CI/CD pipeline passes
