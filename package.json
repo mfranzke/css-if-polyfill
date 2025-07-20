@@ -52,7 +52,7 @@
     "codestyle": "prettier . --write",
     "dev": "microbundle watch",
     "lint": "npm-run-all --parallel lint:*",
-    "lint:markdownlint": "markdownlint -c .config/.markdown-lint.yml **/*.md",
+    "lint:markdownlint": "markdownlint --config .config/.markdown-lint.yml **/*.md",
     "lint:package": "publint",
     "lint:xo": "xo",
     "postbuild": "cp dist/index.d.ts dist/index.d.cts",
