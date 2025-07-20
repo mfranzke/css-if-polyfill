@@ -1,5 +1,12 @@
 # css-if-polyfill
 
+## 0.1.2
+
+### Patch Changes
+
+- 9c6d05a: fix: several package metadata related issues
+- 588be15: docs: corrected the package name
+
 ## 0.1.1
 
 ### Patch Changes
