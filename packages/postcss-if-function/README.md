@@ -20,7 +20,7 @@ npm install postcss-if-function postcss
 
 ```js
 import postcss from "postcss";
-import postcssCssIf from "postcss-if-function";
+import { postcssIfFunction } from "postcss-if-function";
 
 const css = `
 .example {
@@ -29,7 +29,7 @@ const css = `
 }
 `;
 
-const result = await postcss([postcssCssIf()]).process(css, {
+const result = await postcss([postcssIfFunction()]).process(css, {
 	from: undefined
 });
 
@@ -61,7 +61,7 @@ console.log(result.css);
 
 ```js
 const result = await postcss([
-	postcssCssIf({
+	postcssIfFunction({
 		logTransformations: true,
 		preserveOriginal: false,
 		skipSelectors: [".no-transform"]
@@ -76,13 +76,13 @@ const result = await postcss([
 ```js
 // vite.config.js
 import { defineConfig } from "vite";
-import postcssCssIf from "postcss-if-function";
+import { postcssIfFunction } from "postcss-if-function";
 
 export default defineConfig({
 	css: {
 		postcss: {
 			plugins: [
-				postcssCssIf({
+				postcssIfFunction({
 					logTransformations: process.env.NODE_ENV === "development"
 				})
 			]

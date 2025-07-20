@@ -45,10 +45,10 @@
 ### **Core Functionality**
 
 ```js
-import postcssCssIf from "postcss-if-function";
+import { postcssIfFunction } from "postcss-if-function";
 
 const result = await postcss([
-	postcssCssIf({
+	postcssIfFunction({
 		logTransformations: true,
 		preserveOriginal: false,
 		skipSelectors: [".no-transform"]

@@ -115,4 +115,3 @@ function postcssIfFunction(options = {}) {
 postcssIfFunction.postcss = true;
 
 export { postcssIfFunction };
-export default postcssIfFunction;

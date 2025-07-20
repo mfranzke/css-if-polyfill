@@ -33,7 +33,3 @@ export function postcssIfFunction(
 export namespace postcssIfFunction {
 	const postcss: boolean;
 }
-
-// Default export
-declare const _default: typeof postcssIfFunction;
-export default _default;
