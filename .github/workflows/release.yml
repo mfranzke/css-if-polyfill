@@ -27,7 +27,6 @@ jobs:
     name: Create Version PR or Release
     runs-on: ubuntu-24.04
     timeout-minutes: 10
-
     permissions:
       contents: write # to create release (changesets/action)
       issues: write # to post issue comments (changesets/action)
