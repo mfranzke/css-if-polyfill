@@ -184,13 +184,21 @@ module.exports = {
 
 ### Media Queries
 
+<!-- FIXTURE: basic-media -->
+
+<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory -->
+
+**Input CSS:**
+
 ```css
-/* Input */
 .responsive {
 	width: if(media(max-width: 768px): 100%; else: 50%);
 }
+```
 
-/* Output */
+**Expected Output:**
+
+```css
 .responsive {
 	width: 50%;
 }
@@ -201,15 +209,25 @@ module.exports = {
 }
 ```
 
+<!-- /FIXTURE -->
+
 ### Feature Support Queries
 
+<!-- FIXTURE: basic-supports -->
+
+<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory -->
+
+**Input CSS:**
+
 ```css
-/* Input */
 .grid {
 	display: if(supports(display: grid): grid; else: block);
 }
+```
 
-/* Output */
+**Expected Output:**
+
+```css
 .grid {
 	display: block;
 }
@@ -220,40 +238,49 @@ module.exports = {
 }
 ```
 
+<!-- /FIXTURE -->
+
 ### Multiple Conditions
 
+<!-- FIXTURE: multiple-concatenated-conditions -->
+
+<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory -->
+
+**Input CSS:**
+
 ```css
-/* Input */
 .responsive {
 	padding: if(
 		media(width >= 1200px): 40px; media(width >= 768px): 30px;
 			media(width >= 480px): 20px; else: 15px
 	);
 }
+```
 
-/* Output */
+**Expected Output:**
+
+```css
 .responsive {
 	padding: 15px;
 }
-
 @media (width >= 480px) {
 	.responsive {
 		padding: 20px;
 	}
 }
-
 @media (width >= 768px) {
 	.responsive {
 		padding: 30px;
 	}
 }
-
 @media (width >= 1200px) {
 	.responsive {
 		padding: 40px;
 	}
 }
 ```
+
+<!-- /FIXTURE -->
 
 ## Limitations
 
@@ -284,6 +311,7 @@ This plugin is designed for optimal build-time performance, transforming CSS if(
 
 ### Future Optimization Opportunities
 
+- **Reduced CSS Code**: We'll make use of CSS Nesting capabilities as soon as any of the browsers are EOL ([#35](https://github.com/mfranzke/css-if-polyfill/issues/35)).
 - **Direct AST Transformation**: The transformation engine could be modified to output PostCSS AST nodes directly, eliminating the double parsing overhead
 - **Streaming Processing**: For very large CSS files, streaming transformation could reduce memory usage
 

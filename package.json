@@ -29,6 +29,7 @@
   ],
   "scripts": {
     "build": "npm run build --workspaces",
+    "build:docs": "node scripts/build-docs.js",
     "changeset:release": "npm run build && npx --no @changesets/cli publish",
     "codestyle": "prettier . --write",
     "dev": "npm run dev --workspaces",

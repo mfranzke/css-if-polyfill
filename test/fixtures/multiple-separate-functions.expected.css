@@ -1,0 +1,16 @@
+.multiple {
+	color: red;
+}
+@media (max-width: 768px) {
+	.multiple {
+		color: blue;
+	}
+}
+.multiple {
+	background: transparent;
+}
+@supports (color: lab(50% 20 -30)) {
+	.multiple {
+		background: lab(50% 20 -30);
+	}
+}

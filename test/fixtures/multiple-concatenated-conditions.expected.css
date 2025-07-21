@@ -1,0 +1,18 @@
+.responsive {
+	padding: 15px;
+}
+@media (width >= 480px) {
+	.responsive {
+		padding: 20px;
+	}
+}
+@media (width >= 768px) {
+	.responsive {
+		padding: 30px;
+	}
+}
+@media (width >= 1200px) {
+	.responsive {
+		padding: 40px;
+	}
+}
