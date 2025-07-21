@@ -1,0 +1,9 @@
+.responsive {
+	padding: if(
+		media(width >= 1200px): 40px;
+		media(width >= 768px): 30px;
+		supports(display: grid): 25px;
+		style(--large-padding): 35px;
+		else: 15px
+	);
+}

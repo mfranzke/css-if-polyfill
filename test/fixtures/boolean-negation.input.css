@@ -1,0 +1,4 @@
+.test {
+	color: if(not media(print): blue; else: black);
+	display: if(not supports(display: grid): block; else: grid);
+}
