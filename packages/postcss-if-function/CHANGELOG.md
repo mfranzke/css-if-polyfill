@@ -1,5 +1,11 @@
 # postcss-if-function
 
+## 0.1.3
+
+### Patch Changes
+
+- f8cd6cb: fix: added missing default export
+
 ## 0.1.2
 
 ### Patch Changes
