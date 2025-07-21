@@ -1,0 +1,18 @@
+{
+  "name": "postcss-if-function-test-v8",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Test environment for PostCSS v8 compatibility",
+  "private": true,
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "postcss": "^8.0.0",
+    "postcss-if-function": "file:../.."
+  },
+  "devDependencies": {
+    "vitest": "^3.2.4"
+  }
+}

@@ -44,20 +44,25 @@
     "build": "microbundle",
     "dev": "microbundle watch",
     "postbuild": "cp dist/index.d.ts dist/index.d.cts",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run build && npm run test:versions && npm run update:peer-deps",
     "pretest:vitest": "npm run build",
     "test": "npm-run-all --sequential test:*",
+    "test:version-7": "cd examples/postcss-version-7 && npm install && npm test",
+    "test:version-8": "cd examples/postcss-version-8 && npm install && npm test",
+    "test:versions": "npm run test:version-7 && npm run test:version-8",
     "test:vitest": "vitest run",
-    "test:vitest:watch": "vitest"
+    "test:vitest:watch": "vitest",
+    "update:peer-deps": "node scripts/update-peer-deps.js"
   },
   "peerDependencies": {
-    "postcss": "^8.0.0"
+    "postcss": ">=7.0.0 <9.0.0"
   },
   "dependencies": {
     "css-if-polyfill": "0.1.3"
   },
   "devDependencies": {
     "microbundle": "^0.15.1",
+    "npm-run-all2": "^4.1.5",
     "postcss": "^8.4.0",
     "vitest": "^3.2.4",
     "xo": "^1.1.1"
