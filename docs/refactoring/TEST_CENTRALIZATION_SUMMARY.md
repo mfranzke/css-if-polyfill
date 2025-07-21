@@ -259,4 +259,4 @@ The fixture system integrates seamlessly with the existing CI/CD pipeline:
 
 ---
 
-**This refactoring establishes a robust, scalable foundation for maintaining CSS test data across the entire css-if-polyfill project while dramatically improving developer experience and documentation quality.**
+**This refactoring establishes a robust, scalable foundation for maintaining CSS test data across the entire `css-if-polyfill` project while dramatically improving developer experience and documentation quality.**
