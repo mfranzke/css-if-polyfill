@@ -284,6 +284,7 @@ This plugin is designed for optimal build-time performance, transforming CSS if(
 
 ### Future Optimization Opportunities
 
+- **Reduced CSS Code**: We'll make use of CSS Nesting capabilities as soon as any of the browsers are EOL ([#35](https://github.com/mfranzke/css-if-polyfill/issues/35)).
 - **Direct AST Transformation**: The transformation engine could be modified to output PostCSS AST nodes directly, eliminating the double parsing overhead
 - **Streaming Processing**: For very large CSS files, streaming transformation could reduce memory usage
 
