@@ -41,8 +41,9 @@
     "prepare": "husky",
     "preserve": "npm run build --workspace=css-if-polyfill",
     "serve": "http-server -p 3000 -o examples/basic-examples.html",
-    "test": "npm test --workspaces",
-    "test:fixtures": "playwright test test/fixtures-validation/fixture-validation.test.js --config=test/fixtures-validation/fixture-validation.playwright.config.js"
+    "test": "npm-run-all --sequential test:*",
+    "test:fixtures": "playwright test test/fixtures-validation/fixture-validation.test.js --config=test/fixtures-validation/fixture-validation.playwright.config.js",
+    "test:packages": "npm test --workspaces"
   },
   "devDependencies": {
     "@babel/core": "^7.28.0",
