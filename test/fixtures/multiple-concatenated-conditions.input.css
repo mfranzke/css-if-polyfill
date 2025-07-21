@@ -1,0 +1,6 @@
+.responsive {
+	padding: if(
+		media(width >= 1200px): 40px; media(width >= 768px): 30px;
+			media(width >= 480px): 20px; else: 15px
+	);
+}

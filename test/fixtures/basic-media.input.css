@@ -1,0 +1,3 @@
+.responsive {
+	width: if(media(max-width: 768px): 100%; else: 50%);
+}

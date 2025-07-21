@@ -1,4 +1,5 @@
 {
 	"*.md": "markdownlint --config .config/.markdown-lint.yml --fix",
+	"test/fixtures/*.css": "npm run build:docs",
 	"*.{js,ts,tsx,jsx,mjs,cjs}": "npm run lint:xo -- --fix"
 }

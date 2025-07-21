@@ -1,0 +1,16 @@
+.example {
+	color: red;
+}
+@media (max-width: 768px) {
+	.example {
+		color: blue;
+	}
+}
+.example {
+	font-size: 1rem;
+}
+@supports (display: grid) {
+	.example {
+		font-size: 1.2rem;
+	}
+}
