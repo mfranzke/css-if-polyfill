@@ -4,6 +4,9 @@
 
 This is a JavaScript polyfill and PostCSS plugin for [CSS if() functionality](https://developer.mozilla.org/en-US/docs/Web/CSS/if). The polyfill provides browser support for the CSS if() function with style(), media(), and supports() conditions as specified in the WCAG (Web Content Accessibility Guidelines).
 
+<!-- TODO: Update this section if the official specification changes
+https://drafts.csswg.org/css-values-5/#if-notation -->
+
 ## Official WCAG CSS if() Function Specification
 
 8.3. Conditional Value Selection: the if() notation
