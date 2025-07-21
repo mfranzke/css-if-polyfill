@@ -6,7 +6,7 @@ This document demonstrates the centralized test fixture system that provides a s
 
 <!-- FIXTURE: basic-media -->
 
-<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory. To regenerate this documentation, run npm run build:docs -->
+<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory -->
 
 **Input CSS:**
 
@@ -35,7 +35,7 @@ This document demonstrates the centralized test fixture system that provides a s
 
 <!-- FIXTURE: basic-supports -->
 
-<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory. To regenerate this documentation, run npm run build:docs -->
+<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory -->
 
 **Input CSS:**
 
@@ -64,13 +64,13 @@ This document demonstrates the centralized test fixture system that provides a s
 
 <!-- FIXTURE: basic-style -->
 
-<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory. To regenerate this documentation, run npm run build:docs -->
+<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory -->
 
 **Input CSS:**
 
 ```css
 .test {
-	color: if(style(--theme): var(--primary); else: blue);
+	color: if(style(--theme): var(--primary) ; else: blue);
 }
 ```
 
@@ -88,7 +88,7 @@ This document demonstrates the centralized test fixture system that provides a s
 
 <!-- FIXTURE: multiple-functions-one-rule -->
 
-<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory. To regenerate this documentation, run npm run build:docs -->
+<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory -->
 
 **Input CSS:**
 
@@ -126,7 +126,7 @@ This document demonstrates the centralized test fixture system that provides a s
 
 <!-- FIXTURE: multiple-concatenated-conditions -->
 
-<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory. To regenerate this documentation, run npm run build:docs -->
+<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory -->
 
 **Input CSS:**
 
@@ -168,7 +168,7 @@ This document demonstrates the centralized test fixture system that provides a s
 
 <!-- FIXTURE: mixed-conditions -->
 
-<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory. To regenerate this documentation, run npm run build:docs -->
+<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory -->
 
 **Input CSS:**
 
@@ -201,7 +201,7 @@ This document demonstrates the centralized test fixture system that provides a s
 
 <!-- FIXTURE: complex-media-query -->
 
-<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory. To regenerate this documentation, run npm run build:docs -->
+<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory -->
 
 **Input CSS:**
 
@@ -232,7 +232,7 @@ This document demonstrates the centralized test fixture system that provides a s
 
 <!-- FIXTURE: with-comments -->
 
-<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory. To regenerate this documentation, run npm run build:docs -->
+<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory -->
 
 **Input CSS:**
 
@@ -279,7 +279,7 @@ This document demonstrates the centralized test fixture system that provides a s
 
 <!-- FIXTURE: no-if-functions -->
 
-<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory. To regenerate this documentation, run npm run build:docs -->
+<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory -->
 
 **Input CSS:**
 

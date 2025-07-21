@@ -78,7 +78,7 @@ npm run build:docs  # Auto-generates docs from fixtures
 ````markdown
 <!-- FIXTURE: basic-media -->
 
-<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory. To regenerate this documentation, run npm run build:docs -->
+<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory -->
 
 **Input CSS:**
 
