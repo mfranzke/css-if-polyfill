@@ -33,3 +33,5 @@ export function postcssIfFunction(
 export namespace postcssIfFunction {
 	const postcss: boolean;
 }
+
+export default postcssIfFunction;

@@ -16,11 +16,26 @@ npm install postcss-if-function postcss
 
 ## Usage
 
-### Basic Usage
+### PostCSS CLI
+
+```bash
+# Transform CSS using PostCSS CLI
+npx postcss input.css --output output.css --use postcss-if-function
+
+# With custom PostCSS config file
+npx postcss input.css --output output.css --config postcss.config.js
+```
+
+### Basic Programmatic Usage
 
 ```js
+// Named export (recommended)
 import postcss from "postcss";
 import { postcssIfFunction } from "postcss-if-function";
+
+// Or default export (for compatibility)
+import postcss from "postcss";
+import postcssIfFunction from "postcss-if-function";
 
 const css = `
 .example {
@@ -67,6 +82,21 @@ const result = await postcss([
 		skipSelectors: [".no-transform"]
 	})
 ]).process(css, { from: undefined });
+```
+
+### With PostCSS Config File
+
+```js
+// postcss.config.js
+import { postcssIfFunction } from "postcss-if-function";
+
+export default {
+	plugins: [
+		postcssIfFunction({
+			logTransformations: process.env.NODE_ENV === "development"
+		})
+	]
+};
 ```
 
 ### With Popular PostCSS Tools
