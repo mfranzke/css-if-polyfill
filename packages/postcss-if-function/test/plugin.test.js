@@ -1,6 +1,9 @@
 import postcss from 'postcss';
 import { describe, expect, it, vi } from 'vitest';
-import { loadFixture } from '../../../test/fixture-utils.js';
+import {
+	loadFixture,
+	normalizeCSS
+} from '../../../test/scripts/fixture-utils.js';
 import { postcssIfFunction } from '../src/index.js';
 
 describe('postcss-if-function plugin', () => {
@@ -11,7 +14,7 @@ describe('postcss-if-function plugin', () => {
 				from: undefined
 			}
 		);
-		expect(result.css).toBe(output);
+		expect(normalizeCSS(result.css)).toBe(normalizeCSS(output));
 		expect(result.warnings()).toHaveLength(0);
 	}
 

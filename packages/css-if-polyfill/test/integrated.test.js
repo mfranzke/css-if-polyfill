@@ -1,18 +1,9 @@
 import { beforeEach, describe, expect, test } from 'vitest';
-import { loadFixture } from '../../../test/fixture-utils.js';
+import {
+	loadFixture,
+	normalizeCSS
+} from '../../../test/scripts/fixture-utils.js';
 import { buildTimeTransform, init, processCSSText } from '../src/index.js';
-
-/**
- * Normalize CSS for comparison by removing formatting differences
- */
-function normalizeCSS(css) {
-	return css
-		.replaceAll(/\s+/g, ' ') // Replace multiple whitespace/newlines with single space
-		.replaceAll(/\s*{\s*/g, '{') // Remove spaces around opening braces
-		.replaceAll(/\s*}\s*/g, '}') // Remove spaces around closing braces
-		.replaceAll(/\s*;\s*/g, ';') // Remove spaces around semicolons
-		.trim();
-}
 
 describe('Integrated CSS if() Polyfill', () => {
 	beforeEach(() => {

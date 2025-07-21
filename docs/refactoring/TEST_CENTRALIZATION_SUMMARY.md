@@ -31,7 +31,8 @@ test/
 │   ├── multiple-concatenated-conditions.input.css
 │   ├── multiple-concatenated-conditions.expected.css
 │   └── [10 test fixture pairs]
-├── fixture-utils.js         // Utility functions
+├── scripts/
+│   └── fixture-utils.js    // Utility functions
 └── README.md               // Fixture documentation
 
 scripts/
@@ -55,10 +56,10 @@ scripts/
 
 ## 🔧 **Tools & Utilities**
 
-### **1. Fixture Loader (`test/fixture-utils.js`)**
+### **1. Fixture Loader (`test/scripts/fixture-utils.js`)**
 
 ```javascript
-import { loadFixture } from "../../../test/fixture-utils.js";
+import { loadFixture } from "../../../test/scripts/fixture-utils.js";
 
 // Load a test pair
 const { input, expected } = loadFixture("basic-media");
