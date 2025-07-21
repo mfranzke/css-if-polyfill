@@ -211,7 +211,7 @@ const { input, expected } = loadFixture("basic-media");
 Documentation is automatically updated during build:
 
 1. Tests run and validate fixtures
-2. `build:docs` generates fresh documentation
+2. `build:docs` node script generates fresh documentation
 3. Consistent examples across all docs
 
 ## 📈 **Metrics & Results**
