@@ -181,7 +181,7 @@ const css = `
 `;
 
 // After
-const { input } = loadFixture("basic-media");
+const { input, expected } = loadFixture("basic-media");
 ```
 
 ## 📊 **Test Coverage Status**
