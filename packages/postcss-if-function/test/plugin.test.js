@@ -2,7 +2,8 @@ import postcss from 'postcss';
 import { describe, expect, it, vi } from 'vitest';
 import {
 	loadFixture,
-	normalizeCSS
+	normalizeCSS,
+	postcssFixtureTests
 } from '../../../test/scripts/fixture-utils.js';
 import { postcssIfFunction } from '../src/index.js';
 
@@ -18,47 +19,13 @@ describe('postcss-if-function plugin', () => {
 		expect(result.warnings()).toHaveLength(0);
 	}
 
-	it('should transform media() functions to @media rules', async () => {
-		const { input, expected } = loadFixture('basic-media');
-		await run(input, expected);
-	});
-
-	it('should transform supports() functions to @supports rules', async () => {
-		const { input, expected } = loadFixture('basic-supports');
-		await run(input, expected);
-	});
-
-	it('should handle multiple if() functions in one rule', async () => {
-		const { input, expected } = loadFixture('multiple-functions-one-rule');
-		await run(input, expected);
-	});
-
-	it('should handle multiple separate if() functions', async () => {
-		const { input, expected } = loadFixture('multiple-separate-functions');
-		await run(input, expected);
-	});
-
-	it('should handle complex media queries', async () => {
-		const { input, expected } = loadFixture('complex-media-query');
-		await run(input, expected);
-	});
-
-	it('should handle multiple if() conditions', async () => {
-		const { input, expected } = loadFixture(
-			'multiple-concatenated-conditions'
-		);
-		await run(input, expected);
-	});
-
-	it('should handle CSS that does not contain if() functions', async () => {
-		const { input, expected } = loadFixture('no-if-functions');
-		await run(input, expected);
-	});
-
-	it('should preserve other CSS rules and comments', async () => {
-		const { input, expected } = loadFixture('with-comments');
-		await run(input, expected);
-	});
+	// Generate tests for each shared fixture
+	for (const { fixture, description } of postcssFixtureTests) {
+		it(`should ${description}`, async () => {
+			const { input, expected } = loadFixture(fixture);
+			await run(input, expected);
+		});
+	}
 
 	it('should work with logTransformations option', async () => {
 		const { input, expected } = loadFixture('basic-media');

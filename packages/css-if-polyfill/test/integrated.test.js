@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, test } from 'vitest';
 import {
+	basicFixtureTests,
 	loadFixture,
 	normalizeCSS
 } from '../../../test/scripts/fixture-utils.js';
@@ -16,34 +17,6 @@ describe('Integrated CSS if() Polyfill', () => {
 	});
 
 	describe('Build-time transformation', () => {
-		// Test fixtures for basic transformation scenarios
-		const basicFixtureTests = [
-			{
-				fixture: 'basic-media',
-				description: 'transforms media queries to native CSS'
-			},
-			{
-				fixture: 'basic-supports',
-				description: 'transforms supports queries to native CSS'
-			},
-			{
-				fixture: 'complex-media-query',
-				description: 'handles complex media queries'
-			},
-			{
-				fixture: 'multiple-functions-one-rule',
-				description: 'handles multiple functions in one rule'
-			},
-			{
-				fixture: 'with-comments',
-				description: 'handles CSS with comments'
-			},
-			{
-				fixture: 'no-if-functions',
-				description: 'preserves CSS without if() functions'
-			}
-		];
-
 		// Generate tests for each fixture
 		for (const { fixture, description } of basicFixtureTests) {
 			test(description, () => {

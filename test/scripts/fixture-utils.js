@@ -94,3 +94,48 @@ export function normalizeCSS(css) {
 		.replaceAll(/\s*;\s*/g, ';') // Remove spaces around semicolons
 		.trim();
 }
+
+/**
+ * Standard test configurations for shared fixtures
+ */
+export const basicFixtureTests = [
+	{
+		fixture: 'basic-media',
+		description: 'transform media queries to native CSS'
+	},
+	{
+		fixture: 'basic-supports',
+		description: 'transform supports queries to native CSS'
+	},
+	{
+		fixture: 'complex-media-query',
+		description: 'handle complex media queries'
+	},
+	{
+		fixture: 'multiple-functions-one-rule',
+		description: 'handle multiple functions in one rule'
+	},
+	{
+		fixture: 'with-comments',
+		description: 'handle CSS with comments'
+	},
+	{
+		fixture: 'no-if-functions',
+		description: 'preserve CSS without if() functions'
+	}
+];
+
+/**
+ * PostCSS-specific test configurations (includes additional fixtures used only by PostCSS)
+ */
+export const postcssFixtureTests = [
+	...basicFixtureTests,
+	{
+		fixture: 'multiple-separate-functions',
+		description: 'handle multiple separate if() functions'
+	},
+	{
+		fixture: 'multiple-concatenated-conditions',
+		description: 'handle multiple if() conditions'
+	}
+];
