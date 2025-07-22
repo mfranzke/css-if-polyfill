@@ -4,7 +4,7 @@
 
 This is a JavaScript polyfill and PostCSS plugin for [CSS if() functionality](https://developer.mozilla.org/en-US/docs/Web/CSS/if). The polyfill provides browser support for the CSS if() function with style(), media(), and supports() conditions as specified in the WCAG (Web Content Accessibility Guidelines).
 
-<!-- TODO: Update this section if the official specification changes
+<!-- TODO: Update this section if the official specification changes.
 https://drafts.csswg.org/css-values-5/#if-notation -->
 
 ## Official WCAG CSS if() Function Specification
@@ -133,6 +133,7 @@ When working with CSS if() functions, always follow the official WCAG specificat
 2. **Always** add fixture tests for new CSS functionality
 3. **Always** run the full test suite including browser validation
 4. **Always** update documentation when changing public APIs
-5. **Consider** performance impact on large stylesheets and DOM trees
+5. **Always** bear in mind that the developer's main job is to read, not write, code. Therefore, avoid unnecessary complexity, abbreviations and short forms of parameters, for example in CLI usage.
+6. **Consider** performance impact on large stylesheets and DOM trees
 
 This project aims to provide a complete, specification-compliant implementation of CSS if() functionality for browsers that don't yet support it natively.
