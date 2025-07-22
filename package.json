@@ -40,6 +40,7 @@
     "prelint:packages": "npm run build",
     "prepare": "husky",
     "preserve": "npm run build --workspace=css-if-polyfill",
+    "pretest:fixtures": "npm run build",
     "serve": "http-server -p 3000 -o examples/basic-examples.html",
     "test": "npm-run-all --sequential test:*",
     "test:fixtures": "playwright test test/fixtures-validation/fixture-validation.test.js --config=test/fixtures-validation/fixture-validation.playwright.config.js",
