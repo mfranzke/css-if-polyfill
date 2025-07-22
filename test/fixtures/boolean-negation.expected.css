@@ -1,0 +1,16 @@
+.test {
+	color: black;
+}
+@media (not (print)) {
+	.test {
+		color: blue;
+	}
+}
+.test {
+	display: grid;
+}
+@supports (not display: grid) {
+	.test {
+		display: block;
+	}
+}
