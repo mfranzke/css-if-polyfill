@@ -122,6 +122,38 @@ export const basicFixtureTests = [
 	{
 		fixture: 'no-if-functions',
 		description: 'preserve CSS without if() functions'
+	},
+	{
+		fixture: 'complex-supports',
+		description: 'handle complex supports conditions with multiple values'
+	},
+	{
+		fixture: 'nested-media-features',
+		description: 'handle complex nested media feature queries'
+	}
+];
+
+/**
+ * Runtime-only test configurations for features that cannot be transformed at build time
+ */
+export const runtimeOnlyFixtureTests = [
+	{
+		fixture: 'empty-token-stream',
+		description:
+			'handle if() functions without else clause (empty token stream)'
+	},
+	{
+		fixture: 'cyclic-substitution',
+		description: 'prevent cyclic substitution context in style queries'
+	},
+	{
+		fixture: 'boolean-negation',
+		description: 'handle boolean negation in conditions'
+	},
+	{
+		fixture: 'multiple-mixed-conditions',
+		description:
+			'handle multiple mixed condition types in single if() function'
 	}
 ];
 

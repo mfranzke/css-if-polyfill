@@ -2,7 +2,8 @@ import { beforeEach, describe, expect, test } from 'vitest';
 import {
 	basicFixtureTests,
 	loadFixture,
-	normalizeCSS
+	normalizeCSS,
+	runtimeOnlyFixtureTests
 } from '../../../test/scripts/fixture-utils.js';
 import { buildTimeTransform, init, processCSSText } from '../src/index.js';
 
@@ -27,6 +28,22 @@ describe('Integrated CSS if() Polyfill', () => {
 					normalizeCSS(expected)
 				);
 				expect(result.hasRuntimeRules).toBe(false);
+			});
+		}
+
+		// Runtime-only fixtures that cannot be transformed at build time
+		for (const { fixture, description } of runtimeOnlyFixtureTests) {
+			test(description, () => {
+				const { input, expected } = loadFixture(fixture);
+				const result = buildTimeTransform(input);
+
+				// These fixtures should preserve the if() functions for runtime processing
+				expect(result.hasRuntimeRules).toBe(true);
+				expect(normalizeCSS(result.runtimeCSS)).toBe(
+					normalizeCSS(expected)
+				);
+				// NativeCSS should be empty or contain only fallback values
+				expect(result.nativeCSS).toBe('');
 			});
 		}
 

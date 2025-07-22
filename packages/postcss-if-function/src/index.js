@@ -71,8 +71,19 @@ function postcssIfFunction(options = {}) {
 			// Apply transformation
 			const transformed = buildTimeTransform(cssText);
 
+			// If no transformations were made, keep original
 			if (transformed.nativeCSS === cssText) {
-				// No transformations were made
+				return;
+			}
+
+			// If we have runtime rules but no native CSS (or only empty nativeCSS),
+			// we can't transform at build-time, so preserve the original
+			if (
+				(!transformed.nativeCSS ||
+					transformed.nativeCSS.trim() === '') &&
+				transformed.hasRuntimeRules
+			) {
+				// Keep the original CSS unchanged since these features need runtime processing
 				return;
 			}
 
