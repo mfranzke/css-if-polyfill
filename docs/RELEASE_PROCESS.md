@@ -15,7 +15,7 @@ This project uses [Changesets](https://github.com/changesets/changesets) for ver
 After making changes, run:
 
 ```bash
-npx @changesets/cli
+npx --no @changesets/cli
 ```
 
 This will:
@@ -47,13 +47,13 @@ When you merge the "Version Packages" PR, the **Release workflow** (`.github/wor
 ### Create a changeset
 
 ```bash
-npx @changesets/cli
+npx --no @changesets/cli
 ```
 
 ### Preview what version would be released
 
 ```bash
-npx @changesets/cli status
+npx --no @changesets/cli status
 ```
 
 ### Manually version packages (done automatically in CI)
@@ -75,7 +75,7 @@ npm run changeset:release
 3. **Create changeset**:
 
     ```bash
-    npx @changesets/cli
+    npx --no @changesets/cli
     ```
 
     - Select package to bump

@@ -51,7 +51,7 @@ jobs:
       - name: Check changeset status
         run: |
           echo "Checking changeset status..."
-          npx @changesets/cli status
+          npx --no @changesets/cli status
           echo "Listing changesets..."
           ls -la .changeset/
 

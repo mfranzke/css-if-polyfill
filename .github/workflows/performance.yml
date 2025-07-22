@@ -38,7 +38,7 @@ jobs:
         run: npm run build
 
       - name: Install Playwright
-        run: npx playwright install chromium
+        run: npx --no playwright install chromium
 
       - name: Run performance benchmark
         run: node test/performance/run-benchmark.cjs
