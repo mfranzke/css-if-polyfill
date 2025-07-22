@@ -58,7 +58,7 @@
   },
   "devDependencies": {
     "microbundle": "0.15.1",
-    "postcss": "8.4.0",
+    "postcss": "8.4.31",
     "vitest": "3.2.4",
     "xo": "1.1.1"
   },
