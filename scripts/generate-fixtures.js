@@ -2,6 +2,17 @@
 
 /**
  * Generate expected outputs for new fixtures
+ *
+ * This development utility script helps generate expected output files for new test fixtures
+ * by running input CSS through the polyfill transformation engine.
+ *
+ * Usage:
+ *   1. Create your .input.css files in test/fixtures/
+ *   2. Add the fixture names to the newFixtures array below
+ *   3. Run: node scripts/generate-fixtures.js
+ *   4. Review and adjust the generated .expected.css files as needed
+ *
+ * Note: Always review the generated outputs to ensure they match expected behavior.
  */
 
 import { readFile, writeFile } from 'node:fs/promises';
@@ -9,11 +20,13 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 // Import the transform function
-import { buildTimeTransform } from './packages/css-if-polyfill/src/index.js';
+import { buildTimeTransform } from '../packages/css-if-polyfill/src/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const fixturesDir = path.join(__dirname, 'test', 'fixtures');
+const fixturesDir = path.join(__dirname, '..', 'test', 'fixtures');
 
+// Configure which fixtures to process
+// Add fixture names (without .input.css suffix) to generate expected outputs
 const newFixtures = [
 	'empty-token-stream',
 	'cyclic-substitution',
