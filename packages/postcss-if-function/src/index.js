@@ -57,63 +57,79 @@ function postcssIfFunction(options = {}) {
 		skipSelectors: _skipSelectors = []
 	} = options;
 
-	return {
-		postcssPlugin: PLUGIN_NAME,
-		Once(root, { result }) {
-			// Collect all CSS text first
-			const cssText = root.toString();
-
-			// Check if there are any if() functions to transform
-			if (!cssText.includes('if(')) {
-				return;
-			}
-
-			// Apply transformation
-			const transformed = buildTimeTransform(cssText);
-
-			if (transformed.nativeCSS === cssText) {
-				// No transformations were made
-				return;
-			}
-
-			// Clear the original root
-			root.removeAll();
-
-			// Note: Architectural optimization opportunity
-			// This re-parsing step could be eliminated by modifying the transformation engine
-			// to output PostCSS AST nodes directly instead of CSS strings, removing the
-			// double parsing overhead identified by static analysis tools.
-
-			try {
-				const transformedRoot = result.processor.process(
-					transformed.nativeCSS,
-					{
-						from: undefined,
-						parser: result.processor.parser
-					}
-				).root;
-
-				// Clone nodes to preserve original formatting and avoid reference issues
-				transformedRoot.each((node) => {
-					root.append(node.clone());
-				});
-
-				// Log transformation statistics if requested
-				if (logTransformations && transformed.stats) {
-					const { totalRules, transformedRules } = transformed.stats;
-					console.log(`[${PLUGIN_NAME}] Transformation statistics:`);
-					console.log(`  - Total rules: ${totalRules}`);
-					console.log(
-						`  - Total transformations: ${transformedRules}`
-					);
-				}
-			} catch (error) {
-				throw new Error(
-					`${PLUGIN_NAME}: Failed to parse transformed CSS - ${error.message}`
-				);
-			}
+	// Auto-detect PostCSS version by checking for result parameter structure
+	// In PostCSS 7, the second parameter is a Result object directly
+	// In PostCSS 8, it's part of an object with other properties
+	const hybridPlugin = function (root, result) {
+		// This is the PostCSS 7 signature
+		if (result && result.processor !== undefined) {
+			processCSS(root, result, logTransformations);
 		}
 	};
+
+	// Add PostCSS 8 methods to the function for compatibility
+	hybridPlugin.postcssPlugin = PLUGIN_NAME;
+	hybridPlugin.Once = (root, { result }) => {
+		processCSS(root, result, logTransformations);
+	};
+
+	return hybridPlugin;
+}
+
+/**
+ * Common processing logic for all PostCSS versions
+ */
+function processCSS(root, result, logTransformations) {
+	// Collect all CSS text first
+	const cssText = root.toString();
+
+	// Check if there are any if() functions to transform
+	if (!cssText.includes('if(')) {
+		return;
+	}
+
+	// Apply transformation
+	const transformed = buildTimeTransform(cssText);
+
+	if (transformed.nativeCSS === cssText) {
+		// No transformations were made
+		return;
+	}
+
+	// Clear the original root
+	root.removeAll();
+
+	// Note: Architectural optimization opportunity
+	// This re-parsing step could be eliminated by modifying the transformation engine
+	// to output PostCSS AST nodes directly instead of CSS strings, removing the
+	// double parsing overhead identified by static analysis tools.
+
+	try {
+		const transformedRoot = result.processor.process(
+			transformed.nativeCSS,
+			{
+				from: undefined,
+				parser: result.processor.parser
+			}
+		).root;
+
+		// Clone nodes to preserve original formatting and avoid reference issues
+		transformedRoot.each((node) => {
+			root.append(node.clone());
+		});
+
+		// Log transformation statistics if requested
+		if (logTransformations && transformed.stats) {
+			const { totalRules, transformedRules } = transformed.stats;
+			console.log(`[${PLUGIN_NAME}] Transformation statistics:`);
+			console.log(`  - Total rules: ${totalRules}`);
+			console.log(`  - Total transformations: ${transformedRules}`);
+		}
+	} catch (error) {
+		throw new Error(
+			`${PLUGIN_NAME}: Failed to parse transformed CSS - ${error.message}`
+		);
+	}
 }
 
 postcssIfFunction.postcss = true;
