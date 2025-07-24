@@ -1,0 +1,4 @@
+.test {
+	width: if(media((orientation: landscape) and (hover: hover)): 80%; else: 100%);
+	font-size: if(media((min-width: 768px) and (max-width: 1024px) and (prefers-reduced-motion: no-preference)): 1.2rem; else: 1rem);
+}

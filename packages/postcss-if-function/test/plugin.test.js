@@ -3,7 +3,8 @@ import { describe, expect, it, vi } from 'vitest';
 import {
 	loadFixture,
 	normalizeCSS,
-	postcssFixtureTests
+	postcssFixtureTests,
+	runtimeOnlyFixtureTests
 } from '../../../test/scripts/fixture-utils.js';
 import { postcssIfFunction } from '../src/index.js';
 
@@ -24,6 +25,16 @@ describe('postcss-if-function plugin', () => {
 		it(`should ${description}`, async () => {
 			const { input, expected } = loadFixture(fixture);
 			await run(input, expected);
+		});
+	}
+
+	// Runtime-only fixtures that cannot be transformed at build time
+	// PostCSS should preserve these unchanged
+	for (const { fixture, description } of runtimeOnlyFixtureTests) {
+		it(`should preserve ${description} unchanged`, async () => {
+			const { input } = loadFixture(fixture);
+			// For runtime-only features, PostCSS should preserve the original CSS
+			await run(input, input);
 		});
 	}
 

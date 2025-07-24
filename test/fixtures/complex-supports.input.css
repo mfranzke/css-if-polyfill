@@ -1,0 +1,4 @@
+.test {
+	display: if(supports((display: grid) and (gap: 1rem)): grid; else: block);
+	color: if(supports(color: lab(50% 20 -30)): lab(50% 20 -30); supports(color: hsl(from red h s l)): hsl(from red h s l); else: blue);
+}
