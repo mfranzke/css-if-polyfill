@@ -101,10 +101,19 @@ jobs:
       security-events: write
       packages: read
 
+  audit-fix:
+    name: Suggest npm audit fix for Dependabot PRs
+    uses: ./.github/workflows/audit-fix-pr.yml
+    secrets: inherit
+    permissions:
+      contents: write
+      pull-requests: write
+
   # Stage 2: Build and comprehensive testing (requires all analysis to pass)
   ci:
     name: CI Tests & Build
     needs: [lint, quality, security]
+    if: always() && (needs.lint.result == 'success') && (needs.quality.result == 'success') && (needs.security.result == 'success')
     uses: ./.github/workflows/ci.yml
     secrets: inherit
     permissions:
