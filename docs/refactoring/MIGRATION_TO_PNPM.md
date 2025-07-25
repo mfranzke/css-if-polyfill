@@ -60,3 +60,57 @@ All workflows in `.github/workflows/` were updated to:
 ✅ Lockfile generated (`pnpm-lock.yaml`)
 
 The migration is complete and all functionality has been preserved while gaining the benefits of pnpm.
+
+## "Better isolation prevents unauthorized dependency access" in the context of pnpm vs npm
+
+### The Problem with npm's Hoisting
+
+**npm** uses a flat node_modules structure where dependencies are "hoisted" to the top level. This means:
+
+```text
+node_modules/
+├── react/          # Your direct dependency
+├── lodash/         # Hoisted from some sub-dependency
+├── axios/          # Hoisted from some sub-dependency
+└── moment/         # Hoisted from some sub-dependency
+```
+
+**Security issue**: Your code can `import lodash` even if you never declared it as a dependency in package.json. This is dangerous because:
+
+1. You're using an undeclared dependency
+2. If that sub-dependency removes lodash, your code breaks
+3. You might accidentally use a vulnerable version
+
+### pnpm's Isolated Approach
+
+**pnpm** uses symlinks and keeps dependencies isolated:
+
+```text
+node_modules/
+├── .pnpm/          # Actual packages stored here
+│   ├── react@18.0.0/
+│   ├── lodash@4.17.21/
+│   └── axios@1.0.0/
+└── react/          # Symlink to .pnpm/react@18.0.0/
+```
+
+**Security benefit**: You can ONLY access dependencies that are explicitly declared in your package.json. If you try to `import lodash` without declaring it, you get an error.
+
+### Real Example
+
+```javascript
+// This works with npm (dangerous!)
+import _ from "lodash"; // Not in package.json, but available due to hoisting
+
+// With pnpm (secure!)
+import _ from "lodash"; // Error: Cannot find module 'lodash'
+```
+
+### Why This Matters for Security
+
+1. **Dependency Confusion**: Prevents accidentally using wrong/malicious packages
+2. **Supply Chain**: Ensures you only use vetted, declared dependencies
+3. **Reproducibility**: Guarantees the same dependency tree across environments
+4. **Vulnerability Management**: Easier to audit since you know exactly what you're using
+
+So when I say "prevents unauthorized dependency access," I mean pnpm stops your code from accidentally using dependencies you didn't explicitly choose and vet, which is a significant security improvement over npm's permissive hoisting behavior.
