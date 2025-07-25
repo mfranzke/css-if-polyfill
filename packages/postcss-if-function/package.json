@@ -44,8 +44,8 @@
     "build": "microbundle",
     "dev": "microbundle watch",
     "postbuild": "cp dist/index.d.ts dist/index.d.cts",
-    "prepublishOnly": "npm run build",
-    "pretest:vitest": "npm run build",
+    "prepublishOnly": "pnpm run build",
+    "pretest:vitest": "pnpm run build",
     "test": "npm-run-all --sequential test:*",
     "test:vitest": "vitest run",
     "test:vitest:watch": "vitest"
