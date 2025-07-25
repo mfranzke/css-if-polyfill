@@ -46,7 +46,7 @@
     "postbuild": "cp dist/index.d.ts dist/index.d.cts",
     "prepublishOnly": "pnpm run build",
     "pretest:vitest": "pnpm run build",
-    "test": "npm-run-all --sequential test:*",
+    "test": "pnpm run '/^test:[^:]*$/'",
     "test:vitest": "vitest run",
     "test:vitest:watch": "vitest"
   },
