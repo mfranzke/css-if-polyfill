@@ -30,13 +30,13 @@ jobs:
       - name: Run npm audit fix
         run: npm audit fix
 
-      - name: Check if only package-lock.json changed
+      - name: Check if only pnpm-lock.yaml changed
         id: changes
         run: |
           git diff --name-only > changed_files.txt
           cat changed_files.txt
 
-          if grep -Fxq "package-lock.json" changed_files.txt && [ "$(wc -l < changed_files.txt)" -eq 1 ]; then
+          if grep -Fxq "pnpm-lock.yaml" changed_files.txt && [ "$(wc -l < changed_files.txt)" -eq 1 ]; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
           else
             echo "changed=false" >> "$GITHUB_OUTPUT"
