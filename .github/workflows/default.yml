@@ -57,7 +57,7 @@ jobs:
       - name: Check spelling
         uses: codespell-project/actions-codespell@v2
         with:
-          skip: "*.lock,*.json,coverage,node_modules,dist,_site,.git"
+          skip: "pnpm-lock.yaml,coverage,node_modules,dist,_site,.git"
           ignore_words_list: "moz,webkit"
           check_filenames: true
 
