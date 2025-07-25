@@ -59,13 +59,13 @@ npx --no @changesets/cli status
 ### Manually version packages (done automatically in CI)
 
 ```bash
-npm run changeset:version
+pnpm run changeset:version
 ```
 
 ### Manually publish (done automatically in CI)
 
 ```bash
-npm run changeset:release
+pnpm run changeset:release
 ```
 
 ## Example Workflow
@@ -149,7 +149,7 @@ Make sure these secrets are configured in your GitHub repository:
 If you need to release manually:
 
 ```bash
-npm run build
+pnpm run build
 npm version patch  # or minor/major
 npm publish
 git push --tags

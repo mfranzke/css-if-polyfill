@@ -16,20 +16,20 @@ We are committed to fostering a welcoming, respectful, and harassment-free envir
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Run tests
-npm test
+pnpm test
 
 # Run tests in watch mode
-npm run vitest:watch
+pnpm run vitest:watch
 
 # Build distribution files
-npm run build
+pnpm run build
 
 # Run examples
-npm run serve
+pnpm run serve
 
 # Lint code
-npm run lint
+pnpm run lint
 ```
