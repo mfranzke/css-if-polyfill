@@ -11,9 +11,7 @@ describe('postcss-if-function plugin', () => {
 	async function run(input, output, options = {}) {
 		const result = await postcss([postcssIfFunction(options)]).process(
 			input,
-			{
-				from: undefined
-			}
+			{ from: undefined }
 		);
 		expect(normalizeCSS(result.css)).toBe(normalizeCSS(output));
 		expect(result.warnings()).toHaveLength(0);
@@ -31,20 +29,20 @@ describe('postcss-if-function plugin', () => {
 		const { input, expected } = loadFixture('basic-media');
 
 		// Spy on console.log
-		const logSpy = vi.spyOn(console, 'log');
+		const consoleLogSpy = vi.spyOn(console, 'log');
 
 		await run(input, expected, { logTransformations: true });
 
-		expect(logSpy).toHaveBeenCalledWith(
+		expect(consoleLogSpy).toHaveBeenCalledWith(
 			'[postcss-if-function] Transformation statistics:'
 		);
 		expect(
-			logSpy.mock.calls.some((call) =>
+			consoleLogSpy.mock.calls.some((call) =>
 				call[0].includes('Total transformations: 1')
 			)
 		).toBe(true);
 
-		logSpy.mockRestore();
+		consoleLogSpy.mockRestore();
 	});
 
 	it('should handle malformed CSS gracefully', async () => {

@@ -13,21 +13,23 @@ const css = `
 `;
 
 async function demo() {
-	console.log('=== Original CSS ===');
-	console.log(css);
+	try {
+		console.log('=== Original CSS ===');
+		console.log(css);
 
-	const result = await postcss([
-		postcssIfFunction({
-			logTransformations: true
-		})
-	]).process(css, { from: undefined });
+		const result = await postcss([
+			postcssIfFunction({
+				logTransformations: true
+			})
+		]).process(css, { from: undefined });
 
-	console.log('\n=== Transformed CSS ===');
-	console.log(result.css);
+		console.log('\n=== Transformed CSS ===');
+		console.log(result.css);
+	} catch (error) {
+		console.error('Demo failed:', error);
+		throw error;
+	}
 }
 
-try {
-	await demo();
-} catch (error) {
-	console.error(error);
-}
+// Execute demo
+await demo();
