@@ -14,9 +14,10 @@ This is the main orchestrator workflow that runs analysis tasks in parallel, the
 
 **Stage 1: Parallel Analysis** (All run simultaneously, no build required)
 
-- **Lint & Code Style** - XO linting, Markdown linting, Package checks by publint, Prettier checks
+- **Lint & Code Style** - XO linting, Markdown linting, Package checks by publint, Prettier checks, Spell checking with codespell
 - **Quality Analysis** - Test coverage, quality metrics (embedded quality checks)
-- **Security Analysis** - CodeQL security scanning (embedded security checks)
+- **Security Analysis** - CodeQL security scanning (calls `codeql.yml`)
+- **Audit Fix for Dependabot** - Automatically suggests `npm audit fix` for Dependabot PRs (calls `audit-fix-pr.yml`, conditional)
 
 **Stage 2: Build & Test** (Requires all Stage 1 to pass)
 
@@ -50,7 +51,7 @@ This is the main orchestrator workflow that runs analysis tasks in parallel, the
 
 - **Test**: Runs on Node.js 22.x, 24.x
     - Checkout repository
-    - Install dependencies (with npm cache)
+    - Install dependencies (with pnpm cache)
     - Run tests with Vitest
     - Upload test coverage to Codecov
 - **Build**: Builds package and uploads artifacts
@@ -135,6 +136,35 @@ _Note: Comprehensive linting has been moved to default.yml to avoid duplication_
 
 _Note: This workflow remains independent as it handles specialized release processes_
 
+### 9. **Audit Fix for Dependabot PRs** (`.github/workflows/audit-fix-pr.yml`)
+
+**Triggers:** Dependabot PRs, Workflow calls from default.yml
+
+**Features:**
+
+- Automatically runs `npm audit fix` on Dependabot PRs
+- Creates follow-up PRs with security fixes when audit issues are found
+- Branches off the Dependabot PR for seamless integration
+- Adds appropriate labels (`security`, `dependabot`) for easy tracking
+- Only runs when Dependabot is the actor, minimizing unnecessary executions
+
+**Workflow:**
+
+1. Dependabot creates a PR with dependency updates
+2. Audit-fix workflow detects it's a Dependabot PR
+3. Runs `npm audit fix` to resolve any security vulnerabilities
+4. If changes are found, creates a new PR based on the Dependabot branch
+5. The new PR includes the audit fixes on top of the dependency updates
+
+**Benefits:**
+
+- **Proactive Security**: Catches and fixes security issues introduced by dependency updates
+- **Modular Design**: Separate workflow file maintains clean separation of concerns
+- **Automated Resolution**: Reduces manual intervention for common security fixes
+- **Clear Tracking**: Separate PRs make it easy to review security changes independently
+
+_Note: This workflow can run independently on PRs or be called from default.yml as part of the main pipeline_
+
 ## Workflow Architecture
 
 ### Parallel + Sequential Design
@@ -146,7 +176,8 @@ Default.yml (Orchestrator)
 ├── Stage 1: Parallel Analysis (simultaneous)
 │   ├── Lint & Code Style
 │   ├── Quality Analysis (with embedded testing)
-│   └── Security Analysis (CodeQL)
+│   ├── Security Analysis (CodeQL)
+│   └── Audit Fix for Dependabot (conditional)
 ├── Stage 2: CI Tests & Build (requires all Stage 1)
 ├── Stage 3: Performance Tests (conditional, requires Stage 2)
 ├── Stage 4: Deploy (main only, requires Stages 2-3)
@@ -245,7 +276,7 @@ Current performance benchmarks:
 
 ## Cache Strategy
 
-All workflows use npm caching with `actions/setup-node@v4` to speed up dependency installation.
+All workflows use pnpm caching with `actions/setup-node@v4` to speed up dependency installation.
 
 ## Artifact Retention
 
@@ -258,6 +289,7 @@ All workflows use npm caching with `actions/setup-node@v4` to speed up dependenc
 - **CodeQL Analysis**: Automated security scanning
 - **npm audit**: Dependency vulnerability checking
 - **Dependabot**: Automated dependency updates
+- **Audit Fix Automation**: Automatically suggests `npm audit fix` for Dependabot PRs by creating follow-up PRs with security fixes
 - **Private security reporting**: Configured in issue templates
 
 ## Usage Examples
@@ -314,7 +346,7 @@ if (results.avgProcessTime > 1) { // Change this value
 Follow the established patterns:
 
 1. Use `actions/checkout@v4` and `actions/setup-node@v4`
-2. Include npm caching
+2. Include pnpm caching
 3. Add appropriate error handling
 4. Upload relevant artifacts
 5. Use semantic commit messages

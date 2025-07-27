@@ -308,5 +308,5 @@ This document demonstrates the centralized test fixture system that provides a s
 To regenerate this documentation, run:
 
 ```bash
-npm run build:docs
+pnpm run build:docs
 ```

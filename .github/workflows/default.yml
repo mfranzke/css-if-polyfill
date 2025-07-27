@@ -34,25 +34,30 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
-          cache: "npm"
+          cache: "pnpm"
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Lint code (xo), markdown (markdownlint), and package (publint)
-        run: npm run lint
+        run: pnpm run lint
 
       - name: Check code style
-        run: npx --no prettier . --check
+        run: pnpm exec prettier . --check
 
       - name: Check spelling
         uses: codespell-project/actions-codespell@v2
         with:
-          skip: "*.lock,*.json,coverage,node_modules,dist,_site,.git"
+          skip: "pnpm-lock.yaml,coverage,node_modules,dist,_site,.git"
           ignore_words_list: "moz,webkit"
           check_filenames: true
 
@@ -70,17 +75,22 @@ jobs:
         with:
           fetch-depth: 0 # Needed for quality analysis
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
-          cache: "npm"
+          cache: "pnpm"
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Run tests with coverage
-        run: npm run test:vitest --workspaces -- --coverage --coverage.reporter lcov --coverage.reporter json
+        run: pnpm run --recursive test:vitest --coverage --coverage.reporter lcov --coverage.reporter json
 
       - name: Upload coverage reports
         uses: actions/upload-artifact@v4
@@ -101,10 +111,19 @@ jobs:
       security-events: write
       packages: read
 
+  audit-fix:
+    name: Suggest pnpm audit --fix for Dependabot PRs
+    uses: ./.github/workflows/audit-fix-pr.yml
+    secrets: inherit
+    permissions:
+      contents: write
+      pull-requests: write
+
   # Stage 2: Build and comprehensive testing (requires all analysis to pass)
   ci:
     name: CI Tests & Build
     needs: [lint, quality, security]
+    if: always() && (needs.lint.result == 'success') && (needs.quality.result == 'success') && (needs.security.result == 'success')
     uses: ./.github/workflows/ci.yml
     secrets: inherit
     permissions:
