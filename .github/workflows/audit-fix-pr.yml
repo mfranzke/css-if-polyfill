@@ -65,7 +65,7 @@ jobs:
 
       - name: Approve PR
         env:
-          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           gh pr review ${{ steps.create-pr.outputs.pull-request-url }} --approve
 
