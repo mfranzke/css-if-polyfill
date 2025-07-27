@@ -30,7 +30,7 @@
     "changeset:release": "pnpm run build && pnpm exec changeset publish",
     "codestyle": "prettier . --write",
     "dev": "pnpm --recursive run dev",
-    "lint": "pnpm run '/^lint:[^:]*$/'",
+    "lint": "pnpm --parallel run '/^lint:[^:]*$/'",
     "lint:markdownlint": "markdownlint --config .config/.markdown-lint.yml **/*.md",
     "lint:packages": "publint packages/css-if-polyfill && publint packages/postcss-if-function",
     "lint:xo": "xo",
