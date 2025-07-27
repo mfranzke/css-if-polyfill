@@ -38,7 +38,7 @@ All workflows in `.github/workflows/` were updated to:
 1. **Performance**: pnpm is faster than npm for installation and builds
 2. **Disk Space**: pnpm uses symlinks to save disk space with shared dependencies
 3. **Security**: pnpm has better security model with isolated dependencies
-4. **Workspace Support**: Better monorepo support with pnpm workspaces
+4. **Workspace Support**: Better monorepo support with pnpm workspaces with `--parallel` option
 
 ## Commands Changed
 
