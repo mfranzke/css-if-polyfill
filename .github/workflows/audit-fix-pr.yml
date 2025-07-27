@@ -64,12 +64,14 @@ jobs:
           base: ${{ github.head_ref }}
 
       - name: Approve PR
+        if: steps.changes.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           gh pr review ${{ steps.create-pr.outputs.pull-request-url }} --approve
 
       - name: Enable Auto-Merge
+        if: steps.changes.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
