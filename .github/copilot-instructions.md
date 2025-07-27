@@ -77,7 +77,7 @@ When working with CSS if() functions, always follow the official WCAG specificat
 - Follow XO linting rules (extends ESLint strict configuration)
 - Use `/* eslint-disable rule-name */` blocks only when necessary for browser automation
 - Prefer functional programming patterns
-- Use meaningful variable names and comprehensive JSDoc comments
+- Use meaningful variable names and comprehensive JSDoc comments, instead of TypeScript within our source code, but still provide type definitions for public APIs
 
 ### Testing Requirements
 
