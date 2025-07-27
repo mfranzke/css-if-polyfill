@@ -7,8 +7,10 @@ CHECKS=(
 # Check for changes in specified files before pushing and run corresponding commands
 ## Get the upstream branch
 UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)
-if [ -z "$UPSTREAM" ]; then
-  echo "No upstream configured, skipping pre-push checks."
+UPSTREAM_EXIT_CODE=$?
+
+if [ $UPSTREAM_EXIT_CODE -ne 0 ] || [ -z "$UPSTREAM" ]; then
+  echo "No upstream configured or unable to determine upstream, skipping pre-push checks."
   exit 0
 fi
 
