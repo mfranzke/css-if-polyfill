@@ -112,7 +112,7 @@ jobs:
       packages: read
 
   audit-fix:
-    name: Suggest pnpm audit fix for Dependabot PRs
+    name: Suggest pnpm audit --fix for Dependabot PRs
     uses: ./.github/workflows/audit-fix-pr.yml
     secrets: inherit
     permissions:
