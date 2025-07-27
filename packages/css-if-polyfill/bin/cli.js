@@ -68,11 +68,10 @@ const main = async () => {
 
 		// Show statistics if requested
 		if (options.showStats && result.stats) {
+			const { totalRules, transformedRules } = result.stats;
 			console.log('\n📊 Transformation Statistics:');
-			console.log(`  Total rules processed: ${result.stats.totalRules}`);
-			console.log(
-				`  Rules with if() transformed: ${result.stats.transformedRules}`
-			);
+			console.log(`  Total rules processed: ${totalRules}`);
+			console.log(`  Rules with if() transformed: ${transformedRules}`);
 			console.log(
 				`  Has runtime rules: ${result.hasRuntimeRules ? 'Yes' : 'No'}`
 			);
@@ -91,9 +90,10 @@ const main = async () => {
 		// Combine native CSS with any remaining runtime CSS
 		let finalCSS = result.nativeCSS;
 		if (result.hasRuntimeRules && result.runtimeCSS) {
-			finalCSS +=
-				'\n\n/* Runtime-processed rules (require polyfill) */\n' +
-				result.runtimeCSS;
+			finalCSS += `
+
+/* Runtime-processed rules (require polyfill) */
+${result.runtimeCSS}`;
 		}
 
 		// Output result

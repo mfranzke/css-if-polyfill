@@ -96,8 +96,7 @@ const evaluateStyleCondition = (condition) => {
 
 	// Parse property and optional value
 	const parts = query.split(':').map((part) => part.trim());
-	const property = parts[0];
-	const expectedValue = parts[1];
+	const [property, expectedValue] = parts;
 
 	// Get computed style from document element or a test element
 	const testElement = document.createElement('div');
@@ -174,18 +173,22 @@ const evaluateSupportsCondition = (condition) => {
 	}
 };
 
+// Constants for boolean evaluation
+const TRUTHY_VALUES = new Set(['true', '1']);
+const FALSY_VALUES = new Set(['false', '0']);
+
 /**
  * Evaluate boolean condition
  */
 const evaluateBooleanCondition = (condition) => {
-	// Simple boolean evaluation
+	// Simple boolean evaluation using pre-defined Sets for faster lookups
 	const lowerCondition = condition.toLowerCase();
 
-	if (lowerCondition === 'true' || lowerCondition === '1') {
+	if (TRUTHY_VALUES.has(lowerCondition)) {
 		return true;
 	}
 
-	if (lowerCondition === 'false' || lowerCondition === '0') {
+	if (FALSY_VALUES.has(lowerCondition)) {
 		return false;
 	}
 
@@ -320,7 +323,7 @@ const processMultipleConditions = (
 	originalContent = null
 ) => {
 	// Handle malformed if() functions that don't contain proper syntax
-	if (!ifContent || !ifContent.includes(':')) {
+	if (!ifContent?.includes(':')) {
 		log('Malformed if() function - missing colon separator');
 		throw new Error('Malformed if() syntax');
 	}
@@ -491,9 +494,12 @@ const processCSSText = (cssText, options = {}, element = null) => {
 			const ifFunctions = findIfFunctions(result);
 
 			// Process if() functions from right to left to maintain indices
-			for (let i = ifFunctions.length - 1; i >= 0; i--) {
-				const { match, content, start, end } = ifFunctions[i];
-
+			for (const {
+				match,
+				content,
+				start,
+				end
+			} of ifFunctions.reverse()) {
 				log('Processing if() function:', match);
 
 				try {

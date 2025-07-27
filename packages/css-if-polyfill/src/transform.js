@@ -376,8 +376,7 @@ const transformPropertyToNative = (selector, property, value) => {
 
 			// Create conditional rules for each condition (in reverse order for CSS cascade)
 			const { conditions } = parsed;
-			for (let i = conditions.length - 1; i >= 0; i--) {
-				const condition = conditions[i];
+			for (const condition of conditions.reverse()) {
 				const nativeCondition =
 					condition.conditionType === 'media'
 						? `@media (${condition.conditionExpression})`
@@ -417,7 +416,7 @@ const transformPropertyToNative = (selector, property, value) => {
 
 	// Add fallback rules first (mobile-first approach)
 	if (fallbackRules.length > 0) {
-		nativeCSS = fallbackRules.join('\n') + '\n' + nativeCSS;
+		nativeCSS = `${fallbackRules.join('\n')}\n${nativeCSS}`;
 	}
 
 	// Generate runtime CSS
@@ -545,7 +544,7 @@ const transformToNativeCSS = (cssText) => {
 
 		if (!rule) {
 			// Keep non-rule content as-is
-			nativeCSS += ruleText + '\n';
+			nativeCSS += `${ruleText}\n`;
 			continue;
 		}
 
@@ -562,11 +561,11 @@ const transformToNativeCSS = (cssText) => {
 				);
 
 				if (transformed.nativeCSS) {
-					nativeCSS += transformed.nativeCSS + '\n';
+					nativeCSS += `${transformed.nativeCSS}\n`;
 				}
 
 				if (transformed.hasRuntimeRules) {
-					runtimeCSS += transformed.runtimeCSS + '\n';
+					runtimeCSS += `${transformed.runtimeCSS}\n`;
 					hasRuntimeRules = true;
 				}
 			} else {
@@ -581,7 +580,7 @@ const transformToNativeCSS = (cssText) => {
 			nativeCSS += `${rule.selector} { ${nonIfProperties.join('; ')}; }\n`;
 		} else if (!hasIfConditions) {
 			// Keep rules without if() conditions as-is
-			nativeCSS += ruleText + '\n';
+			nativeCSS += `${ruleText}\n`;
 		}
 	}
 

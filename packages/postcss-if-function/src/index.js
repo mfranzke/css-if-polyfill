@@ -36,6 +36,7 @@
 import { buildTimeTransform } from 'css-if-polyfill';
 
 const PLUGIN_NAME = 'postcss-if-function';
+const IF_FUNCTION_PATTERN = 'if(';
 
 /**
  * PostCSS plugin options
@@ -63,16 +64,16 @@ function postcssIfFunction(options = {}) {
 			// Collect all CSS text first
 			const cssText = root.toString();
 
-			// Check if there are any if() functions to transform
-			if (!cssText.includes('if(')) {
+			// Early return if no if() functions to transform
+			if (!cssText.includes(IF_FUNCTION_PATTERN)) {
 				return;
 			}
 
 			// Apply transformation
 			const transformed = buildTimeTransform(cssText);
 
+			// Early return if no transformations were made
 			if (transformed.nativeCSS === cssText) {
-				// No transformations were made
 				return;
 			}
 
