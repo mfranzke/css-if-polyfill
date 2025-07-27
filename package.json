@@ -14,10 +14,7 @@
   "author": "Maximilian Franzke",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
-  "packageManager": "npm@11.4.2",
+  "packageManager": "pnpm@9.0.0",
   "keywords": [
     "css",
     "polyfill",
@@ -28,20 +25,20 @@
     "style"
   ],
   "scripts": {
-    "build": "npm run build --workspaces",
+    "build": "pnpm --recursive run build",
     "build:docs": "node scripts/build-docs.js",
-    "changeset:release": "npm run build && npx --no @changesets/cli publish",
+    "changeset:release": "pnpm run build && pnpm exec changeset publish",
     "codestyle": "prettier . --write",
-    "dev": "npm run dev --workspaces",
-    "lint": "npm-run-all --parallel lint:*",
+    "dev": "pnpm --recursive run dev",
+    "lint": "pnpm --parallel run '/^lint:[^:]*$/'",
     "lint:markdownlint": "markdownlint --config .config/.markdown-lint.yml **/*.md",
     "lint:packages": "publint packages/css-if-polyfill && publint packages/postcss-if-function",
     "lint:xo": "xo",
-    "prelint:packages": "npm run build",
+    "prelint:packages": "pnpm run build",
     "prepare": "husky",
-    "preserve": "npm run build --workspace=css-if-polyfill",
+    "preserve": "pnpm --filter=css-if-polyfill run build",
     "serve": "http-server -p 3000 -o examples/basic-examples.html",
-    "test": "npm test --workspaces"
+    "test": "pnpm --recursive run test"
   },
   "devDependencies": {
     "@babel/core": "7.28.0",
@@ -56,7 +53,6 @@
     "lint-staged": "16.1.2",
     "markdownlint-cli": "0.45.0",
     "microbundle": "0.15.1",
-    "npm-run-all2": "8.0.4",
     "playwright": "1.54.1",
     "prettier": "3.6.2",
     "prettier-plugin-organize-imports": "4.1.0",
@@ -66,7 +62,9 @@
     "vitest": "3.2.4",
     "xo": "1.1.1"
   },
-  "overrides": {
-    "@eslint/plugin-kit": "0.3.3"
+  "pnpm": {
+    "overrides": {
+      "@eslint/plugin-kit": "0.3.3"
+    }
   }
 }

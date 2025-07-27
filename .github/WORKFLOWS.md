@@ -51,7 +51,7 @@ This is the main orchestrator workflow that runs analysis tasks in parallel, the
 
 - **Test**: Runs on Node.js 22.x, 24.x
     - Checkout repository
-    - Install dependencies (with npm cache)
+    - Install dependencies (with pnpm cache)
     - Run tests with Vitest
     - Upload test coverage to Codecov
 - **Build**: Builds package and uploads artifacts
@@ -276,7 +276,7 @@ Current performance benchmarks:
 
 ## Cache Strategy
 
-All workflows use npm caching with `actions/setup-node@v4` to speed up dependency installation.
+All workflows use pnpm caching with `actions/setup-node@v4` to speed up dependency installation.
 
 ## Artifact Retention
 
@@ -346,7 +346,7 @@ if (results.avgProcessTime > 1) { // Change this value
 Follow the established patterns:
 
 1. Use `actions/checkout@v4` and `actions/setup-node@v4`
-2. Include npm caching
+2. Include pnpm caching
 3. Add appropriate error handling
 4. Upload relevant artifacts
 5. Use semantic commit messages

@@ -1,4 +1,4 @@
-name: Suggest npm audit fix for Dependabot PRs
+name: Suggest pnpm audit --fix for Dependabot PRs
 
 on:
   pull_request:
@@ -18,25 +18,30 @@ jobs:
           ref: ${{ github.head_ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
-          cache: "npm"
+          cache: "pnpm"
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
-      - name: Run npm audit fix
-        run: npm audit fix
+      - name: Run pnpm audit --fix
+        run: pnpm audit --fix
 
-      - name: Check if only package-lock.json changed
+      - name: Check if only pnpm-lock.yaml changed
         id: changes
         run: |
           git diff --name-only > changed_files.txt
           cat changed_files.txt
 
-          if grep -Fxq "package-lock.json" changed_files.txt && [ "$(wc -l < changed_files.txt)" -eq 1 ]; then
+          if grep -Fxq "pnpm-lock.yaml" changed_files.txt && [ "$(wc -l < changed_files.txt)" -eq 1 ]; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
           else
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -44,17 +49,18 @@ jobs:
 
       - name: Create PR with audit fix
         if: steps.changes.outputs.changed == 'true'
+        id: create-pr
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore: npm audit fix"
+          commit-message: "chore: pnpm audit --fix"
           branch: "refactor-auditfix-${{ github.head_ref }}"
-          title: "chore: Apply npm audit fix on top of #${{ github.event.pull_request.number }}"
+          title: "chore: Apply pnpm audit --fix on top of #${{ github.event.pull_request.number }}"
           labels: security, dependabot
           body: |
-            This PR applies `npm audit fix` on top of the Dependabot PR #${{ github.event.pull_request.number }}.
+            This PR applies `pnpm audit --fix` on top of the Dependabot PR #${{ github.event.pull_request.number }}.
 
-            It is created automatically to suggest applying security updates that `npm audit fix` can resolve.
+            It is created automatically to suggest applying security updates that `pnpm audit --fix` can resolve.
           base: ${{ github.head_ref }}
 
       - name: Approve PR
