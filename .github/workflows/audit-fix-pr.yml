@@ -1,4 +1,4 @@
-name: Suggest pnpm audit fix for Dependabot PRs
+name: Suggest pnpm audit --fix for Dependabot PRs
 
 on:
   pull_request:
@@ -32,7 +32,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run pnpm audit fix
+      - name: Run pnpm audit --fix
         run: pnpm audit --fix
 
       - name: Check if only pnpm-lock.yaml changed
@@ -53,9 +53,9 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore: pnpm audit fix"
+          commit-message: "chore: pnpm audit --fix"
           branch: "refactor-auditfix-${{ github.head_ref }}"
-          title: "chore: Apply pnpm audit fix on top of #${{ github.event.pull_request.number }}"
+          title: "chore: Apply pnpm audit --fix on top of #${{ github.event.pull_request.number }}"
           labels: security, dependabot
           body: |
             This PR applies `pnpm audit --fix` on top of the Dependabot PR #${{ github.event.pull_request.number }}.
