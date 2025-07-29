@@ -8,6 +8,33 @@ A [PostCSS](https://postcss.org/) plugin for transforming CSS `if()` functions i
 
 This plugin is part of the [css-if-polyfill](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/css-if-polyfill/) project and provides build-time transformation of conditional CSS, eliminating the need for runtime JavaScript processing when using only `media()` and `supports()` functions.
 
+<!-- FIXTURE: basic-media -->
+
+<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory -->
+
+**Input CSS:**
+
+```css
+.responsive {
+	width: if(media(max-width: 768px): 100%; else: 50%);
+}
+```
+
+**Expected Output:**
+
+```css
+.responsive {
+	width: 50%;
+}
+@media (max-width: 768px) {
+	.responsive {
+		width: 100%;
+	}
+}
+```
+
+<!-- /FIXTURE -->
+
 ## Installation
 
 ```bash
