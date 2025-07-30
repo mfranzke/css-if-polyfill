@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- 07385d6: docs: README improvements
+- 1593747: docs: README improvements
 
 ## 0.1.3
 
