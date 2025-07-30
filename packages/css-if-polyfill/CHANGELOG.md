@@ -1,11 +1,5 @@
 # css-if-polyfill
 
-## 0.1.4
-
-### Patch Changes
-
-- 07385d6: docs: README improvements
-
 ## 0.1.3
 
 ### Patch Changes
