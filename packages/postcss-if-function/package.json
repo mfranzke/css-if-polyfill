@@ -10,6 +10,7 @@
   "bugs": {
     "url": "https://github.com/mfranzke/css-if-polyfill/issues"
   },
+  "author": "Maximilian Franzke",
   "license": "MIT",
   "main": "dist/index.cjs",
   "types": "dist/index.d.ts",
