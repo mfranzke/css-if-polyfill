@@ -166,6 +166,8 @@ jobs:
           echo "Examples updated automatically on $(date)" > examples/.updated
 
       - name: Commit documentation updates
+        env:
+          HUSKY: 0 # Disable Husky hooks in CI
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
