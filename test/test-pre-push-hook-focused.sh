@@ -220,9 +220,6 @@ test_hook_with_upstream_no_monitored_changes() {
         ((TESTS_FAILED++))
     fi
 
-    # Remove test file
-    rm -f "$test_file" >/dev/null 2>&1
-
     git checkout "$ORIGINAL_BRANCH" >/dev/null 2>&1
 }
 
