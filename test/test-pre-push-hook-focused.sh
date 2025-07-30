@@ -101,29 +101,42 @@ test_hook_with_upstream_and_changes() {
     # Backup package.json
     cp package.json package.json.backup
 
-    # Make initial change and commit
-    sed 's/"description": ".*"/"description": "Test modification for pre-push hook testing"/' package.json > package.json.tmp && mv package.json.tmp package.json
+    # Add a new dependency that will require pnpm-lock.yaml update
+    # Using jq if available, otherwise sed
+    if command -v jq >/dev/null 2>&1; then
+        # Use jq for clean JSON manipulation
+        jq '.devDependencies["test-dependency-for-hook"] = "1.0.0"' package.json > package.json.tmp && mv package.json.tmp package.json
+    else
+        # Fallback to sed - add dependency before the closing brace of devDependencies
+        sed 's/"xo": "1\.1\.1"/"xo": "1.1.1",\n    "test-dependency-for-hook": "1.0.0"/' package.json > package.json.tmp && mv package.json.tmp package.json
+    fi
+
     git add package.json
-    git commit -m "test: modify package.json for pre-push hook testing" >/dev/null 2>&1
+    git commit -m "test: add new dependency to trigger pnpm-lock.yaml update" >/dev/null 2>&1
 
     # Push to remote to establish upstream (use --no-verify to bypass hook for initial push)
     log_info "Creating upstream by pushing test branch to remote..."
     if git push --no-verify --set-upstream origin "$test_branch" >/dev/null 2>&1; then
         log_success "Successfully established upstream for test branch"
 
-        # Make another change to package.json to test hook with existing upstream
-        sed 's/"Test modification for pre-push hook testing"/"Another test modification for hook testing"/' package.json > package.json.tmp && mv package.json.tmp package.json
+        # Make another dependency change to test hook with existing upstream
+        if command -v jq >/dev/null 2>&1; then
+            jq '.devDependencies["another-test-dependency"] = "2.0.0"' package.json > package.json.tmp && mv package.json.tmp package.json
+        else
+            sed 's/"test-dependency-for-hook": "1\.0\.0"/"test-dependency-for-hook": "1.0.0",\n    "another-test-dependency": "2.0.0"/' package.json > package.json.tmp && mv package.json.tmp package.json
+        fi
+
         git add package.json
-        git commit -m "test: second modification to test hook with upstream" >/dev/null 2>&1
+        git commit -m "test: add another dependency to test hook with upstream" >/dev/null 2>&1
 
         # Now test the hook by pushing (this should trigger the hook)
-        log_info "Testing hook with package.json changes and established upstream..."
+        log_info "Testing hook with package.json dependency changes and established upstream..."
         local push_output
         push_output=$(git push 2>&1)
         local push_exit_code=$?
 
-        # The hook should detect package.json changes and run pnpm install
-        if echo "$push_output" | grep -q "Detected changes.*package.json\|pnpm install"; then
+        # The hook should detect package.json changes and run pnpm install --frozen-lockfile
+        if echo "$push_output" | grep -q "Detected changes.*package.json\|pnpm install.*frozen-lockfile"; then
             log_success "TEST 2 PASSED: Hook detected package.json changes and ran pnpm install"
             ((TESTS_PASSED++))
         elif [ $push_exit_code -eq 0 ]; then
@@ -136,8 +149,14 @@ test_hook_with_upstream_and_changes() {
                 ((TESTS_PASSED++))
             fi
         else
-            log_error "TEST 2 FAILED: Push failed unexpectedly. Output: $push_output"
-            ((TESTS_FAILED++))
+            # Check if the failure is expected due to dependency resolution issues
+            if echo "$push_output" | grep -q "pnpm install.*frozen-lockfile"; then
+                log_success "TEST 2 PASSED: Hook correctly detected dependency changes and attempted validation (expected to fail with fake dependencies)"
+                ((TESTS_PASSED++))
+            else
+                log_error "TEST 2 FAILED: Push failed unexpectedly. Output: $push_output"
+                ((TESTS_FAILED++))
+            fi
         fi
     else
         log_error "TEST 2 FAILED: Could not push test branch to remote to establish upstream"
