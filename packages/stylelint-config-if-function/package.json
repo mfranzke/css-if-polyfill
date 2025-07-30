@@ -2,7 +2,7 @@
   "name": "stylelint-config-if-function",
   "version": "0.0.0",
   "type": "module",
-  "description": "CSS modules shareable config for stylelint",
+  "description": "Shareable stylelint config for CSS if() function support",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mfranzke/css-if-polyfill.git"
