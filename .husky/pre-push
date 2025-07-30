@@ -1,8 +1,6 @@
 # Configuration: Each entry is an array with [pattern, command, description]
-CHECKS=(
-  # Format: "pattern" "command" "pattern description"
-  '^(package\.json|pnpm-lock\.yaml)$' 'pnpm install --lockfile-only --ignore-scripts' 'package.json or pnpm-lock.yaml – please run pnpm install to update dependencies'
-)
+# Format: "pattern" "command" "pattern description"
+CHECKS=('^(package\.json|pnpm-lock\.yaml)$' 'pnpm install --lockfile-only --ignore-scripts' 'package.json or pnpm-lock.yaml – please run pnpm install to update dependencies')
 
 # Check for changes in specified files before pushing and run corresponding commands
 ## Get the upstream branch
