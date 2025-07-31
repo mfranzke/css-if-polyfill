@@ -276,13 +276,18 @@
 		</div>
 
 		<script type="module">
-			import { init } from "../packages/css-if-polyfill/dist/index.modern.js";
+			import {
+				init,
+				hasNativeSupport,
+				refresh,
+				processCSSText
+			} from "../packages/css-if-polyfill/dist/index.modern.js";
 
 			// Initialize the polyfill
 			const polyfill = init(); // Update status indicator
 			function updateStatus() {
 				const statusEl = document.getElementById("status");
-				const hasNative = polyfill.hasNativeSupport();
+				const hasNative = hasNativeSupport();
 
 				if (hasNative) {
 					statusEl.textContent = "Native CSS if() support detected";
@@ -313,7 +318,7 @@
 
 			// Control functions
 			document.querySelector(".refreshPolyfill").onclick = function () {
-				polyfill.refresh();
+				refresh();
 				console.log("Polyfill refreshed");
 			};
 
@@ -334,7 +339,7 @@
 				const outputEl = document.getElementById("manual-css-output");
 
 				const inputCSS = inputEl.textContent.trim();
-				const outputCSS = polyfill.processCSSText(inputCSS);
+				const outputCSS = processCSSText(inputCSS);
 
 				outputEl.innerHTML = `
               <strong>Input:</strong> ${escapeHtml(inputCSS)}<br>
