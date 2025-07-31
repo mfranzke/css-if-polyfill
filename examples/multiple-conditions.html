@@ -376,7 +376,10 @@
 		</div>
 
 		<script type="module">
-			import { init } from "../packages/css-if-polyfill/dist/index.modern.js";
+			import {
+				init,
+				processCSSText
+			} from "../packages/css-if-polyfill/dist/index.modern.js";
 
 			// Initialize the polyfill
 			init(); // Control functions
@@ -417,7 +420,7 @@
 
 			console.log("Test CSS processing:");
 			console.log("Input:", testCSS);
-			console.log("Output:", polyfill.processCSSText(testCSS));
+			console.log("Output:", processCSSText(testCSS));
 
 			console.log("Multiple conditions CSS if() polyfill loaded!");
 		</script>
