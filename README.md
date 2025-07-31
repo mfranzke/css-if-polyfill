@@ -9,7 +9,7 @@
 [![Open Source Love](https://badges.frapsoft.com/os/v3/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.0-4baaaa.svg)](CODE-OF-CONDUCT.md)
 
-A modern JavaScript [polyfill](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/css-if-polyfill), [PostCSS plugin](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/postcss-if-function) and a [Stylelint plugin](stylelint-config-if-function) (to extend to prevent lint errors) for the [CSS `if()` function](https://developer.mozilla.org/en-US/docs/Web/CSS/if) with **hybrid build-time and runtime processing**. Transforms CSS `if()` functions to native `@media` and `@supports` rules where possible, with runtime fallback for dynamic conditions.
+A modern JavaScript [polyfill](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/css-if-polyfill), [PostCSS plugin](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/postcss-if-function) and a [Stylelint plugin](stylelint-config-if-function) (to extend to prevent lint false positives) for the [CSS `if()` function](https://developer.mozilla.org/en-US/docs/Web/CSS/if) with **hybrid build-time and runtime processing**. Transforms CSS `if()` functions to native `@media` and `@supports` rules where possible, with runtime fallback for dynamic conditions.
 
 ## Contributing
 
