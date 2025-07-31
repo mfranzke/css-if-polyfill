@@ -279,10 +279,10 @@
 			import { init } from "../dist/index.modern.js";
 
 			// Initialize the polyfill
-			init(); // Update status indicator
+			const polyfill = init(); // Update status indicator
 			function updateStatus() {
 				const statusEl = document.getElementById("status");
-				const hasNative = CSSIfPolyfill.hasNativeSupport();
+				const hasNative = polyfill.hasNativeSupport();
 
 				if (hasNative) {
 					statusEl.textContent = "Native CSS if() support detected";
@@ -313,7 +313,7 @@
 
 			// Control functions
 			document.querySelector(".refreshPolyfill").onclick = function () {
-				CSSIfPolyfill.refresh();
+				polyfill.refresh();
 				console.log("Polyfill refreshed");
 			};
 
@@ -321,7 +321,7 @@
 			document.querySelector(".toggleDebug").onclick = function () {
 				// Toggle debug mode
 				debugEnabled = !debugEnabled;
-				CSSIfPolyfill.options.debug = debugEnabled;
+				polyfill.options.debug = debugEnabled;
 				console.log(
 					"Debug mode:",
 					debugEnabled ? "enabled" : "disabled"
@@ -334,7 +334,7 @@
 				const outputEl = document.getElementById("manual-css-output");
 
 				const inputCSS = inputEl.textContent.trim();
-				const outputCSS = CSSIfPolyfill.processCSSText(inputCSS);
+				const outputCSS = polyfill.processCSSText(inputCSS);
 
 				outputEl.innerHTML = `
               <strong>Input:</strong> ${escapeHtml(inputCSS)}<br>
