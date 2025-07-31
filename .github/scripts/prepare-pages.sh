@@ -14,7 +14,7 @@ cp -r examples/* _site/examples/
 # Copy dist folder for example pages to access the scripts
 echo "Copying dist folder..."
 mkdir -p _site/dist
-cp -r packages/css-if-polyfill/dist/* _site/dist/
+cp -r packages/css-if-polyfill/dist/* _site/packages/css-if-polyfill/dist/
 
 # Copy the index.html template
 echo "Copying index.html template..."
