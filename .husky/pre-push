@@ -6,8 +6,14 @@ CHECKS=('^(package\.json|pnpm-lock\.yaml)$' 'pnpm install --lockfile-only --igno
 ## Get the upstream branch
 UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || echo "")
 if [ -z "$UPSTREAM" ]; then
-  echo "No upstream configured, checking against main branch."
-  UPSTREAM="main"
+  echo "No upstream configured, detecting default branch."
+  # Try to detect the default branch from origin/HEAD
+  DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+  if [ -z "$DEFAULT_BRANCH" ]; then
+    echo "Could not detect default branch, falling back to 'main'."
+    DEFAULT_BRANCH="main"
+  fi
+  UPSTREAM="$DEFAULT_BRANCH"
 fi
 
 ## Get the list of files changed between upstream and HEAD
