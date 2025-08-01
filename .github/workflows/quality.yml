@@ -32,7 +32,7 @@ jobs:
           cache: "pnpm"
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
       - name: Run tests with coverage
         run: pnpm run --recursive test:vitest --coverage --coverage.reporter lcov --coverage.reporter json
@@ -81,7 +81,7 @@ jobs:
           cache: "pnpm"
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
       - name: Run security audit
         run: pnpm audit --audit-level=low
