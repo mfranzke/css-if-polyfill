@@ -6,8 +6,8 @@ CHECKS=('^(package\.json|pnpm-lock\.yaml)$' 'pnpm install --lockfile-only --igno
 ## Get the upstream branch
 UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || echo "")
 if [ -z "$UPSTREAM" ]; then
-  echo "No upstream configured, skipping pre-push checks."
-  exit 0
+  echo "No upstream configured, checking against main branch."
+  UPSTREAM="main"
 fi
 
 ## Get the list of files changed between upstream and HEAD
