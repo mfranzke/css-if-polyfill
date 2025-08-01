@@ -4,7 +4,7 @@ const config = {
 			true,
 			{
 				ignoreProperties: {
-					'/.+/': ['/^if(.*)/']
+					'/.+/': [String.raw`/^if\((?:[^;]+:[^;]*;?)+\)$/`]
 				}
 			}
 		],
