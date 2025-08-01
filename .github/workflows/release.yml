@@ -68,9 +68,22 @@ jobs:
           # this expects you to have a script called changeset:release which does a build for your packages and calls changeset publish
           publish: pnpm run changeset:release
           commit: "chore: version packages" # we need to fulfill commitlint based rules
-          version: "pnpm changeset version && pnpm install && git add . && git commit -m 'chore: update versions and lockfile'"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
           HUSKY: 0 # Disable Husky hooks in CI
+
+      - name: Update lockfile
+        run: |
+          pnpm install
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "chore: version packages and update lockfile" || echo "No changes to commit"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.head_ref }}
