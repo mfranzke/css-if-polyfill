@@ -27,7 +27,9 @@
   "scripts": {
     "build": "pnpm --recursive run build",
     "build:docs": "node scripts/build-docs.js",
-    "changeset:release": "pnpm run build && pnpm exec changeset publish",
+    "changeset": "changeset",
+    "changeset:publish": "pnpm run build && pnpm exec changeset publish",
+    "changeset:version": "changeset version && pnpm install --lockfile-only",
     "codestyle": "prettier . --write",
     "dev": "pnpm --recursive run dev",
     "lint": "pnpm --parallel run '/^lint:[^:]*$/'",
