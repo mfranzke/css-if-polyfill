@@ -1,0 +1,4 @@
+.test {
+	color: if(media(print): red);
+	background: if(supports(display: none): transparent);
+}

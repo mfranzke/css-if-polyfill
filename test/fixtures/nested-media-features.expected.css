@@ -1,0 +1,16 @@
+.test {
+	width: 100%;
+}
+@media ((orientation: landscape) and (hover: hover)) {
+	.test {
+		width: 80%;
+	}
+}
+.test {
+	font-size: 1rem;
+}
+@media ((min-width: 768px) and (max-width: 1024px) and (prefers-reduced-motion: no-preference)) {
+	.test {
+		font-size: 1.2rem;
+	}
+}
