@@ -3,9 +3,6 @@ set -e
 
 echo "Preparing GitHub Pages content..."
 
-# Create pages directory
-mkdir -p _site
-
 # Copy examples folder
 echo "Copying examples..."
 mkdir -p _site/examples
