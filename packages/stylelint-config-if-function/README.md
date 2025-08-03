@@ -5,7 +5,7 @@ A shareable Stylelint config to support the experimental CSS `if()` function syn
 ## Installation
 
 ```bash
-npm install --save-dev stylelint stylelint-config-if-function
+npm install --save-dev stylelint-config-if-function stylelint stylelint-config-standard
 ```
 
 ## Configuration
