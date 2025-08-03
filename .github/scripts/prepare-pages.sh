@@ -18,7 +18,7 @@ cp -r packages/css-if-polyfill/dist/* _site/packages/css-if-polyfill/dist/
 
 # Copy the index.html template
 echo "Copying index.html template..."
-cp .github/pages/index.html _site/index.html
+cp .github/pages/* _site/
 
 # Update example files to use the built polyfill from dist
 echo "Updating example script references..."
