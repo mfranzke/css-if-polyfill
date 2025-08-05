@@ -1,0 +1,21 @@
+.test {
+	display: block;
+}
+@supports ((display: grid) and (gap: 1rem)) {
+	.test {
+		display: grid;
+	}
+}
+.test {
+	color: blue;
+}
+@supports (color: hsl(from red h s l)) {
+	.test {
+		color: hsl(from red h s l);
+	}
+}
+@supports (color: lab(50% 20 -30)) {
+	.test {
+		color: lab(50% 20 -30);
+	}
+}

@@ -1,0 +1,3 @@
+.test {
+	--foo: if(style(--foo: bar): baz; else: default);
+}

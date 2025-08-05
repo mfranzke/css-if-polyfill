@@ -70,7 +70,7 @@ This document demonstrates the centralized test fixture system that provides a s
 
 ```css
 .test {
-	color: if(style(--theme): var(--primary) ; else: blue);
+	color: if(style(--theme): var(--primary); else: blue);
 }
 ```
 
