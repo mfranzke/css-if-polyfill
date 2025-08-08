@@ -65,7 +65,7 @@ pnpm run changeset:version
 ### Manually publish (done automatically in CI)
 
 ```bash
-pnpm run changeset:release
+pnpm run changeset:publish
 ```
 
 ## Example Workflow
