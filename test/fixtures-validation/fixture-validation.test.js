@@ -28,7 +28,7 @@ const polyfillUmdPath = path.join(
 const polyfillUmdJs = readFileSync(polyfillUmdPath, 'utf8');
 
 // Get all fixture pairs
-const _getFixturePairs = () => {
+const getFixturePairs = () => {
 	const files = readdirSync(fixturesDir);
 	const inputFiles = files.filter((file) => file.endsWith('.input.css'));
 
@@ -208,48 +208,14 @@ test.describe('CSS if() Polyfill Fixture Validation', () => {
 		});
 	});
 
-	// Create individual test for each fixture
-	test('validates basic-style fixture', async ({ page }) => {
-		await testFixture(page, 'basic-style');
-	});
+	// Dynamically generate tests for all fixture pairs
+	const fixturePairs = getFixturePairs();
 
-	test('validates basic-media fixture', async ({ page }) => {
-		await testFixture(page, 'basic-media');
-	});
-
-	test('validates basic-supports fixture', async ({ page }) => {
-		await testFixture(page, 'basic-supports');
-	});
-
-	test('validates complex-media-query fixture', async ({ page }) => {
-		await testFixture(page, 'complex-media-query');
-	});
-
-	test('validates mixed-conditions fixture', async ({ page }) => {
-		await testFixture(page, 'mixed-conditions');
-	});
-
-	test('validates multiple-concatenated-conditions fixture', async ({
-		page
-	}) => {
-		await testFixture(page, 'multiple-concatenated-conditions');
-	});
-
-	test('validates multiple-functions-one-rule fixture', async ({ page }) => {
-		await testFixture(page, 'multiple-functions-one-rule');
-	});
-
-	test('validates multiple-separate-functions fixture', async ({ page }) => {
-		await testFixture(page, 'multiple-separate-functions');
-	});
-
-	test('validates no-if-functions fixture', async ({ page }) => {
-		await testFixture(page, 'no-if-functions');
-	});
-
-	test('validates with-comments fixture', async ({ page }) => {
-		await testFixture(page, 'with-comments');
-	});
+	for (const fixture of fixturePairs) {
+		test(`validates ${fixture.name} fixture`, async ({ page }) => {
+			await testFixture(page, fixture.name);
+		});
+	}
 });
 
 async function testFixture(page, fixtureName) {
