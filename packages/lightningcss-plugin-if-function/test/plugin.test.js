@@ -12,6 +12,14 @@ describe('lightningcss-if-function plugin', () => {
 		const encoder = new TextEncoder();
 		const result = transform({
 			code: encoder.encode(input),
+			// Test-specific options to preserve semantic CSS syntax
+			minify: false,
+			targets: {
+				// Use very old browser targets to prevent modern syntax transformations
+				chrome: 65_536, // Chrome 1
+				firefox: 65_536, // Firefox 1
+				safari: 65_536 // Safari 1
+			},
 			...options
 		});
 		expect(normalizeCSS(result.code.toString('utf8'))).toBe(
@@ -36,7 +44,15 @@ describe('lightningcss-if-function plugin', () => {
 		// Should not throw an error, but may not transform properly
 		const encoder = new TextEncoder();
 		const result = transform({
-			code: encoder.encode(input)
+			code: encoder.encode(input),
+			// Test-specific options to preserve semantic CSS syntax
+			minify: false,
+			targets: {
+				// Use very old browser targets to prevent modern syntax transformations
+				chrome: 65_536, // Chrome 1
+				firefox: 65_536, // Firefox 1
+				safari: 65_536 // Safari 1
+			}
 		});
 
 		expect(result.code).toBeDefined();

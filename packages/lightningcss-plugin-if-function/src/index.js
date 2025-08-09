@@ -8,7 +8,8 @@ import { transform as lightningTransform } from 'lightningcss';
  * @returns {import('lightningcss').TransformResult} The result from Lightning CSS transform.
  */
 export function transform(options) {
-	const cssText = options.code.toString('utf8');
+	const decoder = new TextDecoder();
+	const cssText = decoder.decode(options.code);
 
 	// Early return if no if() functions to transform
 	if (!cssText.includes('if(')) {
