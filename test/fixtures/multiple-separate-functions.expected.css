@@ -7,7 +7,7 @@
 	}
 }
 .multiple {
-	background: transparent;
+	background: none;
 }
 @supports (color: lab(50% 20 -30)) {
 	.multiple {

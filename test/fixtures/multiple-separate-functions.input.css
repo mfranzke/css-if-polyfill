@@ -1,6 +1,6 @@
 .multiple {
 	color: if(media(max-width: 768px): #00f; else: red);
 	background: if(
-		supports(color: lab(50% 20 -30)): lab(50% 20 -30); else: transparent
+		supports(color: lab(50% 20 -30)): lab(50% 20 -30); else: none
 	);
 }
