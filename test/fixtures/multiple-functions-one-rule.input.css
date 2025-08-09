@@ -1,4 +1,4 @@
 .example {
-	color: if(media(max-width: 768px): blue; else: red);
+	color: if(media(width <= 768px): #00f; else: red);
 	font-size: if(supports(display: grid): 1.2rem; else: 1rem);
 }

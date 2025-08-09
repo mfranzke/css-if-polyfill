@@ -57,6 +57,7 @@ jobs:
           path: |
             packages/css-if-polyfill/coverage/
             packages/postcss-if-function/coverage/
+            packages/lightningcss-plugin-if-function/coverage/
             packages/stylelint-config-if-function/coverage/
           retention-days: 30
 

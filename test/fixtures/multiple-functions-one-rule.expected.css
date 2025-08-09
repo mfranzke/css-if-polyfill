@@ -1,9 +1,9 @@
 .example {
 	color: red;
 }
-@media (max-width: 768px) {
+@media (width <= 768px) {
 	.example {
-		color: blue;
+		color: #00f;
 	}
 }
 .example {

@@ -51,6 +51,8 @@ Note: Unlike using @media/@supports/@container rules, which just ignore their co
 
 - `packages/css-if-polyfill/` - Main JavaScript polyfill
 - `packages/postcss-if-function/` - PostCSS plugin for build-time transformation
+- `packages/lightningcss-plugin-if-function/` - Lightning CSS plugin for build-time transformation
+- `packages/stylelint-config-if-function/` - Stylelint configuration for linting CSS if() usage
 
 ### Key Files
 
@@ -134,6 +136,7 @@ When working with CSS if() functions, always follow the official WCAG specificat
 3. **Always** run the full test suite including browser validation
 4. **Always** update documentation when changing public APIs
 5. **Always** bear in mind that the developer's main job is to read, not write, code. Therefore, avoid unnecessary complexity, abbreviations and short forms of parameters, for example in CLI usage.
-6. **Consider** performance impact on large stylesheets and DOM trees
+6. **Always** try to avoid setting up separate fixtures for each output (Polyfill, PostCSS plugin or Lightning CSS plugin) and use the same fixture for all of them if possible. If there are any differences, try changing the fixture so that it can be used for all of them. For example, change the colour values in the fixture so that they produce the same output.
+7. **Consider** performance impact on large stylesheets and DOM trees
 
 This project aims to provide a complete, specification-compliant implementation of CSS if() functionality for browsers that don't yet support it natively.

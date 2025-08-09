@@ -36,8 +36,8 @@ describe('Integrated CSS if() Polyfill', () => {
 
 			// The current buildTimeTransform only handles media() and supports() conditions
 			// and leaves style() conditions for runtime processing
-			expect(result.nativeCSS).toContain('@media (min-width: 768px)');
-			expect(result.nativeCSS).toContain('color: blue');
+			expect(result.nativeCSS).toContain('@media (width >= 768px)');
+			expect(result.nativeCSS).toContain('color: #00f');
 			expect(result.nativeCSS).toContain('color: red');
 
 			// Note: Consider if style() conditions should fall back to else clause during build time
