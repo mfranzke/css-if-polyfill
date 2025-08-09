@@ -15,7 +15,6 @@ describe('postcss-if-function plugin', () => {
 				from: undefined
 			}
 		);
-
 		expect(normalizeCSS(result.css)).toBe(normalizeCSS(output));
 		expect(result.warnings()).toHaveLength(0);
 	}
