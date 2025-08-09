@@ -1,6 +1,6 @@
 {
   "name": "postcss-if-function",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "type": "module",
   "description": "PostCSS plugin for transforming CSS if() functions to native CSS",
   "repository": {

@@ -1,5 +1,13 @@
 # postcss-if-function
 
+## 0.1.4
+
+### Patch Changes
+
+- 6045317: docs: README improvements
+- Updated dependencies [6045317]
+  - css-if-polyfill@0.1.4
+
 ## 0.1.3
 
 ### Patch Changes
@@ -12,7 +20,7 @@
 
 - b7f8df7: fix: ensure that multiple if() conditions are handled correctly
 - Updated dependencies [b7f8df7]
-    - css-if-polyfill@0.1.3
+  - css-if-polyfill@0.1.3
 
 ## 0.1.1
 
@@ -21,7 +29,7 @@
 - 9c6d05a: fix: several package metadata related issues
 - 588be15: docs: corrected the package name
 - Updated dependencies [9c6d05a]
-    - css-if-polyfill@0.1.2
+  - css-if-polyfill@0.1.2
 
 ## 0.1.0
 
@@ -32,4 +40,4 @@
 ### Patch Changes
 
 - Updated dependencies [a6b019d]
-    - css-if-polyfill@0.1.1
+  - css-if-polyfill@0.1.1
