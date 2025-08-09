@@ -1,5 +1,13 @@
 # postcss-if-function
 
+## 0.1.4
+
+### Patch Changes
+
+- 6045317: docs: README improvements
+- Updated dependencies [6045317]
+    - css-if-polyfill@0.1.4
+
 ## 0.1.3
 
 ### Patch Changes
