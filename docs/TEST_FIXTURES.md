@@ -207,7 +207,9 @@ This document demonstrates the centralized test fixture system that provides a s
 
 ```css
 .responsive {
-	width: if(media((width >= 768px) and (width <= 1024px)): 50%; else: 100%);
+	width: if(
+		media((min-width: 768px) and (max-width: 1024px)): 50%; else: 100%
+	);
 }
 ```
 
@@ -217,7 +219,7 @@ This document demonstrates the centralized test fixture system that provides a s
 .responsive {
 	width: 100%;
 }
-@media (width >= 768px) and (width <= 1024px) {
+@media (min-width: 768px) and (max-width: 1024px) {
 	.responsive {
 		width: 50%;
 	}
