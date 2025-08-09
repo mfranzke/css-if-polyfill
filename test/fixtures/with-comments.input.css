@@ -1,10 +1,10 @@
 /* Header styles */
 .header {
-	background: blue;
+	background: #00f;
 }
 
 .conditional {
-	color: if(media(max-width: 768px): red; else: blue);
+	color: if(media(width <= 768px): red; else: #00f);
 }
 
 /* Footer styles */

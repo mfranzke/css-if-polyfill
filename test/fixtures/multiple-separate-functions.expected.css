@@ -1,9 +1,9 @@
 .multiple {
 	color: red;
 }
-@media (max-width: 768px) {
+@media (width <= 768px) {
 	.multiple {
-		color: blue;
+		color: #00f;
 	}
 }
 .multiple {
