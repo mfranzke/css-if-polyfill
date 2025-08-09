@@ -109,7 +109,6 @@ packages/lightningcss-plugin-if-function/
 │   └── index.umd.js            # UMD build
 ├── package.json                # Package configuration
 ├── README.md                   # Plugin documentation
-├── microbundle.config.js       # Build configuration
 ├── vitest.config.js            # Test configuration
 └── xo.config.js               # Linting configuration
 ```

@@ -27,6 +27,3 @@ export function transform(options) {
 
 	return lightningTransform(newOptions);
 }
-
-// It's good practice to provide a default export as well.
-export default transform;
