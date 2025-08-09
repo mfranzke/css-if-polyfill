@@ -82,6 +82,7 @@ jobs:
           path: |
             packages/css-if-polyfill/dist
             packages/postcss-if-function/dist
+            packages/stylelint-config-if-function/dist
           retention-days: 30
 
       - name: Upload examples
