@@ -1,0 +1,6 @@
+{
+	"extends": [
+		"stylelint-config-standard",
+		"../packages/stylelint-config-if-function/dist/index.cjs"
+	]
+}

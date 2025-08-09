@@ -71,7 +71,7 @@ await run(input, expected);
 ### **2. Documentation Builder (`scripts/build-docs.js`)**
 
 ```bash
-npm run build:docs  # Auto-generates docs from fixtures
+pnpm run build:docs  # Auto-generates docs from fixtures
 ```
 
 **Markdown Integration:**
@@ -85,7 +85,7 @@ npm run build:docs  # Auto-generates docs from fixtures
 
 ```css
 .responsive {
-	width: if(media(max-width: 768px): 100%; else: 50%);
+	width: if(media(width <= 768px): 100%; else: 50%);
 }
 ```
 
@@ -95,7 +95,7 @@ npm run build:docs  # Auto-generates docs from fixtures
 .responsive {
 	width: 50%;
 }
-@media (max-width: 768px) {
+@media (width <= 768px) {
 	.responsive {
 		width: 100%;
 	}
@@ -201,7 +201,7 @@ const { input, expected } = loadFixture("basic-media");
 {
 	"scripts": {
 		"build:docs": "node scripts/build-docs.js",
-		"test": "npm test --workspaces"
+		"test": "pnpm test --recursive"
 	}
 }
 ```

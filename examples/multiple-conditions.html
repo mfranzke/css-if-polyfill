@@ -4,6 +4,24 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>CSS if() Multiple Conditions Examples</title>
+		<!-- Favicon for older Browsers -->
+		<link rel="icon" type="image/x-icon" href="../favicon.ico" />
+		<!-- SVG-Favicon for modern browsers -->
+		<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+
+		<!-- PNG-Favicons for High-DPI (Retina) Displays -->
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="../favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="../favicon-16x16.png"
+		/>
 		<style>
 			:root {
 				--scheme: ice;
@@ -376,7 +394,10 @@
 		</div>
 
 		<script type="module">
-			import { init } from "../packages/css-if-polyfill/dist/index.modern.js";
+			import {
+				init,
+				processCSSText
+			} from "../packages/css-if-polyfill/dist/index.modern.js";
 
 			// Initialize the polyfill
 			init(); // Control functions
@@ -417,7 +438,7 @@
 
 			console.log("Test CSS processing:");
 			console.log("Input:", testCSS);
-			console.log("Output:", CSSIfPolyfill.processCSSText(testCSS));
+			console.log("Output:", processCSSText(testCSS));
 
 			console.log("Multiple conditions CSS if() polyfill loaded!");
 		</script>

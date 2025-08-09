@@ -4,6 +4,24 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Enhanced CSS if() Examples - Shorthand Properties</title>
+		<!-- Favicon for older Browsers -->
+		<link rel="icon" type="image/x-icon" href="../favicon.ico" />
+		<!-- SVG-Favicon for modern browsers -->
+		<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+
+		<!-- PNG-Favicons for High-DPI (Retina) Displays -->
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="../favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="../favicon-16x16.png"
+		/>
 		<style>
 			body {
 				font-family:
@@ -452,7 +470,10 @@
 
 		<script type="module">
 			// Load the polyfill
-			import { init } from "../packages/css-if-polyfill/dist/index.modern.js";
+			import {
+				init,
+				processCSSText
+			} from "../packages/css-if-polyfill/dist/index.modern.js";
 
 			// Initialize polyfill with debug enabled
 			const polyfill = init({ debug: true });
@@ -481,7 +502,7 @@
 
 			console.log("Test CSS processing:");
 			console.log("Input:", testCSS);
-			console.log("Output:", CSSIfPolyfill.processCSSText(testCSS));
+			console.log("Output:", processCSSText(testCSS));
 		</script>
 	</body>
 </html>

@@ -309,7 +309,7 @@ const parseIfFunction = (content) => {
 
 		conditions.push({
 			conditionType: conditionMatch[1],
-			conditionExpression: conditionMatch[2],
+			conditionExpression: conditionMatch[2].trim(),
 			value: valuePart
 		});
 	}
@@ -378,10 +378,24 @@ const transformPropertyToNative = (selector, property, value) => {
 			const { conditions } = parsed;
 			for (let i = conditions.length - 1; i >= 0; i--) {
 				const condition = conditions[i];
+
+				// Smart parentheses handling: don't add parentheses if:
+				// 1. The expression already starts with '(' and ends with ')'
+				// 2. The expression already contains properly parenthesized conditions (like media queries)
+				const trimmed = condition.conditionExpression.trim();
+				const needsParentheses = !(
+					(trimmed.startsWith('(') && trimmed.endsWith(')')) ||
+					// Check for patterns like "(min-width: 768px) and (max-width: 1024px)" which are already valid CSS
+					/^\([^)]+\)\s+(and|or)\s+\([^)]+\)/.test(trimmed)
+				);
+				const wrappedExpression = needsParentheses
+					? `(${condition.conditionExpression})`
+					: condition.conditionExpression;
+
 				const nativeCondition =
 					condition.conditionType === 'media'
-						? `@media (${condition.conditionExpression})`
-						: `@supports (${condition.conditionExpression})`;
+						? `@media ${wrappedExpression}`
+						: `@supports ${wrappedExpression}`;
 
 				const conditionalValue = value.replace(
 					ifFunc.fullFunction,

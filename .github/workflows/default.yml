@@ -7,9 +7,19 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# We'd like to run the pipeline for dependabot PRs sequentially, and all other PRs in parallel, but still only one action run for each PR.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: >-
+    ${{
+      github.actor == 'dependabot[bot]' &&
+      'dependabot' ||
+      format('{0}-{1}', github.workflow, github.ref)
+    }}
+  cancel-in-progress: >-
+    ${{
+      github.actor != 'dependabot[bot]' &&
+      github.ref != 'refs/heads/main'
+    }}
 
 jobs:
   # Stage 1: Parallel analysis jobs (no build required)
@@ -24,20 +34,32 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
-          cache: "npm"
+          cache: "pnpm"
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
 
       - name: Lint code (xo), markdown (markdownlint), and package (publint)
-        run: npm run lint
+        run: pnpm run lint
 
       - name: Check code style
-        run: npx --no prettier . --check
+        run: pnpm exec prettier . --check
+
+      - name: Check spelling
+        uses: codespell-project/actions-codespell@v2
+        with:
+          skip: "pnpm-lock.yaml,coverage,node_modules,dist,_site,.git"
+          ignore_words_list: "moz,webkit"
+          check_filenames: true
 
   quality:
     name: Code Quality Analysis
@@ -53,17 +75,22 @@ jobs:
         with:
           fetch-depth: 0 # Needed for quality analysis
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
-          cache: "npm"
+          cache: "pnpm"
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
 
       - name: Run tests with coverage
-        run: npm run test:vitest --workspaces -- --coverage --coverage.reporter lcov --coverage.reporter json
+        run: pnpm run --recursive test:vitest --coverage --coverage.reporter lcov --coverage.reporter json
 
       - name: Upload coverage reports
         uses: actions/upload-artifact@v4
@@ -72,6 +99,8 @@ jobs:
           path: |
             packages/css-if-polyfill/coverage/
             packages/postcss-if-function/coverage/
+            packages/lightningcss-plugin-if-function/coverage/
+            packages/stylelint-config-if-function/coverage/
           retention-days: 30
 
   security:
@@ -84,10 +113,19 @@ jobs:
       security-events: write
       packages: read
 
+  audit-fix:
+    name: Suggest pnpm audit --fix for Dependabot PRs
+    uses: ./.github/workflows/audit-fix-pr.yml
+    secrets: inherit
+    permissions:
+      contents: write
+      pull-requests: write
+
   # Stage 2: Build and comprehensive testing (requires all analysis to pass)
   ci:
     name: CI Tests & Build
     needs: [lint, quality, security]
+    if: always() && (needs.lint.result == 'success') && (needs.quality.result == 'success') && (needs.security.result == 'success')
     uses: ./.github/workflows/ci.yml
     secrets: inherit
     permissions:
@@ -103,11 +141,24 @@ jobs:
       contents: read
       pull-requests: write
 
+  # Aggregate status check for branch protection rules
+  checks-done:
+    name: All Checks Complete
+    needs: [lint, quality, security, audit-fix, ci, performance]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    permissions:
+      contents: read
+
+    steps:
+      - name: All required checks passed
+        run: echo "✅ All required checks completed successfully"
+
   # Stage 4: Deploy to GitHub Pages (main branch only, requires all previous stages)
   deploy:
     name: Deploy to GitHub Pages
-    needs: [ci, performance]
-    if: always() && needs.ci.result == 'success' && (needs.performance.result == 'success' || needs.performance.result == 'skipped') && github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: [checks-done]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     uses: ./.github/workflows/deploy-pages.yml
     secrets: inherit
     permissions:
@@ -118,8 +169,8 @@ jobs:
   # Stage 5: Release (main branch only, requires all checks to pass)
   release:
     name: Release Management
-    needs: [ci, performance, deploy]
-    if: always() && needs.ci.result == 'success' && (needs.performance.result == 'success' || needs.performance.result == 'skipped') && (needs.deploy.result == 'success' || needs.deploy.result == 'skipped') && github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: [checks-done]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     uses: ./.github/workflows/release.yml
     secrets: inherit
     permissions:

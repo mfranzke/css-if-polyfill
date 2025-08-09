@@ -1,4 +1,4 @@
 .test {
-	color: if(media(min-width: 768px): blue; else: red);
+	color: if(media(width >= 768px): #00f; else: red);
 	background: if(style(--dark-mode): black; else: white);
 }

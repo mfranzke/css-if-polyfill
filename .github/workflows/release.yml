@@ -39,19 +39,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
-          cache: "npm"
+          cache: "pnpm"
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
 
       - name: Check changeset status
         run: |
           echo "Checking changeset status..."
-          npx @changesets/cli status
+          pnpm exec changeset status
           echo "Listing changesets..."
           ls -la .changeset/
 
@@ -61,9 +66,10 @@ jobs:
         uses: changesets/action@v1
         with:
           # this expects you to have a script called changeset:release which does a build for your packages and calls changeset publish
-          publish: npm run changeset:release
+          publish: pnpm changeset:publish
           commit: "chore: version packages" # we need to fulfill commitlint based rules
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
+          HUSKY: 0 # Disable Husky hooks in CI

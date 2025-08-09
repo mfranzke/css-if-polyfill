@@ -12,7 +12,7 @@ This document demonstrates the centralized test fixture system that provides a s
 
 ```css
 .responsive {
-	width: if(media(max-width: 768px): 100%; else: 50%);
+	width: if(media(width <= 768px): 100%; else: 50%);
 }
 ```
 
@@ -22,7 +22,7 @@ This document demonstrates the centralized test fixture system that provides a s
 .responsive {
 	width: 50%;
 }
-@media (max-width: 768px) {
+@media (width <= 768px) {
 	.responsive {
 		width: 100%;
 	}
@@ -70,7 +70,7 @@ This document demonstrates the centralized test fixture system that provides a s
 
 ```css
 .test {
-	color: if(style(--theme): var(--primary) ; else: blue);
+	color: if(style(--theme): var(--primary); else: #00f);
 }
 ```
 
@@ -78,7 +78,7 @@ This document demonstrates the centralized test fixture system that provides a s
 
 ```css
 .test {
-	color: blue;
+	color: #00f;
 }
 ```
 
@@ -94,7 +94,7 @@ This document demonstrates the centralized test fixture system that provides a s
 
 ```css
 .example {
-	color: if(media(max-width: 768px): blue; else: red);
+	color: if(media(width <= 768px): #00f; else: red);
 	font-size: if(supports(display: grid): 1.2rem; else: 1rem);
 }
 ```
@@ -105,9 +105,9 @@ This document demonstrates the centralized test fixture system that provides a s
 .example {
 	color: red;
 }
-@media (max-width: 768px) {
+@media (width <= 768px) {
 	.example {
-		color: blue;
+		color: #00f;
 	}
 }
 .example {
@@ -174,7 +174,7 @@ This document demonstrates the centralized test fixture system that provides a s
 
 ```css
 .test {
-	color: if(media(min-width: 768px): blue; else: red);
+	color: if(media(width >= 768px): #00f; else: red);
 	background: if(style(--dark-mode): black; else: white);
 }
 ```
@@ -185,9 +185,9 @@ This document demonstrates the centralized test fixture system that provides a s
 .test {
 	color: red;
 }
-@media (min-width: 768px) {
+@media (width >= 768px) {
 	.test {
-		color: blue;
+		color: #00f;
 	}
 }
 .test {
@@ -208,7 +208,7 @@ This document demonstrates the centralized test fixture system that provides a s
 ```css
 .responsive {
 	width: if(
-		media((min-width: 768px) and (max-width: 1024px)): 50%; else: 100%
+		media((width >= 768px) and (width <= 1024px)): 50%; else: 100%
 	);
 }
 ```
@@ -219,7 +219,7 @@ This document demonstrates the centralized test fixture system that provides a s
 .responsive {
 	width: 100%;
 }
-@media ((min-width: 768px) and (max-width: 1024px)) {
+@media (width >= 768px) and (width <= 1024px) {
 	.responsive {
 		width: 50%;
 	}
@@ -239,11 +239,11 @@ This document demonstrates the centralized test fixture system that provides a s
 ```css
 /* Header styles */
 .header {
-	background: blue;
+	background: #00f;
 }
 
 .conditional {
-	color: if(media(max-width: 768px): red; else: blue);
+	color: if(media(width <= 768px): red; else: #00f);
 }
 
 /* Footer styles */
@@ -257,12 +257,12 @@ This document demonstrates the centralized test fixture system that provides a s
 ```css
 /* Header styles */
 .header {
-	background: blue;
+	background: #00f;
 }
 .conditional {
-	color: blue;
+	color: #00f;
 }
-@media (max-width: 768px) {
+@media (width <= 768px) {
 	.conditional {
 		color: red;
 	}
@@ -308,5 +308,5 @@ This document demonstrates the centralized test fixture system that provides a s
 To regenerate this documentation, run:
 
 ```bash
-npm run build:docs
+pnpm run build:docs
 ```

@@ -1,6 +1,6 @@
 {
   "name": "postcss-if-function",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "type": "module",
   "description": "PostCSS plugin for transforming CSS if() functions to native CSS",
   "repository": {
@@ -10,6 +10,7 @@
   "bugs": {
     "url": "https://github.com/mfranzke/css-if-polyfill/issues"
   },
+  "author": "Maximilian Franzke",
   "license": "MIT",
   "main": "dist/index.cjs",
   "types": "dist/index.d.ts",
@@ -44,23 +45,23 @@
     "build": "microbundle",
     "dev": "microbundle watch",
     "postbuild": "cp dist/index.d.ts dist/index.d.cts",
-    "prepublishOnly": "npm run build",
-    "pretest:vitest": "npm run build",
-    "test": "npm-run-all --sequential test:*",
+    "prepublishOnly": "pnpm run build",
+    "pretest:vitest": "pnpm run build",
+    "test": "pnpm run '/^test:[^:]*$/'",
     "test:vitest": "vitest run",
     "test:vitest:watch": "vitest"
   },
   "peerDependencies": {
-    "postcss": "^8.0.0"
+    "postcss": "8.0.0"
   },
   "dependencies": {
-    "css-if-polyfill": "0.1.3"
+    "css-if-polyfill": "workspace:*"
   },
   "devDependencies": {
-    "microbundle": "^0.15.1",
-    "postcss": "^8.4.0",
-    "vitest": "^3.2.4",
-    "xo": "^1.1.1"
+    "microbundle": "0.15.1",
+    "postcss": "8.5.6",
+    "vitest": "3.2.4",
+    "xo": "1.1.1"
   },
   "source": "src/index.js",
   "umd:main": "dist/index.umd.js"

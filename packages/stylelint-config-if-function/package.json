@@ -1,0 +1,43 @@
+{
+  "name": "stylelint-config-if-function",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "Shareable stylelint config for CSS if() function support",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mfranzke/css-if-polyfill.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mfranzke/css-if-polyfill/issues"
+  },
+  "author": "Maximilian Franzke",
+  "license": "MIT",
+  "main": "dist/index.cjs",
+  "exports": {
+    "require": "./dist/index.cjs",
+    "import": "./dist/index.modern.js"
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "stylelint",
+    "config",
+    "if",
+    "css",
+    "function"
+  ],
+  "scripts": {
+    "build": "microbundle",
+    "prepublishOnly": "pnpm run build"
+  },
+  "peerDependencies": {
+    "stylelint": "^14.5.1 || ^15.0.0 || ^16.0.0"
+  },
+  "devDependencies": {
+    "microbundle": "0.15.1"
+  },
+  "source": "src/index.js"
+}

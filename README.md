@@ -1,4 +1,4 @@
-# CSS if() Function Polyfill and PostCSS plugin
+# CSS if() Function Polyfill, PostCSS plugin and Stylelint plugin
 
 [![MIT license](https://img.shields.io/npm/l/css-if-polyfill.svg "license badge")](https://opensource.org/licenses/mit-license.php)
 [![Default CI/CD Pipeline](https://github.com/mfranzke/css-if-polyfill/actions/workflows/default.yml/badge.svg)](https://github.com/mfranzke/css-if-polyfill/actions/workflows/default.yml)
@@ -9,7 +9,12 @@
 [![Open Source Love](https://badges.frapsoft.com/os/v3/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.0-4baaaa.svg)](CODE-OF-CONDUCT.md)
 
-A modern JavaScript polyfill and PostCSS plugin for the [CSS `if()` function](https://developer.mozilla.org/en-US/docs/Web/CSS/if) with **hybrid build-time and runtime processing**. Transforms CSS `if()` functions to native `@media` and `@supports` rules where possible, with runtime fallback for dynamic conditions.
+We're providing several solutions for the [CSS `if()` function](https://developer.mozilla.org/en-US/docs/Web/CSS/if) with **hybrid build-time and runtime processing**. Transforms CSS `if()` functions to native `@media` and `@supports` rules where possible, with runtime fallback for dynamic conditions. The following packages are provided by this monorepo:
+
+- A modern JavaScript [polyfill](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/css-if-polyfill),
+- [PostCSS plugin](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/postcss-if-function),
+- a [Lightning CSS plugin](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/lightningcss-plugin-if-function) and
+- a [Stylelint plugin](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/stylelint-config-if-function) (to extend to prevent lint false positives)
 
 ## Contributing
 

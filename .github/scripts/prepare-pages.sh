@@ -13,12 +13,12 @@ cp -r examples/* _site/examples/
 
 # Copy dist folder for example pages to access the scripts
 echo "Copying dist folder..."
-mkdir -p _site/dist
-cp -r packages/css-if-polyfill/dist/* _site/dist/
+mkdir -p _site/packages/css-if-polyfill/dist/
+cp -r packages/css-if-polyfill/dist/* _site/packages/css-if-polyfill/dist/
 
 # Copy the index.html template
 echo "Copying index.html template..."
-cp .github/pages/index.html _site/index.html
+cp .github/pages/* _site/
 
 # Update example files to use the built polyfill from dist
 echo "Updating example script references..."

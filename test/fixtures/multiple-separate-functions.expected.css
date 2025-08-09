@@ -1,13 +1,13 @@
 .multiple {
 	color: red;
 }
-@media (max-width: 768px) {
+@media (width <= 768px) {
 	.multiple {
-		color: blue;
+		color: #00f;
 	}
 }
 .multiple {
-	background: transparent;
+	background: none;
 }
 @supports (color: lab(50% 20 -30)) {
 	.multiple {

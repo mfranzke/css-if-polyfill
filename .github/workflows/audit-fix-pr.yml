@@ -1,0 +1,82 @@
+name: Suggest pnpm audit --fix for Dependabot PRs
+
+permissions:
+  contents: read
+  pull-requests: write
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches: [main]
+  workflow_call:
+
+jobs:
+  audit-fix:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run pnpm audit --fix
+        run: pnpm audit --fix
+
+      - name: Check if only pnpm-lock.yaml changed
+        id: changes
+        run: |
+          git diff --name-only > changed_files.txt
+          cat changed_files.txt
+
+          if grep -Fxq "pnpm-lock.yaml" changed_files.txt && [ "$(wc -l < changed_files.txt)" -eq 1 ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create PR with audit fix
+        if: steps.changes.outputs.changed == 'true'
+        id: create-pr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: pnpm audit --fix"
+          branch: "refactor-auditfix-${{ github.head_ref }}"
+          title: "chore: Apply pnpm audit --fix on top of #${{ github.event.pull_request.number }}"
+          labels: security, dependabot
+          body: |
+            This PR applies `pnpm audit --fix` on top of the Dependabot PR #${{ github.event.pull_request.number }}.
+
+            It is created automatically to suggest applying security updates that `pnpm audit --fix` can resolve.
+          base: ${{ github.head_ref }}
+
+      - name: Approve PR
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          gh pr review ${{ steps.create-pr.outputs.pull-request-url }} --approve
+
+      - name: Enable Auto-Merge
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          gh pr merge ${{ steps.create-pr.outputs.pull-request-url }} --auto --squash

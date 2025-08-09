@@ -72,7 +72,9 @@ Manually process CSS text containing if() functions.
 **Example:**
 
 ```javascript
-const processedCSS = CSSIfPolyfill.processCSSText(`
+import { processCSSText } from "css-if-polyfill";
+
+const processedCSS = processCSSText(`
   .button {
     color: if(media(min-width: 768px): blue; else: red);
   }
@@ -88,7 +90,7 @@ Check if the browser has native CSS if() support.
 **Example:**
 
 ```javascript
-if (!CSSIfPolyfill.hasNativeSupport()) {
+if (!hasNativeSupport()) {
 	console.log("Polyfill is needed");
 }
 ```
@@ -101,7 +103,8 @@ Manually trigger processing of existing stylesheets.
 
 ```javascript
 // After dynamically adding new styles
-CSSIfPolyfill.refresh();
+const polyfill = init();
+polyfill.refresh();
 ```
 
 #### `cleanup()`
@@ -112,7 +115,7 @@ Clean up media query listeners to prevent memory leaks.
 
 ```javascript
 // Before page unload or component unmount
-CSSIfPolyfill.cleanup();
+polyfill.cleanup();
 ```
 
 ### Build-time Transformation

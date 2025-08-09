@@ -4,6 +4,24 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>CSS if() Polyfill - Examples</title>
+		<!-- Favicon for older Browsers -->
+		<link rel="icon" type="image/x-icon" href="../favicon.ico" />
+		<!-- SVG-Favicon for modern browsers -->
+		<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+
+		<!-- PNG-Favicons for High-DPI (Retina) Displays -->
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="../favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="../favicon-16x16.png"
+		/>
 		<style>
 			body {
 				font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -224,7 +242,7 @@
 				<h3>4. Dark Mode Support</h3>
 				<p>
 					Whereas technically possible, it might be much easier and
-					stable to use the standarized and well supported
+					stable to use the standardized and well supported
 					<a
 						href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark"
 						><code>light-dark</code> CSS function</a
@@ -276,13 +294,18 @@
 		</div>
 
 		<script type="module">
-			import { init } from "../packages/css-if-polyfill/dist/index.modern.js";
+			import {
+				init,
+				hasNativeSupport,
+				refresh,
+				processCSSText
+			} from "../packages/css-if-polyfill/dist/index.modern.js";
 
 			// Initialize the polyfill
-			init(); // Update status indicator
+			const polyfill = init(); // Update status indicator
 			function updateStatus() {
 				const statusEl = document.getElementById("status");
-				const hasNative = CSSIfPolyfill.hasNativeSupport();
+				const hasNative = hasNativeSupport();
 
 				if (hasNative) {
 					statusEl.textContent = "Native CSS if() support detected";
@@ -313,7 +336,7 @@
 
 			// Control functions
 			document.querySelector(".refreshPolyfill").onclick = function () {
-				CSSIfPolyfill.refresh();
+				refresh();
 				console.log("Polyfill refreshed");
 			};
 
@@ -321,7 +344,7 @@
 			document.querySelector(".toggleDebug").onclick = function () {
 				// Toggle debug mode
 				debugEnabled = !debugEnabled;
-				CSSIfPolyfill.options.debug = debugEnabled;
+				polyfill.options.debug = debugEnabled;
 				console.log(
 					"Debug mode:",
 					debugEnabled ? "enabled" : "disabled"
@@ -334,7 +357,7 @@
 				const outputEl = document.getElementById("manual-css-output");
 
 				const inputCSS = inputEl.textContent.trim();
-				const outputCSS = CSSIfPolyfill.processCSSText(inputCSS);
+				const outputCSS = processCSSText(inputCSS);
 
 				outputEl.innerHTML = `
               <strong>Input:</strong> ${escapeHtml(inputCSS)}<br>

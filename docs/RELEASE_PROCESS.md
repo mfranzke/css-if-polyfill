@@ -15,7 +15,7 @@ This project uses [Changesets](https://github.com/changesets/changesets) for ver
 After making changes, run:
 
 ```bash
-npx @changesets/cli
+npx --no @changesets/cli
 ```
 
 This will:
@@ -47,25 +47,25 @@ When you merge the "Version Packages" PR, the **Release workflow** (`.github/wor
 ### Create a changeset
 
 ```bash
-npx @changesets/cli
+npx --no @changesets/cli
 ```
 
 ### Preview what version would be released
 
 ```bash
-npx @changesets/cli status
+npx --no @changesets/cli status
 ```
 
 ### Manually version packages (done automatically in CI)
 
 ```bash
-npm run changeset:version
+pnpm run changeset:version
 ```
 
 ### Manually publish (done automatically in CI)
 
 ```bash
-npm run changeset:release
+pnpm run changeset:publish
 ```
 
 ## Example Workflow
@@ -75,7 +75,7 @@ npm run changeset:release
 3. **Create changeset**:
 
     ```bash
-    npx @changesets/cli
+    npx --no @changesets/cli
     ```
 
     - Select package to bump
@@ -149,7 +149,7 @@ Make sure these secrets are configured in your GitHub repository:
 If you need to release manually:
 
 ```bash
-npm run build
+pnpm run build
 npm version patch  # or minor/major
 npm publish
 git push --tags
