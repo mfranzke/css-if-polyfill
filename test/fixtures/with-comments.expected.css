@@ -1,9 +1,9 @@
 /* Header styles */
 .header {
-	background: blue;
+	background: #00f;
 }
 .conditional {
-	color: blue;
+	color: #00f;
 }
 @media (max-width: 768px) {
 	.conditional {
