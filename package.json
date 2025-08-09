@@ -44,7 +44,7 @@
     "preserve": "pnpm --filter=css-if-polyfill run build",
     "pretest:fixtures": "npm run build",
     "serve": "http-server -p 3000 -o examples/basic-examples.html",
-    "test": "pnpm --recursive run test",
+    "test": "pnpm --recursive run test && pnpm run test:fixtures",
     "test:fixtures": "playwright test test/fixtures-validation/fixture-validation.test.js --config=test/fixtures-validation/fixture-validation.playwright.config.js"
   },
   "devDependencies": {
