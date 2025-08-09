@@ -379,5 +379,10 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Related
 
-- [postcss-if-function](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/postcss-if-function/) - PostCSS plugin for build-time transformation
 - [CSS Conditional Rules](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_conditional_rules) - MDN documentation for @media and @supports
+
+## Further solutions
+
+- [postcss-if-function](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/postcss-if-function/) - PostCSS plugin for build-time transformation
+- [lightningcss-plugin-if-function](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/lightningcss-plugin-if-function) - Lightning CSS plugin for build-time transformation
+- [stylelint-config-if-function](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/stylelint-config-if-function) - Stylelint configuration for linting CSS if() usage

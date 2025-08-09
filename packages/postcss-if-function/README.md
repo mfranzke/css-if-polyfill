@@ -354,6 +354,11 @@ MIT © [Maximilian Franzke](https://github.com/mfranzke)
 
 ## Related
 
-- [css-if-polyfill](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/css-if-polyfill/) - Runtime polyfill for CSS if() functions
 - [PostCSS](https://postcss.org/) - Tool for transforming CSS with JavaScript
 - [CSS Conditional Rules](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_conditional_rules) - MDN documentation for @media and @supports
+
+## Further solutions
+
+- [css-if-polyfill](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/css-if-polyfill/) - Runtime polyfill for CSS if() functions
+- [lightningcss-plugin-if-function](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/lightningcss-plugin-if-function) - Lightning CSS plugin for build-time transformation
+- [stylelint-config-if-function](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/stylelint-config-if-function) - Stylelint configuration for linting CSS if() usage

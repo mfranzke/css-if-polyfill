@@ -51,6 +51,8 @@ Note: Unlike using @media/@supports/@container rules, which just ignore their co
 
 - `packages/css-if-polyfill/` - Main JavaScript polyfill
 - `packages/postcss-if-function/` - PostCSS plugin for build-time transformation
+- `packages/lightningcss-plugin-if-function/` - Lightning CSS plugin for build-time transformation
+- `packages/stylelint-config-if-function/` - Stylelint configuration for linting CSS if() usage
 
 ### Key Files
 

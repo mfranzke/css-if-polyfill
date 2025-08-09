@@ -2,4 +2,4 @@
 "lightningcss-plugin-if-function": patch
 ---
 
-feat(lightningcss): added plugin
+feat(Lightning CSS): added plugin

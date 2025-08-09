@@ -34,7 +34,7 @@
     "dev": "pnpm --recursive run dev",
     "lint": "pnpm --parallel run '/^lint:[^:]*$/'",
     "lint:markdownlint": "markdownlint --config .config/.markdown-lint.yml **/*.md",
-    "lint:packages": "publint packages/css-if-polyfill && publint packages/postcss-if-function && publint packages/stylelint-config-if-function",
+    "lint:packages": "publint packages/css-if-polyfill && publint packages/postcss-if-function && publint packages/lightningcss-plugin-if-function && publint packages/stylelint-config-if-function",
     "lint:stylelint": "stylelint test/fixtures/*.input.css --config .config/.stylelintrc.json",
     "lint:stylelint:14": "npx stylelint@14 test/fixtures/*.input.css --config .config/.stylelintrc.older.json",
     "lint:stylelint:15": "npx stylelint@15 test/fixtures/*.input.css --config .config/.stylelintrc.older.json",
