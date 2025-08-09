@@ -39,7 +39,7 @@ npm install lightningcss-plugin-if-function lightningcss
 
 ```js
 import { transform } from "lightningcss-plugin-if-function";
-import { readFileSync } from "fs";
+import { readFileSync } from "node:fs";
 
 const css = readFileSync("style.css");
 
