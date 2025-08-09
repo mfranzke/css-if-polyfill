@@ -16,13 +16,9 @@ describe('postcss-if-function plugin', () => {
 			}
 		);
 		// Manually strip comments from result to match Lightning CSS behavior
-		let cssWithoutComments = result.css.replaceAll(/\/\*[\s\S]*?\*\//g, '');
-
-		// Normalize PostCSS output to match expected format:
-		// Remove extra parentheses in complex media queries
-		cssWithoutComments = cssWithoutComments.replaceAll(
-			/@media\s+\(\((.+?)\)\)/g,
-			'@media ($1)'
+		const cssWithoutComments = result.css.replaceAll(
+			/\/\*[\s\S]*?\*\//g,
+			''
 		);
 
 		expect(normalizeCSS(cssWithoutComments)).toBe(normalizeCSS(output));

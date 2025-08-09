@@ -23,16 +23,10 @@ describe('Integrated CSS if() Polyfill', () => {
 				const { input, expected } = loadFixture(fixture);
 				const result = buildTimeTransform(input);
 
-				// Normalize buildTimeTransform output to match expected format:
-				// 1. Strip comments that might be preserved during transformation
-				// 2. Remove extra parentheses in complex media queries: @media ((condition)) -> @media (condition)
-				let normalizedOutput = result.nativeCSS.replaceAll(
+				// Strip comments that might be preserved during transformation
+				const normalizedOutput = result.nativeCSS.replaceAll(
 					/\/\*[\s\S]*?\*\//g,
 					''
-				);
-				normalizedOutput = normalizedOutput.replaceAll(
-					/@media\s+\(\((.+?)\)\)/g,
-					'@media ($1)'
 				);
 
 				expect(normalizeCSS(normalizedOutput)).toBe(
