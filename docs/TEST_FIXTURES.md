@@ -70,7 +70,7 @@ This document demonstrates the centralized test fixture system that provides a s
 
 ```css
 .test {
-	color: if(style(--theme): var(--primary) ; else: #00f);
+	color: if(style(--theme): var(--primary); else: #00f);
 }
 ```
 
@@ -207,7 +207,9 @@ This document demonstrates the centralized test fixture system that provides a s
 
 ```css
 .responsive {
-	width: if(media((width >= 768px) and (width <= 1024px)): 50%; else: 100%);
+	width: if(
+		media((width >= 768px) and (width <= 1024px)): 50%; else: 100%
+	);
 }
 ```
 
