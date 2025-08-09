@@ -1,4 +1,4 @@
-# CSS if() Polyfill - Lightning CSS Plugin Implementation Summary
+# Lightning CSS `if()` function Plugin Implementation Summary
 
 ## ✅ What We've Accomplished
 
@@ -28,7 +28,7 @@
 
 ### 4. **Package Configuration**
 
-- **Package.json**: Complete package configuration with Lightning CSS as peer dependency
+- **package.json**: Complete package configuration with Lightning CSS as peer dependency
 - **TypeScript Definitions**: Full type definitions for Lightning CSS integration
 - **Build System**: Microbundle configuration for multiple output formats
 - **Test Suite**: Comprehensive test coverage with shared fixtures
@@ -89,7 +89,7 @@ const transformedCSS = result.code.toString("utf8");
 - **Lightning CSS Optimizations**: Automatic color optimization, property ordering, and minification
 - **Modern Browser Targeting**: Supports modern CSS syntax transformations
 - **Source Maps**: Compatible with Lightning CSS source map generation
-- **Multiple if() Functions**: Handles complex CSS with multiple conditional properties
+- **Multiple if() Function condition parts**: Handles complex CSS with multiple conditional properties
 - **Error Recovery**: Graceful handling of malformed CSS syntax
 
 ## 📂 Project Structure
@@ -139,7 +139,7 @@ For custom build pipelines or standalone processing:
 
 ```js
 import { transform } from "lightningcss-plugin-if-function";
-import { readFileSync } from "fs";
+import { readFileSync } from "node:fs";
 
 const css = readFileSync("styles.css", "utf8");
 const encoder = new TextEncoder();
@@ -276,11 +276,11 @@ The Lightning CSS plugin (`lightningcss-plugin-if-function`) provides:
 4. **✅ Cross-Platform Compatibility** - Works in Node.js, browsers, Deno, and Bun
 5. **✅ Zero Runtime Overhead** - Pure build-time transformation for static conditions
 
-This plugin complements the PostCSS plugin by providing an alternative for projects using Lightning CSS, offering the same core if() function transformation capabilities with the additional benefits of Lightning CSS's advanced optimization engine.
+This plugin complements the PostCSS plugin by providing an alternative for projects using Lightning CSS, offering the same core CSS `if()` function transformation capabilities with the additional benefits of Lightning CSS's advanced optimization engine.
 
 ## 🔗 Related Documentation
 
-- [PostCSS Plugin Implementation](../postcss-if-function/docs/refactoring/POSTCSS_IMPLEMENTATION_SUMMARY.md)
-- [Main Project README](../../README.md)
-- [Test Fixtures Documentation](../../docs/TEST_FIXTURES.md)
+- [PostCSS Plugin Implementation](../../postcss-if-function/docs/refactoring/POSTCSS_IMPLEMENTATION_SUMMARY.md)
+- [Main Project README](../../../README.md)
+- [Test Fixtures Documentation](../../../docs/TEST_FIXTURES.md)
 - [Lightning CSS Official Documentation](https://lightningcss.dev/)
