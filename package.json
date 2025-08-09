@@ -14,7 +14,7 @@
   "author": "Maximilian Franzke",
   "license": "MIT",
   "private": true,
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "pnpm@10.14.0",
   "keywords": [
     "css",
     "polyfill",
