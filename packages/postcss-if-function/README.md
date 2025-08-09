@@ -16,7 +16,7 @@ This plugin is part of the [css-if-polyfill](https://github.com/mfranzke/css-if-
 
 ```css
 .responsive {
-	width: if(media(max-width: 768px): 100%; else: 50%);
+	width: if(media(width <= 768px): 100%; else: 50%);
 }
 ```
 
@@ -26,7 +26,7 @@ This plugin is part of the [css-if-polyfill](https://github.com/mfranzke/css-if-
 .responsive {
 	width: 50%;
 }
-@media (max-width: 768px) {
+@media (width <= 768px) {
 	.responsive {
 		width: 100%;
 	}
@@ -219,7 +219,7 @@ module.exports = {
 
 ```css
 .responsive {
-	width: if(media(max-width: 768px): 100%; else: 50%);
+	width: if(media(width <= 768px): 100%; else: 50%);
 }
 ```
 
@@ -229,7 +229,7 @@ module.exports = {
 .responsive {
 	width: 50%;
 }
-@media (max-width: 768px) {
+@media (width <= 768px) {
 	.responsive {
 		width: 100%;
 	}

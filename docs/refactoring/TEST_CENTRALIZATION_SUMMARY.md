@@ -85,7 +85,7 @@ pnpm run build:docs  # Auto-generates docs from fixtures
 
 ```css
 .responsive {
-	width: if(media(max-width: 768px): 100%; else: 50%);
+	width: if(media(width <= 768px): 100%; else: 50%);
 }
 ```
 
@@ -95,7 +95,7 @@ pnpm run build:docs  # Auto-generates docs from fixtures
 .responsive {
 	width: 50%;
 }
-@media (max-width: 768px) {
+@media (width <= 768px) {
 	.responsive {
 		width: 100%;
 	}
