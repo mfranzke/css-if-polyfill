@@ -196,4 +196,4 @@ This validation system provides:
 - Use `--workers=1` to run sequentially if needed
 - Consider reducing viewport testing for faster runs
 
-This fixture validation system gives you confidence that your CSS if() polyfill works correctly across different browsers and scenarios, providing the same visual results as native CSS would.
+This fixture validation system gives you confidence that your CSS `if()` polyfill works correctly across different browsers and scenarios, providing the same visual results as native CSS would.
