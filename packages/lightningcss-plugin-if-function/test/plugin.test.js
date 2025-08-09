@@ -6,7 +6,7 @@ import {
 } from '../../../test/scripts/fixture-utils.js';
 import { transform } from '../src/index.js';
 
-describe('lightningcss-if-function plugin', () => {
+describe('lightningcss-plugin-if-function plugin', () => {
 	function run(input, output, options = {}) {
 		// Use TextEncoder instead of Buffer for better cross-platform compatibility
 		const encoder = new TextEncoder();
