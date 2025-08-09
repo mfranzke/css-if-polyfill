@@ -3,7 +3,7 @@
 }
 @media (min-width: 768px) {
 	.test {
-		color: #00f;
+		color: blue;
 	}
 }
 .test {

@@ -70,7 +70,7 @@ This document demonstrates the centralized test fixture system that provides a s
 
 ```css
 .test {
-	color: if(style(--theme): var(--primary) ; else: #00f);
+	color: if(style(--theme): var(--primary) ; else: blue);
 }
 ```
 
@@ -78,7 +78,7 @@ This document demonstrates the centralized test fixture system that provides a s
 
 ```css
 .test {
-	color: #00f;
+	color: blue;
 }
 ```
 
@@ -94,7 +94,7 @@ This document demonstrates the centralized test fixture system that provides a s
 
 ```css
 .example {
-	color: if(media(max-width: 768px): #00f; else: red);
+	color: if(media(max-width: 768px): blue; else: red);
 	font-size: if(supports(display: grid): 1.2rem; else: 1rem);
 }
 ```
@@ -107,7 +107,7 @@ This document demonstrates the centralized test fixture system that provides a s
 }
 @media (max-width: 768px) {
 	.example {
-		color: #00f;
+		color: blue;
 	}
 }
 .example {
@@ -145,17 +145,17 @@ This document demonstrates the centralized test fixture system that provides a s
 .responsive {
 	padding: 15px;
 }
-@media (min-width: 480px) {
+@media (width >= 480px) {
 	.responsive {
 		padding: 20px;
 	}
 }
-@media (min-width: 768px) {
+@media (width >= 768px) {
 	.responsive {
 		padding: 30px;
 	}
 }
-@media (min-width: 1200px) {
+@media (width >= 1200px) {
 	.responsive {
 		padding: 40px;
 	}
@@ -174,7 +174,7 @@ This document demonstrates the centralized test fixture system that provides a s
 
 ```css
 .test {
-	color: if(media(min-width: 768px): #00f; else: red);
+	color: if(media(min-width: 768px): blue; else: red);
 	background: if(style(--dark-mode): black; else: white);
 }
 ```
@@ -187,7 +187,7 @@ This document demonstrates the centralized test fixture system that provides a s
 }
 @media (min-width: 768px) {
 	.test {
-		color: #00f;
+		color: blue;
 	}
 }
 .test {
@@ -219,7 +219,7 @@ This document demonstrates the centralized test fixture system that provides a s
 .responsive {
 	width: 100%;
 }
-@media (min-width: 768px) and (max-width: 1024px) {
+@media ((min-width: 768px) and (max-width: 1024px)) {
 	.responsive {
 		width: 50%;
 	}
@@ -239,11 +239,11 @@ This document demonstrates the centralized test fixture system that provides a s
 ```css
 /* Header styles */
 .header {
-	background: #00f;
+	background: blue;
 }
 
 .conditional {
-	color: if(media(max-width: 768px): red; else: #00f);
+	color: if(media(max-width: 768px): red; else: blue);
 }
 
 /* Footer styles */
@@ -257,10 +257,10 @@ This document demonstrates the centralized test fixture system that provides a s
 ```css
 /* Header styles */
 .header {
-	background: #00f;
+	background: blue;
 }
 .conditional {
-	color: #00f;
+	color: blue;
 }
 @media (max-width: 768px) {
 	.conditional {

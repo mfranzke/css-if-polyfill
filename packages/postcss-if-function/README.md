@@ -290,17 +290,17 @@ module.exports = {
 .responsive {
 	padding: 15px;
 }
-@media (min-width: 480px) {
+@media (width >= 480px) {
 	.responsive {
 		padding: 20px;
 	}
 }
-@media (min-width: 768px) {
+@media (width >= 768px) {
 	.responsive {
 		padding: 30px;
 	}
 }
-@media (min-width: 1200px) {
+@media (width >= 1200px) {
 	.responsive {
 		padding: 40px;
 	}
