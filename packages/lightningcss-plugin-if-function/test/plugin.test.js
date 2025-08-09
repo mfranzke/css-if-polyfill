@@ -1,4 +1,3 @@
-import Buffer from 'node:buffer';
 import { describe, expect, it } from 'vitest';
 import {
 	loadFixture,
@@ -9,8 +8,10 @@ import { transform } from '../src/index.js';
 
 describe('lightningcss-if-function plugin', () => {
 	function run(input, output, options = {}) {
+		// Use TextEncoder instead of Buffer for better cross-platform compatibility
+		const encoder = new TextEncoder();
 		const result = transform({
-			code: Buffer.from(input),
+			code: encoder.encode(input),
 			...options
 		});
 		expect(normalizeCSS(result.code.toString('utf8'))).toBe(
@@ -33,8 +34,9 @@ describe('lightningcss-if-function plugin', () => {
 }`;
 
 		// Should not throw an error, but may not transform properly
+		const encoder = new TextEncoder();
 		const result = transform({
-			code: Buffer.from(input)
+			code: encoder.encode(input)
 		});
 
 		expect(result.code).toBeDefined();
