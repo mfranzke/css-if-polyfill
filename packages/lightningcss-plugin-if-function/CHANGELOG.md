@@ -6,4 +6,4 @@
 
 - 523ac3c: refactor: further optimizations
 - Updated dependencies [6045317]
-  - css-if-polyfill@0.1.4
+    - css-if-polyfill@0.1.4
