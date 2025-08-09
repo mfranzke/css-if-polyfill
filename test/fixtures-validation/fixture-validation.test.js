@@ -185,7 +185,7 @@ test.describe('CSS if() Polyfill Fixture Validation', () => {
 			const url = route.request().url();
 			const filePath = url.replace(
 				/^.*\/packages\//,
-				'/Users/maximilianfranzke/Sites/contributions/css-if-polyfill/packages/'
+				path.join(__dirname, '..', '..', 'packages')
 			);
 
 			try {
