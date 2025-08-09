@@ -12,7 +12,7 @@
 We're providing several solutions for the [CSS `if()` function](https://developer.mozilla.org/en-US/docs/Web/CSS/if) with **hybrid build-time and runtime processing**. Transforms CSS `if()` functions to native `@media` and `@supports` rules where possible, with runtime fallback for dynamic conditions. The following packages are provided by this monorepo:
 
 - A modern JavaScript [polyfill](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/css-if-polyfill),
-- [PostCSS plugin](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/postcss-if-function),
+- a [PostCSS plugin](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/postcss-if-function),
 - a [Lightning CSS plugin](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/lightningcss-plugin-if-function) and
 - a [Stylelint plugin](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/stylelint-config-if-function) (to extend to prevent lint false positives)
 
