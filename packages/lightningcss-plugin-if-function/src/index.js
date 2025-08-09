@@ -1,6 +1,5 @@
 import { buildTimeTransform } from 'css-if-polyfill';
 import { transform as lightningTransform } from 'lightningcss';
-import Buffer from 'node:buffer';
 
 /**
  * Transforms CSS with if() functions using css-if-polyfill and then processes it with Lightning CSS.
@@ -11,16 +10,18 @@ import Buffer from 'node:buffer';
 export function transform(options) {
 	const cssText = options.code.toString('utf8');
 
-	// Avoid transformation if not needed
+	// Early return if no if() functions to transform
 	if (!cssText.includes('if(')) {
 		return lightningTransform(options);
 	}
 
 	const transformed = buildTimeTransform(cssText);
 
+	// Use TextEncoder instead of Buffer for better cross-platform compatibility
+	const encoder = new TextEncoder();
 	const newOptions = {
 		...options,
-		code: Buffer.from(transformed.nativeCSS)
+		code: encoder.encode(transformed.nativeCSS)
 	};
 
 	return lightningTransform(newOptions);
