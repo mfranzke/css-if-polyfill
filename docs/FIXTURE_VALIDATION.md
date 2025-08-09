@@ -75,13 +75,13 @@ Validates CSS feature detection with properties like:
 
 ```bash
 # Run all fixture tests
-npm run test:fixtures
+pnpm run test:fixtures
 
 # Run specific fixture with config
-npx playwright test --config=test/fixtures-validation/fixture-validation.playwright.config.js --grep "basic-media"
+pnpm exec playwright test --config=test/fixtures-validation/fixture-validation.playwright.config.js --grep "basic-media"
 
 # Run with browser UI (for debugging)
-npx playwright test --config=test/fixtures-validation/fixture-validation.playwright.config.js --ui
+pnpm exec playwright test --config=test/fixtures-validation/fixture-validation.playwright.config.js --ui
 ```
 
 ### Using the Helper Script
