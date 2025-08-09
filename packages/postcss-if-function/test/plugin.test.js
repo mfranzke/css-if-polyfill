@@ -15,13 +15,8 @@ describe('postcss-if-function plugin', () => {
 				from: undefined
 			}
 		);
-		// Manually strip comments from result to match Lightning CSS behavior
-		const cssWithoutComments = result.css.replaceAll(
-			/\/\*[\s\S]*?\*\//g,
-			''
-		);
 
-		expect(normalizeCSS(cssWithoutComments)).toBe(normalizeCSS(output));
+		expect(normalizeCSS(result.css)).toBe(normalizeCSS(output));
 		expect(result.warnings()).toHaveLength(0);
 	}
 

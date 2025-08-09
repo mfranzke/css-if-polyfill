@@ -23,13 +23,7 @@ describe('Integrated CSS if() Polyfill', () => {
 				const { input, expected } = loadFixture(fixture);
 				const result = buildTimeTransform(input);
 
-				// Strip comments that might be preserved during transformation
-				const normalizedOutput = result.nativeCSS.replaceAll(
-					/\/\*[\s\S]*?\*\//g,
-					''
-				);
-
-				expect(normalizeCSS(normalizedOutput)).toBe(
+				expect(normalizeCSS(result.nativeCSS)).toBe(
 					normalizeCSS(expected)
 				);
 				expect(result.hasRuntimeRules).toBe(false);

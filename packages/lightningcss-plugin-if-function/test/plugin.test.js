@@ -16,8 +16,15 @@ describe('lightningcss-plugin-if-function plugin', () => {
 			minify: false,
 			...options
 		});
+
+		// Lightning CSS naturally removes comments, so strip them from expected output for comparison
+		const outputWithoutComments = output.replaceAll(
+			/\/\*[\s\S]*?\*\//g,
+			''
+		);
+
 		expect(normalizeCSS(result.code.toString('utf8'))).toBe(
-			normalizeCSS(output)
+			normalizeCSS(outputWithoutComments)
 		);
 	}
 
