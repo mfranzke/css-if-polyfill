@@ -253,6 +253,7 @@ This document demonstrates the centralized test fixture system that provides a s
 **Expected Output:**
 
 ```css
+/* Header styles */
 .header {
 	background: #00f;
 }
@@ -264,6 +265,7 @@ This document demonstrates the centralized test fixture system that provides a s
 		color: red;
 	}
 }
+/* Footer styles */
 .footer {
 	background: gray;
 }
