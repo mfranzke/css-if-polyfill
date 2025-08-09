@@ -19,10 +19,10 @@ describe('postcss-if-function plugin', () => {
 		let cssWithoutComments = result.css.replaceAll(/\/\*[\s\S]*?\*\//g, '');
 
 		// Normalize PostCSS output to match expected format:
-		// Remove extra parentheses in complex media queries: ((condition)) -> (condition)
+		// Remove extra parentheses in complex media queries
 		cssWithoutComments = cssWithoutComments.replaceAll(
-			/\(\(([^)]+)\)\)/g,
-			'($1)'
+			/@media\s+\(\((.+?)\)\)/g,
+			'@media ($1)'
 		);
 
 		expect(normalizeCSS(cssWithoutComments)).toBe(normalizeCSS(output));
