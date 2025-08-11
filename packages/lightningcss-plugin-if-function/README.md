@@ -4,7 +4,7 @@
 [![npm version](https://badge.fury.io/js/lightningcss-plugin-if-function.svg)](https://badge.fury.io/js/lightningcss-plugin-if-function)
 [![Build Status](https://github.com/mfranzke/css-if-polyfill/workflows/CI/badge.svg)](https://github.com/mfranzke/css-if-polyfill/actions)
 
-A [Lightning CSS](https://lightningcss.dev/) plugin for transforming CSS `if()` functions into native CSS `@media` and `@supports` rules at build time.
+A [Lightning CSS](https://lightningcss.dev/) plugin for transforming [CSS `if()` functions](https://developer.mozilla.org/en-US/docs/Web/CSS/if) into native CSS `@media` and `@supports` rules at build time.
 
 This plugin is part of the [css-if-polyfill](https://github.com/mfranzke/css-if-polyfill/tree/main/packages/css-if-polyfill/) project and provides build-time transformation of conditional CSS, eliminating the need for runtime JavaScript processing when using only `media()` and `supports()` functions.
 
