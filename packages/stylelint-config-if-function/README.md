@@ -1,6 +1,6 @@
 # stylelint-config-if-function
 
-A shareable Stylelint config to support the experimental CSS `if()` function syntax.
+A shareable [Stylelint](https://github.com/stylelint/stylelint) config to support the experimental CSS `if()` function syntax.
 
 ## Installation
 
