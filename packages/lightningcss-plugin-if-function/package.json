@@ -60,7 +60,7 @@
     "lightningcss": "1.22.0",
     "microbundle": "0.15.1",
     "vitest": "3.2.4",
-    "xo": "1.1.1"
+    "xo": "1.2.2"
   },
   "source": "src/index.js",
   "umd:main": "dist/index.umd.js"
