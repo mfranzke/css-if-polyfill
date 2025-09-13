@@ -6,3 +6,5 @@ npm-debug.log
 dist
 _site
 packages/*/coverage
+/test-results
+/playwright-report
