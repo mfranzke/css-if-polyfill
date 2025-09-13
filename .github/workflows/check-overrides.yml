@@ -1,0 +1,30 @@
+name: Check pnpm Overrides
+
+on:
+  workflow_dispatch: # manual run
+  schedule:
+    - cron: "0 3 * * 0" # weekly
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  check-overrides:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0 # needed for PR creation
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+
+      - uses: mfranzke/check-pnpm-overrides@v0.0.3

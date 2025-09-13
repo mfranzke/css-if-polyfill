@@ -62,9 +62,9 @@
     "@vitest/coverage-v8": "3.2.4",
     "jsdom": "26.1.0",
     "microbundle": "0.15.1",
-    "vite": "7.0.6",
+    "vite": "7.1.5",
     "vitest": "3.2.4",
-    "xo": "1.1.1"
+    "xo": "1.2.2"
   },
   "source": "src/index.js",
   "umd:main": "dist/index.umd.js"
