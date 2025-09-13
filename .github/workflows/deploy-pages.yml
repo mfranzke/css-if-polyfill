@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages from main
 
 on:
   push:
@@ -62,7 +62,7 @@ jobs:
           path: "_site"
 
   deploy:
-    name: Deploy to GitHub Pages
+    name: Deploy to GitHub Pages from main
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -70,6 +70,6 @@ jobs:
     needs: build
 
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages from main
         id: deployment
         uses: actions/deploy-pages@v4

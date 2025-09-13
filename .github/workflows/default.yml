@@ -156,7 +156,7 @@ jobs:
 
   # Stage 4: Deploy to GitHub Pages (main branch only, requires all previous stages)
   deploy:
-    name: Deploy to GitHub Pages
+    name: Deploy to GitHub Pages from main
     needs: [checks-done]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     uses: ./.github/workflows/deploy-pages.yml
