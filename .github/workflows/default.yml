@@ -146,7 +146,6 @@ jobs:
     name: All Checks Complete
     needs: [lint, quality, security, audit-fix, ci, performance]
     runs-on: ubuntu-24.04
-    timeout-minutes: 1
     permissions:
       contents: read
     steps:
