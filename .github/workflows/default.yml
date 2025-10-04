@@ -149,7 +149,6 @@ jobs:
     timeout-minutes: 1
     permissions:
       contents: read
-
     steps:
       - name: All required checks passed
         run: echo "✅ All required checks completed successfully"
