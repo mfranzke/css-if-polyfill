@@ -150,7 +150,9 @@ jobs:
       contents: read
     steps:
       - name: All required checks passed
-        run: echo "✅ All required checks completed successfully"
+        run: |
+          echo "✅ All required checks completed successfully"
+          echo "status=success" >> $GITHUB_OUTPUT
 
   # Stage 4: Deploy to GitHub Pages (main branch only, requires all previous stages)
   deploy:
