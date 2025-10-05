@@ -15,6 +15,9 @@
   "license": "MIT",
   "private": true,
   "packageManager": "pnpm@10.14.0",
+  "engines": {
+    "node": ">= 22"
+  },
   "keywords": [
     "css",
     "polyfill",
@@ -74,8 +77,5 @@
       "@eslint/plugin-kit@<0.3.4": ">=0.3.4",
       "tmp@<=0.2.3": ">=0.2.4"
     }
-  },
-  "engines": {
-    "node": ">= 22"
   }
 }
