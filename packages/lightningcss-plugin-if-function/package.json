@@ -1,6 +1,6 @@
 {
   "name": "lightningcss-plugin-if-function",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "description": "Lightning CSS plugin for transforming CSS if() functions to native CSS",
   "repository": {
