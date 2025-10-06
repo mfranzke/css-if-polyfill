@@ -85,7 +85,7 @@ _Note: Linting has been moved to default.yml to avoid duplication_
 
 - **Test**: Full test suite before release
 - **GitHub Release**: Creates GitHub release with changelog
-- **npm Publish**: Publishes to npm registry (connection in between GitHub pipeline and npmjs.com enabled via [Trusted Publishing](https://docs.npmjs.com/trusted-publishers))
+- **npm Publish**: Publishes to npm registry using [Trusted Publishing](https://docs.npmjs.com/trusted-publishers) for secure authentication between GitHub and npmjs.com
 
 ### 5. **Code Quality** (`.github/workflows/quality.yml`)
 
