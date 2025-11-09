@@ -61,7 +61,7 @@
     "lint-staged": "16.2.3",
     "markdownlint-cli": "0.45.0",
     "microbundle": "0.15.1",
-    "playwright": "1.55.1",
+    "playwright": "1.56.0",
     "prettier": "3.6.2",
     "prettier-plugin-organize-imports": "4.3.0",
     "prettier-plugin-pkg": "0.21.2",
