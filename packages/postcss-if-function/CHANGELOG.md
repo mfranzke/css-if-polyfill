@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- 60b9697: fix: PostCSS peer dependency version range
+- 2a8b3f7: fix: Update postcss peer dependency version range
 
 ## 0.1.5
 
