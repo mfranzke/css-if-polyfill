@@ -11,6 +11,12 @@ This document demonstrates the centralized test fixture system that provides a s
 **Input CSS:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .responsive {
 	width: if(media(width <= 768px): 100%; else: 50%);
 }
@@ -19,6 +25,12 @@ This document demonstrates the centralized test fixture system that provides a s
 **Expected Output:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .responsive {
 	width: 50%;
 }
@@ -40,6 +52,12 @@ This document demonstrates the centralized test fixture system that provides a s
 **Input CSS:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .grid {
 	display: if(supports(display: grid): grid; else: block);
 }
@@ -48,6 +66,12 @@ This document demonstrates the centralized test fixture system that provides a s
 **Expected Output:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .grid {
 	display: block;
 }
@@ -69,6 +93,12 @@ This document demonstrates the centralized test fixture system that provides a s
 **Input CSS:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .test {
 	color: if(style(--theme): var(--primary) ; else: #00f);
 }
@@ -77,6 +107,12 @@ This document demonstrates the centralized test fixture system that provides a s
 **Expected Output:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .test {
 	color: #00f;
 }
@@ -93,6 +129,12 @@ This document demonstrates the centralized test fixture system that provides a s
 **Input CSS:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .example {
 	color: if(media(width <= 768px): #00f; else: red);
 	font-size: if(supports(display: grid): 1.2rem; else: 1rem);
@@ -102,6 +144,12 @@ This document demonstrates the centralized test fixture system that provides a s
 **Expected Output:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .example {
 	color: red;
 }
@@ -131,6 +179,12 @@ This document demonstrates the centralized test fixture system that provides a s
 **Input CSS:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .responsive {
 	padding: if(
 		media(width >= 1200px): 40px; media(width >= 768px): 30px;
@@ -142,6 +196,12 @@ This document demonstrates the centralized test fixture system that provides a s
 **Expected Output:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .responsive {
 	padding: 15px;
 }
@@ -173,6 +233,12 @@ This document demonstrates the centralized test fixture system that provides a s
 **Input CSS:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .test {
 	color: if(media(width >= 768px): #00f; else: red);
 	background: if(style(--dark-mode): black; else: white);
@@ -182,6 +248,12 @@ This document demonstrates the centralized test fixture system that provides a s
 **Expected Output:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .test {
 	color: red;
 }
@@ -206,6 +278,12 @@ This document demonstrates the centralized test fixture system that provides a s
 **Input CSS:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .responsive {
 	width: if(media((width >= 768px) and (width <= 1024px)): 50%; else: 100%);
 }
@@ -214,6 +292,12 @@ This document demonstrates the centralized test fixture system that provides a s
 **Expected Output:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .responsive {
 	width: 100%;
 }
@@ -235,6 +319,12 @@ This document demonstrates the centralized test fixture system that provides a s
 **Input CSS:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 /* Header styles */
 .header {
 	background: #00f;
@@ -253,6 +343,12 @@ This document demonstrates the centralized test fixture system that provides a s
 **Expected Output:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 /* Header styles */
 .header {
 	background: #00f;
@@ -282,6 +378,12 @@ This document demonstrates the centralized test fixture system that provides a s
 **Input CSS:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .normal {
 	color: red;
 	font-size: 1rem;
@@ -291,6 +393,12 @@ This document demonstrates the centralized test fixture system that provides a s
 **Expected Output:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .normal {
 	color: red;
 	font-size: 1rem;
