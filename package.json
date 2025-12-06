@@ -51,26 +51,26 @@
   "devDependencies": {
     "@babel/core": "7.28.4",
     "@babel/preset-env": "7.28.3",
-    "@changesets/cli": "2.29.7",
+    "@changesets/cli": "2.29.8",
     "@commitlint/cli": "20.1.0",
     "@commitlint/config-conventional": "20.0.0",
     "@vitest/coverage-v8": "4.0.15",
     "http-server": "14.1.1",
     "husky": "9.1.7",
     "jsdom": "26.1.0",
-    "lint-staged": "16.2.3",
+    "lint-staged": "16.2.7",
     "markdownlint-cli": "0.45.0",
     "microbundle": "0.15.1",
     "playwright": "1.55.1",
     "prettier": "3.6.2",
     "prettier-plugin-organize-imports": "4.3.0",
     "prettier-plugin-pkg": "0.21.2",
-    "publint": "0.3.13",
+    "publint": "0.3.15",
     "stylelint": "^16.25.0",
-    "stylelint-config-standard": "^39.0.0",
+    "stylelint-config-standard": "^39.0.1",
     "vite": "7.1.9",
     "vitest": "4.0.15",
-    "xo": "1.2.2"
+    "xo": "1.2.3"
   },
   "pnpm": {
     "overrides": {
