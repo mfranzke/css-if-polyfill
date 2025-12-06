@@ -84,6 +84,12 @@ pnpm run build:docs  # Auto-generates docs from fixtures
 **Input CSS:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .responsive {
 	width: if(media(width <= 768px): 100%; else: 50%);
 }
@@ -92,6 +98,12 @@ pnpm run build:docs  # Auto-generates docs from fixtures
 **Expected Output:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .responsive {
 	width: 50%;
 }
