@@ -59,7 +59,7 @@ function postcssIfFunction(options = {}) {
 
 	return {
 		postcssPlugin: PLUGIN_NAME,
-		Once(root, { result }) {
+		async Once(root, { result }) {
 			// Collect all CSS text first
 			const cssText = root.toString();
 
@@ -85,7 +85,7 @@ function postcssIfFunction(options = {}) {
 			// double parsing overhead identified by static analysis tools.
 
 			try {
-				const transformedRoot = result.processor.process(
+				const processed = await result.processor.process(
 					transformed.nativeCSS,
 					{
 						from: undefined,
@@ -93,7 +93,7 @@ function postcssIfFunction(options = {}) {
 					}
 				).root;
 
-				// Clone nodes to preserve original formatting and avoid reference issues
+				const transformedRoot = processed.root;
 				transformedRoot.each((node) => {
 					root.append(node.clone());
 				});
