@@ -6,7 +6,7 @@
 
 - 9e6949d: chore(docs): README improvements
 - Updated dependencies [9e6949d]
-  - css-if-polyfill@0.1.5
+    - css-if-polyfill@0.1.5
 
 ## 0.0.1
 
@@ -14,4 +14,4 @@
 
 - 523ac3c: refactor: further optimizations
 - Updated dependencies [6045317]
-  - css-if-polyfill@0.1.4
+    - css-if-polyfill@0.1.4
