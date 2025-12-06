@@ -57,8 +57,8 @@
     "test:vitest:watch": "vitest"
   },
   "devDependencies": {
-    "@babel/core": "7.28.4",
-    "@babel/preset-env": "7.28.3",
+    "@babel/core": "7.28.5",
+    "@babel/preset-env": "7.28.5",
     "@vitest/coverage-v8": "4.0.15",
     "jsdom": "26.1.0",
     "microbundle": "0.15.1",
