@@ -62,7 +62,7 @@
     "@vitest/coverage-v8": "4.0.15",
     "jsdom": "26.1.0",
     "microbundle": "0.15.1",
-    "vite": "7.1.9",
+    "vite": "7.1.11",
     "vitest": "4.0.15",
     "xo": "1.2.3"
   },
