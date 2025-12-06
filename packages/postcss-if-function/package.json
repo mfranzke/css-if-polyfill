@@ -52,7 +52,7 @@
     "test:vitest:watch": "vitest"
   },
   "peerDependencies": {
-    "postcss": "8.0.0"
+    "postcss": ">=8 <9"
   },
   "dependencies": {
     "css-if-polyfill": "workspace:*"
