@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages from main
 
 on:
   push:
@@ -33,7 +33,7 @@ jobs:
           run_install: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: ".nvmrc"
           cache: "pnpm"
@@ -62,7 +62,7 @@ jobs:
           path: "_site"
 
   deploy:
-    name: Deploy to GitHub Pages
+    name: Deploy to GitHub Pages from main
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -70,6 +70,6 @@ jobs:
     needs: build
 
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages from main
         id: deployment
         uses: actions/deploy-pages@v4

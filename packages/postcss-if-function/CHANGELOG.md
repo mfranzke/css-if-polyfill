@@ -1,5 +1,13 @@
 # postcss-if-function
 
+## 0.1.5
+
+### Patch Changes
+
+- 9e6949d: chore(docs): README improvements
+- Updated dependencies [9e6949d]
+    - css-if-polyfill@0.1.5
+
 ## 0.1.4
 
 ### Patch Changes

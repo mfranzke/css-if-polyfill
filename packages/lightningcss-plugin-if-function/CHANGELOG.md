@@ -1,5 +1,13 @@
 # lightningcss-plugin-if-function
 
+## 0.0.2
+
+### Patch Changes
+
+- 9e6949d: chore(docs): README improvements
+- Updated dependencies [9e6949d]
+    - css-if-polyfill@0.1.5
+
 ## 0.0.1
 
 ### Patch Changes

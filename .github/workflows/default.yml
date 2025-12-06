@@ -40,7 +40,7 @@ jobs:
           run_install: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: ".nvmrc"
           cache: "pnpm"
@@ -81,7 +81,7 @@ jobs:
           run_install: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: ".nvmrc"
           cache: "pnpm"
@@ -146,17 +146,17 @@ jobs:
     name: All Checks Complete
     needs: [lint, quality, security, audit-fix, ci, performance]
     runs-on: ubuntu-24.04
-    timeout-minutes: 1
     permissions:
       contents: read
-
     steps:
       - name: All required checks passed
-        run: echo "✅ All required checks completed successfully"
+        run: |
+          echo "✅ All required checks completed successfully"
+          echo "status=success" >> $GITHUB_OUTPUT
 
   # Stage 4: Deploy to GitHub Pages (main branch only, requires all previous stages)
   deploy:
-    name: Deploy to GitHub Pages
+    name: Deploy to GitHub Pages from main
     needs: [checks-done]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     uses: ./.github/workflows/deploy-pages.yml

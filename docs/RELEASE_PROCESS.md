@@ -118,9 +118,7 @@ The changeset configuration is in `.changeset/config.json`:
 
 ## Required Secrets
 
-Make sure these secrets are configured in your GitHub repository:
-
-- `NPM_TOKEN`: Your npm authentication token for publishing
+None. The connection in between GitHub pipeline and npmjs.com is done via [Trusted Publishing](https://docs.npmjs.com/trusted-publishers).
 
 ## Benefits over manual tagging
 
@@ -140,7 +138,6 @@ Make sure these secrets are configured in your GitHub repository:
 
 ### Publishing fails
 
-- Verify `NPM_TOKEN` secret is set correctly
 - Check that package name is available on npm
 - Ensure version doesn't already exist
 

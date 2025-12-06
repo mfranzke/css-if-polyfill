@@ -85,7 +85,7 @@ _Note: Linting has been moved to default.yml to avoid duplication_
 
 - **Test**: Full test suite before release
 - **GitHub Release**: Creates GitHub release with changelog
-- **npm Publish**: Publishes to npm registry (requires `NPM_TOKEN` secret)
+- **npm Publish**: Publishes to npm registry using [Trusted Publishing](https://docs.npmjs.com/trusted-publishers) for secure authentication between GitHub and npmjs.com
 
 ### 5. **Code Quality** (`.github/workflows/quality.yml`)
 
@@ -255,7 +255,6 @@ To fully utilize all workflows, set up these GitHub repository secrets:
 ### Required Secrets
 
 - `CODECOV_TOKEN`: For test coverage reporting
-- `NPM_TOKEN`: For publishing to npm (format: `npm_xxxxxxxxxxxx`)
 
 ### Optional Secrets
 

@@ -1,6 +1,6 @@
 {
   "name": "css-if-polyfill",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "type": "module",
   "description": "A JavaScript polyfill for CSS if() functionality with style(), media(), and supports() functions",
   "repository": {
@@ -57,14 +57,14 @@
     "test:vitest:watch": "vitest"
   },
   "devDependencies": {
-    "@babel/core": "7.28.0",
-    "@babel/preset-env": "7.28.0",
-    "@vitest/coverage-v8": "3.2.4",
-    "jsdom": "26.1.0",
+    "@babel/core": "7.28.5",
+    "@babel/preset-env": "7.28.5",
+    "@vitest/coverage-v8": "4.0.15",
+    "jsdom": "27.2.0",
     "microbundle": "0.15.1",
-    "vite": "7.0.6",
-    "vitest": "3.2.4",
-    "xo": "1.1.1"
+    "vite": "7.1.9",
+    "vitest": "4.0.15",
+    "xo": "1.2.3"
   },
   "source": "src/index.js",
   "umd:main": "dist/index.umd.js"
