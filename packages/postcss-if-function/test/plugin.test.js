@@ -85,7 +85,7 @@ describe('postcss-if-function plugin', () => {
 
 	it('should not trigger PostCSS warnings about missing from option', async () => {
 		const inputPath = path.join(FIXTURES_DIR, 'basic-media.input.css');
-		const css = readFileSync(inputPath, 'utf8');
+		const css = loadFixture('basic-media').input;
 
 		// Track warnings
 		const warnings = [];
