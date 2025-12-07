@@ -1,3 +1,6 @@
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import postcss from 'postcss';
 import { describe, expect, it, vi } from 'vitest';
 import {
@@ -6,6 +9,9 @@ import {
 	postcssFixtureTests
 } from '../../../test/scripts/fixture-utils.js';
 import { postcssIfFunction } from '../src/index.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const FIXTURES_DIR = path.join(__dirname, '../../../test/fixtures');
 
 describe('postcss-if-function plugin', () => {
 	async function run(input, output, options = {}) {
@@ -59,5 +65,42 @@ describe('postcss-if-function plugin', () => {
 		});
 
 		expect(result.css).toBeDefined();
+	});
+
+	it('should properly forward the from option when processing files', async () => {
+		const { input, expected } = loadFixture('basic-media');
+		const inputPath = path.join(FIXTURES_DIR, 'basic-media.input.css');
+
+		// Process with actual file path
+		const result = await postcss([postcssIfFunction()]).process(input, {
+			from: inputPath
+		});
+
+		expect(normalizeCSS(result.css)).toBe(normalizeCSS(expected));
+		expect(result.warnings()).toHaveLength(0);
+
+		// Verify the from option was properly set in the result
+		expect(result.opts.from).toBe(inputPath);
+	});
+
+	it('should not trigger PostCSS warnings about missing from option', async () => {
+		const inputPath = path.join(FIXTURES_DIR, 'basic-media.input.css');
+		const css = readFileSync(inputPath, 'utf8');
+
+		// Track warnings
+		const warnings = [];
+		const result = await postcss([postcssIfFunction()]).process(css, {
+			from: inputPath
+		});
+
+		result.warnings().forEach((warning) => {
+			warnings.push(warning.text);
+		});
+
+		// Should not have any warnings about missing from option
+		expect(warnings).toHaveLength(0);
+		expect(
+			warnings.some((w) => w.includes('did not pass the `from` option'))
+		).toBe(false);
 	});
 });
