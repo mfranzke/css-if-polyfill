@@ -1,5 +1,11 @@
 # postcss-if-function
 
+## 0.1.8
+
+### Patch Changes
+
+- [#139](https://github.com/mfranzke/css-if-polyfill/pull/139) [`2666f97`](https://github.com/mfranzke/css-if-polyfill/commit/2666f979827890a39dc944cd2adec63ee6891bf1) Thanks [@mfranzke](https://github.com/mfranzke)! - fix(PostCSS): warning about missing `from` option
+
 ## 0.1.7
 
 ### Patch Changes
@@ -18,7 +24,7 @@
 
 - 9e6949d: chore(docs): README improvements
 - Updated dependencies [9e6949d]
-    - css-if-polyfill@0.1.5
+  - css-if-polyfill@0.1.5
 
 ## 0.1.4
 
@@ -26,7 +32,7 @@
 
 - 6045317: docs: README improvements
 - Updated dependencies [6045317]
-    - css-if-polyfill@0.1.4
+  - css-if-polyfill@0.1.4
 
 ## 0.1.3
 
@@ -40,7 +46,7 @@
 
 - b7f8df7: fix: ensure that multiple if() conditions are handled correctly
 - Updated dependencies [b7f8df7]
-    - css-if-polyfill@0.1.3
+  - css-if-polyfill@0.1.3
 
 ## 0.1.1
 
@@ -49,7 +55,7 @@
 - 9c6d05a: fix: several package metadata related issues
 - 588be15: docs: corrected the package name
 - Updated dependencies [9c6d05a]
-    - css-if-polyfill@0.1.2
+  - css-if-polyfill@0.1.2
 
 ## 0.1.0
 
@@ -60,4 +66,4 @@
 ### Patch Changes
 
 - Updated dependencies [a6b019d]
-    - css-if-polyfill@0.1.1
+  - css-if-polyfill@0.1.1
