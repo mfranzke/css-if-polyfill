@@ -1,7 +1,9 @@
 {
 	"$schema": "https://cdn.jsdelivr.net/npm/@changesets/config@3.1.1/schema.json",
-	"changelog": ["@changesets/changelog-github",
-		{ "owner": "mfranzke", "repo": "css-if-polyfill" }],
+	"changelog": [
+		"@changesets/changelog-github",
+		{ "owner": "mfranzke", "repo": "css-if-polyfill" }
+	],
 	"commit": false,
 	"fixed": [],
 	"linked": [],
