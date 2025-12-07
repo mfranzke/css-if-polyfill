@@ -86,20 +86,16 @@ describe('postcss-if-function plugin', () => {
 		const inputPath = path.join(FIXTURES_DIR, 'basic-media.input.css');
 		const css = loadFixture('basic-media').input;
 
-		// Track warnings
-		const warnings = [];
 		const result = await postcss([postcssIfFunction()]).process(css, {
 			from: inputPath
 		});
 
-		result.warnings().forEach((warning) => {
-			warnings.push(warning.text);
-		});
-
 		// Should not have any warnings about missing from option
-		expect(warnings).toHaveLength(0);
+		expect(result.warnings()).toHaveLength(0);
 		expect(
-			warnings.some((w) => w.includes('did not pass the `from` option'))
+			result.warnings().some((w) =>
+				w.text.includes('did not pass the `from` option')
+			)
 		).toBe(false);
 	});
 });
