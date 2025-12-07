@@ -88,7 +88,7 @@ function postcssIfFunction(options = {}) {
 				const processed = await result.processor.process(
 					transformed.nativeCSS,
 					{
-						from: undefined,
+						from: result.opts.from,
 						parser: result.processor.parser
 					}
 				);
