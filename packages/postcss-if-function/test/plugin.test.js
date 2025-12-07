@@ -81,5 +81,4 @@ describe('postcss-if-function plugin', () => {
 		// Verify the from option was properly set in the result
 		expect(result.opts.from).toBe(inputPath);
 	});
-
 });
