@@ -32,7 +32,7 @@
     "build:docs": "node scripts/build-docs.js",
     "changeset": "changeset",
     "changeset:publish": "pnpm run build && pnpm exec changeset publish",
-    "changeset:version": "changeset version && pnpm install --lockfile-only",
+    "changeset:version": "changeset version && pnpm install --lockfile-only && prettier **/CHANGELOG.md --write",
     "codestyle": "prettier . --write",
     "dev": "pnpm --recursive run dev",
     "lint": "pnpm --parallel run '/^lint:[^:]*$/'",
