@@ -93,7 +93,7 @@ jobs:
         run: pnpm run --recursive test:vitest --coverage --coverage.reporter lcov --coverage.reporter json
 
       - name: Upload coverage reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: coverage-reports
           path: |
