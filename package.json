@@ -66,10 +66,10 @@
     "prettier": "3.7.4",
     "prettier-plugin-organize-imports": "4.3.0",
     "prettier-plugin-pkg": "0.21.2",
-    "publint": "0.3.15",
+    "publint": "0.3.16",
     "stylelint": "^16.26.1",
     "stylelint-config-standard": "^39.0.1",
-    "vite": "7.2.6",
+    "vite": "7.2.7",
     "vitest": "4.0.15",
     "xo": "1.2.3"
   },
