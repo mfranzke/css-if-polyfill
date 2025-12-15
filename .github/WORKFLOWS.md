@@ -255,7 +255,6 @@ To fully utilize all workflows, set up these GitHub repository secrets:
 ### Required Secrets
 
 - `CODECOV_TOKEN`: For test coverage reporting
-- `NPM_TOKEN`: For publishing to npm (format: `npm_xxxxxxxxxxxx`)
 
 ### Optional Secrets
 

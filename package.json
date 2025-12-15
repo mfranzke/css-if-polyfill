@@ -32,7 +32,7 @@
     "build:docs": "node scripts/build-docs.js",
     "changeset": "changeset",
     "changeset:publish": "pnpm run build && pnpm exec changeset publish",
-    "changeset:version": "changeset version && pnpm install --lockfile-only",
+    "changeset:version": "changeset version && pnpm install --lockfile-only && prettier '{CHANGELOG.md,packages/*/CHANGELOG.md}' --write",
     "codestyle": "prettier . --write",
     "dev": "pnpm --recursive run dev",
     "lint": "pnpm --parallel run '/^lint:[^:]*$/'",
@@ -49,38 +49,33 @@
     "test": "pnpm --recursive run test"
   },
   "devDependencies": {
-    "@babel/core": "7.28.4",
-    "@babel/preset-env": "7.28.3",
-    "@changesets/cli": "2.29.7",
-    "@commitlint/cli": "20.1.0",
-    "@commitlint/config-conventional": "20.0.0",
+    "@babel/core": "7.28.5",
+    "@babel/preset-env": "7.28.5",
+    "@changesets/changelog-github": "0.5.2",
+    "@changesets/cli": "2.29.8",
+    "@commitlint/cli": "20.2.0",
+    "@commitlint/config-conventional": "20.2.0",
     "@vitest/coverage-v8": "4.0.15",
     "http-server": "14.1.1",
     "husky": "9.1.7",
-    "jsdom": "26.1.0",
-    "lint-staged": "16.2.3",
-    "markdownlint-cli": "0.45.0",
+    "jsdom": "27.2.0",
+    "lint-staged": "16.2.7",
+    "markdownlint-cli": "0.46.0",
     "microbundle": "0.15.1",
     "playwright": "1.55.1",
-    "prettier": "3.6.2",
+    "prettier": "3.7.4",
     "prettier-plugin-organize-imports": "4.3.0",
     "prettier-plugin-pkg": "0.21.2",
-    "publint": "0.3.13",
-    "stylelint": "^16.25.0",
-    "stylelint-config-standard": "^39.0.0",
-    "vite": "7.1.9",
+    "publint": "0.3.15",
+    "stylelint": "^16.26.1",
+    "stylelint-config-standard": "^39.0.1",
+    "vite": "7.2.6",
     "vitest": "4.0.15",
-    "xo": "1.2.2"
+    "xo": "1.2.3"
   },
   "pnpm": {
     "overrides": {
-      "@eslint/plugin-kit@<0.3.4": ">=0.3.4",
-      "tmp@<=0.2.3": ">=0.2.4",
-      "vite@>=7.1.0 <=7.1.10": ">=7.1.11",
-      "js-yaml@<3.14.2": ">=3.14.2",
-      "js-yaml@>=4.0.0 <4.1.1": ">=4.1.1",
-      "glob@>=10.2.0 <10.5.0": ">=10.5.0",
-      "glob@>=11.0.0 <11.1.0": ">=11.1.0"
+      "@eslint/plugin-kit@<0.3.4": ">=0.3.4"
     }
   }
 }

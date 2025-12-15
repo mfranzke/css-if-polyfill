@@ -1,5 +1,23 @@
 # postcss-if-function
 
+## 0.1.8
+
+### Patch Changes
+
+- [#139](https://github.com/mfranzke/css-if-polyfill/pull/139) [`2666f97`](https://github.com/mfranzke/css-if-polyfill/commit/2666f979827890a39dc944cd2adec63ee6891bf1) Thanks [@mfranzke](https://github.com/mfranzke)! - fix(PostCSS): warning about missing `from` option
+
+## 0.1.7
+
+### Patch Changes
+
+- 0ba6c34: fix: support `async` PostCSS plugins in `postcss-if-function`
+
+## 0.1.6
+
+### Patch Changes
+
+- 2a8b3f7: fix: Update postcss peer dependency version range
+
 ## 0.1.5
 
 ### Patch Changes
