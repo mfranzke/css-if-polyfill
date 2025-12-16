@@ -59,7 +59,7 @@
   "devDependencies": {
     "lightningcss": "1.30.2",
     "microbundle": "0.15.1",
-    "vitest": "4.0.15",
+    "vitest": "4.0.16",
     "xo": "1.2.3"
   },
   "source": "src/index.js",
