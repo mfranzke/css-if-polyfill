@@ -60,7 +60,7 @@
   "devDependencies": {
     "microbundle": "0.15.1",
     "postcss": "8.5.6",
-    "vitest": "4.0.15",
+    "vitest": "4.0.16",
     "xo": "1.2.3"
   },
   "source": "src/index.js",

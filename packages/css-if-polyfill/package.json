@@ -59,11 +59,11 @@
   "devDependencies": {
     "@babel/core": "7.28.5",
     "@babel/preset-env": "7.28.5",
-    "@vitest/coverage-v8": "4.0.15",
+    "@vitest/coverage-v8": "4.0.16",
     "jsdom": "27.2.0",
     "microbundle": "0.15.1",
     "vite": "7.2.6",
-    "vitest": "4.0.15",
+    "vitest": "4.0.16",
     "xo": "1.2.3"
   },
   "source": "src/index.js",
