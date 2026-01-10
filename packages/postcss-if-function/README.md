@@ -15,6 +15,12 @@ This plugin is part of the [css-if-polyfill](https://github.com/mfranzke/css-if-
 **Input CSS:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .responsive {
 	width: if(media(width <= 768px): 100%; else: 50%);
 }
@@ -23,6 +29,12 @@ This plugin is part of the [css-if-polyfill](https://github.com/mfranzke/css-if-
 **Expected Output:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .responsive {
 	width: 50%;
 }
@@ -218,6 +230,12 @@ module.exports = {
 **Input CSS:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .responsive {
 	width: if(media(width <= 768px): 100%; else: 50%);
 }
@@ -226,6 +244,12 @@ module.exports = {
 **Expected Output:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .responsive {
 	width: 50%;
 }
@@ -247,6 +271,12 @@ module.exports = {
 **Input CSS:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .grid {
 	display: if(supports(display: grid): grid; else: block);
 }
@@ -255,6 +285,12 @@ module.exports = {
 **Expected Output:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .grid {
 	display: block;
 }
@@ -276,6 +312,12 @@ module.exports = {
 **Input CSS:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .responsive {
 	padding: if(
 		media(width >= 1200px): 40px; media(width >= 768px): 30px;
@@ -287,6 +329,12 @@ module.exports = {
 **Expected Output:**
 
 ```css
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .responsive {
 	padding: 15px;
 }
