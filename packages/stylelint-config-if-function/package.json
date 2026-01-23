@@ -34,7 +34,7 @@
     "prepublishOnly": "pnpm run build"
   },
   "peerDependencies": {
-    "stylelint": "^14.5.1 || ^15.0.0 || ^16.0.0"
+    "stylelint": "^14.5.1 || ^15.0.0 || ^16.0.0 || ^17.0.0"
   },
   "devDependencies": {
     "microbundle": "0.15.1"

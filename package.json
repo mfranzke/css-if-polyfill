@@ -41,6 +41,8 @@
     "lint:stylelint": "stylelint test/fixtures/*.input.css --config .config/.stylelintrc.json",
     "lint:stylelint:14": "npx stylelint@14 test/fixtures/*.input.css --config .config/.stylelintrc.older.json",
     "lint:stylelint:15": "npx stylelint@15 test/fixtures/*.input.css --config .config/.stylelintrc.older.json",
+    "lint:stylelint:16": "npx stylelint@16 test/fixtures/*.input.css --config .config/.stylelintrc.json",
+    "lint:stylelint:17": "npx stylelint@17 test/fixtures/*.input.css --config .config/.stylelintrc.json",
     "lint:xo": "xo",
     "prelint:packages": "pnpm run build",
     "prepare": "husky",
