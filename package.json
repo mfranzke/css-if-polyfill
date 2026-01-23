@@ -41,6 +41,7 @@
     "lint:stylelint": "stylelint test/fixtures/*.input.css --config .config/.stylelintrc.json",
     "lint:stylelint:14": "npx stylelint@14 test/fixtures/*.input.css --config .config/.stylelintrc.older.json",
     "lint:stylelint:15": "npx stylelint@15 test/fixtures/*.input.css --config .config/.stylelintrc.older.json",
+    "lint:stylelint:16": "npx stylelint@16 test/fixtures/*.input.css --config .config/.stylelintrc.json",
     "lint:xo": "xo",
     "prelint:packages": "pnpm run build",
     "prepare": "husky",
@@ -67,8 +68,8 @@
     "prettier-plugin-organize-imports": "4.3.0",
     "prettier-plugin-pkg": "0.21.2",
     "publint": "0.3.16",
-    "stylelint": "^16.26.1",
-    "stylelint-config-standard": "^39.0.1",
+    "stylelint": "^17.0.0",
+    "stylelint-config-standard": "^40.0.0",
     "vite": "7.2.6",
     "vitest": "4.0.16",
     "xo": "1.2.3"
