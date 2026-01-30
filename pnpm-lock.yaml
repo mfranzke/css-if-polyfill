@@ -63,8 +63,8 @@ importers:
         specifier: 0.21.2
         version: 0.21.2(prettier@3.7.4)
       publint:
-        specifier: 0.3.16
-        version: 0.3.16
+        specifier: 0.3.17
+        version: 0.3.17
       stylelint:
         specifier: ^17.0.0
         version: 17.0.0(typescript@4.9.5)
@@ -1250,8 +1250,8 @@ packages:
     resolution: {integrity: sha512-QNqXyfVS2wm9hweSYD2O7F0G06uurj9kZ96TRQE5Y9hU7+tgdZwIkbAKc5Ocy1HxEY2kuDQa6cQ1WRs/O5LFKA==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
 
-  '@publint/pack@0.1.2':
-    resolution: {integrity: sha512-S+9ANAvUmjutrshV4jZjaiG8XQyuJIZ8a4utWmN/vW1sgQ9IfBnPndwkmQYw53QmouOIytT874u65HEmu6H5jw==}
+  '@publint/pack@0.1.3':
+    resolution: {integrity: sha512-dHDWeutAerz+Z2wFYAce7Y51vd4rbLBfUh0BNnyul4xKoVsPUVJBrOAFsJvtvYBwGFJSqKsxyyHf/7evZ8+Q5Q==}
     engines: {node: '>=18'}
 
   '@rollup/plugin-alias@3.1.9':
@@ -4338,8 +4338,8 @@ packages:
     resolution: {integrity: sha512-uCWE2QqnGlwvvJXTwiHTPTyHE62+zORO5hpFWhAwBGDtEtTmNZZleNLJDoFsqHCL4p/CeAP2Q1uMKFUKALuRGQ==}
     engines: {node: '>=18.20'}
 
-  publint@0.3.16:
-    resolution: {integrity: sha512-MFqyfRLAExPVZdTQFwkAQELzA8idyXzROVOytg6nEJ/GEypXBUmMGrVaID8cTuzRS1U5L8yTOdOJtMXgFUJAeA==}
+  publint@0.3.17:
+    resolution: {integrity: sha512-Q3NLegA9XM6usW+dYQRG1g9uEHiYUzcCVBJDJ7yMcWRqVU9LYZUWdqbwMZfmTCFC5PZLQpLAmhvRcQRl3exqkw==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -5085,10 +5085,12 @@ packages:
   whatwg-encoding@2.0.0:
     resolution: {integrity: sha512-p41ogyeMUrw3jWclHWTQg1k05DSVXPLcVxRTYsXUk+ZooOCZLcoYgPZ/HL/D/N+uQPOtcp1me1WhBEaX02mhWg==}
     engines: {node: '>=12'}
+    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-encoding@3.1.1:
     resolution: {integrity: sha512-6qN4hJdMwfYBtE3YBTTHhoeuUrDBPZmbQaxWAqSALV/MeEnR5z1xd8UKud2RAkFoPkmB+hli1TZSnyi84xz1vQ==}
     engines: {node: '>=18'}
+    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-mimetype@4.0.0:
     resolution: {integrity: sha512-QaKxh0eNIi2mE9p2vEdzfagOKHCcj1pJ56EEHGQOVxp8r9/iszLUUV7v89x9O1p/T+NlTM5W7jW6+cz4Fq1YVg==}
@@ -6564,7 +6566,7 @@ snapshots:
 
   '@pkgr/core@0.2.9': {}
 
-  '@publint/pack@0.1.2': {}
+  '@publint/pack@0.1.3': {}
 
   '@rollup/plugin-alias@3.1.9(rollup@2.79.2)':
     dependencies:
@@ -9876,9 +9878,9 @@ snapshots:
 
   prototype-properties@5.0.0: {}
 
-  publint@0.3.16:
+  publint@0.3.17:
     dependencies:
-      '@publint/pack': 0.1.2
+      '@publint/pack': 0.1.3
       package-manager-detector: 1.6.0
       picocolors: 1.1.1
       sade: 1.8.1
