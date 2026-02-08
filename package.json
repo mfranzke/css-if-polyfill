@@ -56,7 +56,7 @@
     "@changesets/cli": "2.29.8",
     "@commitlint/cli": "20.2.0",
     "@commitlint/config-conventional": "20.2.0",
-    "@vitest/coverage-v8": "4.0.16",
+    "@vitest/coverage-v8": "4.0.18",
     "http-server": "14.1.1",
     "husky": "9.1.7",
     "jsdom": "27.2.0",
@@ -71,7 +71,7 @@
     "stylelint": "^17.1.1",
     "stylelint-config-standard": "^40.0.0",
     "vite": "7.2.6",
-    "vitest": "4.0.16",
+    "vitest": "4.0.18",
     "xo": "1.2.3"
   },
   "pnpm": {
