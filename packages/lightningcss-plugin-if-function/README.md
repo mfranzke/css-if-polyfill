@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+
+SPDX-License-Identifier: MIT
+-->
+
 # lightningcss-plugin-if-function
 
 [![Default CI/CD Pipeline](https://github.com/mfranzke/css-if-polyfill/actions/workflows/default.yml/badge.svg)](https://github.com/mfranzke/css-if-polyfill/actions/workflows/default.yml)
