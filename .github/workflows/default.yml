@@ -145,6 +145,7 @@ jobs:
   checks-done:
     name: All Checks Complete
     needs: [lint, quality, security, audit-fix, ci, performance]
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-24.04
     permissions:
       contents: read
