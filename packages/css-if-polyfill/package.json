@@ -60,7 +60,7 @@
     "@babel/core": "7.29.0",
     "@babel/preset-env": "7.29.0",
     "@vitest/coverage-v8": "4.0.18",
-    "jsdom": "27.2.0",
+    "jsdom": "28.1.0",
     "microbundle": "0.15.1",
     "vite": "7.2.6",
     "vitest": "4.0.18",
