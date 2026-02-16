@@ -21,7 +21,7 @@ All workflows in `.github/workflows/` were updated to:
 
 - Use `pnpm/action-setup@v3`
 - Install pnpm version 9
-- Use `pnpm install` instead of `npm ci`
+- Use `pnpm install --frozen-lockfile` instead of `npm ci`
 - Use `pnpm run` and `pnpm exec` instead of `npm run` and `npx`
 
 ### Documentation Updates
@@ -45,7 +45,7 @@ All workflows in `.github/workflows/` were updated to:
 | npm command                         | pnpm equivalent                   |
 | ----------------------------------- | --------------------------------- |
 | `npm install`                       | `pnpm install`                    |
-| `npm ci`                            | `pnpm install`                    |
+| `npm ci`                            | `pnpm install --frozen-lockfile`                    |
 | `npm run build --workspaces`        | `pnpm --recursive run build`      |
 | `npm test --workspaces`             | `pnpm --recursive run test`       |
 | `npx command`                       | `pnpm exec command`               |
