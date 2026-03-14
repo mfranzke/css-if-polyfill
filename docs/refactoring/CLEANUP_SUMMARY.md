@@ -57,6 +57,8 @@ css-if-polyfill/
 │   └── ...other examples...
 ├── docs/
 │   ├── API.md             # Complete API documentation
+│   ├── RELEASE_PROCESS.md
+│   ├── TEST_FIXTURES.md
 │   └── refactoring/       # Integration documentation
 └── README.md              # Updated with v2.0 features
 ```
