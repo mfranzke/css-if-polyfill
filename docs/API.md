@@ -44,9 +44,9 @@ Initializes the CSS if() polyfill with optional configuration.
 **Parameters:**
 
 - `options` (optional): Configuration object
-    - `debug` (boolean): Enable debug logging (default: false)
-    - `autoInit` (boolean): Auto-initialize on DOMContentLoaded (default: true)
-    - `useNativeTransform` (boolean): Enable hybrid native transformation (default: true)
+    - `debug` (boolean): Enable debug logging (default: `false`)
+    - `autoInit` (boolean): Auto-initialize on DOMContentLoaded (default: `true`)
+    - `useNativeTransform` (boolean): Enable hybrid native transformation (default: `true`)
 
 **Example:**
 
@@ -128,7 +128,7 @@ Transform CSS at build time to generate native CSS where possible.
 
 - `cssText` (string): CSS text to transform
 - `options` (optional): Transform options
-    - `minify` (boolean): Minify the output CSS (default: false)
+    - `minify` (boolean): Minify the output CSS (default: `false`)
 
 **Returns:** Transform result object
 
