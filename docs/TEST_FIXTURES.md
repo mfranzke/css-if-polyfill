@@ -2,7 +2,7 @@
 
 This document describes the centralized test fixture system. Each fixture consists of an `.input.css` / `.expected.css` pair in the `test/fixtures/` directory and serves as the single source of truth for CSS transformation tests across all test suites (polyfill, PostCSS plugin, and any future transform backends).
 
-To modify a test case, edit the corresponding fixture files directly — do not edit the code blocks in this document.
+<!-- Note: This content is automatically generated from test fixtures. Do not edit the code blocks directly - they will be overwritten during the build process. To modify test cases, edit the corresponding .input.css and .expected.css files in the test/fixtures/ directory -->
 
 ## Basic Media Query
 
