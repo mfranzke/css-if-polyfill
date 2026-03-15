@@ -92,6 +92,7 @@ Check if the browser has native CSS if() support.
 ```javascript
 if (!hasNativeSupport()) {
 	console.log("Polyfill is needed");
+	init();
 }
 ```
 
