@@ -150,13 +150,11 @@ Transform CSS at build time to generate native CSS where possible.
 ```javascript
 import { buildTimeTransform } from "css-if-polyfill";
 
-const result = buildTimeTransform(
-	`
+const result = buildTimeTransform(`
   .card {
     background: if(media(min-width: 768px): blue; else: gray);
     font-size: if(style(--large): 24px; else: 16px);
-  }
-`,
+  }`,
 	{ minify: true }
 );
 
