@@ -1,6 +1,8 @@
 # CSS if() Polyfill Test Fixtures
 
-This document demonstrates the centralized test fixture system that provides a single source of truth for CSS test cases across all test suites.
+This document describes the centralized test fixture system. Each fixture consists of an `.input.css` / `.expected.css` pair in the `test/fixtures/` directory and serves as the single source of truth for CSS transformation tests across all test suites (polyfill, PostCSS plugin, and any future transform backends).
+
+To modify a test case, edit the corresponding fixture files directly — do not edit the code blocks in this document.
 
 ## Basic Media Query
 
