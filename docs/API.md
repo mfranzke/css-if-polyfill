@@ -98,7 +98,7 @@ if (!hasNativeSupport()) {
 
 #### `refresh()`
 
-Manually trigger processing of existing stylesheets.
+Manually re-process all stylesheets in the document. Useful after dynamically inserting new `<style>` elements that the mutation observer may not have caught.
 
 **Example:**
 
