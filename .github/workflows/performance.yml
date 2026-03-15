@@ -49,7 +49,7 @@ jobs:
         run: node test/performance/run-benchmark.cjs
 
       - name: Upload performance results
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: performance-results
           path: test/performance/performance-results.json
