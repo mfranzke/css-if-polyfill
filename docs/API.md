@@ -356,4 +356,4 @@ const optimized = buildTimeTransform(cssText);
 
 ## Examples
 
-See the `/examples` directory for complete working demonstrations of all features.
+See the [`/examples`](../examples/) directory for complete working demonstrations.
