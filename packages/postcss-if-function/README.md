@@ -56,11 +56,6 @@ npx postcss input.css --output output.css --config postcss.config.js
 ### Basic Programmatic Usage
 
 ```js
-// Named export (recommended)
-import postcss from "postcss";
-import { postcssIfFunction } from "postcss-if-function";
-
-// Or default export (for compatibility)
 import postcss from "postcss";
 import postcssIfFunction from "postcss-if-function";
 
@@ -115,7 +110,7 @@ const result = await postcss([
 
 ```js
 // postcss.config.js
-import { postcssIfFunction } from "postcss-if-function";
+import postcssIfFunction from "postcss-if-function";
 
 export default {
 	plugins: [
@@ -126,6 +121,13 @@ export default {
 };
 ```
 
+```js
+// postcss.config.cjs (CommonJS)
+module.exports = {
+	plugins: [require("postcss-if-function")]
+};
+```
+
 ### With Popular PostCSS Tools
 
 #### Vite
@@ -133,7 +135,7 @@ export default {
 ```js
 // vite.config.js
 import { defineConfig } from "vite";
-import { postcssIfFunction } from "postcss-if-function";
+import postcssIfFunction from "postcss-if-function";
 
 export default defineConfig({
 	css: {
