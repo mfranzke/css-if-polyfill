@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+#
+# SPDX-License-Identifier: MIT
+
 # Configuration file for yamllint.
 # It extends the default conf by adjusting some options.
 
