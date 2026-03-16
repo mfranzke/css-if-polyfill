@@ -1,3 +1,4 @@
+import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import postcss from 'postcss';
@@ -7,9 +8,10 @@ import {
 	normalizeCSS,
 	postcssFixtureTests
 } from '../../../test/scripts/fixture-utils.js';
-import { postcssIfFunction } from '../src/index.js';
+import postcssIfFunction from '../src/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const require = createRequire(import.meta.url);
 const FIXTURES_DIR = path.join(__dirname, '../../../test/fixtures');
 
 describe('postcss-if-function plugin', () => {
@@ -80,5 +82,21 @@ describe('postcss-if-function plugin', () => {
 
 		// Verify the from option was properly set in the result
 		expect(result.opts.from).toBe(inputPath);
+	});
+
+	it('should support CommonJS require in postcss.config.cjs', async () => {
+		const plugin = require('../dist/index.cjs');
+		const { input, expected } = loadFixture('basic-media');
+
+		// Verify the CJS export is a callable function with the postcss flag
+		expect(typeof plugin).toBe('function');
+		expect(plugin.postcss).toBe(true);
+
+		const result = await postcss([plugin]).process(input, {
+			from: undefined
+		});
+
+		expect(normalizeCSS(result.css)).toBe(normalizeCSS(expected));
+		expect(result.warnings()).toHaveLength(0);
 	});
 });

@@ -1,6 +1,6 @@
 const config = {
 	output: {
-		exports: 'named'
+		exports: 'default'
 	}
 };
 
