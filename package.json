@@ -73,7 +73,7 @@
     "stylelint-config-standard": "^40.0.0",
     "vite": "8.0.0",
     "vitest": "4.0.18",
-    "xo": "1.2.3"
+    "xo": "2.0.2"
   },
   "pnpm": {
     "overrides": {

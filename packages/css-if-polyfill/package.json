@@ -64,7 +64,7 @@
     "microbundle": "0.15.1",
     "vite": "8.0.0",
     "vitest": "4.0.18",
-    "xo": "1.2.3"
+    "xo": "2.0.2"
   },
   "source": "src/index.js",
   "umd:main": "dist/index.umd.js"

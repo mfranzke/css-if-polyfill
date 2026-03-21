@@ -61,7 +61,7 @@
     "microbundle": "0.15.1",
     "postcss": "8.5.8",
     "vitest": "4.0.18",
-    "xo": "1.2.3"
+    "xo": "2.0.2"
   },
   "source": "src/index.js",
   "umd:main": "dist/index.umd.js"
