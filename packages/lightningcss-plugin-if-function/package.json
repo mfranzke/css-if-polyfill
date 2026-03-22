@@ -57,7 +57,7 @@
     "css-if-polyfill": "workspace:*"
   },
   "devDependencies": {
-    "lightningcss": "1.31.1",
+    "lightningcss": "1.32.0",
     "microbundle": "0.15.1",
     "vitest": "4.0.18",
     "xo": "1.2.3"
