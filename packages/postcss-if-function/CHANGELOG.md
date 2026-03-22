@@ -1,5 +1,11 @@
 # postcss-if-function
 
+## 0.1.9
+
+### Patch Changes
+
+- [#185](https://github.com/mfranzke/css-if-polyfill/pull/185) [`a458c49`](https://github.com/mfranzke/css-if-polyfill/commit/a458c490f4c957c049a9820d45064657466d2aa5) Thanks [@mfranzke](https://github.com/mfranzke)! - fix: support CommonJS require in postcss.config.cjs
+
 ## 0.1.8
 
 ### Patch Changes
@@ -24,7 +30,7 @@
 
 - 9e6949d: chore(docs): README improvements
 - Updated dependencies [9e6949d]
-    - css-if-polyfill@0.1.5
+  - css-if-polyfill@0.1.5
 
 ## 0.1.4
 
@@ -32,7 +38,7 @@
 
 - 6045317: docs: README improvements
 - Updated dependencies [6045317]
-    - css-if-polyfill@0.1.4
+  - css-if-polyfill@0.1.4
 
 ## 0.1.3
 
@@ -46,7 +52,7 @@
 
 - b7f8df7: fix: ensure that multiple if() conditions are handled correctly
 - Updated dependencies [b7f8df7]
-    - css-if-polyfill@0.1.3
+  - css-if-polyfill@0.1.3
 
 ## 0.1.1
 
@@ -55,7 +61,7 @@
 - 9c6d05a: fix: several package metadata related issues
 - 588be15: docs: corrected the package name
 - Updated dependencies [9c6d05a]
-    - css-if-polyfill@0.1.2
+  - css-if-polyfill@0.1.2
 
 ## 0.1.0
 
@@ -66,4 +72,4 @@
 ### Patch Changes
 
 - Updated dependencies [a6b019d]
-    - css-if-polyfill@0.1.1
+  - css-if-polyfill@0.1.1
