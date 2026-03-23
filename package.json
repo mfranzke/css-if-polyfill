@@ -67,7 +67,7 @@
     "playwright": "1.55.1",
     "prettier": "3.8.1",
     "prettier-plugin-organize-imports": "4.3.0",
-    "prettier-plugin-pkg": "0.21.2",
+    "prettier-plugin-pkg": "0.22.0",
     "publint": "0.3.18",
     "stylelint": "^17.4.0",
     "stylelint-config-standard": "^40.0.0",
