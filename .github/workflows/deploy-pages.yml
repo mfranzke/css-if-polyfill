@@ -54,7 +54,7 @@ jobs:
         run: ./.github/scripts/prepare-pages.sh
 
       - name: Setup GitHub Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
