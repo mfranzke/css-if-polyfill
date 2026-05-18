@@ -4,10 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  qs@>=6.7.0 <=6.14.1: '>=6.14.2'
-  markdown-it@>=13.0.0 <14.1.1: '>=14.1.1'
-
 importers:
 
   .:
