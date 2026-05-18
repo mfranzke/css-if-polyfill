@@ -8439,7 +8439,7 @@ snapshots:
   flat-cache@6.1.21:
     dependencies:
       cacheable: 2.3.3
-      flatted: 3.4.1
+      flatted: 3.4.2
       hookified: 1.15.1
 
   flatted@3.4.1: {}
