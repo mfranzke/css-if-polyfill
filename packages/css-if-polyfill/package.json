@@ -58,11 +58,11 @@
   },
   "devDependencies": {
     "@babel/core": "7.29.0",
-    "@babel/preset-env": "7.29.2",
+    "@babel/preset-env": "7.29.5",
     "@vitest/coverage-v8": "4.0.18",
     "jsdom": "27.2.0",
     "microbundle": "0.15.1",
-    "vite": "8.0.1",
+    "vite": "8.0.13",
     "vitest": "4.0.18",
     "xo": "2.0.2"
   },
