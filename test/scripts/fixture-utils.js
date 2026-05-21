@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+//
+// SPDX-License-Identifier: MIT
+
 /**
  * Test fixture utilities for loading CSS test data
  */

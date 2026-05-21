@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2025 Maximilian Franzke <mfr@nzke.net>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 .responsive {
 	padding: if(
 		media(width >= 1200px): 40px; media(width >= 768px): 30px;
