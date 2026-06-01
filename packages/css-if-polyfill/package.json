@@ -62,8 +62,8 @@
     "@vitest/coverage-v8": "4.0.18",
     "jsdom": "27.2.0",
     "microbundle": "0.15.1",
-    "vite": "8.0.1",
-    "vitest": "4.0.18",
+    "vite": "8.0.5",
+    "vitest": "4.1.0",
     "xo": "2.0.2"
   },
   "source": "src/index.js",
