@@ -57,7 +57,7 @@
     "test:vitest:watch": "vitest"
   },
   "devDependencies": {
-    "@babel/core": "7.29.0",
+    "@babel/core": "7.29.6",
     "@babel/preset-env": "7.29.2",
     "@vitest/coverage-v8": "4.0.18",
     "jsdom": "27.2.0",
